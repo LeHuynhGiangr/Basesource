@@ -16,9 +16,9 @@ Travel Social Network Web
 ## How to configure and run
 
 ## How to contribute
-- Commit convention: 
---<account git>_ <create|update|correct|fix>_<feature|code|function|class|>
---ex: lehuynhgiang1219 create code
+>> Commit convention: 
+> > > <account git>_<create|update|correct|fix>_<feature|code|function|class|...>
+> > > ex: lehuynhgiang1219 create code
 
 ## Contact
 - lehuynhgiang1219@outlook.com
