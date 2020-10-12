@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data.CommonEntities
+﻿namespace Data.CommonEntities
 {
     abstract class BaseEntity<T>
     {

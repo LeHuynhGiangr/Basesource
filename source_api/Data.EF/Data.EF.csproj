@@ -7,22 +7,30 @@
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="Extensions\" />
+    <Folder Include="EFEntities\" />
     <Folder Include="Repositories\" />
 
+    <!-- project reference -->
+    <ProjectReference Include="..\Data\Data.csproj" />
+    
     <!--lehuynhgiang1219@outlook.com add packages for working with SqlServer https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     
     <!--lehuynhgiang1219@outlook.com add packages for migration https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-rc.1.20451.13">
       <PrivateAssets>all</PrivateAssets>
+      
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     
     <!--lehuynhgiang1219@outlook.com add packages for enable commmonly command at design-time https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-rc.1.20451.13">
       <PrivateAssets>all</PrivateAssets>
+      
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    
+    <!--lehuynhgiang1219@outlook.com add packages for using authentication https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore -->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
   </ItemGroup>
-  
 </Project>

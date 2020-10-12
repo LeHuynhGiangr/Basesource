@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+
+    <!--lehuynhgiang1219@outlook.com add packages for using authentication https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore -->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
+  </ItemGroup>
 
 </Project>
