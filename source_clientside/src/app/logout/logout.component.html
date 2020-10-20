@@ -1,0 +1,82 @@
+<app-header-logout></app-header-logout>    
+    <section>
+		<div class="feature-photo">
+			<figure><img alt="" src="assets/images/resources/timeline-1.jpg"></figure>
+			<div class="add-btn">
+				<span>1205 followers</span>
+				<a data-ripple="" title="" href="#">Add Friend</a>
+			</div>
+			<form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file">
+				</label>
+			</form>
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img alt="" src="assets/images/resources/user-avatar.jpg">
+								<form class="edit-phto">
+									<i class="fa fa-camera-retro"></i>
+									<label class="fileContainer">
+										Edit Display Photo
+										<input type="file">
+									</label>
+								</form>
+							</figure>
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>Janice Griffith</h5>
+								  <span>Group Admin</span>
+								</li>
+								<li>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="active">Time line</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">Photos</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">Videos</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">Friends</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">Groups</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">about</a>
+									<a data-ripple="" title="" [routerLink]="['/logout']" class="">more</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+		
+	<section>
+		<div class="gap100 gray-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="logout-meta">
+							<h2>logged out</h2>
+							<span>Do you want to check Janice Griffith’s Profile?</span>
+							<p>
+								Please <a [routerLink]="['/login']" title="">Login</a> or <a [routerLink]="['/login']" title="">Register</a> now to create your own profile and have access to all the Winku awesome features!
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<i><img src="images/credit-cards.png" alt=""></i>
+				</div>
+			</div>
+		</div>
+	</div>

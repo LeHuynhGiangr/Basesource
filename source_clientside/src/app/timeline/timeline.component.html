@@ -1,241 +1,845 @@
-<div class="container">
+<app-header></app-header>	
+	<section>
+		<div class="feature-photo">
+			<figure><img src="assets/images/resources/timeline-1.jpg" alt=""></figure>
+			<div class="add-btn">
+				<span>1205 followers</span>
+				<a href="#" title="" data-ripple="">Add Friend</a>
+			</div>
+			<form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file"/>
+				</label>
+			</form>
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img src="assets/images/resources/user-avatar.jpg" alt="">
+								<form class="edit-phto">
+									<i class="fa fa-camera-retro"></i>
+									<label class="fileContainer">
+										Edit Display Photo
+										<input type="file"/>
+									</label>
+								</form>
+							</figure>
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>Janice Griffith</h5>
+								  <span>Group Admin</span>
+								</li>
+								<li>
+									<a class="active" [routerLink]="['/timeline']" title="" data-ripple="">time line</a>
+									<a class="" [routerLink]="['/images']" title="" data-ripple="">Photos</a>
+									<a class="" [routerLink]="['/videos']" title="" data-ripple="">Videos</a>
+									<a class="" [routerLink]="['/friends']" title="" data-ripple="">Friends</a>
+									<a class="" [routerLink]="['/groups']" title="" data-ripple="">Groups</a>
+									<a class="" [routerLink]="['/about']" title="" data-ripple="">about</a>
+									<a class="" href="#" title="" data-ripple="">more</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+											<h4 class="widget-title">Socials</h4>
+											<ul class="socials">
+												<li class="facebook">
+													<a title="" href="#"><i class="fa fa-facebook"></i> <span>facebook</span> <ins>45 likes</ins></a>
+												</li>
+												<li class="twitter">
+													<a title="" href="#"><i class="fa fa-twitter"></i> <span>twitter</span><ins>25 likes</ins></a>
+												</li>
+												<li class="google">
+													<a title="" href="#"><i class="fa fa-google"></i> <span>google</span><ins>35 likes</ins></a>
+												</li>
+											</ul>
+										</div>
+									<div class="widget">
+										<h4 class="widget-title">Shortcuts</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-clipboard"></i>
+												<a [routerLink]="['/newsfeed']" title="">News feed</a>
+											</li>
+											<li>
+												<i class="ti-mouse-alt"></i>
+												<a [routerLink]="['/inbox']" title="">Inbox</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a [routerLink]="['/fanpage']" title="">My pages</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a [routerLink]="['/friends']" title="">friends</a>
+											</li>
+											<li>
+												<i class="ti-image"></i>
+												<a [routerLink]="['/images']" title="">images</a>
+											</li>
+											<li>
+												<i class="ti-video-camera"></i>
+												<a [routerLink]="['/videos']" title="">videos</a>
+											</li>
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a [routerLink]="['/messages']" title="">Messages</a>
+											</li>
+											<li>
+												<i class="ti-bell"></i>
+												<a [routerLink]="['/notifications']" title="">Notifications</a>
+											</li>
+											<li>
+												<i class="ti-share"></i>
+												<a [routerLink]="['/people-nearby']" title="">People Nearby</a>
+											</li>
+											<li>
+												<i class="fa fa-bar-chart-o"></i>
+												<a [routerLink]="['/insights']" title="">insights</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a [routerLink]="['/login']" title="">Logout</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="newsfeed.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="newsfeed.html" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="newsfeed.html">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div><!-- recent activites -->
+									<div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="assets/images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="assets/images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="assets/images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="assets/images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="assets/images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div><!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="loadMore">
+									<div class="central-meta item">
+										<div class="new-postbox">
+											<figure>
+												<img src="assets/images/resources/admin2.jpg" alt="">
+											</figure>
+											<div class="newpst-input">
+												<form method="post">
+													<textarea rows="2" placeholder="write something"></textarea>
+													<div class="attachments">
+														<ul>
+															<li>
+																<i class="fa fa-music"></i>
+																<label class="fileContainer">
+																	<input type="file">
+																</label>
+															</li>
+															<li>
+																<i class="fa fa-image"></i>
+																<label class="fileContainer">
+																	<input type="file">
+																</label>
+															</li>
+															<li>
+																<i class="fa fa-video-camera"></i>
+																<label class="fileContainer">
+																	<input type="file">
+																</label>
+															</li>
+															<li>
+																<i class="fa fa-camera"></i>
+																<label class="fileContainer">
+																	<input type="file">
+																</label>
+															</li>
+															<li>
+																<button type="submit">Publish</button>
+															</li>
+														</ul>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div><!-- add post new box -->
+									<div class="central-meta item">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="assets/images/resources/friend-avatar10.jpg" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<span>published: june,2 2018 19:PM</span>
+												</div>
+												<div class="description">
+														
+														<p>
+															World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
+														</p>
+													</div>
+												<div class="post-meta">
+													<div class="linked-image align-left">
+														<a href="#" title=""><img src="assets/images/resources/page1.jpg" alt=""></a>
+													</div>
+													<div class="detail">
+														<span>Love Maid - ChillGroves</span>
+														<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
+														<a href="#" title="">www.sample.com</a>
+													</div>		
+													<div class="we-video-info">
+														<ul>
+															
+															<li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>52</ins>
+																</span>
+															</li>
+															<li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li>
+															<li class="social-media">
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
 
-    <!-- Timeline
-    ================================================= -->
-    <div class="timeline">
-      <div class="timeline-cover">
-        <!--Timeline Menu for Large Screens-->
-        <div class="timeline-nav-bar hidden-sm hidden-xs">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="profile-info">
-                <img src="assets/images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-                <h3>Sarah Cruiz</h3>
-                <p class="text-muted">Creative Director</p>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <ul class="list-inline profile-menu">
-                <li><a [routerLink]="['/timeline']" class="active">Timeline</a></li>
-                <li><a [routerLink]="['/timeline-about']">About</a></li>
-                <li><a [routerLink]="['/timeline-album']">Album</a></li>
-                <li><a [routerLink]="['/timeline-friends']">Friends</a></li>
-              </ul>
-              <ul class="follow-me list-inline">
-                <li>1,299 people following her</li>
-                <li><button class="btn-primary">Add Friend</button></li>
-              </ul>
-            </div>
-          </div>
-        </div><!--Timeline Menu for Large Screens End-->
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+                                    </div>
+                                    <div class="central-meta item">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="assets/images/resources/friend-avatar10.jpg" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<span>published: june,2 2018 19:PM</span>
+												</div>
+												<div class="post-meta">
+													<iframe src="assets/videos/tralaianh.mp4" height="385" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+													<div class="we-video-info">
+														<ul>
+															
+															<li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>52</ins>
+																</span>
+															</li>
+															<li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li>
+															<li class="social-media">
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
 
-        <!--Timeline Menu for Small Screens-->
-        <div class="navbar-mobile hidden-lg hidden-md">
-          <div class="profile-info">
-            <img src="assets/images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-            <h4>Sarah Cruiz</h4>
-            <p class="text-muted">Creative Director</p>
-          </div>
-          <div class="mobile-menu">
-            <ul class="list-inline">
-              <li><a href="https://themified.com/friend-finder/timline.html" class="active">Timeline</a></li>
-              <li><a href="timeline-about.html">About</a></li>
-              <li><a href="timeline-album.html">Album</a></li>
-              <li><a href="timeline-friends.html">Friends</a></li>
-            </ul>
-            <button class="btn-primary">Add Friend</button>
-          </div>
-        </div><!--Timeline Menu for Small Screens End-->
+																</div>
+															</li>
+														</ul>
+													</div>
+													<div class="description">
+														
+														<p>
+															Lonely Cat Enjoying in Summer Curabitur <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="coment-area">
+												<ul class="we-comet">
+													<li>
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-1.jpg" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="time-line.html" title="">Jason borne</a></h5>
+																<span>1 year ago</span>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel</p>
+														</div>
 
-      </div>
-      <div id="page-contents">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-7">
+													</li>
+													<li>
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-2.jpg" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="time-line.html" title="">Sophia</a></h5>
+																<span>1 week ago</span>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p>we are working for the dance and sing songs. this video is very awesome for the youngster.
+																<i class="em em-smiley"></i>
+															</p>
+														</div>
+													</li>
+													<li>
+														<a href="#" title="" class="showmore underline">more comments</a>
+													</li>
+													<li class="post-comment">
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-2.jpg" alt="">
+														</div>
+														<div class="post-comt-box">
+															<form method="post">
+																<textarea placeholder="Post your comment"></textarea>
+																<div class="add-smiles">
+																	<span class="em em-expressionless" title="add icon"></span>
+																</div>
+																<div class="smiles-bunch">
+																	<i class="em em---1"></i>
+																	<i class="em em-smiley"></i>
+																	<i class="em em-anguished"></i>
+																	<i class="em em-laughing"></i>
+																	<i class="em em-angry"></i>
+																	<i class="em em-astonished"></i>
+																	<i class="em em-blush"></i>
+																	<i class="em em-disappointed"></i>
+																	<i class="em em-worried"></i>
+																	<i class="em em-kissing_heart"></i>
+																	<i class="em em-rage"></i>
+																	<i class="em em-stuck_out_tongue"></i>
+																</div>
+																<button type="submit"></button>
+															</form>	
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="central-meta item">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="assets/images/resources/friend-avatar10.jpg" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<span>published: june,2 2018 19:PM</span>
+												</div>
+												<div class="post-meta">
+													<img src="assets/images/resources/user-post.jpg" alt="">
+													<div class="we-video-info">
+														<ul>
+															
+															<li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Comments">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>52</ins>
+																</span>
+															</li>
+															<li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li>
+															<li class="social-media">
+																<div class="menu">
+																  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																	</div>
+																  </div>
+																	<div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																	</div>
+																  </div>
+																  <div class="rotater">
+																	<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																	</div>
+																  </div>
 
-            <!-- Post Create Box
-            ================================================= -->
-            <div class="create-post">
-              <div class="row">
-                <div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                  </div>
-                </div>
-                <div class="col-md-5 col-sm-5">
-                  <div class="tools">
-                    <ul class="publishing-tools list-inline">
-                      <li><a href="timeline.html#"><i class="ion-compose"></i></a></li>
-                      <li><a href="timeline.html#"><i class="ion-images"></i></a></li>
-                      <li><a href="timeline.html#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="timeline.html#"><i class="ion-map"></i></a></li>
-                    </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
-                  </div>
-                </div>
-              </div>
-            </div><!-- Post Create Box End-->
-
-            <!-- Post Content
-            ================================================= -->
-            <div class="post-content">
-
-              <!--Post Date-->
-              <div class="post-date hidden-xs hidden-sm">
-                <h5>Sarah</h5>
-                <p class="text-grey">Sometimes ago</p>
-              </div><!--Post Date End-->
-
-              <img src="assets/images/post-images/12.jpg" alt="post-image" class="img-responsive post-image" />
-              <div class="post-container">
-                <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Published a photo about 15 mins ago</p>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Post Content
-            ================================================= -->
-            <div class="post-content">
-
-              <!--Post Date-->
-              <div class="post-date hidden-xs hidden-sm">
-                <h5>Sarah</h5>
-                <p class="text-grey">10/22/2016</p>
-              </div><!--Post Date End-->
-
-              <img src="assets/images/post-images/13.jpg" alt="post-image" class="img-responsive post-image" />
-              <div class="post-container">
-                <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Yesterday</p>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Post Content
-            ================================================= -->
-            <div class="post-content">
-
-              <!--Post Date-->
-              <div class="post-date hidden-xs hidden-sm">
-                <h5>Sarah</h5>
-                <p class="text-grey">10/21/2016</p>
-              </div><!--Post Date End-->
-
-              <div class="post-container">
-                <img src="assets/images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                    <p class="text-muted">2 days ago</p>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="assets/images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-md-2 static">
-            <div id="sticky-sidebar">
-              <h4 class="grey">Sarah's activity</h4>
-              <div class="feed-item">
-                <div class="live-activity">
-                  <p><a href="timeline.html#" class="profile-link">Sarah</a> Commended on a Photo</p>
-                  <p class="text-muted">5 mins ago</p>
-                </div>
-              </div>
-              <div class="feed-item">
-                <div class="live-activity">
-                  <p><a href="timeline.html#" class="profile-link">Sarah</a> Has posted a photo</p>
-                  <p class="text-muted">an hour ago</p>
-                </div>
-              </div>
-              <div class="feed-item">
-                <div class="live-activity">
-                  <p><a href="timeline.html#" class="profile-link">Sarah</a> Liked her friend's post</p>
-                  <p class="text-muted">4 hours ago</p>
-                </div>
-              </div>
-              <div class="feed-item">
-                <div class="live-activity">
-                  <p><a href="timeline.html#" class="profile-link">Sarah</a> has shared an album</p>
-                  <p class="text-muted">a day ago</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+																</div>
+															</li>
+														</ul>
+													</div>
+													<div class="description">
+														
+														<p>
+															Curabitur world's most beautiful car in <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="coment-area">
+												<ul class="we-comet">
+													<li>
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-1.jpg" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="time-line.html" title="">Jason borne</a></h5>
+																<span>1 year ago</span>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
+														</div>
+														<ul>
+															<li>
+																<div class="comet-avatar">
+																	<img src="assets/images/resources/comet-2.jpg" alt="">
+																</div>
+																<div class="we-comment">
+																	<div class="coment-head">
+																		<h5><a href="time-line.html" title="">alexendra dadrio</a></h5>
+																		<span>1 month ago</span>
+																		<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+																	</div>
+																	<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
+																</div>
+															</li>
+															<li>
+																<div class="comet-avatar">
+																	<img src="assets/images/resources/comet-3.jpg" alt="">
+																</div>
+																<div class="we-comment">
+																	<div class="coment-head">
+																		<h5><a href="time-line.html" title="">Olivia</a></h5>
+																		<span>16 days ago</span>
+																		<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+																	</div>
+																	<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
+																</div>
+															</li>
+														</ul>
+													</li>
+													<li>
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-1.jpg" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="time-line.html" title="">Donald Trump</a></h5>
+																<span>1 week ago</span>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
+																<i class="em em-smiley"></i>
+															</p>
+														</div>
+													</li>
+													<li>
+														<a href="#" title="" class="showmore underline">more comments</a>
+													</li>
+													<li class="post-comment">
+														<div class="comet-avatar">
+															<img src="assets/images/resources/comet-1.jpg" alt="">
+														</div>
+														<div class="post-comt-box">
+															<form method="post">
+																<textarea placeholder="Post your comment"></textarea>
+																<div class="add-smiles">
+																	<span class="em em-expressionless" title="add icon"></span>
+																</div>
+																<div class="smiles-bunch">
+																	<i class="em em---1"></i>
+																	<i class="em em-smiley"></i>
+																	<i class="em em-anguished"></i>
+																	<i class="em em-laughing"></i>
+																	<i class="em em-angry"></i>
+																	<i class="em em-astonished"></i>
+																	<i class="em em-blush"></i>
+																	<i class="em em-disappointed"></i>
+																	<i class="em em-worried"></i>
+																	<i class="em em-kissing_heart"></i>
+																	<i class="em em-rage"></i>
+																	<i class="em em-stuck_out_tongue"></i>
+																</div>
+																<button type="submit"></button>
+															</form>	
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<div class="banner medium-opacity bluesh">
+											<div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)" class="bg-image"></div>
+											<div class="baner-top">
+												<span><img src="assets/images/book-icon.png" alt=""></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a href="#" title="" data-ripple="">start now!</a>
+											</div>
+										</div>											
+									</div>
+									<div class="widget friend-list stick-widget">
+										<h4 class="widget-title">Friends</h4>
+										<div id="searchDir"></div>
+										<ul id="people-list" class="friendz-list">
+											<li>
+												<figure>
+													<img src="assets/images/resources/friend-avatar.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">bucky barnes</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="assets/images/resources/friend-avatar3.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">jason borne</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="assets/images/resources/friend-avatar4.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Cameron diaz</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="assets/images/resources/friend-avatar6.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">andrew</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="assets/images/resources/friend-avatar7.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">amy watson</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
+												</div>
+											</li>
+										</ul>
+										<div class="chat-box">
+											<div class="chat-head">
+												<span class="status f-online"></span>
+												<h6>Bucky Barnes</h6>
+												<div class="more">
+													<span><i class="ti-more-alt"></i></span>
+													<span class="close-mesage"><i class="ti-close"></i></span>
+												</div>
+											</div>
+											<div class="chat-list">
+												<ul>
+													<li class="me">
+														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="you">
+														<div class="chat-thumb"><img src="assets/images/resources/chatlist2.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="me">
+														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+												</ul>
+												<form class="text-box">
+													<textarea placeholder="Post enter to post..."></textarea>
+													<div class="add-smiles">
+														<span title="add icon" class="em em-expressionless"></span>
+													</div>
+													<div class="smiles-bunch">
+														<i class="em em---1"></i>
+														<i class="em em-smiley"></i>
+														<i class="em em-anguished"></i>
+														<i class="em em-laughing"></i>
+														<i class="em em-angry"></i>
+														<i class="em em-astonished"></i>
+														<i class="em em-blush"></i>
+														<i class="em em-disappointed"></i>
+														<i class="em em-worried"></i>
+														<i class="em em-kissing_heart"></i>
+														<i class="em em-rage"></i>
+														<i class="em em-stuck_out_tongue"></i>
+													</div>
+													<button type="submit"></button>
+												</form>
+											</div>
+										</div>
+									</div><!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<app-footer></app-footer>
