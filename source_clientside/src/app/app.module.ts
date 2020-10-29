@@ -33,14 +33,19 @@ import { NgModule } from '@angular/core';
 import { _404Component } from './404/404.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginModule } from './login/login.module';
+import { MainModule } from './main/main.module';
+import { AdminModule } from './admin/admin.module';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 //import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
+    HeaderComponent,
     // HeaderLogoutComponent,
-    // FooterComponent,
+    FooterComponent,
     // NewsfeedComponent,
     // InboxComponent,
     // FanpageComponent,
@@ -72,6 +77,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    LoginModule,
+    MainModule,
+    AdminModule,
     AppRoutingModule,
     // NgxEchartsModule.forRoot({
     //   echarts: () => import('echarts')
