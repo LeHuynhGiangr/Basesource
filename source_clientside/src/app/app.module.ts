@@ -17,7 +17,7 @@ import { NgModule } from '@angular/core';
 // import { InsightsComponent } from './insights/insights.component';
 // import { LoginComponent } from './login/login.component';
 // import { LogoutComponent } from './logout/logout.component';
-// import { TimelineComponent } from './timeline/timeline.component';
+//import { TimelineComponent } from './main/timeline/timeline.component';
 // import { GroupsComponent } from './groups/groups.component';
 // import { GroupsSearchComponent } from './groups-search/groups-search.component';
 // import { AboutComponent } from './about/about.component';
@@ -30,62 +30,30 @@ import { NgModule } from '@angular/core';
 // import { FaqComponent } from './faq/faq.component';
 // import { KnowledgeComponent } from './knowledge/knowledge.component';
 // import { WidgetsComponent } from './widgets/widgets.component';
-import { _404Component } from './404/404.component';
+//import { _404Component } from './404/404.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
+import { GeneralModule } from './general/general.module';
 import { AdminModule } from './admin/admin.module';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
-//import { NgxEchartsModule } from 'ngx-echarts';
+import { _404Module } from './404/404.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    // HeaderLogoutComponent,
-    FooterComponent,
-    // NewsfeedComponent,
-    // InboxComponent,
-    // FanpageComponent,
-    // LikersComponent,
-    // NewpageComponent,
-    // ImagesComponent,
-    // VideosComponent,
-    // FriendsComponent,
-    // MessagesComponent,
-    // NotificationsComponent,
-    // PeopleNearbyComponent,
-    // InsightsComponent,
-    // LoginComponent,
-    // LogoutComponent,
-    // TimelineComponent,
-    // GroupsComponent,
-    // GroupsSearchComponent,
-    // AboutComponent,
-    // EditBasicComponent,
-    // EditWorkComponent,
-    // EditHobbyComponent,
-    // EditSettingComponent,
-    // EditPasswordComponent,
-    // ContactComponent,
-    // FaqComponent,
-    // KnowledgeComponent,
-    // WidgetsComponent,
-    // _404Component
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     LoginModule,
     MainModule,
+    GeneralModule,
     AdminModule,
-    AppRoutingModule,
-    // NgxEchartsModule.forRoot({
-    //   echarts: () => import('echarts')
-    // })
+    _404Module
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+

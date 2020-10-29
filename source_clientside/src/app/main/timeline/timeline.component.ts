@@ -10,7 +10,6 @@ import { DOCUMENT } from '@angular/common';
 export class TimelineComponent implements OnInit {
 
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ) {}
-
     ngOnInit() {
       var script = document.createElement("script");
       script.type = "text/javascript";
@@ -21,3 +20,4 @@ export class TimelineComponent implements OnInit {
       return this.router.url;
     }
 }
+ 

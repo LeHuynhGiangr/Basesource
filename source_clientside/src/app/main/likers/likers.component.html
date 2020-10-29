@@ -1,57 +1,56 @@
-<app-header></app-header>	
+<app-header></app-header>
 	<section>
-			<div class="feature-photo">
-				<figure><img src="assets/images/resources/timeline-1.jpg" alt=""></figure>
-				<div class="add-btn">
-					<span>1205 followers</span>
-					<a href="#" title="" data-ripple="">Add Friend</a>
-				</div>
-				<form class="edit-phto">
-					<i class="fa fa-camera-retro"></i>
-					<label class="fileContainer">
-						Edit Cover Photo
-					<input type="file"/>
-					</label>
-				</form>
-				<div class="container-fluid">
-					<div class="row merged">
-						<div class="col-lg-2 col-sm-3">
-							<div class="user-avatar">
-								<figure>
-									<img src="assets/images/resources/user-avatar.jpg" alt="">
-									<form class="edit-phto">
-										<i class="fa fa-camera-retro"></i>
-										<label class="fileContainer">
-											Edit Display Photo
-											<input type="file"/>
-										</label>
-									</form>
-								</figure>
-							</div>
+		<div class="feature-photo">
+			<figure><img alt="" src="assets/images/resources/timeline-4.jpg"></figure>
+			<div class="add-btn">
+				<span>1.3k followers</span>
+				<a data-ripple="" title="" href="#">Add button</a>
+			</div>
+			<form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file">
+			</label>
+			</form>
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img alt="" src="assets/images/resources/user-avatar2.jpg">
+								<form class="edit-phto">
+									<i class="fa fa-camera-retro"></i>
+									<label class="fileContainer">
+										Edit Display Photo
+										<input type="file">
+									</label>
+								</form>
+							</figure>
 						</div>
-						<div class="col-lg-10 col-sm-9">
-							<div class="timeline-info">
-								<ul>
-									<li class="admin-name">
-									  <h5>Janice Griffith</h5>
-									  <span>Group Admin</span>
-									</li>
-									<li>
-										<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
-										<a class="" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
-										<a class="" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
-										<a class="active" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>
-										<a class="" [routerLink]="['/main/groups']" title="" data-ripple="">Groups</a>
-										<a class="" [routerLink]="['/main/about']" title="" data-ripple="">about</a>
-										<a class="" href="#" title="" data-ripple="">more</a>
-									</li>
-								</ul>
-							</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>Amazon Shop</h5>
+								  <span>@amazonshop</span>
+								</li>
+								<li>
+									<a data-ripple="" title="" [routerLink]="['/main/fanpage']" class="">Page</a>
+									<a data-ripple="" title="" [routerLink]="['/main/fanpage']" class="">Notifications</a>
+									<a data-ripple="" title="" [routerLink]="['/main/fanpage']" class="">inbox</a>
+									<a data-ripple="" title="" [routerLink]="['/main/fanpage']" class="">insights</a>
+									<a data-ripple="" title="" [routerLink]="['/main/fanpage']" class="">posts</a>
+									<a data-ripple="" title="" [routerLink]="['/main/likers']" class="active">likers</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section><!-- top area -->
+		</div>
+	</section><!-- top area -->
 
 	<section>
 		<div class="gap gray-bg">
@@ -74,7 +73,7 @@
 												</li>
 												<li>
 													<i class="ti-files"></i>
-													<a [routerLink]="['/main/fanpage']" title="">My pages</a>
+													<a [routerLink]="['/main/newpage']" title="">Create Page</a>
 												</li>
 												<li>
 													<i class="ti-user"></i>
@@ -119,11 +118,11 @@
 											</li>
 											<li>
 												<span>fav tv show</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
+												<p>Sacred Games, Spartcus Blood, Games of theron</p>
 											</li>
 											<li>
 												<span>favourit music</span>
-												<p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
+												<p>Justin Biber, Nati Natsha, Shakira</p>
 											</li>
 										</ul>
 									</div><!-- profile intro widget -->
@@ -134,8 +133,8 @@
 								<div class="central-meta">
 									<div class="frnds">
 										<ul class="nav nav-tabs">
-											 <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">My Friends</a> <span>55</span></li>
-											 <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Friend Requests</a><span>60</span></li>
+											 <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Likers</a> <span>55</span></li>
+											 <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Follwers</a><span>60</span></li>
 										</ul>
 
 										<!-- Tab panes -->
@@ -145,13 +144,12 @@
 											<li>
 												<div class="nearly-pepls">
 													<figure>
-														<a href="time-line.html" title=""><img src="assets/images/resources/friend-avatar9.jpg" alt=""></a>
+														<a [routerLink]="['/main/timeline']" title=""><img src="assets/images/resources/friend-avatar9.jpg" alt=""></a>
 													</figure>
 													<div class="pepl-info">
-														<h4><a href="time-line.html" title="">jhon kates</a></h4>
+														<h4><a [routerLink]="['/main/timline']" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a [routerLink]="['/main/timeline']" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -163,8 +161,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">sophia Gate</a></h4>
 														<span>tv actresses</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -176,8 +173,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">sara grey</a></h4>
 														<span>work at IBM</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -189,8 +185,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Sexy cat</a></h4>
 														<span>Student</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -202,8 +197,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -215,8 +209,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Amy watson</a></h4>
 														<span>Study in university</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -228,8 +221,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">caty lasbo</a></h4>
 														<span>work as dancers</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -241,8 +233,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Ema watson</a></h4>
 														<span>personal business</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">unfriend</a>
-														<a href="#" title="" class="add-butn" data-ripple="">add friend</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -259,8 +250,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Amy watson</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>	
@@ -273,8 +263,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">sophia Gate</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -286,8 +275,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">caty lasbo</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -299,8 +287,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -312,8 +299,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -325,8 +311,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Sara grey</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -338,8 +323,7 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">Sexy cat</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
@@ -351,13 +335,11 @@
 													<div class="pepl-info">
 														<h4><a href="time-line.html" title="">jhon kates</a></h4>
 														<span>ftv model</span>
-														<a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-														<a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+														<a href="time-line.html" title="" class="add-butn" data-ripple="">view profile</a>
 													</div>
 												</div>
 											</li>
 										</ul>	
-											  <button class="btn-view btn-load-more"></button>
 										  </div>
 										</div>
 									</div>
@@ -416,7 +398,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6b1afa8b2a3b4b5a9aaa2a3b486a1aba7afaae8a5a9ab">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82f5ebecf6e7f0f1edeee6e7f0c2e5efe3ebeeace1edef">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -426,7 +408,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e0e3f0ece7f1c2e5efe3ebeeace1edef">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcbebdaeb2b9af9cbbb1bdb5b0f2bfb3b1">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -436,7 +418,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f050e1c00010d2f08020e0603410c0002">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef858e9c80818daf88828e8683c18c8082">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -446,7 +428,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147e75677b7a76547379757d783a777b79">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e444f5d41404c6e49434f4742004d4143">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -457,7 +439,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="640e05170b0a06240309050d084a070b09">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305a51435f5e5270575d51595c1e535f5d">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -468,7 +450,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b9b2a0bcbdb193b4beb2babffdb0bcbe">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e6c70717d5f78727e7673317c7072">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -479,7 +461,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb4bfadb1b0bc9eb9b3bfb7b2f0bdb1b3">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d373c2e32333f1d3a303c3431733e3230">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -490,7 +472,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd1dac8d4d5d9fbdcd6dad2d795d8d4d6">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f09a91839f9e92b0979d91999cde939f9d">[email&#160;protected]</a></i>
 												</div>
 											</li>
 											<li>
@@ -501,7 +483,7 @@
 												</figure>
 												<div class="friendz-meta">
 													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d9e8d919a8cbf98929e9693d19c9092">[email&#160;protected]</a></i>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99b988b979c8ab99e94989095d79a9694">[email&#160;protected]</a></i>
 												</div>
 											</li>
 										</ul>
@@ -567,8 +549,7 @@
 												</form>
 											</div>
 										</div>
-									</div><!-- friends list sidebar -->
-									
+									</div><!-- friends list sidebar -->								
 								</aside>
 							</div><!-- sidebar -->
 						</div>	
