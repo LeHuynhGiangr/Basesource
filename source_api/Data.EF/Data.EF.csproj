@@ -32,5 +32,11 @@
     
     <!--lehuynhgiang1219@outlook.com add packages for using authentication https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore -->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
+
+    <!--lehuynhgiang1219@outlook.com add packages https://www.nuget.org/packages/Microsoft.Extensions.Configuration.FileExtensions-->
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0-rc.2.20475.5" />
+
+    <!--lehuynhgiang1219@outlook.com add packages for configuration by json file https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/-->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
   </ItemGroup>
 </Project>
