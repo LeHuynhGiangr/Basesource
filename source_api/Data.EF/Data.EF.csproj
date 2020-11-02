@@ -16,26 +16,37 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     
     <!--lehuynhgiang1219@outlook.com add packages for migration https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-rc.1.20451.13">
+    <!--<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-rc.1.20451.13">
       <PrivateAssets>all</PrivateAssets>
       
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     
     <!--lehuynhgiang1219@outlook.com add packages for enable commmonly command at design-time https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-rc.1.20451.13">
+    <!--<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-rc.1.20451.13">
       <PrivateAssets>all</PrivateAssets>
       
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     
     <!--lehuynhgiang1219@outlook.com add packages for using authentication https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore -->
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
+    <!--<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
 
     <!--lehuynhgiang1219@outlook.com add packages https://www.nuget.org/packages/Microsoft.Extensions.Configuration.FileExtensions-->
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0-rc.2.20475.5" />
+    <!--<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0-rc.2.20475.5" />-->
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.8" />
 
     <!--lehuynhgiang1219@outlook.com add packages for configuration by json file https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/-->
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+    <!--<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />-->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
   </ItemGroup>
 </Project>
