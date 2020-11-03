@@ -2,7 +2,7 @@
 
 namespace Data.Interfaces
 {
-    interface IDateTracking
+    public interface IDateTracking
     {
         DateTime DateCreated { get; set; }
         DateTime DateModified { get; set; }
