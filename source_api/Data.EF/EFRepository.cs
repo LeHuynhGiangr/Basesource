@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Data.EF
 {
-    public class EFRepository<T, K>:Data.Interfaces.IRepository<T, K> where T: class
+    public class EFRepository<T, K>:Data.Interfaces.IRepository<T, K> where T: class, Data.Interfaces.IEntity<K>
     {                                                                                                            
         private readonly ProjectDbContext _context;                                                              
                                                                                                                  
@@ -56,12 +55,18 @@ namespace Data.EF
 
         public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
         {
-            //return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
+            return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
         }
 
         public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             return FindAll(includeProperties).SingleOrDefault(predicate);
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            var l_Records = from record in _context.Set<T>() select record;
+            return l_Records;
         }
 
         public void Remove(T entity)
@@ -79,9 +84,14 @@ namespace Data.EF
             _context.Set<T>().RemoveRange(entities);
         }
 
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
+            _context.Dispose();
         }
     }
 }

@@ -3,10 +3,12 @@
  */
 using Data.EF.Configurations;
 using Data.Entities;
+using Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace Data.EF
 {
@@ -43,6 +45,18 @@ namespace Data.EF
         public override int SaveChanges()
         {
             //auto add created datetime or update modified datetime
+            var l_modifiedEntities=ChangeTracker.Entries().Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
+            foreach(var modifiedEntity in l_modifiedEntities)
+            {
+                if(modifiedEntity is IDateTracking l_dateTrackedEntity)
+                {
+                    if (modifiedEntity.State == EntityState.Added)
+                    {
+                        l_dateTrackedEntity.DateCreated = DateTime.Now;
+                    }
+                    l_dateTrackedEntity.DateModified = DateTime.Now;
+                }
+            }
             return base.SaveChanges();
         }
     }

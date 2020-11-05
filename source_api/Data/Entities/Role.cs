@@ -7,7 +7,7 @@ using System;
 
 namespace Data.Entities
 {
-    public class Role : IdentityRole<System.Guid>, IDateTracking
+    public class Role : IdentityRole<System.Guid>, IEntity<Guid>, IDateTracking
     {
         //description role
         public string Description { get; set; }

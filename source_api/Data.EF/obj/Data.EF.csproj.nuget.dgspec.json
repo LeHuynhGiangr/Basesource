@@ -1,23 +1,112 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SocialNetwork\\source_api\\Data.EF\\Data.EF.csproj": {}
+    "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data.EF\\Data.EF.csproj": {}
   },
   "projects": {
-    "D:\\SocialNetwork\\source_api\\Data.EF\\Data.EF.csproj": {
+    "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data.EF\\Data.EF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SocialNetwork\\source_api\\Data.EF\\Data.EF.csproj",
+        "projectUniqueName": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data.EF\\Data.EF.csproj",
         "projectName": "Data.EF",
-        "projectPath": "D:\\SocialNetwork\\source_api\\Data.EF\\Data.EF.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\SocialNetwork\\source_api\\Data.EF\\obj\\",
+        "projectPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data.EF\\Data.EF.csproj",
+        "packagesPath": "C:\\Users\\lehuy\\.nuget\\packages\\",
+        "outputPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data.EF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lehuy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj": {
+                "projectPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
+        "projectName": "Data",
+        "projectPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\lehuy\\.nuget\\packages\\",
+        "outputPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\lehuy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +129,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +150,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

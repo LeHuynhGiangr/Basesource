@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="ViewModels\" />
+    <!--project reference - lehuynhgiang-->
+    <ProjectReference Include="../Data.EF/Data.EF.csproj"/>
+    <ProjectReference Include="../Data/Data.csproj"/>
   </ItemGroup>
 
 </Project>

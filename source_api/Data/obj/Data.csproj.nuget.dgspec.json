@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SocialNetwork\\source_api\\Data\\Data.csproj": {}
+    "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj": {}
   },
   "projects": {
-    "D:\\SocialNetwork\\source_api\\Data\\Data.csproj": {
+    "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SocialNetwork\\source_api\\Data\\Data.csproj",
+        "projectUniqueName": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "D:\\SocialNetwork\\source_api\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\SocialNetwork\\source_api\\Data\\obj\\",
+        "projectPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\lehuy\\.nuget\\packages\\",
+        "outputPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lehuy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
