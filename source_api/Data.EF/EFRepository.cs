@@ -53,9 +53,19 @@ namespace Data.EF
             return items.Where(predicate);
         }
 
+        public T FindById(K id)
+        {
+            return _context.Set<T>().SingleOrDefault(x => x.Id.Equals(id));
+        }
+
         public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
         {
             return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
+        }
+
+        public T FindSingle(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().SingleOrDefault(predicate);
         }
 
         public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)

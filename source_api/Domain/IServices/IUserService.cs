@@ -6,12 +6,22 @@ using System.Collections.Generic;
 
 namespace Domain.IServices
 {
-    public interface IUserService
+    public interface IUserService<T>
     {
         AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest, string ipAdress);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token">refresh token</param>
+        /// <param name="ipAddress">client ipv4 address</param>
+        /// <returns>
+        /// AuthenticateResponse instance if refresh successfully
+        /// null if refresh failure
+        /// </returns>
         AuthenticateResponse RefreshToken(string token, string ipAddress);
         bool RevokeToken(string token, string ipAddress);
         IEnumerable<User> GetAll();
-        User GetById(int id);
+        User GetById(T id);
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * the program class is console app that is the main entry point to start the application, it configures and launches the web api host and web server using
+ * and instance of IHostBuilder
+ */
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -14,6 +18,7 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://localhost:4000");
                     webBuilder.UseStartup<Startup>();
                 });
     }

@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace Domain.Services
 {
-    class UserService : IUserService
+    class UserService : IUserService<Guid>
     {
         private EFRepository<User, Guid> m_userRepository;
 
@@ -79,14 +79,31 @@ namespace Domain.Services
             return m_userRepository.GetAll();
         }
 
-        public User GetById(int id)
+        public User GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return m_userRepository.FindById(id);
         }
 
         public bool RevokeToken(string token, string ipAddress)
         {
-            throw new NotImplementedException();
+            //find user having token
+            var l_user = m_userRepository.FindSingle(_ => _.RefreshTokens.Any(_ => _.Token == token));
+
+            //return false if no user found with token
+            if (l_user == null) return false;
+
+            var l_refreshToken = l_user.RefreshTokens.Single(rt => rt.Token == token);
+
+            //return null if token is no longer active
+            if (!l_refreshToken.IsActive) return false;
+
+            //revoke token and save
+            l_refreshToken.Revoked = DateTime.UtcNow;
+            l_refreshToken.RevokedByIp = ipAddress;
+            m_userRepository.Update(l_user);
+            m_userRepository.SaveChanges();
+
+            return true;//revoke successfully
         }
 
         //helper methods
