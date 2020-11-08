@@ -1,0 +1,44 @@
+﻿reference:https://docs.microsoft.com/en-us/ef/ef6/querying/related-data
+
+Entity Framework supports three ways to load related data - eager loading, lazy loading and explicit loading. 
+The techniques shown in this topic apply equally to models created with Code First and the EF Designer.
+
+Eager loading is the process whereby a query for one type of entity also loads related entities as part of the query. 
+Eager loading is achieved by use of the Include method.
+
+Eagerly loading multiple levels
+ex:
+	// Load all blogs, all related posts, and all related comments.
+    var blogs1 = context.Blogs
+                        .Include(b => b.Posts.Select(p => p.Comments))
+                        .ToList();
+
+    // Load all users, their related profiles, and related avatar.
+    var users1 = context.Users
+                        .Include(u => u.Profile.Avatar)
+                        .ToList();
+
+...
+
+Lazy Loading
+Lazy loading is the process whereby an entity or collection of entities 
+is automatically loaded from the database the first time that a property referring to the entity/entities is accessed. 
+When using POCO entity types, lazy loading is achieved by creating instances of derived proxy types and then overriding 
+virtual properties to add the loading hook.
+
+Explicitly Loading
+
+Applying filters when explicitly loading related entities
+The Query method provides access to the underlying query that Entity Framework will use when loading related entities. 
+You can then use LINQ to apply filters to the query before executing it with a call to a LINQ extension method such as ToList, Load, etc. 
+The Query method can be used with both reference and collection navigation properties but is most useful for collections where it can be 
+used to load only part of the collection.
+    
+
+Using Query to count related entities without loading them
+ex:
+    // Count how many posts the blog has.
+    var postCount = context.Entry(blog)
+                           .Collection(b => b.Posts)
+                           .Query()
+                           .Count();

@@ -20,7 +20,7 @@ namespace Data.EF.Configurations
                 .IsUnicode(unicode: true)
                 .IsRequired(required: true);
 
-            builder.Property(propertyExpression: _ => _.BirthDay).IsRequired(required: true);
+            builder.Property(propertyExpression: _ => _.BirthDay).IsRequired(required: false);
         }
     }
 }

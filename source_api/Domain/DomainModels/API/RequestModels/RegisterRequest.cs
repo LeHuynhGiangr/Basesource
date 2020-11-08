@@ -30,7 +30,7 @@ namespace Domain.DomainModels.API.RequestModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        [Range(typeof(bool), "true", "true")]
+        [Range(typeof(bool), "true", "True")]
         public bool AcceptTerms { get; set; }
     }
 }

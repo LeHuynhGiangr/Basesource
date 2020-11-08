@@ -62,8 +62,7 @@ namespace Domain.Services
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
         {
-            var tem = m_userRepository.GetAll();
-            var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token));
+            var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token), _=>_.RefreshTokens);
 
             //return null if no user found with token
             if (l_user == null) {
@@ -79,7 +78,7 @@ namespace Domain.Services
             };
 
             // replace old refresh token with a new one and save
-            var l_newRefreshToken = this.GenerateRefreshToken(ipAddress);
+            var l_newRefreshToken = this.GenerateRefreshToken(ipAddress);//generate new RefreshToken instance
             l_refreshToken.Revoked = DateTime.UtcNow;
             l_refreshToken.RevokedByIp = ipAddress;
             l_refreshToken.ReplacedByToken = l_newRefreshToken.Token;
@@ -94,7 +93,7 @@ namespace Domain.Services
             // generate new jwt
             var l_jwtToken = GenerateJwtToken(l_user);
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_jwtToken, l_refreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_jwtToken, l_newRefreshToken.Token);
         }
 
         //get new JWT and new refresh token
@@ -127,12 +126,21 @@ namespace Domain.Services
 
         public void Register(RegisterRequest model, string origin)
         {
+            //Check valid model
+            if (model.Password != model.ConfirmPassword)
+            {
+                throw new Exception("Password and Confirm Password must be matched");
+            }
+            if (model.AcceptTerms == false)
+            {
+                throw new Exception("Terms must be accepted");
+            }
             //check username or has not been used
-            if(m_userRepository.FindSingle(_ => _.UserName == model.UserName) != null)
+            if (m_userRepository.FindSingle(_ => _.UserName == model.UserName) != null)
             {
                 throw new Exception("Username are already registered");
             }
-            if (m_userRepository.FindSingle(_ => _.Email == model.UserName) != null)
+            if (m_userRepository.FindSingle(_ => _.Email == model.Email) != null)
             {
                 throw new Exception("Email are already registered");
             }
@@ -144,10 +152,11 @@ namespace Domain.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Gender = model.Gender,
+                PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString(),////temporarily, using encode instead of really hash
 
                 TwoFactorEnabled = false,
-                PhoneNumberConfirmed = false,
-                EmailConfirmed = false,
+                PhoneNumberConfirmed = true,
+                EmailConfirmed = true,
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
 
@@ -163,9 +172,6 @@ namespace Domain.Services
 
             l_user.Role = Data.Enums.ERole.User;
             //l_user.VerificationShortToken = RandomSixDigitToken();
-
-            //hash password
-            l_user.PasswordHash = Encoding.ASCII.GetBytes(model.Password).ToString();//temporarily, using encode instead of really hash
 
             m_userRepository.Add(l_user);
             m_userRepository.SaveChanges();
@@ -276,7 +282,11 @@ namespace Domain.Services
 
         private void RemoveOldRefreshTokens(User user)
         {
-            user.RefreshTokens.RemoveAll(_ => _.IsActive == false && _.Expires.AddDays(m_refreshTokenDayTimeLive) <= DateTime.UtcNow);
+            var l_tokens = user.RefreshTokens.Where(_ => _.IsActive == false && _.Expires.AddDays(m_refreshTokenDayTimeLive) <= DateTime.UtcNow).Select(_=>_);
+            foreach(var token in l_tokens)
+            {
+                user.RefreshTokens.Remove(token);
+            }
         }
 
         private string RandomSixDigitToken()

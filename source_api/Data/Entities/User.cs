@@ -4,9 +4,9 @@
 using Data.Enums;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Data.Entities
 {
@@ -36,7 +36,7 @@ namespace Data.Entities
         public ERole Role { get; set; }
 
         //collection navigation
-        public List<RefreshToken> RefreshTokens { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
 
         //method
         public bool IsRefreshTokenOwned(string token)
@@ -46,7 +46,7 @@ namespace Data.Entities
              * If the entity is not found in the context then a query will be sent to the database to find the entity there. 
              * Null is returned if the entity is not found in the context or in the database. 
              */
-            return this.RefreshTokens?.Find(_ => _.Token == token) != null;
+            return this.RefreshTokens?.Single(_ => _.Token == token) != null;
         }
     }
 }

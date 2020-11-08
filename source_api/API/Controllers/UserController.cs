@@ -56,26 +56,32 @@ namespace API
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken()
         {
-            //get refreshToken in cookies
-            var l_refreshToken = Request.Cookies[m_tokenKeyName];
-
-            //if cannot get token return status 400 - bad request
-            if (string.IsNullOrEmpty(l_refreshToken))
+            try
             {
-                return BadRequest(new { message = "token is required" });
-            }
+                //get refreshToken in cookies
+                var l_refreshToken = Request.Cookies[m_tokenKeyName];
 
-            var l_response = m_userService.RefreshToken(l_refreshToken, GetclientIpv4Address());
+                //if cannot get token return status 400 - bad request
+                if (string.IsNullOrEmpty(l_refreshToken))
+                {
+                    return BadRequest(new { message = "token is required" });
+                }
 
-            //if response is null return status 401 unauthorized
-            if (l_response == null)
+                var l_response = m_userService.RefreshToken(l_refreshToken, GetclientIpv4Address());
+
+                //if response is null return status 401 unauthorized
+                if (l_response == null)
+                {
+                    return Unauthorized(new { message = "invalid token" });
+                }
+
+                SetTokenCookie(l_response.RefreshToken);
+
+                return Ok(l_response);//status 200 OK
+            }catch(Exception e)
             {
-                return Unauthorized(new { message = "invalid token" });
+                return BadRequest(new { message = e.Message });
             }
-
-            SetTokenCookie(l_response.RefreshToken);
-
-            return Ok(l_response);//status 200 OK
         }
 
         [Authorize]
@@ -106,7 +112,7 @@ namespace API
             try
             {
                 m_userService.Register(registerRequest, Request.Headers["origin"]);
-                return Ok(new { message = "registration successful" });//temporarily, verification email has not been used yet
+                return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
             }
             catch(Exception e)
             {

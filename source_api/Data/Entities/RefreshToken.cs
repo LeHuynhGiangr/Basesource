@@ -24,6 +24,6 @@ namespace Data.Entities
         //public Guid UserId { get; set; }
 
         //navigation/
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

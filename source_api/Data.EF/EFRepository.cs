@@ -70,12 +70,18 @@ namespace Data.EF
 
         public T FindSingle(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().SingleOrDefault(predicate);
+            return _context.Set<T>().FirstOrDefault(predicate);
         }
 
-        public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties)
         {
-            return FindAll(includeProperties).SingleOrDefault(predicate);
+            IQueryable<T> entity = _context.Set<T>();
+            //Eagerly loading
+            foreach(var navigationProperty in navigationProperties)
+            {
+                entity=entity.Include(navigationProperty);
+            }
+            return entity.SingleOrDefault(predicate);
         }
 
         public IQueryable<T> GetAll()
@@ -110,3 +116,7 @@ namespace Data.EF
         }
     }
 }
+/*
+ * Entity Framework supports three ways to load related data - eager loading, lazy loading and explicit loading. 
+ * The techniques shown in this topic apply equally to models created with Code First and the EF Designer.
+ */
