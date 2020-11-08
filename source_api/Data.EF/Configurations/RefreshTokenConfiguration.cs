@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Data.EF.Configurations
 {
-    class RefreshTokenConfiguration: IEntityTypeConfiguration<RefreshToken>
+    public class RefreshTokenConfiguration: IEntityTypeConfiguration<RefreshToken>
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {

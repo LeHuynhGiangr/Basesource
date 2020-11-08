@@ -21,7 +21,16 @@ namespace Domain.IServices
         /// </returns>
         AuthenticateResponse RefreshToken(string token, string ipAddress);
         bool RevokeToken(string token, string ipAddress);
-        IEnumerable<User> GetAll();
-        User GetById(T id);
+        void Register(RegisterRequest model, string origin);
+        void VerifyEmail(string token);
+        void ForgotPassword(ForgotPasswordRequest model, string origin);
+        void ValidateResetToken(ValidateResetTokenRequest model);
+        void ResetPassword(ResetPasswordRequest model);
+
+        IEnumerable<UserResponse> GetAll();
+        UserResponse GetById(T id);
+        UserResponse Create(CreateRequest model);
+        UserResponse Update(T id, UpdateUserRequest model);
+        bool Delete(T id);
     }
 }

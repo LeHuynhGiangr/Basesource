@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// </summary>
 namespace Data.EF.Configurations
 {
-    class RoleConfiguration : IEntityTypeConfiguration<Data.Entities.Role>
+    public class RoleConfiguration : IEntityTypeConfiguration<Data.Entities.Role>
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {

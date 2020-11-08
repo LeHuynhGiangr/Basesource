@@ -27,6 +27,11 @@ namespace Data.EF
             }
         }
 
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().Where(predicate);
+        }
+
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();

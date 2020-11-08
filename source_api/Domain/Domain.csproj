@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <!--project reference - lehuynhgiang-->
-    <ProjectReference Include="../Data.EF/Data.EF.csproj"/>
-    <ProjectReference Include="../Data/Data.csproj"/>
+    <ProjectReference Include="../Data.EF/Data.EF.csproj" />
+    <ProjectReference Include="../Data/Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MapperConfigs\" />
   </ItemGroup>
 
 </Project>

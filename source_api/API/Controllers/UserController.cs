@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Domain.IServices;
-using Domain.DomainModels.API.RequestModels;
+﻿using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
+using Domain.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace API
 {
@@ -70,6 +71,8 @@ namespace API
             return Ok(l_response);//status 200 OK
         }
 
+        [Authorize]
+        [HttpPost("revoke-token")]
         public IActionResult RevokeToken([FromBody] RevokeTokenRequest revokeTokenRequestModel)
         {
             //get jwt from request body if not null or else get refreshToken from request cookie
@@ -88,6 +91,112 @@ namespace API
 
             return Ok(new { message = "token is invoke" });
         }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterRequest registerRequest)
+        {
+            try
+            {
+                m_userService.Register(registerRequest, Request.Headers["origin"]);
+                return Ok(new { message = "registration successful" });//temporarily, verification email has not been used yet
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new { message=e.Message});
+            }
+        }
+
+        [HttpPost("verify-email")]
+        public IActionResult VerifyEmail()
+        {
+            return StatusCode(503);
+        }
+
+        [HttpPost("forgot-password")]
+        public IActionResult ForgotPassword()
+        {
+            return StatusCode(503);
+        }
+
+        [HttpPost("validate-reset-token")]
+        public IActionResult ValidateResetToken()
+        {
+            return StatusCode(503);
+        }
+
+        [HttpPost("reset-password")]
+        public IActionResult ResetPassword()
+        {
+            return StatusCode(503);
+        }
+
+        //[Authorize(Role.Admin)]
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult<IEnumerable<UserResponse>> GetAll()
+        
+        {
+            try
+            {
+                var l_userResponses = m_userService.GetAll();
+                return Ok(l_userResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(503);//service unavailable
+            }
+        }
+
+        //[Authorize]
+        //[HttpGet("{id:int}")]
+        //public ActionResult<AccountResponse> GetById(int id)
+        //{
+        //    // users can get their own account and admins can get any account
+        //    if (id != Account.Id && Account.Role != Role.Admin)
+        //        return Unauthorized(new { message = "Unauthorized" });
+
+        //    var account = _accountService.GetById(id);
+        //    return Ok(account);
+        //}
+
+        //[Authorize(Role.Admin)]
+        //[HttpPost]
+        //public ActionResult<AccountResponse> Create(CreateRequest model)
+        //{
+        //    var account = _accountService.Create(model);
+        //    return Ok(account);
+        //}
+
+        //[Authorize]
+        //[HttpPut("{id:int}")]
+        //public ActionResult<AccountResponse> Update(int id, UpdateRequest model)
+        //{
+        //    // users can update their own account and admins can update any account
+        //    if (id != Account.Id && Account.Role != Role.Admin)
+        //        return Unauthorized(new { message = "Unauthorized" });
+
+        //    // only admins can update role
+        //    if (Account.Role != Role.Admin)
+        //        model.Role = null;
+
+        //    var account = _accountService.Update(id, model);
+        //    return Ok(account);
+        //}
+
+        //[Authorize]
+        //[HttpDelete("{id:int}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    // users can delete their own account and admins can delete any account
+        //    if (id != Account.Id && Account.Role != Role.Admin)
+        //        return Unauthorized(new { message = "Unauthorized" });
+
+        //    _accountService.Delete(id);
+        //    return Ok(new { message = "Account deleted successfully" });
+        //}
+
+
 
         /*
          * helper methods

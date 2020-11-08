@@ -19,8 +19,9 @@ namespace Data.EF
         }
 
         //start declare entities 
-        public DbSet<User> AppUsers { get; set; }
-        public DbSet<Role> AppRoles { get; set; }
+        public override DbSet<User> Users { get; set; }
+        public override DbSet<Role> Roles { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         //end declare entites
 
         //this method is called on event model creating
@@ -29,17 +30,21 @@ namespace Data.EF
         {
             //start configure using fluent API
             //config asp identity
+            builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
-            builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens");
-            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins");
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles");
+            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_=> new { _.UserId, _.RoleId});
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
+            builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
             //end config asp identity
             //end configure
 
-            base.OnModelCreating(builder);
+            //seeding data
+
+
+            //base.OnModelCreating(builder);
         }
         
         public override int SaveChanges()

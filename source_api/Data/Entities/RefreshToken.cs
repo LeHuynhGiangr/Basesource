@@ -5,13 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace Data.Entities
 {
-    public class RefreshToken:IdentityUserToken<Guid>, IEntity<Guid>, IDateTracking
+    public class RefreshToken: IEntity<Guid>, IDateTracking
     {
-        //key/
-        [JsonIgnore]
-        public Guid Id { get; set; }
-
         //properties/
+        public Guid Id { get; set; }
         public string Token { get; set; }
         public DateTime Expires { get; set; }
         public bool IsExpired => DateTime.UtcNow >= Expires;
@@ -21,7 +18,7 @@ namespace Data.Entities
         public string RevokedByIp { get; set; }
         public string ReplacedByToken { get; set; }
         public bool IsActive => Revoked == null && !IsExpired;
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         ////foreign key/
         //public Guid UserId { get; set; }
