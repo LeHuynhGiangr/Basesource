@@ -106,7 +106,7 @@ namespace Data.EF
 
         public void Update(T entity)
         {
-            _context.Dispose();
+            _context.Update(entity);
         }
     }
 }

@@ -33,7 +33,8 @@ namespace Domain.Services
 
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest, string ipAddress)
         {
-            var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.Password == authenticateRequest.Password);
+            //var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.Password == authenticateRequest.Password);
+            var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.PasswordHash == System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(authenticateRequest.Password)).ToString());
 
             //User not found
             if (l_user == null)
@@ -46,6 +47,7 @@ namespace Domain.Services
             var l_refreshToken = this.GenerateRefreshToken(ipAddress);
 
             //save refresh token
+            if (l_user.RefreshTokens == null) l_user.RefreshTokens = new List<RefreshToken>();
             l_user.RefreshTokens.Add(l_refreshToken);
 
             //remove old refresh token from user
@@ -60,6 +62,7 @@ namespace Domain.Services
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
         {
+            var tem = m_userRepository.GetAll();
             var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token));
 
             //return null if no user found with token
@@ -68,6 +71,7 @@ namespace Domain.Services
             };
 
             var l_refreshToken = l_user.RefreshTokens.Single(rt => rt.Token == token);
+
 
             //return null if token is no longer active
             if (!l_refreshToken.IsActive) {
@@ -93,6 +97,7 @@ namespace Domain.Services
             return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_jwtToken, l_refreshToken.Token);
         }
 
+        //get new JWT and new refresh token
         public bool RevokeToken(string token, string ipAddress)
         {
             var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token));
@@ -254,7 +259,7 @@ namespace Domain.Services
 
         private RefreshToken GenerateRefreshToken(string ipAddress)
         {
-            RefreshToken l_refreshToken;
+            RefreshToken l_refreshToken=new RefreshToken();
             using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
             {
                 var l_randomBytes = new byte[64];
@@ -266,7 +271,7 @@ namespace Domain.Services
                     CreatedByIp = ipAddress
                 };
             };
-            return null;
+            return l_refreshToken;
         }
 
         private void RemoveOldRefreshTokens(User user)

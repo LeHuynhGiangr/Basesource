@@ -32,17 +32,24 @@ namespace API
         [HttpPost("authenticate")]//Http post method
         public IActionResult Authenticate([FromBody] AuthenticateRequest model)//get data from request body, auto binding/
         {
-            var l_response = m_userService.Authenticate(model, GetclientIpv4Address());
-
-            //if response is null -> status 400 - Bad request
-            if (l_response == null)
+            try
             {
-                return BadRequest(new { message = "username or password is incorrect" });
+                var l_response = m_userService.Authenticate(model, GetclientIpv4Address());
+
+                //if response is null -> status 400 - Bad request
+                if (l_response == null)
+                {
+                    return BadRequest(new { message = "username or password is incorrect" });
+                }
+
+                SetTokenCookie(l_response.RefreshToken);
+
+                return Ok(l_response);//status 200 OK
+            }catch(Exception e)
+            {
+                return BadRequest(new { message = e.Message });
             }
-
-            SetTokenCookie(l_response.RefreshToken);
-
-            return Ok(l_response);//status 200 OK
+            
         }
 
         [AllowAnonymous]

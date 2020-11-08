@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201108103043_mig2.cs" />
+    <Compile Remove="Migrations\20201108103043_mig2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="EFEntities\" />
     <Folder Include="Repositories\" />

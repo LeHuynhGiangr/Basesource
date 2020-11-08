@@ -46,7 +46,7 @@ namespace API
             //configure Dependency Injection for services
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
-            
+            services.AddTransient<DbInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +78,8 @@ namespace API
             app.UseAuthorization();
 
             app.UseEndpoints(_ => _.MapControllers());
+
+            dbInitializer.Seed().Wait();
         }
     }
 }

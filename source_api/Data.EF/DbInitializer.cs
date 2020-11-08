@@ -42,7 +42,7 @@ namespace Data.EF
 
                         UserName="admin",
                         Password="123456",
-                        PasswordHash=Encoding.ASCII.GetBytes("123456").ToString(),
+                        PasswordHash=System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("123456")).ToString(),
                         Role=Enums.ERole.Admin,
 
                         VerificationShortToken=null,
@@ -63,7 +63,7 @@ namespace Data.EF
                     }
                 });
 
-                //_context.SaveChanges();
+                _context.SaveChanges();
             }
         }
     }

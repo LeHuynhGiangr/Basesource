@@ -812,23 +812,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lehuy\\.nuget\\packages\\": {},
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
+      "projectUniqueName": "D:\\Git\\Basesource\\source_api\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\Data.csproj",
-      "packagesPath": "C:\\Users\\lehuy\\.nuget\\packages\\",
-      "outputPath": "D:\\SPKT_HQ_IT\\4FORTHYEAR\\1stSemester\\essay\\working\\M110320\\Basesource\\source_api\\Data\\obj\\",
+      "projectPath": "D:\\Git\\Basesource\\source_api\\Data\\Data.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Git\\Basesource\\source_api\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lehuy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -872,7 +872,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
