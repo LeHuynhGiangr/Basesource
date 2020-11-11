@@ -27,6 +27,7 @@ import { VideosComponent } from './videos/videos.component';
 import { HeaderComponent } from '../layout/header/header.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+
 export const mainRoutes: Routes = [
   {path: '', redirectTo:'home',pathMatch:'full'},
   {path:'about', component:AboutComponent},

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
@@ -7,22 +7,36 @@ import { MainModule } from './main/main.module';
 import { GeneralModule } from './general/general.module';
 import { AdminModule } from './admin/admin.module';
 import { _404Module } from './404/404.module';
+import { InitApp } from './_helpers/app.initializer';
+import { AuthenService } from './_core/services/authen.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { fakeBackendProvider } from './_helpers/fake-backend';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    GeneralModule,
     LoginModule,
     MainModule,
-    GeneralModule,
     AdminModule,
     _404Module,
-
   ],
-  providers: [],
+  providers: [
+    {provide:APP_INITIALIZER, useFactory: InitApp, multi:true, deps: [AuthenService]},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
+
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
