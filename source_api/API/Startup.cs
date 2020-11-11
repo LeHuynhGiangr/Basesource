@@ -35,7 +35,7 @@ namespace API
                 .AddEntityFrameworkStores<ProjectDbContext>().AddDefaultTokenProviders();
 
             //register group of services with extension methods
-            services.AddDbContext<ProjectDbContext>(_ => _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), _=>_.MigrationsAssembly("source_api.Data.EF")));
+            services.AddDbContext<ProjectDbContext>(_ => _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), _ => _.MigrationsAssembly("source_api.Data.EF")));
 
             services.AddControllers();
 
@@ -47,6 +47,7 @@ namespace API
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
             services.AddTransient<DbInitializer>();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +56,7 @@ namespace API
             //ASP.NET Core controllers use the Routing middleware to match the URLs of incoming requests and map them to actions.Routes templates:
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); 
+                app.UseDeveloperExceptionPage();
             }
 
             // generated swagger json and swagger ui middleware
@@ -79,7 +80,7 @@ namespace API
 
             app.UseEndpoints(_ => _.MapControllers());
 
-            dbInitializer.Seed().Wait();
+            //dbInitializer.Seed().Wait();
         }
     }
 }

@@ -62,10 +62,11 @@ namespace Domain.Services
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
         {
-            var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token), _=>_.RefreshTokens);
+            var l_user = m_userRepository.FindSingle(u => u.RefreshTokens.Any(rt => rt.Token == token), _ => _.RefreshTokens);
 
             //return null if no user found with token
-            if (l_user == null) {
+            if (l_user == null)
+            {
                 throw new Exception("invalid token");
             };
 
@@ -73,7 +74,8 @@ namespace Domain.Services
 
 
             //return null if token is no longer active
-            if (!l_refreshToken.IsActive) {
+            if (!l_refreshToken.IsActive)
+            {
                 throw new Exception("invalid token");
             };
 
@@ -153,7 +155,7 @@ namespace Domain.Services
                 LastName = model.LastName,
                 Gender = model.Gender,
                 PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString(),////temporarily, using encode instead of really hash
-
+                Password = model.Password,
                 TwoFactorEnabled = false,
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
@@ -204,7 +206,7 @@ namespace Domain.Services
         {
             var l_users = m_userRepository.GetAll();
             List<UserResponse> l_userResponses = new List<UserResponse>();
-            foreach(User user in l_users)
+            foreach (User user in l_users)
             {
                 l_userResponses.Add(new UserResponse
                 {
@@ -215,9 +217,9 @@ namespace Domain.Services
                     LastName = user.LastName,
                     Gender = user.Gender,
                     IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
-                    Phone=user.PhoneNumber,
-                    Role=user.Role.ToString(),
-                    Updated=user.DateModified
+                    Phone = user.PhoneNumber,
+                    Role = user.Role.ToString(),
+                    Updated = user.DateModified
                 });
             }
             return l_userResponses;
@@ -265,7 +267,7 @@ namespace Domain.Services
 
         private RefreshToken GenerateRefreshToken(string ipAddress)
         {
-            RefreshToken l_refreshToken=new RefreshToken();
+            RefreshToken l_refreshToken = new RefreshToken();
             using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
             {
                 var l_randomBytes = new byte[64];
@@ -282,8 +284,8 @@ namespace Domain.Services
 
         private void RemoveOldRefreshTokens(User user)
         {
-            var l_tokens = user.RefreshTokens.Where(_ => _.IsActive == false && _.Expires.AddDays(m_refreshTokenDayTimeLive) <= DateTime.UtcNow).Select(_=>_);
-            foreach(var token in l_tokens)
+            var l_tokens = user.RefreshTokens.Where(_ => _.IsActive == false && _.Expires.AddDays(m_refreshTokenDayTimeLive) <= DateTime.UtcNow).Select(_ => _);
+            foreach (var token in l_tokens)
             {
                 user.RefreshTokens.Remove(token);
             }
@@ -299,6 +301,41 @@ namespace Domain.Services
         private void SendVerificationEmail(User user, string origin)
         {
 
+        }
+        private async void SendEmail(string mailAddress, string content)
+        {
+
+        }
+
+        async void IUserService<Guid>.SendEmail(string mailAddress, string content)
+        {
+
+            var client = new System.Net.Mail.SmtpClient("smtp.example.com", 111);
+            client.UseDefaultCredentials = false;
+            client.EnableSsl = true;
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+
+            client.Credentials = new System.Net.NetworkCredential("cauviewchome3@gmail.com", "cqxouerrcxzbnxdv");
+
+            var mailMessage = new System.Net.Mail.MailMessage();
+            mailMessage.From = new System.Net.Mail.MailAddress("cauviewchome3@gmail.com");
+
+            mailMessage.To.Add(mailAddress);
+
+            if (!string.IsNullOrEmpty(mailAddress))
+            {
+                mailMessage.CC.Add(mailAddress);
+            }
+
+            mailMessage.Body = content;
+
+            mailMessage.Subject = "Confirm Email Social Network";
+
+            mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+            mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+
+            await client.SendMailAsync(mailMessage);
         }
     }
 }

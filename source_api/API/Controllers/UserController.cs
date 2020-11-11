@@ -1,4 +1,5 @@
-﻿using Domain.DomainModels.API.RequestModels;
+﻿using Data.Entities;
+using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -6,13 +7,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace API
 {
     [Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
     [ApiController]
     [Route("user")]//routing/
-    public class UserController:ControllerBase
+    public class UserController : ControllerBase
     {
         private string m_tokenKeyName = "refreshtoken";
 
@@ -45,11 +47,12 @@ namespace API
                 SetTokenCookie(l_response.RefreshToken);
 
                 return Ok(l_response);//status 200 OK
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
             }
-            
+
         }
 
         [AllowAnonymous]
@@ -78,7 +81,8 @@ namespace API
                 SetTokenCookie(l_response.RefreshToken);
 
                 return Ok(l_response);//status 200 OK
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
             }
@@ -98,7 +102,8 @@ namespace API
             }
 
             //if revoke token is failure return 404 not found
-            if(! m_userService.RevokeToken(l_token, GetclientIpv4Address())){
+            if (!m_userService.RevokeToken(l_token, GetclientIpv4Address()))
+            {
                 return NotFound(new { message = "not found" });
             }
 
@@ -114,9 +119,9 @@ namespace API
                 m_userService.Register(registerRequest, Request.Headers["origin"]);
                 return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return BadRequest(new { message=e.Message});
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -148,7 +153,7 @@ namespace API
         [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<UserResponse>> GetAll()
-        
+
         {
             try
             {
@@ -161,6 +166,22 @@ namespace API
             }
         }
 
+        [AllowAnonymous]//this attribute is applied to does not require authorization/
+        [HttpPost("sendingemail")]//Http post method
+        public async Task<IActionResult> SendMail([FromBody] Email email)
+        {
+            try
+            {
+                m_userService.SendEmail("ngodangdongkhoi@gmail.com", "noi dung ne");
+                return Ok(new { message = "Send Email Successfully" });//temporarily, verification token has not been sent to email yet
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+
+
+        }
         //[Authorize]
         //[HttpGet("{id:int}")]
         //public ActionResult<AccountResponse> GetById(int id)
