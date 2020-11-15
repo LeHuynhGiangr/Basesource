@@ -15,10 +15,15 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
 using Domain.ApplicationSettings;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Domain.Services
 {
-    public class UserService : IUserService<Guid>
+    public class UserService : ControllerBase, IUserService<Guid>
     {
         private readonly int m_refreshTokenDayTimeLive = 7;
 
@@ -30,7 +35,6 @@ namespace Domain.Services
         {
             m_userRepository = userRepository;
         }
-
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest, string ipAddress)
         {
             //var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.Password == authenticateRequest.Password);
@@ -302,11 +306,6 @@ namespace Domain.Services
         {
 
         }
-        private async void SendEmail(string mailAddress, string content)
-        {
-
-        }
-
         async void IUserService<Guid>.SendEmail(string mailAddress, string content)
         {
 
@@ -336,6 +335,35 @@ namespace Domain.Services
             mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
 
             await client.SendMailAsync(mailMessage);
+        }
+
+        void IUserService<Guid>.UploadAvatar(Guid id, IFormFile avatar)
+        {
+            User user = m_userRepository.FindById(id);
+
+            var ms = new MemoryStream();
+            avatar.CopyTo(ms);
+
+            var fileBytes = ms.ToArray();
+            //string dataBytes = Convert.ToBase64String(fileBytes);
+
+            user.Avatar = fileBytes;
+
+            //if (HttpContext.Request.Form.Files.Count > 0)
+            //{
+            //    var file = HttpContext.Request.Form.Files[0];
+
+            //    byte[] fileData = null;
+
+            //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+            //    {
+            //        fileData = binaryReader.ReadBytes((int)file.Length);
+            //    }
+
+            //    user.Avatar = fileData;
+            //}
+            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
+            m_userRepository.SaveChanges();
         }
     }
 }

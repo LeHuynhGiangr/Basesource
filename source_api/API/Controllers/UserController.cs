@@ -5,8 +5,10 @@ using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API
@@ -29,7 +31,6 @@ namespace API
         /*
          * below is public action methods which can be access without authorization
          */
-
         [AllowAnonymous]//this attribute is applied to does not require authorization/
         [HttpPost("authenticate")]//Http post method
         public IActionResult Authenticate([FromBody] AuthenticateRequest model)//get data from request body, auto binding/
@@ -179,7 +180,36 @@ namespace API
             {
                 return BadRequest(new { message = e.Message });
             }
+        }
 
+        [AllowAnonymous]//this attribute is applied to does not require authorization/
+        [Route("avatar/{id:guid}")]
+        [HttpPut]
+        //public async Task<IActionResult> UploadAvatar(Guid id, [FromForm] User user)
+        public async Task<IActionResult> UploadAvatar([FromForm] IFormFile avatar, Guid id)
+        {
+
+            // JwtDataDeCoder data = JWT.Decode(req.herders.authization]
+            ///  var user = m_userService.GetById(data.uniqe_name);
+
+            //var users = m_userService.GetById(id);
+
+            //if (users == null)
+            //{
+            //    return NotFound("User is not exists");
+            //}
+            try
+            {
+                m_userService.UploadAvatar(id, avatar);
+                return Ok("Upload avatar success fully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+
+            //m_userService.UploadAvatar();
+            //return Ok(new { message = "Upload successfully", data = user.Avatar.ToString() });//temporarily, verification token has not been sent to email yet
 
         }
         //[Authorize]

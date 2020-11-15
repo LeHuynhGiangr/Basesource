@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,22 @@ using System.Linq.Expressions;
 
 namespace Data.EF
 {
-    public class EFRepository<T, K>:Data.Interfaces.IRepository<T, K> where T: class, Data.Interfaces.IEntity<K>
-    {                                                                                                            
-        private readonly ProjectDbContext _context;                                                              
-                                                                                                                 
-        public EFRepository(ProjectDbContext context)                                                            
+    public class EFRepository<T, K> : Data.Interfaces.IRepository<T, K> where T : class, Data.Interfaces.IEntity<K>
+    {
+        private readonly ProjectDbContext _context;
+
+        public EFRepository(ProjectDbContext context)
         {
             _context = context;
         }
         public void Add(T entity)
         {
             _context.Add(entity);
+        }
+
+        public void SetModifierUserStatus(User user, EntityState entityState)
+        {
+            _context.Entry(user).State = entityState;
         }
 
         public void Dispose()
@@ -77,9 +83,9 @@ namespace Data.EF
         {
             IQueryable<T> entity = _context.Set<T>();
             //Eagerly loading
-            foreach(var navigationProperty in navigationProperties)
+            foreach (var navigationProperty in navigationProperties)
             {
-                entity=entity.Include(navigationProperty);
+                entity = entity.Include(navigationProperty);
             }
             return entity.SingleOrDefault(predicate);
         }
@@ -114,6 +120,7 @@ namespace Data.EF
         {
             _context.Update(entity);
         }
+
     }
 }
 /*

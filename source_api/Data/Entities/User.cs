@@ -21,6 +21,17 @@ namespace Data.Entities
         public string LastName { get; set; }
         public string Gender { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public float Location { get; set; }
+        public string Works { get; set; }
+        public bool Active { get; set; }
+        public byte[] Avatar { get; set; }
+        public byte[] Background { get; set; }
+        public bool FollowMe { get; set; }
+        public bool RequestFriend { get; set; }
+        public bool ViewListFriend { get; set; }
+        public bool ViewTimeLine { get; set; }
         public DateTime? BirthDay { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
