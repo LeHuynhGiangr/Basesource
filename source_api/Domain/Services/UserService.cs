@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Services
 {
-    public class UserService : ControllerBase, IUserService<Guid>
+    public class UserService : IUserService<Guid>
     {
         private readonly int m_refreshTokenDayTimeLive = 7;
 
