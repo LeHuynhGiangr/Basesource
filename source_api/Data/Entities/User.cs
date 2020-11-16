@@ -49,6 +49,8 @@ namespace Data.Entities
         //collection navigation
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
 
+        public virtual ICollection<Post> Posts { get; set; }
+
         //method
         public bool IsRefreshTokenOwned(string token)
         {

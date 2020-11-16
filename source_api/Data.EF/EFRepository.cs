@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Data.EF
 {
@@ -15,53 +16,11 @@ namespace Data.EF
         {
             _context = context;
         }
-        public void Add(T entity)
-        {
-            _context.Add(entity);
-        }
 
-        public void SetModifierUserStatus(User user, EntityState entityState)
+        public IQueryable<T> GetAll()
         {
-            _context.Entry(user).State = entityState;
-        }
-
-        public void Dispose()
-        {
-            if (_context != null)
-            {
-                _context.Dispose();
-            }
-        }
-
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
-        {
-            return _context.Set<T>().Where(predicate);
-        }
-
-        public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> items = _context.Set<T>();
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    items = items.Include(includeProperty);
-                }
-            }
-            return items;
-        }
-
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> items = _context.Set<T>();
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    items = items.Include(includeProperty);
-                }
-            }
-            return items.Where(predicate);
+            var l_Records = from record in _context.Set<T>() select record;
+            return l_Records;
         }
 
         public T FindById(K id)
@@ -72,6 +31,11 @@ namespace Data.EF
         public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
         {
             return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
+        }
+
+        public Task<T> FindByIdAsyn(K id)
+        {
+            return _context.Set<T>().SingleOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public T FindSingle(Expression<Func<T, bool>> predicate)
@@ -90,10 +54,45 @@ namespace Data.EF
             return entity.SingleOrDefault(predicate);
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
         {
-            var l_Records = from record in _context.Set<T>() select record;
-            return l_Records;
+            return _context.Set<T>().Where(predicate);
+        }
+
+        public IQueryable<T> FindAll(params Expression<Func<T, object>>[] navigationProperties)
+        {
+            IQueryable<T> items = _context.Set<T>();
+            if (navigationProperties != null)
+            {
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    items = items.Include(navigationProperty);
+                }
+            }
+            return items;
+        }
+
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties)
+        {
+            IQueryable<T> items = _context.Set<T>();
+            if (navigationProperties != null)
+            {
+                foreach (var navigationProperty in navigationProperties)
+                {
+                    items = items.Include(navigationProperty);
+                }
+            }
+            return items.Where(predicate);
+        }
+
+        public void Add(T entity)
+        {
+            _context.Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _context.Update(entity);
         }
 
         public void Remove(T entity)
@@ -116,14 +115,22 @@ namespace Data.EF
             _context.SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Dispose()
         {
-            _context.Update(entity);
+            if (_context != null)
+            {
+                _context.Dispose();
+            }
         }
 
+        public void SetModifierUserStatus(User user, EntityState entityState)
+        {
+            _context.Entry(user).State = entityState;
+        }
     }
 }
 /*
  * Entity Framework supports three ways to load related data - eager loading, lazy loading and explicit loading. 
  * The techniques shown in this topic apply equally to models created with Code First and the EF Designer.
+ * ref: https://docs.microsoft.com/en-us/ef/ef6/querying/related-data
  */

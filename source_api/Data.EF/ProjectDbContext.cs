@@ -41,8 +41,8 @@ namespace Data.EF
             //end config asp identity
             //end configure
 
-            //seeding data
-
+            //seeding data by extension method
+            builder.SeedData();
 
             //base.OnModelCreating(builder);
         }
