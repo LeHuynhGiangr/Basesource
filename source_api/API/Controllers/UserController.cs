@@ -132,7 +132,7 @@ namespace API
         [HttpPost("revoke-token")]
         public IActionResult RevokeToken([FromBody] RevokeTokenRequest revokeTokenRequestModel)
         {
-            //get jwt from request body if not null or else get refreshToken from request cookie
+            //get token from request body if not null or else get refreshToken from request cookie
             var l_token = revokeTokenRequestModel.Token ?? Request.Cookies[m_tokenKeyName];
 
             //if cannot get token return status 400 - bad request
