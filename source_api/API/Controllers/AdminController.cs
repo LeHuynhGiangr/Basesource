@@ -9,10 +9,7 @@ using System.Collections.Generic;
 namespace API.Controllers
 {
     [ApiController]
-    //[RoleBaseAuthorize(Data.Enums.ERole.Admin)]
-    /**/
-    [AllowAnonymous]//temp
-    /**/
+    [RoleBaseAuthorize(Data.Enums.ERole.Admin)]
     [Route("admin")]//routing/
     public class AdminController:ControllerBase
     {

@@ -8,15 +8,11 @@ using System.Text;
 
 using Data.EF;
 using Domain.IServices;
-using Domain.DomainModels;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
-using Domain.ApplicationSettings;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 
 namespace Domain.Services

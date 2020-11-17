@@ -64,5 +64,6 @@ namespace API
 }
 /*
  * autho: LeHuynhGiang
- * reference: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-3.1
+ * reference: 
+ * [1] https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write?view=aspnetcore-3.1
  */

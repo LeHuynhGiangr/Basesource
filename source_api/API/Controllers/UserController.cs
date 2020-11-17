@@ -8,18 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace API
 {
     //[Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
     [ApiController]
-    //[RoleBaseAuthorize(Data.Enums.ERole.User)]
-    /**/
-    [AllowAnonymous]//temp
-    /**/
+    [RoleBaseAuthorize(Data.Enums.ERole.User, Data.Enums.ERole.Admin)]
     [Route("user")]//routing/
     public class UserController : ControllerBase
     {
