@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   public appUsers: AppUsers;
 
   //constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService) { }
-  constructor(private m_formBuilder:FormBuilder, private m_route:ActivatedRoute,private m_router:Router, private m_authenService:AuthenService){
+  constructor(private m_formBuilder:FormBuilder, private m_route:ActivatedRoute,private m_router:Router, private m_authenService:AuthenService
+    ,private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService){
       if(this.m_authenService.currentUser){
         //get user to home page
         this.m_router.navigateByUrl("/", {skipLocationChange:true});
@@ -32,14 +33,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.appUsers = new AppUsers();
-    /* this.appUsers.Gender = 'Male';
+    this.appUsers = new AppUsers();
+    this.appUsers.Gender = 'Male';
     this.appUsers.AcceptTerms = false;
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.appUsers.AcceptTerms = true; */
+    this.appUsers.AcceptTerms = true; 
     this.m_loginForm = this.m_formBuilder.group({
       username:['', Validators.required],
       password:['', Validators.required]
@@ -79,18 +80,18 @@ export class LoginComponent implements OnInit {
     //clear input after register
   }
   onChangeGender = (event: any) => {
-    //this.appUsers.Gender = event.target.value;
+    this.appUsers.Gender = event.target.value;
   }
 
   onChangeTerm = (event: any) => {
-    //this.appUsers.AcceptTerms = event.target.checked;
-    //console.log(this.appUsers)
+    this.appUsers.AcceptTerms = event.target.checked;
+    console.log(this.appUsers)
   }
 
 
   public createUser = async () => { 
-    /* try {
-
+    try {
+      console.log("Created", this.appUsers);
       if (this.appUsers.Password !== this.appUsers.ConfirmPassword) {
         return alert('Password not match a confirm password');
       }
@@ -106,6 +107,6 @@ export class LoginComponent implements OnInit {
     }
     catch (e) {
       alert('Register failed');
-    } */
+    }
   };
 }

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class LoginService {
-    private urlAPI = 'https://localhost:44350/user/';
+    private urlAPI = 'https://localhost:44350/';
 
     constructor(private http: HttpClient) {
 
@@ -23,7 +23,7 @@ export class LoginService {
     postUser = async (users) => {
         try {
             console.log(users);
-            return await this.http.post(this.urlAPI + "register", users).toPromise();
+            return await this.http.post(this.urlAPI + "identity/register", users).toPromise();
         }
         catch (e) {
             console.log(e);
@@ -37,7 +37,7 @@ export class LoginService {
                 password
             };
 
-            return await this.http.post(`${this.urlAPI}/`, data);
+            return await this.http.post(`${this.urlAPI}user/`, data);
         }
         catch (e) {
             console.log(e);

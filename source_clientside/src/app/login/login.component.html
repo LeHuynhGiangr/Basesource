@@ -27,7 +27,7 @@
 
 
 						<!-- ********************************START LOGIN FORM********************************************* -->
-						<form method="post" [formGroup]="m_loginForm" (ngSubmit)="onSubmit()">
+						<form method="post" [formGroup]="m_loginForm">
 							<div class="form-group">
 								<!-- <input type="text" required="required" [(ngModel)]="appUsers.FirstName"
 									[ngModelOptions]="{standalone: true}" /> -->
@@ -51,10 +51,10 @@
 								<!-- <button class="mtr-btn signin" type="button" [routerLink]="['/newsfeed']">
 									<span>Login</span>
 								</button> -->
-								<button class="mtr-btn signin">
+								<button class="mtr-btn signin" (click)="onSubmit()">
 									<span>Login</span> 
 								</button>
-								<!-- <button class="mtr-btn signup" type="submit"><span>Register</span></button> -->
+								<button class="mtr-btn signup" type="submit"><span>Register</span></button>
 							</div>
 						</form>
 						<!-- ********************************END LOGIN FORM********************************************* -->
