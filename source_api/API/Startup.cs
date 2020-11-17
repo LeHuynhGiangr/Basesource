@@ -41,26 +41,26 @@ namespace API
                 _.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 _.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(_ =>
+            {
+                _.RequireHttpsMetadata = false;
+                _.SaveToken = true;
+                _.TokenValidationParameters = new TokenValidationParameters
                 {
-                    _.RequireHttpsMetadata = false;
-                    _.SaveToken = true;
-                    _.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes("S#$33ab654te^#^$KD%^64")),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes("S#$33ab654te^#^$KD%^64")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             //register group of services with extension methods
             services.AddDbContext<ProjectDbContext>(_ => _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), _ => _.MigrationsAssembly("source_api.Data.EF")));
 
-            //services.AddControllers();
+            services.AddControllers();
 
-            //services.AddSwaggerGen();
+            services.AddSwaggerGen();
 
-            //services.AddCors();//***
+            services.AddCors();//***
 
             //configure Dependency Injection for services
             services.AddScoped<IUserService<Guid>, UserService>();
@@ -86,14 +86,14 @@ namespace API
             //app.UseRouting();
 
             // global cors policy
-            //app.UseCors(x => x
-            //    .SetIsOriginAllowed(origin => true)
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .AllowCredentials());
+            app.UseCors(x => x
+                .SetIsOriginAllowed(origin => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();

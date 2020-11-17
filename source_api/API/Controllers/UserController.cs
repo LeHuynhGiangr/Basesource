@@ -182,35 +182,36 @@ namespace API
             }
         }
 
-        //[AllowAnonymous]//this attribute is applied to does not require authorization/
         [Route("avatar/{id:guid}")]
         [HttpPut]
-        //public async Task<IActionResult> UploadAvatar(Guid id, [FromForm] User user)
-        public async Task<IActionResult> UploadAvatar([FromForm] IFormFile avatar, Guid id)
+        public IActionResult UploadAvatar([FromForm] IFormFile avatar, Guid id)
         {
-
-            // JwtDataDeCoder data = JWT.Decode(req.herders.authization]
-            ///  var user = m_userService.GetById(data.uniqe_name);
-
-            //var users = m_userService.GetById(id);
-
-            //if (users == null)
-            //{
-            //    return NotFound("User is not exists");
-            //}
             try
             {
-                //m_userService.UploadAvatar(id, avatar);
+                m_userService.UploadAvatar(id, avatar);
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
             }
-
-            //m_userService.UploadAvatar();
             //return Ok(new { message = "Upload successfully", data = user.Avatar.ToString() });//temporarily, verification token has not been sent to email yet
 
+        }
+
+        [Route("{id:guid}")]
+        [HttpDelete]
+        public async Task<ActionResult<User>> DeleteSkill(Guid id)
+        {
+            try
+            {
+                m_userService.DeleteUser(id);
+                return Ok("Delete user successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Not found !" });
+            }
         }
         //[Authorize]
         //[HttpGet("{id:int}")]

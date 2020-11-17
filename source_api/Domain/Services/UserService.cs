@@ -13,7 +13,9 @@ using Domain.DomainModels.API.ResponseModels;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
-
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Services
 {
@@ -331,33 +333,25 @@ namespace Domain.Services
             await client.SendMailAsync(mailMessage);
         }
 
-        //void IUserService<Guid>.UploadAvatar(Guid id, IFormFile avatar)
-        //{
-        //    User user = m_userRepository.FindById(id);
+        void IUserService<Guid>.UploadAvatar(Guid id, IFormFile avatar)
+        {
+            User user = m_userRepository.FindById(id);
 
-        //    var ms = new MemoryStream();
-        //    avatar.CopyTo(ms);
+            var ms = new MemoryStream();
+            avatar.CopyTo(ms);
 
-        //    var fileBytes = ms.ToArray();
-        //    //string dataBytes = Convert.ToBase64String(fileBytes);
+            var fileBytes = ms.ToArray();
+            //string dataBytes = Convert.ToBase64String(fileBytes);
 
-        //    user.Avatar = fileBytes;
-
-        //    //if (HttpContext.Request.Form.Files.Count > 0)
-        //    //{
-        //    //    var file = HttpContext.Request.Form.Files[0];
-
-        //    //    byte[] fileData = null;
-
-        //    //    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-        //    //    {
-        //    //        fileData = binaryReader.ReadBytes((int)file.Length);
-        //    //    }
-
-        //    //    user.Avatar = fileData;
-        //    //}
-        //    m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
-        //    m_userRepository.SaveChanges();
-        //}
+            user.Avatar = fileBytes;
+            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
+        async void IUserService<Guid>.DeleteUser(Guid id)
+        {
+            User user = m_userRepository.FindById(id);
+            m_userRepository.Remove(user);
+            m_userRepository.SaveChanges();
+        }
     }
 }

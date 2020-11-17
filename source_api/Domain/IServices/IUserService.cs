@@ -2,6 +2,7 @@
 using Domain.DomainModels;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 
@@ -33,6 +34,7 @@ namespace Domain.IServices
         UserResponse Create(CreateRequest model);
         UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
-        //void UploadAvatar(Guid id, IFormFile avatar);
+        void UploadAvatar(Guid id, IFormFile avatar);
+        void DeleteUser(Guid id);
     }
 }
