@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿using API.Helpers;
+using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
@@ -13,8 +14,12 @@ using System.Threading.Tasks;
 
 namespace API
 {
-    [Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
+    //[Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
     [ApiController]
+    //[RoleBaseAuthorize(Data.Enums.ERole.User)]
+    /**/
+    [AllowAnonymous]//temp
+    /**/
     [Route("user")]//routing/
     public class UserController : ControllerBase
     {
@@ -28,68 +33,107 @@ namespace API
             m_userService = userService;
         }
 
-        /*
-         * below is public action methods which can be access without authorization
-         */
-        [AllowAnonymous]//this attribute is applied to does not require authorization/
-        [HttpPost("authenticate")]//Http post method
-        public IActionResult Authenticate([FromBody] AuthenticateRequest model)//get data from request body, auto binding/
-        {
-            try
-            {
-                var l_response = m_userService.Authenticate(model, GetclientIpv4Address());
+        ///*
+        // * below is public action methods which can be access without authorization
+        // */
+        //[AllowAnonymous]//this attribute is applied to does not require authorization/
+        //[HttpPost("authenticate")]//Http post method
+        //public IActionResult Authenticate([FromBody] AuthenticateRequest model)//get data from request body, auto binding/
+        //{
+        //    try
+        //    {
+        //        var l_response = m_userService.Authenticate(model, GetclientIpv4Address());
 
-                //if response is null -> status 400 - Bad request
-                if (l_response == null)
-                {
-                    return BadRequest(new { message = "username or password is incorrect" });
-                }
+        //        //if response is null -> status 400 - Bad request
+        //        if (l_response == null)
+        //        {
+        //            return BadRequest(new { message = "username or password is incorrect" });
+        //        }
 
-                SetTokenCookie(l_response.RefreshToken);
+        //        SetTokenCookie(l_response.RefreshToken);
 
-                return Ok(l_response);//status 200 OK
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new { message = e.Message });
-            }
+        //        return Ok(l_response);//status 200 OK
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(new { message = e.Message });
+        //    }
 
-        }
+        //}
 
-        [AllowAnonymous]
-        [HttpPost("refresh-token")]
-        public IActionResult RefreshToken()
-        {
-            try
-            {
-                //get refreshToken in cookies
-                var l_refreshToken = Request.Cookies[m_tokenKeyName];
+        //[AllowAnonymous]
+        //[HttpPost("refresh-token")]
+        //public IActionResult RefreshToken()
+        //{
+        //    try
+        //    {
+        //        //get refreshToken in cookies
+        //        var l_refreshToken = Request.Cookies[m_tokenKeyName];
 
-                //if cannot get token return status 400 - bad request
-                if (string.IsNullOrEmpty(l_refreshToken))
-                {
-                    return BadRequest(new { message = "token is required" });
-                }
+        //        //if cannot get token return status 400 - bad request
+        //        if (string.IsNullOrEmpty(l_refreshToken))
+        //        {
+        //            return BadRequest(new { message = "token is required" });
+        //        }
 
-                var l_response = m_userService.RefreshToken(l_refreshToken, GetclientIpv4Address());
+        //        var l_response = m_userService.RefreshToken(l_refreshToken, GetclientIpv4Address());
 
-                //if response is null return status 401 unauthorized
-                if (l_response == null)
-                {
-                    return Unauthorized(new { message = "invalid token" });
-                }
+        //        //if response is null return status 401 unauthorized
+        //        if (l_response == null)
+        //        {
+        //            return Unauthorized(new { message = "invalid token" });
+        //        }
 
-                SetTokenCookie(l_response.RefreshToken);
+        //        SetTokenCookie(l_response.RefreshToken);
 
-                return Ok(l_response);//status 200 OK
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new { message = e.Message });
-            }
-        }
+        //        return Ok(l_response);//status 200 OK
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(new { message = e.Message });
+        //    }
+        //}
 
-        [Authorize]
+        //[AllowAnonymous]
+        //[HttpPost("register")]
+        //public IActionResult Register([FromBody] RegisterRequest registerRequest)
+        //{
+        //    try
+        //    {
+        //        m_userService.Register(registerRequest, Request.Headers["origin"]);
+        //        return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(new { message = e.Message });
+        //    }
+        //}
+
+        //[HttpPost("verify-email")]
+        //public IActionResult VerifyEmail()
+        //{
+        //    return StatusCode(503);
+        //}
+
+        //[HttpPost("forgot-password")]
+        //public IActionResult ForgotPassword()
+        //{
+        //    return StatusCode(503);
+        //}
+
+        //[HttpPost("validate-reset-token")]
+        //public IActionResult ValidateResetToken()
+        //{
+        //    return StatusCode(503);
+        //}
+
+        //[HttpPost("reset-password")]
+        //public IActionResult ResetPassword()
+        //{
+        //    return StatusCode(503);
+        //}
+
+        //[Authorize]
         [HttpPost("revoke-token")]
         public IActionResult RevokeToken([FromBody] RevokeTokenRequest revokeTokenRequestModel)
         {
@@ -111,69 +155,30 @@ namespace API
             return Ok(new { message = "token is invoke" });
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterRequest registerRequest)
-        {
-            try
-            {
-                m_userService.Register(registerRequest, Request.Headers["origin"]);
-                return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new { message = e.Message });
-            }
-        }
-
-        [HttpPost("verify-email")]
-        public IActionResult VerifyEmail()
-        {
-            return StatusCode(503);
-        }
-
-        [HttpPost("forgot-password")]
-        public IActionResult ForgotPassword()
-        {
-            return StatusCode(503);
-        }
-
-        [HttpPost("validate-reset-token")]
-        public IActionResult ValidateResetToken()
-        {
-            return StatusCode(503);
-        }
-
-        [HttpPost("reset-password")]
-        public IActionResult ResetPassword()
-        {
-            return StatusCode(503);
-        }
-
         //[Authorize(Role.Admin)]
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult<IEnumerable<UserResponse>> GetAll()
+        //[AllowAnonymous]
+        //[HttpGet]
+        //public ActionResult<IEnumerable<UserResponse>> GetAll()
 
-        {
-            try
-            {
-                var l_userResponses = m_userService.GetAll();
-                return Ok(l_userResponses);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(503);//service unavailable
-            }
-        }
+        //{
+        //    try
+        //    {
+        //        var l_userResponses = m_userService.GetAll();
+        //        return Ok(l_userResponses);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return StatusCode(503);//service unavailable
+        //    }
+        //}
 
-        [AllowAnonymous]//this attribute is applied to does not require authorization/
+        //[AllowAnonymous]//this attribute is applied to does not require authorization/
         [HttpPost("sendingemail")]//Http post method
         public async Task<IActionResult> SendMail([FromBody] Email email)
         {
             try
             {
-                m_userService.SendEmail("ngodangdongkhoi@gmail.com", "noi dung ne");
+                //m_userService.SendEmail("ngodangdongkhoi@gmail.com", "noi dung ne");
                 return Ok(new { message = "Send Email Successfully" });//temporarily, verification token has not been sent to email yet
             }
             catch (Exception e)
@@ -182,7 +187,7 @@ namespace API
             }
         }
 
-        [AllowAnonymous]//this attribute is applied to does not require authorization/
+        //[AllowAnonymous]//this attribute is applied to does not require authorization/
         [Route("avatar/{id:guid}")]
         [HttpPut]
         //public async Task<IActionResult> UploadAvatar(Guid id, [FromForm] User user)
@@ -200,7 +205,7 @@ namespace API
             //}
             try
             {
-                m_userService.UploadAvatar(id, avatar);
+                //m_userService.UploadAvatar(id, avatar);
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
@@ -266,17 +271,17 @@ namespace API
          * helper methods
          */
 
-        //Set token for response
-        private void SetTokenCookie(string token)
-        {
-            var l_cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7),//time of cookie life is seven day
-                //...
-            };
-            Response.Cookies.Append(m_tokenKeyName, token, l_cookieOptions);
-        }
+        ////Set token for response
+        //private void SetTokenCookie(string token)
+        //{
+        //    var l_cookieOptions = new CookieOptions
+        //    {
+        //        HttpOnly = true,
+        //        Expires = DateTime.UtcNow.AddDays(7),//time of cookie life is seven day
+        //        //...
+        //    };
+        //    Response.Cookies.Append(m_tokenKeyName, token, l_cookieOptions);
+        //}
 
         //Get client IP address
         private string GetclientIpv4Address()

@@ -7,7 +7,6 @@ using Domain.IServices;
 using Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -46,12 +45,11 @@ namespace API
             //configure Dependency Injection for services
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
-            services.AddTransient<DbInitializer>();
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbInitializer dbInitializer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //ASP.NET Core controllers use the Routing middleware to match the URLs of incoming requests and map them to actions.Routes templates:
             if (env.IsDevelopment())
@@ -66,7 +64,7 @@ namespace API
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "ASP.NET Core Sign-up and Verification API"));
 
-            app.UseRouting();
+            //app.UseRouting();
 
             // global cors policy
             app.UseCors(x => x
@@ -75,12 +73,16 @@ namespace API
                 .AllowAnyHeader()
                 .AllowCredentials());
 
+            //app.UseMiddleware<JwtMiddleware>();
+
+            app.UseRouting();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(_ => _.MapControllers());
+            
 
-            //dbInitializer.Seed().Wait();
+            app.UseEndpoints(_ => _.MapControllers());
         }
     }
 }
