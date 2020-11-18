@@ -14,4 +14,8 @@
     <Folder Include="MapperConfigs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.0" />
+  </ItemGroup>
+
 </Project>

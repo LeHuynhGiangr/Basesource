@@ -1,6 +1,7 @@
 /*
  * the Startup class configures the request pipeline of the application, dependency injection and how all requests are handled.
  */
+using API.utls;
 using Data.EF;
 using Data.Entities;
 using Domain.IServices;
@@ -65,6 +66,7 @@ namespace API
             //configure Dependency Injection for services
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
+            services.AddScoped<IJWTDecoder, JWTDecoder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

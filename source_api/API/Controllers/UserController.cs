@@ -1,4 +1,5 @@
 ﻿using API.Helpers;
+using API.utls;
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
@@ -20,12 +21,15 @@ namespace API
     {
         private string m_tokenKeyName = "refreshtoken";
 
+        private IJWTDecoder m_jwtDecoder;
+
         private IUserService<Guid> m_userService;//dependency injection/
 
         //Parameter DI/
-        public UserController(IUserService<Guid> userService)
+        public UserController(IUserService<Guid> userService, IJWTDecoder jwtDecoder)
         {
             m_userService = userService;
+            m_jwtDecoder = jwtDecoder;
         }
 
         ///*
@@ -197,6 +201,28 @@ namespace API
             }
             //return Ok(new { message = "Upload successfully", data = user.Avatar.ToString() });//temporarily, verification token has not been sent to email yet
 
+        }
+
+        [Route("load")]
+        [HttpGet]
+        public async Task<IActionResult> LoadUser()
+        {
+            try
+            {
+                User user = await m_jwtDecoder.FindUserByJWT(HttpContext);
+
+                if (user == null)
+                {
+                    return NotFound("User not found !");
+                }
+
+                return Ok(user);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
         }
 
         [Route("{id:guid}")]
