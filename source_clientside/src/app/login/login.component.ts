@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
 
   public appUsers: AppUsers;
 
-  //constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService) { }
   constructor(private m_formBuilder:FormBuilder, private m_route:ActivatedRoute,private m_router:Router, private m_authenService:AuthenService
     ,private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService){
       // if(this.m_authenService.currentUser){
@@ -49,7 +48,8 @@ export class LoginComponent implements OnInit {
     this.m_returnUrl=this.m_route.snapshot.queryParams['returnUrl'] || '/';
 
    const user = await this.service.getUser();
-   if (user) this.m_router.navigateByUrl("/", {skipLocationChange:true});
+   console.log(user)
+   if (user) this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
   }
 
   private get m_formValue(){
@@ -64,19 +64,19 @@ export class LoginComponent implements OnInit {
     }
 
     this.m_loading=true;
-    //  this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
-    //    .pipe(first())
-    //    .subscribe({
-    //      next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
+      this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
         
-    //      error:error=>{
-    //        this.m_error=error;
-    //        this.m_loading=false;
-    //      }
-    //    });
+          error:error=>{
+            this.m_error=error;
+            this.m_loading=false;
+          }
+        });
 
     const result = await this.service.login(this.m_formValue.username.value, this.m_formValue.password.value);
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
+    //this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
     console.log(result);
   }
 

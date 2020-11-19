@@ -14,7 +14,7 @@ export class LoginService {
     getUser = async () => {
         try {
 
-            console.log(this.getToken());
+            console.log("Load user", this.getToken());
 
             const config = {
                 headers: {
@@ -22,7 +22,9 @@ export class LoginService {
                 }
             }
 
-            return await this.http.get(this.urlAPI + 'user/load', config).toPromise();
+            const result =  await this.http.get(this.urlAPI + 'user/load', config).toPromise();
+
+            return result;
         }
         catch (e) {
             console.log(e);
@@ -50,7 +52,7 @@ export class LoginService {
             };
 
             
-            console.log("kjdshflkdsjf");
+            console.log("Login Successfully !");
 
             const res = await this.http.post(`${this.urlAPI}identity/authenticate`, data).toPromise() as any;
             //phải chạy hàm này trước rồi token nó mới có hiệu lực để sài qua kia, căng
