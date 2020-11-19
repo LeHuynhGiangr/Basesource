@@ -18,7 +18,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="assets/images/resources/user-avatar.jpg" alt="">
+								<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -33,8 +33,8 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Janice Griffith</h5>
-								  <span>Group Admin</span>
+									<h5><strong>{{this.Name}}</strong></h5>
+									<span>My Videos</span>
 								</li>
 								<li>
 									<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
@@ -109,7 +109,7 @@
 										<div class="personal">
 											<h5 class="f-title"><i class="ti-info-alt"></i> Personal Info</h5>
 											<p>
-												Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												{{this.Description}}
 											</p>
 										</div>
 										<div class="d-flex flex-row mt-2">
@@ -133,9 +133,9 @@
 											<div class="tab-content">
 												<div class="tab-pane fade show active" id="basic" >
 													<ul class="basics">
-														<li><i class="ti-user"></i>sarah grey</li>
-														<li><i class="ti-map-alt"></i>live in Dubai</li>
-														<li><i class="ti-mobile"></i>+1-234-345675</li>
+														<li><i class="ti-user"></i>{{this.Name}}</li>
+														<li><i class="ti-map-alt"></i>{{this.Address}}</li>
+														<li><i class="ti-mobile"></i>{{this.PhoneNumber}}</li>
 														<li><i class="ti-email"></i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4553494e515d55507c59515d5550125f5351">[email&#160;protected]</a></li>
 														<li><i class="ti-world"></i>www.yoursite.com</li>
 													</ul>

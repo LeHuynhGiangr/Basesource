@@ -35,10 +35,7 @@ export class TimelineComponent implements OnInit {
     }
     getImageMime(base64: string): string
     {
-      if (base64.charAt(0)=='/') return 'jpg';
-      else if (base64.charAt(0)=='R') return "gif";
-      else if(base64.charAt(0)=='i') return 'png';
-      else return 'jpeg';
+      return 'jpg';
     }
     getImageSource(base64: string): string
     {
