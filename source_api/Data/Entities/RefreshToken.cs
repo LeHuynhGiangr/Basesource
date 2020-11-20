@@ -1,7 +1,5 @@
 ﻿using Data.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using System;
-using System.Text.Json.Serialization;
 
 namespace Data.Entities
 {

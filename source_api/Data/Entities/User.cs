@@ -15,7 +15,6 @@ namespace Data.Entities
     {
         //key/
         //inherit from IdentityUser<Guid>
-
         //properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -61,5 +60,6 @@ namespace Data.Entities
              */
             return this.RefreshTokens?.Single(_ => _.Token == token) != null;
         }
+        public virtual ICollection<Friend> Friends { get; } = new List<Friend>();
     }
 }

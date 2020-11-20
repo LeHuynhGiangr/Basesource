@@ -3,19 +3,13 @@ using System;
 
 namespace Data.Entities
 {
-    public class Post : IEntity<Guid>, IDateTracking
+    public class TripMedia : IEntity<Guid>, IDateTracking
     {
         public Guid Id { get; set; }
-
-        public string Content { get; set; }
-        public int Likes { get; set; }
-        public bool Active { get; set; }
-        public string Privacy { get; set; }
-
+        public byte[] MediaFile { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
-
-        //reference navigation
+        public Trip Trip { get; set; }
         public User User { get; set; }
     }
 }
