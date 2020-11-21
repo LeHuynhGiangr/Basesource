@@ -25,10 +25,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private m_formBuilder:FormBuilder, private m_route:ActivatedRoute,private m_router:Router, private m_authenService:AuthenService
     ,private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService){
-      // if(this.m_authenService.currentUser){
-      //   //get user to home page
-      //   this.m_router.navigateByUrl("/", {skipLocationChange:true});
-      // }
   }
 
   async ngOnInit() {
@@ -47,9 +43,13 @@ export class LoginComponent implements OnInit {
 
     this.m_returnUrl=this.m_route.snapshot.queryParams['returnUrl'] || '/';
 
-   const user = await this.service.getUser();
-   console.log(user)
-   if (user) this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    const user = await this.service.getUser();
+    console.log(user)
+    if (user) 
+    {
+      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+      alert('Login Successfully');
+    }
   }
 
   private get m_formValue(){
@@ -58,34 +58,35 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(){
     this.m_submitted=true;
-
     if(this.m_loginForm.invalid){
       return;
     }
-
     this.m_loading=true;
-      this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
-        .pipe(first())
-        .subscribe({
-          next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
+      // this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
+      //   .pipe(first())
+      //   .subscribe({
+      //     next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
         
-          error:error=>{
-            this.m_error=error;
-            this.m_loading=false;
-          }
-        });
+      //     error:error=>{
+      //       this.m_error=error;
+      //       this.m_loading=false;
+      //     }
+      //   });
 
     const result = await this.service.login(this.m_formValue.username.value, this.m_formValue.password.value);
-    //this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
+    if(result) this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
+    else alert('Username or Password incorrect !');
     console.log(result);
   }
 
   getPath() {
     return this.m_router.url;
   }
+
   clear() {
     //clear input after register
   }
+
   onChangeGender = (event: any) => {
     this.appUsers.Gender = event.target.value;
   }
@@ -95,16 +96,13 @@ export class LoginComponent implements OnInit {
     console.log(this.appUsers)
   }
 
-
   public createUser = async () => { 
     try {
       console.log("Created", this.appUsers);
       if (this.appUsers.Password !== this.appUsers.ConfirmPassword) {
         return alert('Password not match a confirm password');
       }
-
       console.log("Created", this.appUsers);
-
       if (this.appUsers) {
         const result = await this.service.postUser(this.appUsers);
         console.log(result);

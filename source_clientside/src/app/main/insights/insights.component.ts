@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { EChartOption } from 'echarts';
-import { graphic } from 'echarts';
+import { LoginService } from './../../login/shared/login.service';
 @Component({
     selector: 'app-insights',
     templateUrl: './insights.component.html',
@@ -20,7 +19,7 @@ export class InsightsComponent implements OnInit {
   options9:any;
   options10:any;
   options11:any;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ) {}
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService ) {}
 
   ngOnInit(): void {
     var script = document.createElement("script");
@@ -588,5 +587,9 @@ export class InsightsComponent implements OnInit {
         ]
     };
     
+  }
+  onLogout() {
+    this.service.logout();
+    this.router.navigateByUrl('/login');
   }
 }

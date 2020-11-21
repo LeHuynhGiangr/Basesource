@@ -13,22 +13,18 @@ export class LoginService {
 
     getUser = async () => {
         try {
-
             console.log("Load user", this.getToken());
-
             const config = {
                 headers: {
                     Authorization: this.getConfigToken()
                 }
             }
-
             const result =  await this.http.get(this.urlAPI + 'user/load', config).toPromise();
-
             return result;
         }
         catch (e) {
             console.log(e);
-            this.removeToken();
+            // this.removeToken();
         }
     }
 
@@ -45,25 +41,17 @@ export class LoginService {
 
     login = async (username, password) => {
         try {
-
             const data = {
                 username,
                 password
-            };
-
-            
+            };           
             console.log("Login Successfully !");
-
             const res = await this.http.post(`${this.urlAPI}identity/authenticate`, data).toPromise() as any;
-            //phải chạy hàm này trước rồi token nó mới có hiệu lực để sài qua kia, căng
-
             console.log(res)
-
             if (res) {
                 console.log(res.jwtToken);
                 this.setToken(res.jwtToken);
             }
-
             return res;
         }
         catch (e) {
@@ -71,6 +59,9 @@ export class LoginService {
         }
     };
 
+    logout = () => {
+        this.removeToken();
+    }
 
     setToken = (token) => {
         localStorage.setItem('token', token);
@@ -86,7 +77,6 @@ export class LoginService {
 
     getConfigToken = () => {
         const token = this.getToken();
-
         return token ? 'Bearer ' + token : undefined;
     }
 

@@ -41,4 +41,8 @@ export class VideosComponent implements OnInit {
   {
     return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
+  onLogout() {
+    this.service.logout();
+    this.router.navigateByUrl('/login');
+  }
 }
