@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     if (user) 
     {
       this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-      alert('Login Successfully');
     }
   }
 
@@ -74,7 +73,11 @@ export class LoginComponent implements OnInit {
       //   });
 
     const result = await this.service.login(this.m_formValue.username.value, this.m_formValue.password.value);
-    if(result) this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
+    if(result) 
+    {
+      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
+      alert('Login Successfully');
+    }
     else alert('Username or Password incorrect !');
     console.log(result);
   }

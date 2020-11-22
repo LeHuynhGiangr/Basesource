@@ -16,9 +16,6 @@ const routes: Routes = [
   //http://domain/admin
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }, //call ./admin/admin.module
 
-  //http://domain/admin
-  { path: 'general', loadChildren: './general/general.module#GeneralModule' }, //call ./general/general.module
-
   
   {path:'**', redirectTo:'404'},
 ];
