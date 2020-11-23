@@ -36,5 +36,6 @@ namespace Domain.IServices
         bool Delete(T id);
         void UploadAvatar(Guid id, IFormFile avatar);
         void DeleteUser(Guid id);
+        void UploadUserProfile(Guid id, UpdateUserRequest model);
     }
 }

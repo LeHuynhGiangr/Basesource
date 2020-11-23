@@ -347,6 +347,37 @@ namespace Domain.Services
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
+        void IUserService<Guid>.UploadUserProfile(Guid id, UpdateUserRequest model)
+        {
+            User user = m_userRepository.FindById(id);
+            var l_user = user;
+            {
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Description = model.Description;
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Location = model.Location;
+                user.Works = model.Works;
+                user.Gender = model.Gender;
+                user.FollowMe = true;
+                user.Active = true;
+                user.RequestFriend = true;
+                user.ViewListFriend = true;
+                user.ViewTimeLine = true;
+                ///*
+                // * temp code, make easy to register, but registering need a verification token
+                // */
+                user.DateVerified = DateTime.UtcNow;
+                user.VerificationShortToken = null;
+                /*
+                 * 
+                 */
+            };
+            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
         async void IUserService<Guid>.DeleteUser(Guid id)
         {
             User user = m_userRepository.FindById(id);

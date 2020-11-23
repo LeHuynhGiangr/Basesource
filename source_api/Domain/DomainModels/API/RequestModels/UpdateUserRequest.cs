@@ -15,6 +15,8 @@ namespace Domain.DomainModels.API.RequestModels
 
         [Required]
         public string Gender { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -23,13 +25,11 @@ namespace Domain.DomainModels.API.RequestModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Location { get; set; }
+        public float Location { get; set; }
         [Required]
         public string Works { get; set; }
         [Required]
         public bool Active { get; set; }
-        [Required]
-        public byte[] Background { get; set; }
         [Required]
         public bool FollowMe { get; set; }
         [Required]
@@ -38,11 +38,5 @@ namespace Domain.DomainModels.API.RequestModels
         public bool ViewListFriend { get; set; }
         [Required]
         public bool ViewTimeLine { get; set; }
-        [Required]
-        public byte[] Avatar { get; set; }
-
-        [Required]
-        [MinLength(6)]
-        public string Password { get; set; }
     }
 }

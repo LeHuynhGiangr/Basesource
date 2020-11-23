@@ -225,6 +225,21 @@ namespace API
             }
         }
 
+        [Route("profile/{id:guid}")]
+        [HttpPut]
+        public IActionResult UploadProfile(Guid id, UpdateUserRequest updateUserRequest)
+        {
+            try
+            {
+                m_userService.UploadUserProfile(id, updateUserRequest);
+                return Ok("Upload profile successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
         [Route("{id:guid}")]
         [HttpDelete]
         public async Task<ActionResult<User>> DeleteSkill(Guid id)
