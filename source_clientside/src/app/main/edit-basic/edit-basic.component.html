@@ -113,26 +113,25 @@
 									</div><!-- settings widget -->										
 								</aside>
 							</div><!-- sidebar -->
-							<div class="col-lg-6">
-								<div class="central-meta">
-									<div class="editing-info">
-										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>
-
-										<form method="post">
+							<div class="col-lg-6">								
+								<div class="central-meta">									
+									<div class="editing-info">										
+										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>								
+										<form novalidate (ngSubmit)="onSubmit()">
 											<div class="form-group half">	
-											  <input type="text" id="input" required="required" />
+											  <input name="FirstName" type="text" id="input" required="required" [(ngModel)]="this.FName">
 											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group half">	
-											  <input type="text" required="required"/>
+											  <input name="LastName" type="text" id="input" required="required" [(ngModel)]="this.LName">
 											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											  <input type="text" required="required"/>
+											<input name="Email" type="text" id="input" required="required" [(ngModel)]="this.Email">
 											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											  <input type="text" required="required"/>
+												<input name="PhoneNumber" type="text" id="input" required="required" [(ngModel)]="this.PhoneNumber">
 											  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
 											</div>
 											<div class="dob">
@@ -220,7 +219,7 @@
 											  </div>
 											</div>
 											<div class="form-group">	
-											  <input type="text" required="required"/>
+											<input name="Address" type="text" id="input" required="required" [(ngModel)]="this.Address">										
 											  <label class="control-label" for="input">City</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
@@ -478,7 +477,7 @@
 											  </select>
 											</div>
 											<div class="form-group">	
-											  <textarea rows="4" id="textarea" required="required"></textarea>
+											  <textarea name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description"></textarea>
 											  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
 											</div>
 											<div class="submit-btns">

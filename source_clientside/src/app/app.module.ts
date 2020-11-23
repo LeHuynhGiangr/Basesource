@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     _404Module,
     BrowserAnimationsModule,
     MatDialogModule,
+    FormsModule,
   ],
   providers: [
     {provide:APP_INITIALIZER, useFactory: InitApp, multi:true, deps: [AuthenService]},

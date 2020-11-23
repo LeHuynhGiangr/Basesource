@@ -2,12 +2,12 @@
 <div class="form-group">
     <h2>New Avatar</h2>
     <img [src]="url" height="200"> <br/>
-    <input type='file' (change)="onSelectFile($event)">
+    <input type='file' accept="image/*" (change)="onSelectFile($event)">
  </div>
 <br>
 <br>
 <div mat-dialog-actions class="myDiv">
-    <button class="btn btn-primary" mat-button (click)="onNoClick()">Save</button>
+    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
     <button class="btn btn-secondary left" mat-button (click)="onNoClick()">Refresh</button>
     <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
 </div>

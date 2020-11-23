@@ -31,7 +31,8 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { HeaderComponent } from '../layout/header/header.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 export const mainRoutes: Routes = [
   {path: '', redirectTo:'home',pathMatch:'full'},
   {path:'about', component:AboutComponent},
@@ -92,7 +93,7 @@ export const mainRoutes: Routes = [
     VideosComponent,
     WidgetsComponent
   ],
-  imports: [CommonModule, RouterModule.forChild(mainRoutes),NgxEchartsModule.forRoot({
+  imports: [ReactiveFormsModule,FormsModule,CommonModule, RouterModule.forChild(mainRoutes),NgxEchartsModule.forRoot({
     echarts: () => import('echarts')
   }),],
 })

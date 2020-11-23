@@ -15,16 +15,16 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public m_loginForm:FormGroup; //check value and validity state
-  public m_returnUrl:string;
-  public m_submitted:boolean=false;
-  public m_loading:boolean=false;
-  public m_error='';
+  public m_loginForm: FormGroup; //check value and validity state
+  public m_returnUrl: string;
+  public m_submitted: boolean = false;
+  public m_loading: boolean = false;
+  public m_error = '';
 
   public appUsers: AppUsers;
 
-  constructor(private m_formBuilder:FormBuilder, private m_route:ActivatedRoute,private m_router:Router, private m_authenService:AuthenService
-    ,private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService){
+  constructor(private m_formBuilder: FormBuilder, private m_route: ActivatedRoute, private m_router: Router, private m_authenService: AuthenService
+    , private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService) {
   }
 
   async ngOnInit() {
@@ -35,51 +35,54 @@ export class LoginComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.appUsers.AcceptTerms = true; 
+    this.appUsers.AcceptTerms = true;
     this.m_loginForm = this.m_formBuilder.group({
-      username:['', Validators.required],
-      password:['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
-    this.m_returnUrl=this.m_route.snapshot.queryParams['returnUrl'] || '/';
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
 
     const user = await this.service.getUser();
     console.log(user)
-    if (user) 
-    {
-      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    if (user) {
+      this.m_router.navigateByUrl('/', { skipLocationChange: true });
     }
   }
 
-  private get m_formValue(){
-     return this.m_loginForm.controls;
+  private get m_formValue() {
+    return this.m_loginForm.controls;
   }
 
-  async onSubmit(){
-    this.m_submitted=true;
-    if(this.m_loginForm.invalid){
+  async onSubmit() {
+    this.m_submitted = true;
+    if (this.m_loginForm.invalid) {
       return;
     }
-    this.m_loading=true;
-      // this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
-      //   .pipe(first())
-      //   .subscribe({
-      //     next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
-        
-      //     error:error=>{
-      //       this.m_error=error;
-      //       this.m_loading=false;
-      //     }
-      //   });
+    this.m_loading = true;
+    // this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
+    //   .pipe(first())
+    //   .subscribe({
+    //     next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
 
-    const result = await this.service.login(this.m_formValue.username.value, this.m_formValue.password.value);
-    if(result) 
-    {
-      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true})
-      alert('Login Successfully');
-    }
-    else alert('Username or Password incorrect !');
-    console.log(result);
+    //     error:error=>{
+    //       this.m_error=error;
+    //       this.m_loading=false;
+    //     }
+    //   });
+
+    this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then((result) => {
+      if (result) {
+        alert('Login Successfully');
+        this.m_router.navigateByUrl('/', { skipLocationChange: true });
+      }
+      else alert('Username or Password incorrect !');
+      console.log(result);
+    }).catch((error) => {
+      this.m_error = error;
+      this.m_loading = false;
+    });
+
   }
 
   getPath() {
@@ -99,7 +102,7 @@ export class LoginComponent implements OnInit {
     console.log(this.appUsers)
   }
 
-  public createUser = async () => { 
+  public createUser = async () => {
     try {
       console.log("Created", this.appUsers);
       if (this.appUsers.Password !== this.appUsers.ConfirmPassword) {
