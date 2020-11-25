@@ -2,9 +2,9 @@
 using Domain.DomainModels;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Domain.IServices
 {
@@ -25,7 +25,7 @@ namespace Domain.IServices
         bool RevokeToken(string token, string ipAddress);
         void Register(RegisterRequest model, string origin);
         void VerifyEmail(string token);
-        void SendEmail(string mailAddress, string content);
+        //void SendEmail(string mailAddress, string content);
         void ForgotPassword(ForgotPasswordRequest model, string origin);
         void ValidateResetToken(ValidateResetTokenRequest model);
         void ResetPassword(ResetPasswordRequest model);
@@ -34,7 +34,8 @@ namespace Domain.IServices
         UserResponse Create(CreateRequest model);
         UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
-        void UploadAvatar(Guid id, IFormFile avatar);
+        void UploadAvatar(Guid id, MemoryStream avatar);
+        //void UploadAvatar(Guid id, IFormFile avatar);
         void DeleteUser(Guid id);
         void UploadUserProfile(Guid id, UpdateUserRequest model);
     }

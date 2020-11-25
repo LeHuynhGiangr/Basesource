@@ -1,4 +1,5 @@
 ﻿using Data.EF;
+using Data.Entities;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
@@ -44,7 +45,7 @@ namespace API
                     ValidateIssuer = false,
                     ValidateAudience = false,
 
-                    ClockSkew=TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero
                 };
                 l_tokenHandler.ValidateToken(token, l_tokenValidationParams, out SecurityToken securityToken);
 
@@ -53,11 +54,12 @@ namespace API
 
                 var l_user = await userRepository.FindByIdAsyn(System.Guid.Parse(l_accountId.ToString()));
 
-                httpContext.Items["Role"] = (int)l_user.Role;
+                httpContext.Items["Role"] = (int)l_user.Role;//set "Role" item in httpcontex
+                httpContext.Items["Id"] = l_accountId;
             }
             catch
             {
-                
+
             }
         }
     }

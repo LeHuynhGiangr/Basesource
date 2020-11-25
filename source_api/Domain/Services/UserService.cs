@@ -14,7 +14,6 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
 using System.IO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Services
@@ -202,7 +201,7 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        IEnumerable<UserResponse> IUserService<Guid>.GetAll()
+        public IEnumerable<UserResponse> GetAll()
         {
             var l_users = m_userRepository.GetAll();
             List<UserResponse> l_userResponses = new List<UserResponse>();
@@ -217,7 +216,7 @@ namespace Domain.Services
                     LastName = user.LastName,
                     Gender = user.Gender,
                     IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
-                    Phone = user.PhoneNumber,
+                    PhoneNumber = user.PhoneNumber,
                     Role = user.Role.ToString(),
                     Updated = user.DateModified
                 });
@@ -225,9 +224,40 @@ namespace Domain.Services
             return l_userResponses;
         }
 
-        UserResponse IUserService<Guid>.GetById(Guid id)
+        public UserResponse GetById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User l_user = m_userRepository.FindById(id);
+                if (l_user == null)
+                {
+                    throw new Exception("can not find user");
+                }
+                return new UserResponse
+                {
+                    FirstName = l_user.FirstName,
+                    LastName = l_user.LastName,
+                    PhoneNumber = l_user.PhoneNumber,
+                    Address = l_user.Address,
+                    Email = l_user.Email,
+                    Gender = l_user.Gender,
+                    Description = l_user.Description,
+                    Background = l_user.Background,
+                    Avatar = l_user.Avatar,
+                    FollowMe = l_user.FollowMe,
+                    Location = l_user.Location,
+                    RequestFriend = l_user.RequestFriend,
+                    ViewListFriend = l_user.ViewListFriend,
+                    ViewTimeLine = l_user.ViewTimeLine,
+                    Works = l_user.Works,
+
+                };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            //throw new NotImplementedException();
         }
 
         public UserResponse Create(CreateRequest model)
@@ -245,7 +275,94 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
+        //public async void SendEmail(string mailAddress, string content)
+        //{
 
+        //    var client = new System.Net.Mail.SmtpClient("smtp.example.com", 111);
+        //    client.UseDefaultCredentials = false;
+        //    client.EnableSsl = true;
+        //    client.Port = 587;
+        //    client.Host = "smtp.gmail.com";
+
+        //    client.Credentials = new System.Net.NetworkCredential("cauviewchome3@gmail.com", "cqxouerrcxzbnxdv");
+
+        //    var mailMessage = new System.Net.Mail.MailMessage();
+        //    mailMessage.From = new System.Net.Mail.MailAddress("cauviewchome3@gmail.com");
+
+        //    mailMessage.To.Add(mailAddress);
+
+        //    if (!string.IsNullOrEmpty(mailAddress))
+        //    {
+        //        mailMessage.CC.Add(mailAddress);
+        //    }
+
+        //    mailMessage.Body = content;
+
+        //    mailMessage.Subject = "Confirm Email Social Network";
+
+        //    mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+        //    mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+
+        //    await client.SendMailAsync(mailMessage);
+        //}
+
+        //public void UploadAvatar(Guid id, IFormFile avatar)
+        public void UploadAvatar(Guid id, MemoryStream avatar)
+        {
+            User user = m_userRepository.FindById(id);
+
+            //var ms = new MemoryStream();
+            //avatar.CopyTo(ms);
+
+            var fileBytes = avatar.ToArray();
+            //string dataBytes = Convert.ToBase64String(fileBytes);
+
+            user.Avatar = fileBytes;
+            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
+        public void UploadUserProfile(Guid id, UpdateUserRequest model)
+        {
+            User user = m_userRepository.FindById(id);
+            var l_user = user;
+            {
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Description = model.Description;
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Location = model.Location;
+                user.Works = model.Works;
+                user.Gender = model.Gender;
+                user.FollowMe = true;
+                user.Active = true;
+                user.RequestFriend = true;
+                user.ViewListFriend = true;
+                user.ViewTimeLine = true;
+                ///*
+                // * temp code, make easy to register, but registering need a verification token
+                // */
+                user.DateVerified = DateTime.UtcNow;
+                user.VerificationShortToken = null;
+                /*
+                 * 
+                 */
+            };
+            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
+        public void DeleteUser(Guid id)
+        {
+            User user = m_userRepository.FindById(id);
+            m_userRepository.Remove(user);
+            m_userRepository.SaveChanges();
+        }
+
+
+
+
+        //--------------------------------------------------------------------------
         //helper methods
         private string GenerateJwtToken(User user)
         {
@@ -301,88 +418,6 @@ namespace Domain.Services
         private void SendVerificationEmail(User user, string origin)
         {
 
-        }
-        async void IUserService<Guid>.SendEmail(string mailAddress, string content)
-        {
-
-            var client = new System.Net.Mail.SmtpClient("smtp.example.com", 111);
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = true;
-            client.Port = 587;
-            client.Host = "smtp.gmail.com";
-
-            client.Credentials = new System.Net.NetworkCredential("cauviewchome3@gmail.com", "cqxouerrcxzbnxdv");
-
-            var mailMessage = new System.Net.Mail.MailMessage();
-            mailMessage.From = new System.Net.Mail.MailAddress("cauviewchome3@gmail.com");
-
-            mailMessage.To.Add(mailAddress);
-
-            if (!string.IsNullOrEmpty(mailAddress))
-            {
-                mailMessage.CC.Add(mailAddress);
-            }
-
-            mailMessage.Body = content;
-
-            mailMessage.Subject = "Confirm Email Social Network";
-
-            mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
-            mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
-
-            await client.SendMailAsync(mailMessage);
-        }
-
-        void IUserService<Guid>.UploadAvatar(Guid id, IFormFile avatar)
-        {
-            User user = m_userRepository.FindById(id);
-
-            var ms = new MemoryStream();
-            avatar.CopyTo(ms);
-
-            var fileBytes = ms.ToArray();
-            //string dataBytes = Convert.ToBase64String(fileBytes);
-
-            user.Avatar = fileBytes;
-            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
-            m_userRepository.SaveChanges();
-        }
-        void IUserService<Guid>.UploadUserProfile(Guid id, UpdateUserRequest model)
-        {
-            User user = m_userRepository.FindById(id);
-            var l_user = user;
-            {
-                user.Email = model.Email;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.Description = model.Description;
-                user.Address = model.Address;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Location = model.Location;
-                user.Works = model.Works;
-                user.Gender = model.Gender;
-                user.FollowMe = true;
-                user.Active = true;
-                user.RequestFriend = true;
-                user.ViewListFriend = true;
-                user.ViewTimeLine = true;
-                ///*
-                // * temp code, make easy to register, but registering need a verification token
-                // */
-                user.DateVerified = DateTime.UtcNow;
-                user.VerificationShortToken = null;
-                /*
-                 * 
-                 */
-            };
-            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
-            m_userRepository.SaveChanges();
-        }
-        async void IUserService<Guid>.DeleteUser(Guid id)
-        {
-            User user = m_userRepository.FindById(id);
-            m_userRepository.Remove(user);
-            m_userRepository.SaveChanges();
         }
     }
 }

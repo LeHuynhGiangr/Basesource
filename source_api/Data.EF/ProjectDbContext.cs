@@ -50,17 +50,13 @@ namespace Data.EF
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new FriendConfiguration());
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_ => _.UserId);
             builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_ => new { _.UserId, _.RoleId });
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
-            builder.Entity<Friend>(b =>
-            {
-                b.HasKey(e => new { e.User1, e.User2 });
-                b.HasOne(e => e.User1s).WithMany(e => e.Friends);
-                b.HasOne(e => e.User2s).WithMany().OnDelete(DeleteBehavior.ClientSetNull);
-            });
+
             //end config asp identity
             //end configure
 

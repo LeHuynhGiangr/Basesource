@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Threading.Tasks;
-
 namespace API
 {
     //[Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
@@ -29,7 +28,7 @@ namespace API
         public UserController(IUserService<Guid> userService, IJWTDecoder jwtDecoder)
         {
             m_userService = userService;
-            m_jwtDecoder = jwtDecoder;
+            //m_jwtDecoder = jwtDecoder;
         }
 
         ///*
@@ -173,7 +172,7 @@ namespace API
 
         //[AllowAnonymous]//this attribute is applied to does not require authorization/
         [HttpPost("sendingemail")]//Http post method
-        public async Task<IActionResult> SendMail([FromBody] Email email)
+        public IActionResult SendMail([FromBody] Email email)
         {
             try
             {
@@ -188,11 +187,14 @@ namespace API
 
         [Route("avatar/{id:guid}")]
         [HttpPut]
-        public IActionResult UploadAvatar([FromForm] IFormFile avatar, Guid id)
+        public IActionResult UploadAvatar([FromForm] IFormFile avatar)
         {
             try
             {
-                m_userService.UploadAvatar(id, avatar);
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_memStream = new System.IO.MemoryStream();
+                avatar.CopyTo(l_memStream);
+                m_userService.UploadAvatar(l_userId, l_memStream);
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
@@ -205,18 +207,20 @@ namespace API
 
         [Route("load")]
         [HttpGet]
-        public async Task<IActionResult> LoadUser()
+        public IActionResult LoadUser()
         {
             try
             {
-                User user = await m_jwtDecoder.FindUserByJWT(HttpContext);
+                //User user = await m_jwtDecoder.FindUserByJWT(HttpContext);
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_user = m_userService.GetById(l_userId);
 
-                if (user == null)
+                if (l_user == null)
                 {
                     return NotFound("User not found !");
                 }
 
-                return Ok(user);
+                return Ok(l_user);
 
             }
             catch (Exception e)

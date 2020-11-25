@@ -21,8 +21,8 @@ namespace API.Helpers
         //Called early in the filter pipeline to confirm request is authorized.
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var l_role = (ERole)context.HttpContext.Items["Role"];
-            foreach(ERole role in m_roles)
+            var l_role = (ERole)context.HttpContext.Items["Role"];//get "Role" item in httpcontext
+            foreach (ERole role in m_roles)
             {
                 //if (System.String.Compare(role, l_role, System.StringComparison.OrdinalIgnoreCase))
                 if ((int)role == (int)l_role) return;

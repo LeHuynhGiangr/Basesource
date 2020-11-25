@@ -89,7 +89,14 @@ namespace Data.EF
                     EmailConfirmed = false,
                     PhoneNumberConfirmed = false,
                     LockoutEnabled = false,
-
+                    Description = "No description",
+                    Active = true,
+                    Address = "Ho Chi Minh",
+                    FollowMe = true,
+                    Location = 111,
+                    ViewListFriend = true,
+                    ViewTimeLine = true,
+                    Works = "Ho Chi Minh",
                     UserName = "admin",
                     Password = "123456",
                     PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("123456")).ToString(),
@@ -116,7 +123,14 @@ namespace Data.EF
                     EmailConfirmed = false,
                     PhoneNumberConfirmed = false,
                     LockoutEnabled = false,
-
+                    Description = "No description",
+                    Active = true,
+                    Address = "Ho Chi Minh",
+                    FollowMe = true,
+                    Location = 111,
+                    ViewListFriend = true,
+                    ViewTimeLine = true,
+                    Works = "Ho Chi Minh",
                     UserName = "user",
                     Password = "123456",
                     PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("123456")).ToString(),
@@ -132,12 +146,12 @@ namespace Data.EF
             modelBuilder.Entity<RefreshToken>().HasData(
                 new
                 {
-                    Id=l_guid_admin_token,
+                    Id = l_guid_admin_token,
                     CreatedByIp = "127.0.0.1",
                     Expires = DateTime.UtcNow.AddDays(7),
                     Token = "91322406899332748392",
-                    DateCreated= DateTime.Now,
-                    userid =l_guid_admin
+                    DateCreated = DateTime.Now,
+                    userid = l_guid_admin
                 },
 
                 new
