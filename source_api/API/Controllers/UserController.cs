@@ -231,11 +231,12 @@ namespace API
 
         [Route("profile/{id:guid}")]
         [HttpPut]
-        public IActionResult UploadProfile(Guid id, UpdateUserRequest updateUserRequest)
+        public IActionResult UploadProfile([FromForm] UpdateUserRequest updateUserRequest)
         {
             try
             {
-                m_userService.UploadUserProfile(id, updateUserRequest);
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                m_userService.UploadUserProfile(l_userId, updateUserRequest);
                 return Ok("Upload profile successfully");
             }
             catch (Exception e)

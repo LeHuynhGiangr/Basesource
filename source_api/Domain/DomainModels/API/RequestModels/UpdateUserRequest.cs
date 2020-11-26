@@ -29,8 +29,6 @@ namespace Domain.DomainModels.API.RequestModels
         [Required]
         public string Works { get; set; }
         [Required]
-        public bool Active { get; set; }
-        [Required]
         public bool FollowMe { get; set; }
         [Required]
         public bool RequestFriend { get; set; }

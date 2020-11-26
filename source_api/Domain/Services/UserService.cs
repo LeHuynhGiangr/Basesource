@@ -336,7 +336,6 @@ namespace Domain.Services
                 user.Works = model.Works;
                 user.Gender = model.Gender;
                 user.FollowMe = true;
-                user.Active = true;
                 user.RequestFriend = true;
                 user.ViewListFriend = true;
                 user.ViewTimeLine = true;
