@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   public appUsers: AppUsers;
 
-  constructor(private m_formBuilder: FormBuilder, private m_route: ActivatedRoute, private m_router: Router, private m_authenService: AuthenService
+  constructor(private m_formBuilder: FormBuilder, private m_route: ActivatedRoute, private m_router: Router
     , private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService) {
   }
 
@@ -74,9 +74,11 @@ export class LoginComponent implements OnInit {
     this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then((result) => {
       if (result) {
         alert('Login Successfully');
+        // this.m_authenService.startRefreshTokenTimer();
         this.m_router.navigateByUrl('/', { skipLocationChange: true });
       }
-      else alert('Username or Password incorrect !');
+      else
+        alert('Username or Password incorrect !');
       console.log(result);
     }).catch((error) => {
       this.m_error = error;

@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
     private urlAPI = 'https://localhost:44350/';
+    private currentUser: BehaviorSubject<any>
 
     constructor(private http: HttpClient) {
+        this.currentUser = new BehaviorSubject<any>(null);
+    }
 
+    getCurrrentUser(): any {
+        return this.currentUser.value;
     }
 
     getUser = async () => {
         try {
-            console.log("Load user", this.getToken());
+       
             const config = {
                 headers: {
                     Authorization: this.getConfigToken()
                 }
             }
-            const result =  await this.http.get(this.urlAPI + 'user/load', config).toPromise();
+            const result = await this.http.get(this.urlAPI + 'user/load', config).toPromise();
+            this.currentUser.next(result);
             return result;
         }
         catch (e) {
@@ -32,7 +39,7 @@ export class LoginService {
         try {
             console.log(users);
             return await this.http.post(this.urlAPI + "identity/register", users).toPromise();
-            
+
         }
         catch (e) {
             console.log(e);
@@ -44,13 +51,13 @@ export class LoginService {
             const data = {
                 username,
                 password
-            };           
+            };
             console.log("Login Successfully !");
-            const res = await this.http.post(`${this.urlAPI}identity/authenticate`, data).toPromise() as any;
-            console.log(res)
+            const res = await this.http.post(`${this.urlAPI}identity/authenticate`, data, { withCredentials: true }).toPromise() as any;
+
             if (res) {
-                console.log(res.jwtToken);
                 this.setToken(res.jwtToken);
+                await this.getUser();
             }
             return res;
         }
@@ -61,6 +68,7 @@ export class LoginService {
 
     logout = () => {
         this.removeToken();
+        this.currentUser.next(null);
     }
 
     setToken = (token) => {
@@ -79,5 +87,6 @@ export class LoginService {
         const token = this.getToken();
         return token ? 'Bearer ' + token : undefined;
     }
+
 
 }

@@ -64,7 +64,7 @@ export class AuthenService {
   //helper methods
   private m_refreshTokenTimeout:any;
 
-  private startRefreshTokenTimer() {
+  public startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
     const jwtToken = JSON.parse(atob(this.currentUser.jwtToken.split('.')[1]));
 
