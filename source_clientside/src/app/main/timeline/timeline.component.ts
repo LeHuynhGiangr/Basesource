@@ -29,7 +29,8 @@ export class TimelineComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
-    var user = await this.service.getUser();
+    const user = await this.service.getUser();
+    console.log(user)
     console.log(user["firstName"] + " " + user["lastName"]);
     this.Id = user["id"].toString();
     this.Name = user["firstName"] + " " + user["lastName"];

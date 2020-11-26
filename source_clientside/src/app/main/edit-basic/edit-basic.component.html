@@ -19,11 +19,10 @@
 						<div class="user-avatar">
 							<figure>
 								<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
-								<form class="edit-phto">
+								<form class="edit-phto" (click)=openDialog()>
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
 										Edit Display Photo
-										<input type="file"/>
 									</label>
 								</form>
 							</figure>
@@ -117,21 +116,21 @@
 								<div class="central-meta">									
 									<div class="editing-info">										
 										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>								
-										<form novalidate (ngSubmit)="onSubmit()">
+										<form (ngSubmit)="onSave()">
 											<div class="form-group half">	
-											  <input name="FirstName" type="text" id="input" required="required" [(ngModel)]="this.FName">
+											  <input name="firstName" type="text" id="input" required="required" [(ngModel)]="this.FName" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group half">	
-											  <input name="LastName" type="text" id="input" required="required" [(ngModel)]="this.LName">
+											  <input name="lastName" type="text" id="input" required="required" [(ngModel)]="this.LName" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											<input name="Email" type="text" id="input" required="required" [(ngModel)]="this.Email">
+											<input name="email" type="text" id="input" required="required" [(ngModel)]="this.Email" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-												<input name="PhoneNumber" type="text" id="input" required="required" [(ngModel)]="this.PhoneNumber">
+												<input name="phoneNumber" type="text" id="input" required="required" [(ngModel)]="this.PhoneNumber" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
 											</div>
 											<div class="dob">
@@ -219,11 +218,11 @@
 											  </div>
 											</div>
 											<div class="form-group">	
-											<input name="Address" type="text" id="input" required="required" [(ngModel)]="this.Address">										
+											<input name="address" type="text" id="input" required="required" [(ngModel)]="this.Address" [ngModelOptions]="{standalone: true}">										
 											  <label class="control-label" for="input">City</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											  <select>
+											  <select >
 												<option value="country">Country</option>
 												  <option value="AFG">Afghanistan</option>
 												  <option value="ALA">Ƭand Islands</option>
@@ -477,12 +476,12 @@
 											  </select>
 											</div>
 											<div class="form-group">	
-											  <textarea name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description"></textarea>
+											  <textarea name="description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}"></textarea>
 											  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
 											</div>
 											<div class="submit-btns">
 												<button type="button" class="mtr-btn"><span>Cancel</span></button>
-												<button type="button" class="mtr-btn"><span>Update</span></button>
+												<button type="button" class="mtr-btn" (click)="onSave()"><span>Update</span></button>
 											</div>
 										</form>
 									</div>

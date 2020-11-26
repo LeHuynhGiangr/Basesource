@@ -19,11 +19,10 @@
 							<div class="user-avatar">
 								<figure>
 									<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
-									<form class="edit-phto">
+									<form class="edit-phto" (click)=openDialog()>
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
 											Edit Display Photo
-											<input type="file"/>
 										</label>
 									</form>
 								</figure>
