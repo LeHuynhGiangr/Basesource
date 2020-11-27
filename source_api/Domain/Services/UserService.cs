@@ -141,18 +141,14 @@ namespace Domain.Services
             {
                 throw new Exception("Username are already registered");
             }
-            if (m_userRepository.FindSingle(_ => _.Email == model.Email) != null)
-            {
-                throw new Exception("Email are already registered");
-            }
 
             var l_user = new User
             {
                 UserName = model.UserName,
-                Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Gender = model.Gender,
+                Active = true,
                 PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString(),////temporarily, using encode instead of really hash
                 Password = model.Password,
                 TwoFactorEnabled = false,
@@ -246,11 +242,17 @@ namespace Domain.Services
                     Avatar = l_user.Avatar,
                     FollowMe = l_user.FollowMe,
                     Location = l_user.Location,
+                    BirthDay = l_user.BirthDay,
                     RequestFriend = l_user.RequestFriend,
                     ViewListFriend = l_user.ViewListFriend,
                     ViewTimeLine = l_user.ViewTimeLine,
                     Works = l_user.Works,
-
+                    AcademicLevel = l_user.AcademicLevel,
+                    AddressAcademic = l_user.AddressAcademic,
+                    DescriptionAcademic = l_user.DescriptionAcademic,
+                    StudyingAt = l_user.StudyingAt,
+                    FromDate = l_user.FromDate,
+                    ToDate = l_user.ToDate
                 };
             }
             catch (Exception e)
@@ -335,6 +337,7 @@ namespace Domain.Services
                 user.Location = model.Location;
                 user.Works = model.Works;
                 user.Gender = model.Gender;
+                user.BirthDay = model.BirthDay;
                 user.FollowMe = true;
                 user.RequestFriend = true;
                 user.ViewListFriend = true;
@@ -362,6 +365,21 @@ namespace Domain.Services
             {
                 user.PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString();
                 user.Password = model.Password;
+            }
+            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
+        public void UpdateAcademic(Guid id, UpdateAcademicRequest model)
+        {
+            User user = m_userRepository.FindById(id);
+            var l_user = user;
+            {
+                user.AcademicLevel = model.AcademicLevel;
+                user.AddressAcademic = model.AddressAcademic;
+                user.DescriptionAcademic = model.DescriptionAcademic;
+                user.FromDate = model.FromDate;
+                user.ToDate = model.ToDate;
+                user.StudyingAt = model.StudyingAt;
             }
             m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
             m_userRepository.SaveChanges();
