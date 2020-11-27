@@ -16,6 +16,7 @@ export class AboutComponent implements OnInit {
   public Description: string = ''
   public Address: string = ''
   public PhoneNumber: string = ''
+  public Email: string = ''
   public dataset: AppUsers[]
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService) {
     
@@ -34,6 +35,7 @@ export class AboutComponent implements OnInit {
     this.Description = user["description"]
     this.Address = user["address"]
     this.PhoneNumber = user["phoneNumber"]
+    this.Email = user["email"]
   }
   getPath(){
     return this.router.url;

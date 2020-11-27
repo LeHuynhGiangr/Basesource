@@ -1,8 +1,9 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
+import { EditPasswordService } from './shared/edit-password.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 @Component({
@@ -17,8 +18,12 @@ export class EditPasswordComponent implements OnInit {
   public Name: string = ''
   public Image: string
   public Description: string = ''
+  public Password :string = ''
+  public ConfirmPassword :string = ''
+  public m_returnUrl: string;
   public dataset: AppUsers[]
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog) {
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
+  private EPservice:EditPasswordService,private m_route: ActivatedRoute, private m_router: Router) {
     
   }
   
@@ -29,6 +34,7 @@ export class EditPasswordComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     var user = await this.service.getUser();
+    this.Id = user["id"].toString();
     console.log(user["firstName"]+" "+user["lastName"]);
     this.Name=user["firstName"]+" "+user["lastName"];
     this.Image = user["avatar"]
@@ -68,5 +74,38 @@ export class EditPasswordComponent implements OnInit {
         }
       });
     });
+  }
+  onSave() {
+    try{
+      const formData = new FormData();
+      formData.append('id', this.Id);
+      if (1) {
+        formData.append('password', this.Password);
+        formData.append('confirmPassword', this.ConfirmPassword);
+        if (this.Password !== this.ConfirmPassword) {
+          return alert('Password not match a confirm password');
+        }
+        else
+        {
+          this.EPservice.changePassword(this.Id,formData);
+          alert("Upload succesfully !")
+          this.refresh();
+        }
+        
+      }
+      else
+      {
+        alert("Upload failure !")
+      }
+    }
+    catch(e)
+    {
+      alert("Upload failure !")
+    }
+  }
+  refresh(): void {
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
+    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    //window.location.reload();
   }
 }
