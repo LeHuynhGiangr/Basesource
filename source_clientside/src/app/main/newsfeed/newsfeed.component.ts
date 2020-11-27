@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
+
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -10,10 +11,7 @@ import { LoginService } from './../../login/shared/login.service';
 })
 export class NewsfeedComponent implements OnInit {
 
-  appUsers:Array<AppUsers>
-  public Name: string = ''
-  public Image: string
-  public dataset: AppUsers[]
+  public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService) {
     
   }
@@ -24,10 +22,10 @@ export class NewsfeedComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.appUsers = new AppUsers();
     var user = await this.service.getUser();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.Name=user["firstName"]+" "+user["lastName"];
-    this.Image = user["avatar"]
+    this.appUsers.Avatar = user["avatar"]
   }
   getPath(){
     return this.router.url;

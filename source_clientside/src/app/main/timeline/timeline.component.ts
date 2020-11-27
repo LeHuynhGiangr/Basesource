@@ -12,18 +12,14 @@ import { DialogUploadAvatarComponent } from './dialog-uploadavatar/dialog-upload
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-
-  appUsers: Array<AppUsers>
-  public Id: string = ''
-  public Name: string = ''
-  public Image: string
-  public dataset: AppUsers[]
+  public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
     private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog) {
 
   }
 
   async ngOnInit() {
+    this.appUsers = new AppUsers();
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
@@ -31,10 +27,10 @@ export class TimelineComponent implements OnInit {
 
     const user = await this.service.getUser();
     console.log(user)
-    console.log(user["firstName"] + " " + user["lastName"]);
-    this.Id = user["id"].toString();
-    this.Name = user["firstName"] + " " + user["lastName"];
-    this.Image = user["avatar"]
+    this.appUsers.Id=user["id"].toString();
+    this.appUsers.FirstName=user["firstName"];
+    this.appUsers.LastName=user["lastName"];
+    this.appUsers.Avatar = user["avatar"];
   }
   getPath() {
     return this.router.url;
@@ -51,14 +47,14 @@ export class TimelineComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
   onFileChanged(event) {
-    this.Image = event.target.files[0]
+    this.appUsers.Avatar = event.target.files[0]
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
       height: '400px',
-      data: { Id: this.Id }
+      data: { Id: this.appUsers.Id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -67,9 +63,8 @@ export class TimelineComponent implements OnInit {
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);
-          this.Id = user["id"].toString();
-          this.Name = user["firstName"] + " " + user["lastName"];
-          this.Image = user["avatar"]
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Avatar = user["avatar"]
         }
       });
 

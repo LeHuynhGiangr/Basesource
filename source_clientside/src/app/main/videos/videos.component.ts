@@ -12,11 +12,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 })
 export class VideosComponent implements OnInit {
 
-  appUsers:Array<AppUsers>
-  public Id: string = ''
-  public Name: string = ''
-  public Image: string
-  public dataset: AppUsers[]
+  public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, public dialog: MatDialog) {
     
   }
@@ -27,10 +23,12 @@ export class VideosComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.appUsers = new AppUsers();
     var user = await this.service.getUser();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.Name=user["firstName"]+" "+user["lastName"];
-    this.Image = user["avatar"]
+    this.appUsers.FirstName=user["firstName"];
+    this.appUsers.LastName=user["lastName"];
+    this.appUsers.Avatar = user["avatar"]
   }
   getPath(){
     return this.router.url;
@@ -48,13 +46,13 @@ export class VideosComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
   onFileChanged(event) {
-    this.Image = event.target.files[0]
+    this.appUsers.Avatar = event.target.files[0]
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
       height: '400px',
-      data: { Id: this.Id }
+      data: { Id: this.appUsers.Id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,9 +61,8 @@ export class VideosComponent implements OnInit {
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);
-          this.Id = user["id"].toString();
-          this.Name = user["firstName"] + " " + user["lastName"];
-          this.Image = user["avatar"]
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Avatar = user["avatar"]
         }
       });
     });

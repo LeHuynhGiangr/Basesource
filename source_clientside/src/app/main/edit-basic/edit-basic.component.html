@@ -18,7 +18,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
+								<img [src]="getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="">
 								<form class="edit-phto" (click)=openDialog()>
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -32,8 +32,8 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-									<h5><strong>{{this.Name}}</strong></h5>
-									<span>My Videos</span>
+									<h5><strong>{{this.appUsers.FirstName+" "+this.appUsers.LastName}}</strong></h5>
+									<span>My Profile</span>
 								</li>
 								<li>
 									<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
@@ -118,19 +118,19 @@
 										<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>								
 										<form (ngSubmit)="onSave()">
 											<div class="form-group half">	
-											  <input name="firstName" type="text" id="input" required="required" [(ngModel)]="this.FName" [ngModelOptions]="{standalone: true}">
+											  <input name="firstName" type="text" id="input" required="required" [(ngModel)]="this.appUsers.FirstName" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">First Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group half">	
-											  <input name="lastName" type="text" id="input" required="required" [(ngModel)]="this.LName" [ngModelOptions]="{standalone: true}">
+											  <input name="lastName" type="text" id="input" required="required" [(ngModel)]="this.appUsers.LastName" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-											<input name="email" type="text" id="input" required="required" [(ngModel)]="this.Email" [ngModelOptions]="{standalone: true}">
+											<input name="email" type="text" id="input" required="required" [(ngModel)]="this.appUsers.Email" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b0e262a22270b">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
-												<input name="phoneNumber" type="text" id="input" required="required" [(ngModel)]="this.PhoneNumber" [ngModelOptions]="{standalone: true}">
+												<input name="phoneNumber" type="text" id="input" required="required" [(ngModel)]="this.appUsers.PhoneNumber" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
 											</div>
 											<div class="dob">
@@ -218,7 +218,7 @@
 											  </div>
 											</div>
 											<div class="form-group">	
-											<input name="address" type="text" id="input" required="required" [(ngModel)]="this.Address" [ngModelOptions]="{standalone: true}">										
+											<input name="address" type="text" id="input" required="required" [(ngModel)]="this.appUsers.Address" [ngModelOptions]="{standalone: true}">										
 											  <label class="control-label" for="input">City</label><i class="mtrl-select"></i>
 											</div>
 											<div class="form-group">	
@@ -476,7 +476,7 @@
 											  </select>
 											</div>
 											<div class="form-group">	
-											  <textarea name="description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}"></textarea>
+											  <textarea name="description" type="text" id="input" required="required" [(ngModel)]="this.appUsers.Descriptions" [ngModelOptions]="{standalone: true}"></textarea>
 											  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
 											</div>
 											<div class="submit-btns">

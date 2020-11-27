@@ -18,12 +18,11 @@
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
 								<figure>
-									<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
-									<form class="edit-phto">
+									<img [src]="getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="">
+									<form class="edit-phto" (click)=openDialog()>
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
 											Edit Display Photo
-											<input type="file"/>
 										</label>
 									</form>
 								</figure>
@@ -33,8 +32,8 @@
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-										<h5><strong>{{this.Name}}</strong></h5>
-										<span>My Videos</span>
+										<h5><strong>{{this.appUsers.FirstName+" "+this.appUsers.LastName}}</strong></h5>
+										<span>Create Page</span>
 									</li>
 									<li>
 										<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>

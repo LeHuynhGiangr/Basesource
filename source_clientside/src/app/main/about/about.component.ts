@@ -10,14 +10,7 @@ import { LoginService } from './../../login/shared/login.service';
 })
 export class AboutComponent implements OnInit {
 
-  appUsers:Array<AppUsers>
-  public Name: string = ''
-  public Image: string
-  public Description: string = ''
-  public Address: string = ''
-  public PhoneNumber: string = ''
-  public Email: string = ''
-  public dataset: AppUsers[]
+  public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService) {
     
   }
@@ -28,14 +21,16 @@ export class AboutComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.appUsers = new AppUsers();
     var user = await this.service.getUser();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.Name=user["firstName"]+" "+user["lastName"];
-    this.Image = user["avatar"]
-    this.Description = user["description"]
-    this.Address = user["address"]
-    this.PhoneNumber = user["phoneNumber"]
-    this.Email = user["email"]
+    this.appUsers.FirstName=user["firstName"]
+    this.appUsers.LastName=user["lastName"]
+    this.appUsers.Avatar = user["avatar"]
+    this.appUsers.Descriptions = user["description"]
+    this.appUsers.Address = user["address"]
+    this.appUsers.PhoneNumber = user["phoneNumber"]
+    this.appUsers.Email = user["email"]
   }
   getPath(){
     return this.router.url;

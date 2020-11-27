@@ -19,7 +19,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="" >
+								<img [src]="getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="" >
 								<form class="edit-phto" (click)=openDialog()>
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -33,7 +33,7 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5><strong>{{this.Name}}</strong></h5>
+								  <h5><strong>{{this.appUsers.FirstName+" "+this.appUsers.LastName}}</strong></h5>
 								  <span>My Timeline</span>
 								</li>
 								<li>
@@ -196,7 +196,7 @@
 									<div class="central-meta item">
 										<div class="new-postbox">
 											<figure>
-												<img src="assets/images/resources/admin2.jpg" alt="">
+												<img [src]="getImageSource(this.appUsers.Avatar)" alt="">
 											</figure>
 											<div class="newpst-input">
 												<form method="post">

@@ -1,7 +1,9 @@
 export class AppUsers {
+    Id:string;
     UserName: string;
     FirstName: string;
     LastName: string;
+    Avatar:string;
     Email: string;
     Gender: string;
     Password: string;
@@ -14,4 +16,9 @@ export class AppUsers {
     ResetToken: string;
     DateResetTokenExpired: Date;
     AcceptTerms:boolean;
+    Descriptions:string;
+    Address:string;
+    PhoneNumber:string;
+    Works:string;
+    Location: Float32Array;
 }

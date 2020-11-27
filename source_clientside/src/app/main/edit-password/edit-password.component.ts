@@ -13,15 +13,8 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 })
 export class EditPasswordComponent implements OnInit {
 
-  appUsers:Array<AppUsers>
-  public Id: string = ''
-  public Name: string = ''
-  public Image: string
-  public Description: string = ''
-  public Password :string = ''
-  public ConfirmPassword :string = ''
+  public appUsers: AppUsers;
   public m_returnUrl: string;
-  public dataset: AppUsers[]
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
   private EPservice:EditPasswordService,private m_route: ActivatedRoute, private m_router: Router) {
     
@@ -33,12 +26,13 @@ export class EditPasswordComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.appUsers = new AppUsers();
     var user = await this.service.getUser();
-    this.Id = user["id"].toString();
+    this.appUsers.Id = user["id"].toString();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.Name=user["firstName"]+" "+user["lastName"];
-    this.Image = user["avatar"]
-    this.Description = user["description"]
+    this.appUsers.FirstName = user["firstName"]
+    this.appUsers.LastName = user["lastName"]
+    this.appUsers.Avatar = user["avatar"]
   }
   getPath(){
     return this.router.url;
@@ -52,14 +46,14 @@ export class EditPasswordComponent implements OnInit {
     return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onFileChanged(event) {
-    this.Image = event.target.files[0]
+    this.appUsers.Avatar = event.target.files[0]
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
       height: '400px',
-      data: { Id: this.Id }
+      data: { Id: this.appUsers.Id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -68,9 +62,8 @@ export class EditPasswordComponent implements OnInit {
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);
-          this.Id = user["id"].toString();
-          this.Name = user["firstName"] + " " + user["lastName"];
-          this.Image = user["avatar"]
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Avatar = user["avatar"]
         }
       });
     });
@@ -78,16 +71,16 @@ export class EditPasswordComponent implements OnInit {
   onSave() {
     try{
       const formData = new FormData();
-      formData.append('id', this.Id);
+      formData.append('id', this.appUsers.Id);
       if (1) {
-        formData.append('password', this.Password);
-        formData.append('confirmPassword', this.ConfirmPassword);
-        if (this.Password !== this.ConfirmPassword) {
+        formData.append('password', this.appUsers.Password);
+        formData.append('confirmPassword', this.appUsers.ConfirmPassword);
+        if (this.appUsers.Password !== this.appUsers.ConfirmPassword) {
           return alert('Password not match a confirm password');
         }
         else
         {
-          this.EPservice.changePassword(this.Id,formData);
+          this.EPservice.changePassword(this.appUsers.Id,formData);
           alert("Upload succesfully !")
           this.refresh();
         }
