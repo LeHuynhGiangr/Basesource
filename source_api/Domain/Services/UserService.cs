@@ -351,6 +351,21 @@ namespace Domain.Services
             m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
+        public void ChangePassword(Guid id, ResetPasswordRequest model)
+        {
+            if (model.Password != model.ConfirmPassword)
+            {
+                throw new Exception("Password and Confirm Password must be matched");
+            }
+            User user = m_userRepository.FindById(id);
+            var l_user = user;
+            {
+                user.PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString();
+                user.Password = model.Password;
+            }
+            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
         public void DeleteUser(Guid id)
         {
             User user = m_userRepository.FindById(id);

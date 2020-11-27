@@ -38,5 +38,6 @@ namespace Domain.IServices
         //void UploadAvatar(Guid id, IFormFile avatar);
         void DeleteUser(Guid id);
         void UploadUserProfile(Guid id, UpdateUserRequest model);
+        void ChangePassword(Guid id, ResetPasswordRequest model);
     }
 }

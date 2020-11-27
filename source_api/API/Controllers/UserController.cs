@@ -245,6 +245,21 @@ namespace API
             }
         }
 
+        [Route("password/{id:guid}")]
+        [HttpPut]
+        public IActionResult ChangePassword([FromForm] ResetPasswordRequest ResetPasswordRequest)
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                m_userService.ChangePassword(l_userId, ResetPasswordRequest);
+                return Ok("Change password successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
         [Route("{id:guid}")]
         [HttpDelete]
         public async Task<ActionResult<User>> DeleteSkill(Guid id)
