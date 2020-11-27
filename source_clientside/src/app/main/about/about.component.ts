@@ -31,6 +31,14 @@ export class AboutComponent implements OnInit {
     this.appUsers.Address = user["address"]
     this.appUsers.PhoneNumber = user["phoneNumber"]
     this.appUsers.Email = user["email"]
+    this.appUsers.BirthDay= user["birthDay"];
+    this.appUsers.AcademicLevel = user["academicLevel"]
+    this.appUsers.AddressAcademic = user["addressAcademic"]
+    this.appUsers.DescriptionAcademic = user["descriptionAcademic"]
+    this.appUsers.StudyingAt = user["studyingAt"]
+    this.appUsers.FromDate = user["fromDate"]
+    this.appUsers.ToDate = user["toDate"]
+
   }
   getPath(){
     return this.router.url;

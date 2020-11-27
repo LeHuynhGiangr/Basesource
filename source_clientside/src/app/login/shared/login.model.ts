@@ -21,4 +21,10 @@ export class AppUsers {
     PhoneNumber:string;
     Works:string;
     Location: Float32Array;
+    AcademicLevel:string;
+    AddressAcademic:string;
+    DescriptionAcademic:string;
+    StudyingAt:string;
+    FromDate:Date;
+    ToDate:Date;
 }

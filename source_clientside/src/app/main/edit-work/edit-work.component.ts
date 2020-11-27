@@ -1,10 +1,11 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { EditWorkService } from './shared/edit-work.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
     selector: 'app-edit-work',
     templateUrl: './edit-work.component.html',
@@ -12,13 +13,11 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 })
 export class EditWorkComponent implements OnInit {
 
-  appUsers:Array<AppUsers>
-  public Id: string = ''
-  public Name: string = ''
-  public Image: string
-  public Description: string = ''
-  public dataset: AppUsers[]
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog) {
+  public appUsers: AppUsers;
+  public m_returnUrl: string;
+  items = ["Primary school", "Junior high school", "High school","University"]
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
+  private EWService:EditWorkService,private m_router: Router,private m_route: ActivatedRoute) {
     
   }
   
@@ -28,11 +27,20 @@ export class EditWorkComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    
+    this.appUsers = new AppUsers();
     var user = await this.service.getUser();
+    this.appUsers.Id = user["id"].toString();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.Name=user["firstName"]+" "+user["lastName"];
-    this.Image = user["avatar"]
-    this.Description = user["description"]
+    this.appUsers.FirstName = user["firstName"]
+    this.appUsers.LastName = user["lastName"]
+    this.appUsers.Avatar = user["avatar"]
+    this.appUsers.AcademicLevel = user["academicLevel"]
+    this.appUsers.AddressAcademic = user["addressAcademic"]
+    this.appUsers.DescriptionAcademic = user["descriptionAcademic"]
+    this.appUsers.StudyingAt = user["studyingAt"]
+    this.appUsers.FromDate = user["fromDate"]
+    this.appUsers.ToDate = user["toDate"]
   }
   getPath(){
     return this.router.url;
@@ -46,14 +54,14 @@ export class EditWorkComponent implements OnInit {
     return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onFileChanged(event) {
-    this.Image = event.target.files[0]
+    this.appUsers.Avatar = event.target.files[0]
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
       height: '400px',
-      data: { Id: this.Id }
+      data: { Id: this.appUsers.Id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,11 +70,40 @@ export class EditWorkComponent implements OnInit {
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);
-          this.Id = user["id"].toString();
-          this.Name = user["firstName"] + " " + user["lastName"];
-          this.Image = user["avatar"]
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Avatar = user["avatar"]
         }
       });
     });
+  }
+  onSave() {
+    try{
+      const formData = new FormData();
+      formData.append('id', this.appUsers.Id);
+      if (1) {
+        formData.append('academicLevel', this.appUsers.AcademicLevel);
+        formData.append('studyingAt', this.appUsers.StudyingAt);
+        formData.append('descriptionAcademic', this.appUsers.DescriptionAcademic);
+        formData.append('addressAcademic', this.appUsers.AddressAcademic);
+        formData.append('fromDate', this.appUsers.FromDate.toString());
+        formData.append('toDate', this.appUsers.ToDate.toString());
+        this.EWService.updateAcademic(this.appUsers.Id,formData);
+        alert("Upload succesfully !")
+        this.refresh();
+      }
+      else
+      {
+        alert("Upload failure !")
+      }
+    }
+    catch(e)
+    {
+      alert("Upload failure !")
+    }
+  }
+  refresh(): void {
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
+    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    //window.location.reload();
   }
 }

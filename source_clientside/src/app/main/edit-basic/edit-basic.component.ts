@@ -40,6 +40,8 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.PhoneNumber = user["phoneNumber"];
     this.appUsers.Address = user["address"];
     this.appUsers.Descriptions = user["description"];
+    this.appUsers.BirthDay= user["birthDay"];
+    //this.datePipe.transform(this.appUsers.BirthDay,"yyyy-MM-dd")
   }
   getPath(){
     return this.router.url;
@@ -55,6 +57,9 @@ export class EditBasicComponent implements OnInit {
   onSubmit() {
     console.log('title is:');
   }
+  onChangeGender = (event: any) => {
+    this.appUsers.Gender = event.target.value;
+  }
   onSave() {
     try{
       const formData = new FormData();
@@ -68,6 +73,7 @@ export class EditBasicComponent implements OnInit {
         formData.append('gender', this.appUsers.Gender);
         formData.append('phoneNumber', this.appUsers.PhoneNumber);
         formData.append('works', this.appUsers.Works);
+        formData.append('birthDay', this.appUsers.BirthDay.toString());
         this.EBService.uploadProfile(this.appUsers.Id,formData);
         alert("Upload succesfully !")
         this.refresh();

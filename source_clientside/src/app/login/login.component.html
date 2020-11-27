@@ -81,7 +81,8 @@
 							<div class="form-group">
 								<input type="text" name='UserName' required="required" [(ngModel)]="appUsers.UserName"
 									[ngModelOptions]="{standalone: true}" />
-								<label class="control-label" for="input">User Name</label><i class="mtrl-select"></i>
+								<label class="control-label" for="input">Email/Phone</label><i class="mtrl-select"></i>
+								<button class="mtr-btn signup" type="button"><span>Send OTP</span></button>
 							</div>
 							<div class="form-group">
 								<input type="password" name='Password' required="required"
@@ -108,12 +109,8 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="text" required="required" [(ngModel)]="appUsers.Email"
-									[ngModelOptions]="{standalone: true}" />
-								<label class="control-label" for="input"><a
-										href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
-										data-cfemail="6c29010d05002c">[email&#160;protected]</a></label><i
-									class="mtrl-select"></i>
+								<input type="text" name='OTP' required="required" />
+								<label class="control-label" for="input">OTP</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
 								<label>

@@ -42,7 +42,7 @@ export class LoginService {
 
         }
         catch (e) {
-            console.log(e);
+            alert("Username are already registered");
         }
     }
 

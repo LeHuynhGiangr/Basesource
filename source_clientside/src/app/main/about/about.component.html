@@ -137,7 +137,7 @@
 														<li><i class="ti-map-alt"></i>{{this.appUsers.Address}}</li>
 														<li><i class="ti-mobile"></i>{{this.appUsers.PhoneNumber}}</li>
 														<li><i class="ti-email"></i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4553494e515d55507c59515d5550125f5351">{{this.appUsers.Email}}</a></li>
-														<li><i class="ti-heart"></i>12/04/1999</li>
+														<li><i class="ti-heart"></i>{{this.appUsers.BirthDay| date: 'dd/MM/yyyy'}}</li>
 													</ul>
 												</div>
 												<div class="tab-pane fade" id="location" role="tabpanel">
@@ -149,12 +149,12 @@
 												<div class="tab-pane fade" id="work" role="tabpanel">
 													<div>
 														
-														<a href="#" title="">Envato</a>
-														<p>work as autohr in envato themeforest from 2013</p> 
+														<a><strong>Level : {{this.appUsers.AcademicLevel}}</strong></a>
 														<ul class="education">
-															<li><i class="ti-facebook"></i> BSCS from Oxford University</li>
-															<li><i class="ti-twitter"></i> MSCS from Harvard Unversity</li>
+															<li><i class="ti-info-alt"></i> Attend <strong>{{this.appUsers.StudyingAt}}</strong> in <strong>{{this.appUsers.AddressAcademic}}</strong></li>
+															<li><i class="ti-eye"></i>Since <strong>{{this.appUsers.FromDate| date: 'dd/MM/yyyy'}}</strong> to <strong>{{this.appUsers.ToDate| date: 'dd/MM/yyyy'}}</strong></li>
 														</ul>
+														<a><strong>Description : {{this.appUsers.DescriptionAcademic}}</strong></a>
 													</div>
 												</div>
 												<div class="tab-pane fade" id="interest" role="tabpanel">
