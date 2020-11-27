@@ -31,6 +31,12 @@ namespace Data.Entities
         public bool RequestFriend { get; set; }
         public bool ViewListFriend { get; set; }
         public bool ViewTimeLine { get; set; }
+        public string AcademicLevel { get; set; }
+        public string StudyingAt { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string AddressAcademic { get; set; }
+        public string DescriptionAcademic { get; set; }
         public DateTime? BirthDay { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }

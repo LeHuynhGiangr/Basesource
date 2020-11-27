@@ -16,6 +16,8 @@ namespace Domain.DomainModels.API.RequestModels
         [Required]
         public string Gender { get; set; }
         [Required]
+        public DateTime BirthDay { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
 
         [Required]

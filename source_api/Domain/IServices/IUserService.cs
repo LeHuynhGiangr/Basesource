@@ -39,5 +39,6 @@ namespace Domain.IServices
         void DeleteUser(Guid id);
         void UploadUserProfile(Guid id, UpdateUserRequest model);
         void ChangePassword(Guid id, ResetPasswordRequest model);
+        void UpdateAcademic(Guid id, UpdateAcademicRequest model);
     }
 }

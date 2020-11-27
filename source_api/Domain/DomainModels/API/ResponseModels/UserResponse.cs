@@ -24,6 +24,13 @@ namespace Domain.DomainModels.API.ResponseModels
         public bool RequestFriend { get; set; }
         public bool ViewListFriend { get; set; }
         public bool ViewTimeLine { get; set; }
+        public DateTime? BirthDay { get; set; }
+        public string AcademicLevel { get; set; }
+        public string StudyingAt { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string AddressAcademic { get; set; }
+        public string DescriptionAcademic { get; set; }
         public string Role { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }

@@ -29,7 +29,6 @@ namespace Data.EF
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<PageType> PageTypes { get; set; }
-        public DbSet<UserAcademic> UserAcademics { get; set; }
         public DbSet<UserHobby> UserHobbies { get; set; }
         public DbSet<UserLanguage> UserLanguages { get; set; }
         public DbSet<Card> Cards { get; set; }

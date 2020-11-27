@@ -2,9 +2,9 @@
 using API.utls;
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
-using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
+using Domain.Services.InternalServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -254,6 +254,22 @@ namespace API
                 System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 m_userService.ChangePassword(l_userId, ResetPasswordRequest);
                 return Ok("Change password successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [Route("academic/{id:guid}")]
+        [HttpPut]
+        public IActionResult UpdateAcademic([FromForm] UpdateAcademicRequest academicRequest)
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                m_userService.UpdateAcademic(l_userId, academicRequest);
+                return Ok("Update successfully");
             }
             catch (Exception e)
             {
