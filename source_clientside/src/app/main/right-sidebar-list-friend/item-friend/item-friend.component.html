@@ -1,7 +1,13 @@
 <li>
     <figure>
         <img src="assets/images/resources/friend-avatar.jpg" alt="">
-        <span class="status f-online"></span>
+        <div *ngIf="m_isOnline; then if_span else else_span"></div>
+        <ng-template #if_span>
+            <span class="status f-online"></span>
+        </ng-template>
+        <ng-template #else_span>
+            <span class="status f-offline"></span>
+        </ng-template>
     </figure>
     <div class="friendz-meta">
         <a href="time-line.html">bucky barnes</a>

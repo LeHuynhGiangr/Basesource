@@ -1,3 +1,4 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-friend.component.css']
 })
 export class ItemFriendComponent implements OnInit {
+  @Input() m_avatarString:string;
+  @Input() m_account:string;
+  @Input() m_isOnline:boolean=false;
 
   constructor() { }
 
