@@ -35,6 +35,22 @@ export class LoginService {
         }
     }
 
+    sendOtp = async (email) => {
+        try {
+
+            console.log("tét email: ", email)
+
+            const formData = new FormData();
+            formData.append('email', email);
+
+            return await this.http.post(this.urlAPI + "otp/send-email-otp", formData).toPromise();
+
+        }
+        catch (e) {
+            alert("Send mail successfully");
+        }
+    }
+
     postUser = async (users) => {
         try {
             console.log(users);
@@ -42,7 +58,7 @@ export class LoginService {
 
         }
         catch (e) {
-            alert("Username are already registered");
+            alert("Username are already registered or OTP wrong !");
         }
     }
 

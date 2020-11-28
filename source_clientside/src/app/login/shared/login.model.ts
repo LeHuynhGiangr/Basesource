@@ -27,4 +27,5 @@ export class AppUsers {
     StudyingAt:string;
     FromDate:Date;
     ToDate:Date;
+    OTP: string;
 }

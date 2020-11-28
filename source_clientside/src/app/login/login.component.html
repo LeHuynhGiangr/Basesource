@@ -37,7 +37,7 @@
 							<div class="form-group">
 								<!-- <input type="password" required="required" [(ngModel)]="appUsers.Password"
 									[ngModelOptions]="{standalone: true}" /> -->
-								<input type="text" required="required" formControlName="password"/>
+								<input type="text" type="password" required="required" formControlName="password"/>
 								<label class="control-label" for="password">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
@@ -82,7 +82,7 @@
 								<input type="text" name='UserName' required="required" [(ngModel)]="appUsers.UserName"
 									[ngModelOptions]="{standalone: true}" />
 								<label class="control-label" for="input">Email/Phone</label><i class="mtrl-select"></i>
-								<button class="mtr-btn signup" type="button"><span>Send OTP</span></button>
+								<button class="mtr-btn signup" type="button" (click)="sendOtp()"><span>Send OTP</span></button>
 							</div>
 							<div class="form-group">
 								<input type="password" name='Password' required="required"
@@ -109,7 +109,8 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="text" name='OTP' required="required" />
+								<input type="text" name='OTP' required="required" [(ngModel)]="appUsers.OTP"
+								[ngModelOptions]="{standalone: true}" />
 								<label class="control-label" for="input">OTP</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">

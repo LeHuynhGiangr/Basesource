@@ -104,22 +104,35 @@ export class LoginComponent implements OnInit {
     console.log(this.appUsers)
   }
 
+  public sendOtp = async () => {
+    this.service.sendOtp(this.appUsers.UserName);
+    alert("Sending email...")
+  }
+
   public createUser = async () => {
     try {
       console.log("Created", this.appUsers);
       if (this.appUsers.Password !== this.appUsers.ConfirmPassword) {
         return alert('Password not match a confirm password');
+        
       }
       console.log("Created", this.appUsers);
       if (this.appUsers) {
         const result = await this.service.postUser(this.appUsers);
         console.log(result);
         if (result)
+        {
           alert('Register sucessfully');
+          this.refresh();
+        }
       }
     }
     catch (e) {
       alert('Register failed');
+      this.refresh();
     }
   };
+  refresh(): void {
+    window.location.reload();
+  }
 }
