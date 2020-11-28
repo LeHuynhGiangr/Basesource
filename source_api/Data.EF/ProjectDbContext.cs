@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Data.EF
 {
-    public class ProjectDbContext : IdentityDbContext<User, Role, System.Guid>
+    public  class ProjectDbContext : IdentityDbContext<User, Role, System.Guid>
     {
         public ProjectDbContext(DbContextOptions dbContextOption) : base(dbContextOption)
         {
@@ -37,6 +37,8 @@ namespace Data.EF
         public DbSet<ReviewTrip> ReviewTrips { get; set; }
         public DbSet<UserJoinTrip> UserJoinTrips { get; set; }
         public DbSet<Friend> Friends { get; set; }
+        public DbSet<OTP> OTPs { get; set; }
+
 
         //end declare entites
 
@@ -51,11 +53,11 @@ namespace Data.EF
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new FriendConfiguration());
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
-            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_ => _.UserId);
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_ => new { _.UserId, _.RoleId });
+            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_=> new { _.UserId, _.RoleId});
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
-
+            
             //end config asp identity
             //end configure
 
@@ -64,14 +66,14 @@ namespace Data.EF
 
             //base.OnModelCreating(builder);
         }
-
+        
         public override int SaveChanges()
         {
             //auto add created datetime or update modified datetime
-            var l_modifiedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
-            foreach (var modifiedEntity in l_modifiedEntities)
+            var l_modifiedEntities=ChangeTracker.Entries().Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
+            foreach(var modifiedEntity in l_modifiedEntities)
             {
-                if (modifiedEntity is IDateTracking l_dateTrackedEntity)
+                if(modifiedEntity is IDateTracking l_dateTrackedEntity)
                 {
                     if (modifiedEntity.State == EntityState.Added)
                     {

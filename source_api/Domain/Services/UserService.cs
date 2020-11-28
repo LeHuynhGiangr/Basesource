@@ -225,8 +225,7 @@ namespace Domain.Services
             try
             {
                 User l_user = m_userRepository.FindById(id);
-                if (l_user == null)
-                {
+                if(l_user == null) {
                     throw new Exception("can not find user");
                 }
                 return new UserResponse
@@ -243,19 +242,19 @@ namespace Domain.Services
                     FollowMe = l_user.FollowMe,
                     Location = l_user.Location,
                     BirthDay = l_user.BirthDay,
-                    RequestFriend = l_user.RequestFriend,
-                    ViewListFriend = l_user.ViewListFriend,
-                    ViewTimeLine = l_user.ViewTimeLine,
-                    Works = l_user.Works,
-                    AcademicLevel = l_user.AcademicLevel,
-                    AddressAcademic = l_user.AddressAcademic,
-                    DescriptionAcademic = l_user.DescriptionAcademic,
-                    StudyingAt = l_user.StudyingAt,
-                    FromDate = l_user.FromDate,
-                    ToDate = l_user.ToDate
+                    RequestFriend =l_user.RequestFriend,
+                    ViewListFriend=l_user.ViewListFriend,
+                    ViewTimeLine=l_user.ViewTimeLine,
+                    Works=l_user.Works,
+                    AcademicLevel=l_user.AcademicLevel,
+                    AddressAcademic=l_user.AddressAcademic,
+                    DescriptionAcademic=l_user.DescriptionAcademic,
+                    StudyingAt=l_user.StudyingAt,
+                    FromDate=l_user.FromDate,
+                    ToDate=l_user.ToDate
                 };
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 throw e;
             }
@@ -323,7 +322,7 @@ namespace Domain.Services
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
-        public void UploadUserProfile(Guid id, UpdateUserRequest model)
+        public void UploadUserProfile(Guid id,UpdateUserRequest model)
         {
             User user = m_userRepository.FindById(id);
             var l_user = user;

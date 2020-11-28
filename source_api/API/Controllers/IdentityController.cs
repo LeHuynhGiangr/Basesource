@@ -1,11 +1,15 @@
 ﻿using API.Helpers;
+using Data.EF;
+using Data.Entities;
 using Data.Enums;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -16,14 +20,16 @@ namespace API.Controllers
     {
         private string m_tokenKeyName = "refreshtoken";
         private IUserService<Guid> m_userService;//dependency injection/
+        private readonly ProjectDbContext _context;
 
         /*-----------------------------------------------------------------------------
          ------------------------------------------------------------------------------*/
 
         //Parameter DI/
-        public IdentityController(IUserService<Guid> userService)
+        public IdentityController(IUserService<Guid> userService, ProjectDbContext context)
         {
             m_userService = userService;
+            _context = context;
         }
 
         /*-----------------------------------------------------------------------------
@@ -34,10 +40,19 @@ namespace API.Controllers
          */
         //[AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterRequest registerRequest)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
         {
             try
             {
+
+                // Validation OTP
+                OTP otp = await _context.OTPs.FirstOrDefaultAsync(otp =>  otp.MailAddress == registerRequest.UserName && otp.OTPcode.ToString() == registerRequest.OTP);
+
+                if (otp == null)
+                {
+                    return BadRequest("OTP is not match");
+                }
+
                 m_userService.Register(registerRequest, Request.Headers["origin"]);
                 return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
             }

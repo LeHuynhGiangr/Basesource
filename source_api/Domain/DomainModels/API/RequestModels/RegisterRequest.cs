@@ -15,9 +15,8 @@ namespace Domain.DomainModels.API.RequestModels
 
         [Required]
         public string Gender { get; set; }
-
         [Required]
-        public string Email { get; set; }
+        public bool Active { get; set; }
 
         [Required]
         public string UserName { get; set; }
@@ -32,5 +31,8 @@ namespace Domain.DomainModels.API.RequestModels
 
         [Range(typeof(bool), "true", "True")]
         public bool AcceptTerms { get; set; }
+
+        [Required]
+        public string OTP { get; set; }
     }
 }
