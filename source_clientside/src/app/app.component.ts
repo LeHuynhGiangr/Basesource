@@ -12,7 +12,8 @@ export class AppComponent {
   title = 'ProjectAngular';
 
   constructor(private m_authenService:AuthenService){
-    this.m_authenService.m_user.subscribe(u => this.m_user=u);
+    const m=1;
+    //this.m_authenService.m_user.subscribe(u => this.m_user=u);
   }
 
   logout(){

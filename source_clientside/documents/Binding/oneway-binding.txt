@@ -1,0 +1,11 @@
+Interpolation Binding: Interpolation refers to binding expressions into marked up language.
+{{property-name}}
+
+Property Binding: Property binding is used to set a property of a view element. The binding sets the property to the value of a template expression.
+
+
+Attribute Binding: Attribute binding is used to set a attribute property of a view element.
+Class Binding: Class binding is used to set a class property of a view element.
+Style Binding: Style binding is used to set a style of a view element.
+
+event binding

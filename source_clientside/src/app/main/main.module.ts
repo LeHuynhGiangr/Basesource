@@ -15,7 +15,13 @@ import { FanpageComponent } from './fanpage/fanpage.component';
 import { FaqComponent } from './faq/faq.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupsSearchComponent } from './groups-search/groups-search.component';
+
+/*start group home */
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import {ListNavigationComponent} from './list-navigation/list-navigation.component';
+import {RightSidebarListFriendComponent} from './right-sidebar-list-friend/right-sidebar-list-friend.component';
+/**end group home */
+
 import { InboxComponent } from './inbox/inbox.component';
 import { ImagesComponent } from './images/images.component';
 import { InsightsComponent } from './insights/insights.component';
@@ -33,7 +39,12 @@ import { FooterComponent } from '../layout/footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ItemFriendComponent } from './right-sidebar-list-friend/item-friend/item-friend.component';
 export const mainRoutes: Routes = [
+
+  {path:'home', component:NewsfeedComponent},//main entry point
+
+  /* ------------------------------------------- */
   {path: '', redirectTo:'home',pathMatch:'full'},
   {path:'about', component:AboutComponent},
   {path:'contact', component:ContactComponent},
@@ -47,7 +58,6 @@ export const mainRoutes: Routes = [
   {path:'faq', component:FaqComponent},
   {path:'groups', component:GroupsComponent},
   {path:'groups-search', component:GroupsSearchComponent},
-  {path:'home', component:NewsfeedComponent},
   {path:'inbox', component:InboxComponent},
   {path:'images', component:ImagesComponent},
   {path:'insights', component:InsightsComponent},
@@ -85,13 +95,26 @@ export const mainRoutes: Routes = [
     KnowledgeComponent,
     LikersComponent,
     MessagesComponent,
+
+    /**start group home */
     NewsfeedComponent,
+
+    /**left of page */
+    ListNavigationComponent,
+
+    /**right of page */
+    /**start RightSidebarListFriendComponent*/
+    RightSidebarListFriendComponent,
+    ItemFriendComponent,//inside list friend
+    /**start RightSidebarListFriendComponent*/
+    /**end group home */
+
     NewpageComponent,
     NotificationsComponent,
     PeopleNearbyComponent,
     TimelineComponent,
     VideosComponent,
-    WidgetsComponent
+    WidgetsComponent,
   ],
   imports: [ReactiveFormsModule,FormsModule,CommonModule, RouterModule.forChild(mainRoutes),NgxEchartsModule.forRoot({
     echarts: () => import('echarts')
