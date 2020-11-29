@@ -1,5 +1,4 @@
 ﻿using API.Helpers;
-using API.utls;
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Threading.Tasks;
+
 namespace API
 {
     //[Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
@@ -20,15 +20,12 @@ namespace API
     {
         private string m_tokenKeyName = "refreshtoken";
 
-        private IJWTDecoder m_jwtDecoder;
-
         private IUserService<Guid> m_userService;//dependency injection/
 
         //Parameter DI/
-        public UserController(IUserService<Guid> userService, IJWTDecoder jwtDecoder)
+        public UserController(IUserService<Guid> userService)
         {
             m_userService = userService;
-            //m_jwtDecoder = jwtDecoder;
         }
 
         ///*

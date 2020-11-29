@@ -56,6 +56,8 @@ namespace Data.Entities
 
         public virtual ICollection<Post> Posts { get; set; }
 
+        public virtual ICollection<Friend> Friends { get; set; }
+
         //method
         public bool IsRefreshTokenOwned(string token)
         {
@@ -66,6 +68,6 @@ namespace Data.Entities
              */
             return this.RefreshTokens?.Single(_ => _.Token == token) != null;
         }
-        public virtual ICollection<Friend> Friends { get; } = new List<Friend>();
+        //public virtual ICollection<Friend> Friends { get; } = new List<Friend>();
     }
 }

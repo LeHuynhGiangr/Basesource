@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities
 {
-    public class Friend
+    public class Friend:IEntity<int>
     {
-        public Guid User1 { get; set; }//temp
-        public virtual User User1s { get; set; }
-        public bool Confirm { get; set; }
-        public Guid User2 { get; set; }//temp
-        public virtual User User2s { get; set; }
+        //public Guid Id { get; set; }//temp
+        public int Id { get; set; }
+        public Guid FriendId { get; set; }
+        //reference navigation/
+        public virtual User User { get; set; }
+        
     }
 }

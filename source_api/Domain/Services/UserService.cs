@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using System.Linq;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Domain.Services.InternalServices;
 
 namespace Domain.Services
 {
@@ -142,6 +143,8 @@ namespace Domain.Services
                 throw new Exception("Username are already registered");
             }
 
+            var l_sixDigitToken = RandomSixDigitToken();
+
             var l_user = new User
             {
                 UserName = model.UserName,
@@ -151,7 +154,8 @@ namespace Domain.Services
                 Active = true,
                 PasswordHash = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.Password)).ToString(),////temporarily, using encode instead of really hash
                 Password = model.Password,
-                TwoFactorEnabled = false,
+                //TwoFactorEnabled = false,
+                TwoFactorEnabled = true,
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
                 LockoutEnabled = false,
@@ -160,8 +164,10 @@ namespace Domain.Services
                 /*
                  * temp code, make easy to register, but registering need a verification token
                  */
-                DateVerified = DateTime.UtcNow,
-                VerificationShortToken = null,
+                //DateVerified = DateTime.UtcNow,
+                DateVerified = null,
+                //VerificationShortToken = null,
+                VerificationShortToken = l_sixDigitToken,
                 /*
                  * 
                  */
@@ -175,6 +181,7 @@ namespace Domain.Services
 
             //send varification token to email
             //SendVerificationEmail(l_user, origin);
+            EmailService.SendAsync(l_user.Email, "Token for confirm of register", l_sixDigitToken);
         }
 
         public void VerifyEmail(string token)
@@ -344,8 +351,8 @@ namespace Domain.Services
                 ///*
                 // * temp code, make easy to register, but registering need a verification token
                 // */
-                user.DateVerified = DateTime.UtcNow;
-                user.VerificationShortToken = null;
+                //user.DateVerified = DateTime.UtcNow;
+                //user.VerificationShortToken = null;
                 /*
                  * 
                  */
@@ -389,8 +396,6 @@ namespace Domain.Services
             m_userRepository.Remove(user);
             m_userRepository.SaveChanges();
         }
-
-
 
 
         //--------------------------------------------------------------------------

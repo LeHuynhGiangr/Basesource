@@ -1,7 +1,6 @@
 /*
  * the Startup class configures the request pipeline of the application, dependency injection and how all requests are handled.
  */
-using API.utls;
 using Data.EF;
 using Data.Entities;
 using Domain.IServices;
@@ -57,16 +56,15 @@ namespace API
             //register group of services with extension methods
             services.AddDbContext<ProjectDbContext>(_ => _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), _ => _.MigrationsAssembly("source_api.Data.EF")));
 
-            services.AddControllers();
+            //services.AddControllers();
 
-            services.AddSwaggerGen();
+            //services.AddSwaggerGen();
 
             services.AddCors();//***
 
             //configure Dependency Injection for services
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
-            services.AddScoped<IJWTDecoder, JWTDecoder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +93,7 @@ namespace API
                 .AllowCredentials());
 
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
@@ -107,5 +105,6 @@ namespace API
 /*
  * 
  * https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-3.1
+ * https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
  * problems: WWW-Authenticate, cofiguring authentication schema in asp.net core
  */

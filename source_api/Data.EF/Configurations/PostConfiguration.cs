@@ -8,7 +8,8 @@ namespace Data.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
-            builder.ToTable("post");
+            builder.ToTable("posts");
+
             builder.Property<System.Guid>("userid");
             builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey("userid").HasConstraintName("fk_post_user_userid");
         }

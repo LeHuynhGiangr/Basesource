@@ -47,18 +47,17 @@ namespace Data.EF
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //start configure using fluent API
-            //config asp identity
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new FriendConfiguration());
+            builder.ApplyConfiguration(new PostConfiguration());
+
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);
             builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_=> new { _.UserId, _.RoleId});
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
-            
-            //end config asp identity
             //end configure
 
             //seeding data by extension method
