@@ -4,7 +4,7 @@ using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.Json;
 
 namespace Domain.Services
 {
@@ -43,7 +43,7 @@ namespace Domain.Services
                         post.Id,
                         post.DateCreated,
                         post.Content,
-                        post.LikeObjectsJson,
+                        JsonSerializer.Deserialize<object>(post.LikeObjectsJson),
                         post.CommentObjectsJson,
                         post.User.FirstName + " " + post.User.LastName,
                         post.User.Id.ToString()));

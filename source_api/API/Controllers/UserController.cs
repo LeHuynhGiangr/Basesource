@@ -2,8 +2,6 @@
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
-using Microsoft.AspNetCore.Authorization;
-using Domain.Services.InternalServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.IServices
 {
-    interface IPostService<T>
+    public interface IPostService<T>
     {
         IEnumerable<PostResponse> GetAll(T id);
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id);
