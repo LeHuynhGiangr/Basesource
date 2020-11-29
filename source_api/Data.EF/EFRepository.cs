@@ -23,14 +23,19 @@ namespace Data.EF
             return l_Records;
         }
 
+        public IQueryable<T> GetAll(params Expression<Func<T,object>>[] navigationProperties)
+        {
+            throw new NotImplementedException();
+        }
+
         public T FindById(K id)
         {
             return _context.Set<T>().SingleOrDefault(x => x.Id.Equals(id));
         }
 
-        public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
+        public T FindById(K id, params Expression<Func<T, object>>[] navigationProperties)
         {
-            return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
+            return GetAll(navigationProperties).SingleOrDefault(x => x.Id.Equals(id));
         }
 
         public Task<T> FindByIdAsyn(K id)
@@ -54,25 +59,25 @@ namespace Data.EF
             return entity.SingleOrDefault(predicate);
         }
 
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> FindMultiple(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate);
         }
 
-        public IQueryable<T> FindAll(params Expression<Func<T, object>>[] navigationProperties)
-        {
-            IQueryable<T> items = _context.Set<T>();
-            if (navigationProperties != null)
-            {
-                foreach (var navigationProperty in navigationProperties)
-                {
-                    items = items.Include(navigationProperty);
-                }
-            }
-            return items;
-        }
+        //public IQueryable<T> FindAll(params Expression<Func<T, object>>[] navigationProperties)
+        //{
+        //    IQueryable<T> items = _context.Set<T>();
+        //    if (navigationProperties != null)
+        //    {
+        //        foreach (var navigationProperty in navigationProperties)
+        //        {
+        //            items = items.Include(navigationProperty);
+        //        }
+        //    }
+        //    return items;
+        //}
 
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties)
+        public IQueryable<T> FindMultiple(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties)
         {
             IQueryable<T> items = _context.Set<T>();
             if (navigationProperties != null)

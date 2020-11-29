@@ -9,6 +9,7 @@ namespace Data.Interfaces
     public interface IRepository<T, K> where T : class
     {
         IQueryable<T> GetAll();
+        IQueryable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties);
 
         T FindById(K id);
         T FindById(K id, params Expression<Func<T, object>>[] navigationProperties);
@@ -17,9 +18,9 @@ namespace Data.Interfaces
         T FindSingle(Expression<Func<T, bool>> predicate);
         T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties);
 
-        IQueryable<T> FindAll(Expression<Func<T, bool>> predicate);
-        IQueryable<T> FindAll(params Expression<Func<T, object>>[] navigationProperties);
-        IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties);
+        IQueryable<T> FindMultiple(Expression<Func<T, bool>> predicate);
+        //IQueryable<T> FindAll(params Expression<Func<T, object>>[] navigationProperties);
+        IQueryable<T> FindMultiple(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] navigationProperties);
 
         void Add(T entity);
 
