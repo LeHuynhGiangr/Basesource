@@ -50,7 +50,6 @@ namespace Data.EF
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new FriendConfiguration());
             builder.ApplyConfiguration(new PostConfiguration());
 
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");

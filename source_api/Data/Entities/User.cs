@@ -47,6 +47,9 @@ namespace Data.Entities
         public string ResetToken { get; set; }
         public DateTime? DateResetTokenExpired { get; set; }
 
+        //json string, storing list of friends
+        public string FriendsJsonString { get; set; }
+
         //Reference navigation
         //public Role Role { get; set; }
         public ERole Role { get; set; }
@@ -56,7 +59,7 @@ namespace Data.Entities
 
         public virtual ICollection<Post> Posts { get; set; }
 
-        public virtual ICollection<Friend> Friends { get; set; }
+        //public virtual ICollection<Friend> Friends { get; set; }
 
         //method
         public bool IsRefreshTokenOwned(string token)

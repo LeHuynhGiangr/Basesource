@@ -4,7 +4,7 @@ namespace Domain.DomainModels.API.ResponseModels
 {
     public class PostResponse
     {
-        public PostResponse(int id, System.DateTime dateCreated, string content, object likeJson, string commentJson, string authorName, string authorId)
+        public PostResponse(int id, System.DateTime dateCreated, string content, object likeJson, object commentJson, string authorName, string authorId)
         {
             Id = id;
             DateCreated = dateCreated;
@@ -18,7 +18,7 @@ namespace Domain.DomainModels.API.ResponseModels
         public System.DateTime DateCreated { get; set; }
         public string Content { get; set; }
         public object LikeJson { get; set; }
-        public string CommentJson { get; set; }
+        public object CommentJson { get; set; }
         public string AuthorName { get; set; }
         public string AuthorId { get; set; }
     }

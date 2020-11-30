@@ -41,6 +41,7 @@ namespace Data.EF
             string l_string_user_fullname6 = "Dong Khoi";
 
             modelBuilder.Entity<User>().HasData(
+                //admin
                 new User()
                 {
                     Id = l_guid_admin,
@@ -75,6 +76,8 @@ namespace Data.EF
                     TwoFactorEnabled = false,
                 },
 
+                //user1
+                //friends of user1, +{2,3,4}, -{5, 6)
                 new User()
                 {
                     Id = l_guid_user1,
@@ -107,8 +110,32 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user2,
+                            Name=l_string_user_fullname2
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user3,
+                            Name=l_string_user_fullname3
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user4,
+                            Name=l_string_user_fullname4
+                        },
+                    })
                 },
 
+                //user2
+                //friends of user2, +{1,3,4}, -{5, 6)
                 new User()
                 {
                     Id = l_guid_user2,
@@ -141,8 +168,32 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user1,
+                            Name=l_string_user_fullname1
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user3,
+                            Name=l_string_user_fullname3
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user4,
+                            Name=l_string_user_fullname4
+                        },
+                    })
                 },
 
+                //user3
+                //friends of user3, +{1,2,4,5,6}
                 new User()
                 {
                     Id = l_guid_user3,
@@ -175,8 +226,44 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user1,
+                            Name=l_string_user_fullname1
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user2,
+                            Name=l_string_user_fullname2
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user4,
+                            Name=l_string_user_fullname4
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user5,
+                            Name=l_string_user_fullname5
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user6,
+                            Name=l_string_user_fullname6
+                        },
+                    })
                 },
 
+                //user4
+                //friends of user4, +{1,2,3,6}, -{5}
                 new User()
                 {
                     Id = l_guid_user4,
@@ -209,8 +296,38 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user1,
+                            Name=l_string_user_fullname1
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user2,
+                            Name=l_string_user_fullname2
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user3,
+                            Name=l_string_user_fullname3
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user6,
+                            Name=l_string_user_fullname6
+                        }
+                    })
                 },
 
+                //user5
+                //friends of user5, +{3,6}, -{1,2,4)
                 new User()
                 {
                     Id = l_guid_user5,
@@ -243,8 +360,26 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user3,
+                            Name=l_string_user_fullname3
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user6,
+                            Name=l_string_user_fullname6
+                        }
+                    })
                 },
 
+                //user6
+                //friends of user6, +{3,4,5}, -{1,2)
                 new User()
                 {
                     Id = l_guid_user6,
@@ -277,6 +412,28 @@ namespace Data.EF
                     DateVerified = DateTime.UtcNow,
 
                     TwoFactorEnabled = false,
+
+                    //list friend in json format
+                    FriendsJsonString = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id = l_guid_user3,
+                            Name=l_string_user_fullname3
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user4,
+                            Name=l_string_user_fullname4
+                        },
+
+                        new
+                        {
+                            Id = l_guid_user5,
+                            Name=l_string_user_fullname5
+                        }
+                    })
                 }
             );
 
@@ -346,154 +503,6 @@ namespace Data.EF
                 }
             );
 
-            modelBuilder.Entity<Friend>().HasData(
-                //friends of user1, +{2,3,4}, -{5, 6)
-                new
-                {
-                    Id = 1,
-                    FriendId = l_guid_user2,
-                    userid = l_guid_user1
-                },
-
-                new
-                {
-                    Id = 2,
-                    FriendId = l_guid_user3,
-                    userid = l_guid_user1
-                },
-
-                new
-                {
-                    Id = 3,
-                    FriendId = l_guid_user4,
-                    userid = l_guid_user1
-                },
-
-                //friends of user2, +{1,3,4}, -{5, 6)
-                new
-                {
-                    Id = 4,
-                    FriendId = l_guid_user1,
-                    userid = l_guid_user2
-                },
-
-                new
-                {
-                    Id = 5,
-                    FriendId = l_guid_user3,
-                    userid = l_guid_user2
-                },
-
-                new
-                {
-                    Id = 6,
-                    FriendId = l_guid_user4,
-                    userid = l_guid_user2
-                },
-
-                //friends of user3, +{1,2,4,5,6}
-                new
-                {
-                    Id = 7,
-                    FriendId = l_guid_user1,
-                    userid = l_guid_user3
-                },
-
-                new
-                {
-                    Id = 8,
-                    FriendId = l_guid_user2,
-                    userid = l_guid_user3
-                },
-
-                new
-                {
-                    Id = 9,
-                    FriendId = l_guid_user4,
-                    userid = l_guid_user3
-                },
-
-                new
-                {
-                    Id = 10,
-                    FriendId = l_guid_user5,
-                    userid = l_guid_user3
-                },
-
-                new
-                {
-                    Id = 11,
-                    FriendId = l_guid_user6,
-                    userid = l_guid_user3
-                },
-
-                //friends of user4, +{1,2,3,6}, -{5}
-                new
-                {
-                    Id = 12,
-                    FriendId = l_guid_user1,
-                    userid = l_guid_user4
-                },
-
-                new
-                {
-                    Id = 13,
-                    FriendId = l_guid_user2,
-                    userid = l_guid_user4
-                },
-
-                new
-                {
-                    Id = 14,
-                    FriendId = l_guid_user3,
-                    userid = l_guid_user4
-                },
-
-                new
-                {
-                    Id = 15,
-                    FriendId = l_guid_user6,
-                    userid = l_guid_user4
-                },
-
-                //friends of user5, +{3,6}, -{1,2,4)
-                new
-                {
-                    Id = 16,
-                    FriendId = l_guid_user3,
-                    userid = l_guid_user5
-                },
-
-                new
-                {
-                    Id = 17,
-                    FriendId = l_guid_user6,
-                    userid = l_guid_user5
-                },
-                //friends of user6, +{3,4,5}, -{1,2)
-                new
-                {
-                    Id = 18,
-                    FriendId = l_guid_user3,
-                    userid = l_guid_user6
-                },
-
-                new
-                {
-                    Id = 19,
-                    FriendId = l_guid_user4,
-                    userid = l_guid_user6
-                },
-
-                new
-                {
-                    Id = 20,
-                    FriendId = l_guid_user5,
-                    userid = l_guid_user6
-                }
-
-                );
-
             modelBuilder.Entity<Post>().HasData(
                 //post of user1
                 new
@@ -515,10 +524,25 @@ namespace Data.EF
                                 Id = l_guid_user3.ToString(),
                                 Name=l_string_user_fullname3
                             }
-
-
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="i like it!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="i will be here"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
 
                     userid = l_guid_user1
@@ -547,6 +571,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="i like it!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="i will be here"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user1
                 },
@@ -575,6 +616,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment="i like it!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="i will be here"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user2
                 },
@@ -602,6 +660,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment="i like it!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="i will be here"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user2
                 },
@@ -632,6 +707,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment="i like it!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="i will be here"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user2
                 },
@@ -660,6 +752,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment="Where to stay in here!"
+                        },
+                        new
+                        {
+                            Id = l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="greatest place i've ever seen"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user3
                 },
@@ -688,6 +797,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment=":)"
+                        },
+                        new
+                        {
+                            Id = l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="woow!!!"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user4
                 },
@@ -715,6 +841,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment=":)"
+                        },
+                        new
+                        {
+                            Id = l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="woow!!!"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user4
                 },
@@ -743,6 +886,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment=":)"
+                        },
+                        new
+                        {
+                            Id = l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="woow!!!"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user4
                 },
@@ -770,6 +930,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user1.ToString(),
+                            Name=l_string_user_fullname1,
+                            Comment=":)"
+                        },
+                        new
+                        {
+                            Id = l_guid_user2.ToString(),
+                            Name=l_string_user_fullname2,
+                            Comment="woow!!!"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user4
                 },
@@ -799,6 +976,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="haha"
+                        },
+                        new
+                        {
+                            Id = l_guid_user6.ToString(),
+                            Name=l_string_user_fullname6,
+                            Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user5
                 },
@@ -826,6 +1020,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="haha"
+                        },
+                        new
+                        {
+                            Id = l_guid_user6.ToString(),
+                            Name=l_string_user_fullname6,
+                            Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user5
                 },
@@ -853,6 +1064,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="haha"
+                        },
+                        new
+                        {
+                            Id = l_guid_user6.ToString(),
+                            Name=l_string_user_fullname6,
+                            Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user5
                 },
@@ -881,6 +1109,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="haha"
+                        },
+                        new
+                        {
+                            Id = l_guid_user4.ToString(),
+                            Name=l_string_user_fullname4,
+                            Comment="đẹp quá"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user6
                 },
@@ -908,6 +1153,23 @@ namespace Data.EF
 
                         }
                     }),
+
+                    CommentObjectsJson = JsonSerializer.Serialize(new List<object>
+                    {
+                        new
+                        {
+                            Id=l_guid_user3.ToString(),
+                            Name=l_string_user_fullname3,
+                            Comment="Quê mình có bánh tráng nha"
+                        },
+                        new
+                        {
+                            Id = l_guid_user4.ToString(),
+                            Name=l_string_user_fullname4,
+                            Comment="Cơm gà là món mình rất thích"
+                        }
+                    }),
+
                     DateCreated = DateTime.Now,
                     userid = l_guid_user6
                 }
@@ -919,3 +1181,154 @@ namespace Data.EF
 /*
  * reference: https://focusasiatravel.com/travel-to-phu-yen-everything-you-need-to-know/
  */
+
+//backup
+/*
+            //modelBuilder.Entity<Friend>().HasData(
+            //    //friends of user1, +{2,3,4}, -{5, 6)
+            //    new
+            //    {
+            //        Id = 1,
+            //        FriendId = l_guid_user2,
+            //        userid = l_guid_user1
+            //    },
+
+            //    new
+            //    {
+            //        Id = 2,
+            //        FriendId = l_guid_user3,
+            //        userid = l_guid_user1
+            //    },
+
+            //    new
+            //    {
+            //        Id = 3,
+            //        FriendId = l_guid_user4,
+            //        userid = l_guid_user1
+            //    },
+
+            //    //friends of user2, +{1,3,4}, -{5, 6)
+            //    new
+            //    {
+            //        Id = 4,
+            //        FriendId = l_guid_user1,
+            //        userid = l_guid_user2
+            //    },
+
+            //    new
+            //    {
+            //        Id = 5,
+            //        FriendId = l_guid_user3,
+            //        userid = l_guid_user2
+            //    },
+
+            //    new
+            //    {
+            //        Id = 6,
+            //        FriendId = l_guid_user4,
+            //        userid = l_guid_user2
+            //    },
+
+            //    //friends of user3, +{1,2,4,5,6}
+            //    new
+            //    {
+            //        Id = 7,
+            //        FriendId = l_guid_user1,
+            //        userid = l_guid_user3
+            //    },
+
+            //    new
+            //    {
+            //        Id = 8,
+            //        FriendId = l_guid_user2,
+            //        userid = l_guid_user3
+            //    },
+
+            //    new
+            //    {
+            //        Id = 9,
+            //        FriendId = l_guid_user4,
+            //        userid = l_guid_user3
+            //    },
+
+            //    new
+            //    {
+            //        Id = 10,
+            //        FriendId = l_guid_user5,
+            //        userid = l_guid_user3
+            //    },
+
+            //    new
+            //    {
+            //        Id = 11,
+            //        FriendId = l_guid_user6,
+            //        userid = l_guid_user3
+            //    },
+
+            //    //friends of user4, +{1,2,3,6}, -{5}
+            //    new
+            //    {
+            //        Id = 12,
+            //        FriendId = l_guid_user1,
+            //        userid = l_guid_user4
+            //    },
+
+            //    new
+            //    {
+            //        Id = 13,
+            //        FriendId = l_guid_user2,
+            //        userid = l_guid_user4
+            //    },
+
+            //    new
+            //    {
+            //        Id = 14,
+            //        FriendId = l_guid_user3,
+            //        userid = l_guid_user4
+            //    },
+
+            //    new
+            //    {
+            //        Id = 15,
+            //        FriendId = l_guid_user6,
+            //        userid = l_guid_user4
+            //    },
+
+            //    //friends of user5, +{3,6}, -{1,2,4)
+            //    new
+            //    {
+            //        Id = 16,
+            //        FriendId = l_guid_user3,
+            //        userid = l_guid_user5
+            //    },
+
+            //    new
+            //    {
+            //        Id = 17,
+            //        FriendId = l_guid_user6,
+            //        userid = l_guid_user5
+            //    },
+            //    //friends of user6, +{3,4,5}, -{1,2)
+            //    new
+            //    {
+            //        Id = 18,
+            //        FriendId = l_guid_user3,
+            //        userid = l_guid_user6
+            //    },
+
+            //    new
+            //    {
+            //        Id = 19,
+            //        FriendId = l_guid_user4,
+            //        userid = l_guid_user6
+            //    },
+
+            //    new
+            //    {
+            //        Id = 20,
+            //        FriendId = l_guid_user5,
+            //        userid = l_guid_user6
+            //    }
+
+            //    );
+            */

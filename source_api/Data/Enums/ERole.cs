@@ -7,6 +7,7 @@ namespace Data.Enums
     public enum ERole
     {
         Admin,
-        User
+        User,
+        Anonymous,
     }
 }

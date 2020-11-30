@@ -16,6 +16,7 @@ using System.Linq;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Domain.Services.InternalServices;
+using System.Text.Json;
 
 namespace Domain.Services
 {
@@ -221,7 +222,8 @@ namespace Domain.Services
                     IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
                     PhoneNumber = user.PhoneNumber,
                     Role = user.Role.ToString(),
-                    Updated = user.DateModified
+                    Updated = user.DateModified,
+                    FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
                 });
             }
             return l_userResponses;

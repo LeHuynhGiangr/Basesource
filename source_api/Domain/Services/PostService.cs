@@ -43,8 +43,8 @@ namespace Domain.Services
                         post.Id,
                         post.DateCreated,
                         post.Content,
-                        JsonSerializer.Deserialize<object>(post.LikeObjectsJson),
-                        post.CommentObjectsJson,
+                        JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
+                        JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,
                         post.User.Id.ToString()));
             }
