@@ -40,6 +40,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ItemFriendComponent } from './right-sidebar-list-friend/item-friend/item-friend.component';
+import { PostComponent } from './post/post.component';
+import { PostMetaComponent } from './post/post-meta/post-meta.component';
+import { CommentAreaComponent } from './post/comment-area/comment-area.component';
 export const mainRoutes: Routes = [
 
   {path:'home', component:NewsfeedComponent},//main entry point
@@ -99,6 +102,10 @@ export const mainRoutes: Routes = [
     /**start group home */
     NewsfeedComponent,
 
+    /*Post */
+    PostComponent,
+    PostMetaComponent,
+    CommentAreaComponent,
     /**left of page */
     ListNavigationComponent,
 
