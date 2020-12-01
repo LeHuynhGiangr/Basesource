@@ -17,6 +17,8 @@ namespace Domain.DomainModels.API.ResponseModels
         public float Location { get; set; }
         public string PhoneNumber { get; set; }
         public string Works { get; set; }
+        public string Hobby { get; set; }
+        public string Language { get; set; }
         public bool Active { get; set; }
         public byte[] Avatar { get; set; }
         public byte[] Background { get; set; }

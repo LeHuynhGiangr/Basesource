@@ -260,7 +260,9 @@ namespace Domain.Services
                     DescriptionAcademic=l_user.DescriptionAcademic,
                     StudyingAt=l_user.StudyingAt,
                     FromDate=l_user.FromDate,
-                    ToDate=l_user.ToDate
+                    ToDate=l_user.ToDate,
+                    Hobby=l_user.Hobby,
+                    Language=l_user.Language
                 };
             }
             catch(Exception e)
@@ -331,6 +333,20 @@ namespace Domain.Services
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
+        public void UploadBackground(Guid id, MemoryStream background)
+        {
+            User user = m_userRepository.FindById(id);
+
+            //var ms = new MemoryStream();
+            //avatar.CopyTo(ms);
+
+            var fileBytes = background.ToArray();
+            //string dataBytes = Convert.ToBase64String(fileBytes);
+
+            user.Background = fileBytes;
+            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
         public void UploadUserProfile(Guid id,UpdateUserRequest model)
         {
             User user = m_userRepository.FindById(id);
@@ -392,6 +408,18 @@ namespace Domain.Services
             m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
+        public void UpdateInterest(Guid id, UpdateInterestRequest model)
+        {
+            User user = m_userRepository.FindById(id);
+            var l_user = user;
+            {
+                user.Hobby = model.Hobby;
+                user.Language = model.Language;
+            }
+            m_userRepository.SetModifierUserStatus(l_user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+        }
+
         public void DeleteUser(Guid id)
         {
             User user = m_userRepository.FindById(id);

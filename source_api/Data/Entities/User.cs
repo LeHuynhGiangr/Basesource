@@ -49,6 +49,8 @@ namespace Data.Entities
 
         //json string, storing list of friends
         public string FriendsJsonString { get; set; }
+        public string Hobby { get; set; }
+        public string Language { get; set; }
 
         //Reference navigation
         //public Role Role { get; set; }

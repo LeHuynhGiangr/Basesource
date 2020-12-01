@@ -40,5 +40,7 @@ namespace Domain.IServices
         void UploadUserProfile(Guid id, UpdateUserRequest model);
         void ChangePassword(Guid id, ResetPasswordRequest model);
         void UpdateAcademic(Guid id, UpdateAcademicRequest model);
+        void UpdateInterest(Guid id, UpdateInterestRequest model);
+        void UploadBackground(Guid id, MemoryStream background);
     }
 }

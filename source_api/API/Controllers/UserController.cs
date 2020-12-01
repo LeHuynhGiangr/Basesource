@@ -199,7 +199,25 @@ namespace API
             //return Ok(new { message = "Upload successfully", data = user.Avatar.ToString() });//temporarily, verification token has not been sent to email yet
 
         }
+        [Route("background/{id:guid}")]
+        [HttpPut]
+        public IActionResult UploadBackground([FromForm] IFormFile background)
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_memStream = new System.IO.MemoryStream();
+                background.CopyTo(l_memStream);
+                m_userService.UploadBackground(l_userId, l_memStream);
+                return Ok("Upload avatar success fully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+            //return Ok(new { message = "Upload successfully", data = user.Avatar.ToString() });//temporarily, verification token has not been sent to email yet
 
+        }
         [Route("load")]
         [HttpGet]
         public IActionResult LoadUser()
@@ -271,9 +289,24 @@ namespace API
                 return BadRequest(new { message = e.Message });
             }
         }
+        [Route("interest/{id:guid}")]
+        [HttpPut]
+        public IActionResult UpdateInterest([FromForm] UpdateInterestRequest interestRequest)
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                m_userService.UpdateInterest(l_userId, interestRequest);
+                return Ok("Update successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
         [Route("{id:guid}")]
         [HttpDelete]
-        public async Task<ActionResult<User>> DeleteSkill(Guid id)
+        public async Task<ActionResult<User>> DeleteUser(Guid id)
         {
             try
             {
