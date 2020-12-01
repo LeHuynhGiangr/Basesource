@@ -24,4 +24,18 @@ export class TimeLineService {
             console.log(e);
         }
     }
+    uploadBackground = async (iduser, formData) => {
+        try {
+            console.log(iduser);
+             const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            return await this.http.put(this.urlAPI + "user/background/" + iduser ,formData, config).toPromise();            
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }

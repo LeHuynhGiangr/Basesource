@@ -28,4 +28,7 @@ export class AppUsers {
     FromDate:Date;
     ToDate:Date;
     OTP: string;
+    Hobby:string;
+    Language:string;
+    Background:string;
 }

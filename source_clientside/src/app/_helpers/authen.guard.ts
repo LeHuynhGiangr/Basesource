@@ -24,17 +24,17 @@ export class AuthenGuard implements CanActivate {
         //     return false;
         // }
 
-        // const user = this.service.getCurrrentUser();
+        const user = this.service.getCurrrentUser();
 
-        // if (user) {
-        //     //logged in so return true
-        //     return true;
-        // } else {
-        //     //this.m_router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
-        //     this.m_router.navigateByUrl("/login", { skipLocationChange: true });
-        //     return false;
-        // }
-        return true;//temp
+        if (user) {
+            //logged in so return true
+            return true;
+        } else {
+            //this.m_router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+            this.m_router.navigateByUrl("/login", { skipLocationChange: true });
+            return false;
+        }
+
     }
 
 }

@@ -38,7 +38,8 @@ export class AboutComponent implements OnInit {
     this.appUsers.StudyingAt = user["studyingAt"]
     this.appUsers.FromDate = user["fromDate"]
     this.appUsers.ToDate = user["toDate"]
-
+    this.appUsers.Hobby = user["hobby"]
+    this.appUsers.Language = user["language"]
   }
   getPath(){
     return this.router.url;

@@ -128,17 +128,22 @@
 										</div><!-- recent photos-->										
 								</aside>
 							</div><!-- sidebar -->
+							
 							<div class="col-lg-6">
 								<div class="central-meta">
 									<div class="editing-info">
 										<h5 class="f-title"><i class="ti-info-alt"></i> Edit work & Education</h5>
 
 										<form >
-											<div class="form-group">	
-												<select name="AcademicLevel" id="AcademicLevel" required="required" [(ngModel)]="this.appUsers.AcademicLevel" [ngModelOptions]="{standalone: true}">
-													<option *ngFor="let item of items" [value]="item">{{item}}</option>
+											<div class="form-group">
+												<select name="level" type="text" id="level" #level required="required" [(ngModel)]="this.appUsers.AcademicLevel">
+													<option value="Primary school">Primary school</option>
+													<option value="Junior high school">Junior high school</option>
+													<option value="High school">High school</option>
+													<option value="University">University</option>
 												</select>
-											  </div>
+												<label class="control-label" for="input">Academic Level</label><i class="mtrl-select"></i>
+											</div>
 											<div class="form-group">	
 											  <input name="StudyingAt" type="text" id="StudyingAt" required="required" [(ngModel)]="this.appUsers.StudyingAt" [ngModelOptions]="{standalone: true}">
 											  <label class="control-label" for="input">Studying at</label><i class="mtrl-select"></i>
@@ -163,7 +168,7 @@
 											  <label class="control-label" for="textarea">Description</label><i class="mtrl-select"></i>
 											</div>
 											<div class="submit-btns">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button>
+												<button type="button" class="mtr-btn" (click)=this.refresh()><span>Cancel</span></button>
 												<button type="button" class="mtr-btn"(click)="onSave()"><span>Update</span></button>
 											</div>
 										</form>

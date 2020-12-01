@@ -18,7 +18,7 @@
 						<div class="col-lg-2 col-sm-3">
 							<div class="user-avatar">
 								<figure>
-									<img [src]="getImageSource(this.Image)" style="width: 250px; height: 200px;" alt="">
+									<img [src]="getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="">
 									<form class="edit-phto" (click)=openDialog()>
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
@@ -32,8 +32,8 @@
 							<div class="timeline-info">
 								<ul>
 									<li class="admin-name">
-										<h5><strong>{{this.Name}}</strong></h5>
-										<span>My Videos</span>
+										<h5><strong>{{this.appUsers.FirstName+" "+this.appUsers.LastName}}</strong></h5>
+										<span>My Interest</span>
 									</li>
 									<li>
 										<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
@@ -104,26 +104,23 @@
 									</div><!-- settings widget -->										
 									</aside>
 								</div><!-- sidebar -->
-								<div class="col-lg-6">
-									<div class="central-meta">
-										<div class="editing-interest">
-											<h5 class="f-title"><i class="ti-heart"></i>My interests</h5>
-											<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
-											<form method="post">
-												<label>Add interests: </label>
-												<input type="text" placeholder="Photography, Cycling, traveling.">
-												<button type="submit">Add</button>
-												<ol class="interest-added">
-													<li><a href="#" title="">bycicling</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-													<li><a href="#" title="">traveling</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-													<li><a href="#" title="">photography</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-													<li><a href="#" title="">shopping</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-													<li><a href="#" title="">eating</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-													<li><a href="#" title="">hoteling</a><span class="remove" title="remove"><i class="fa fa-close"></i></span></li>
-												</ol>
+								<div class="col-lg-6">								
+									<div class="central-meta">									
+										<div class="editing-info">										
+											<h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>								
+											<form (ngSubmit)="onSave()">
+												<div class="form-group">	
+													<textarea name="Hobby" type="text" id="input" required="required" [(ngModel)]="this.appUsers.Hobby" [ngModelOptions]="{standalone: true}"></textarea>
+													<label class="control-label" for="textarea">Hobby</label><i class="mtrl-select"></i>
+												  </div>
+												
+												<div class="form-group">	
+												  <textarea name="Language" type="text" id="input" required="required" [(ngModel)]="this.appUsers.Language" [ngModelOptions]="{standalone: true}"></textarea>
+												  <label class="control-label" for="textarea">Language</label><i class="mtrl-select"></i>
+												</div>
 												<div class="submit-btns">
-													<button type="button" class="mtr-btn"><span>Cancel</span></button>
-													<button type="button" class="mtr-btn"><span>Update</span></button>
+													<button type="button" class="mtr-btn" (click)=this.refresh()><span>Cancel</span></button>
+													<button type="button" class="mtr-btn" (click)="onSave()"><span>Update</span></button>
 												</div>
 											</form>
 										</div>

@@ -7,31 +7,31 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { EditWorkService } from './shared/edit-work.service';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
-    selector: 'app-edit-work',
-    templateUrl: './edit-work.component.html',
-    styleUrls: ['./edit-work.component.css']
+  selector: 'app-edit-work',
+  templateUrl: './edit-work.component.html',
+  styleUrls: ['./edit-work.component.css']
 })
 export class EditWorkComponent implements OnInit {
 
   public appUsers: AppUsers;
   public m_returnUrl: string;
-  items = ["Primary school", "Junior high school", "High school","University"]
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  private EWService:EditWorkService,private m_router: Router,private m_route: ActivatedRoute) {
-    
+  items = ["Primary school", "Junior high school", "High school", "University"]
+  constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService, public dialog: MatDialog,
+    private EWService: EditWorkService, private m_router: Router, private m_route: ActivatedRoute) {
+
   }
-  
+
   async ngOnInit() {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
-    
+
     this.appUsers = new AppUsers();
     var user = await this.service.getUser();
     this.appUsers.Id = user["id"].toString();
-    console.log(user["firstName"]+" "+user["lastName"]);
+    console.log(user["firstName"] + " " + user["lastName"]);
     this.appUsers.FirstName = user["firstName"]
     this.appUsers.LastName = user["lastName"]
     this.appUsers.Avatar = user["avatar"]
@@ -42,16 +42,14 @@ export class EditWorkComponent implements OnInit {
     this.appUsers.FromDate = user["fromDate"]
     this.appUsers.ToDate = user["toDate"]
   }
-  getPath(){
+  getPath() {
     return this.router.url;
   }
-  getImageMime(base64: string): string
-  {
+  getImageMime(base64: string): string {
     return 'jpg';
   }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
+  getImageSource(base64: string): string {
+    return `data:image/${this.getImageMime(base64)};base64,${base64}`;
   }
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]
@@ -61,7 +59,7 @@ export class EditWorkComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
       height: '400px',
-      data: { Id: this.appUsers.Id}
+      data: { Id: this.appUsers.Id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -76,8 +74,15 @@ export class EditWorkComponent implements OnInit {
       });
     });
   }
+  selectChangeHandler(value: any) {
+    //update the ui
+    console.log('!!', value);
+    this.appUsers.AcademicLevel = value;
+  }
   onSave() {
-    try{
+    try {
+      const lelveElement = document.querySelector("#level");
+      this.appUsers.AcademicLevel = (<HTMLInputElement>lelveElement).value;
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);
       if (1) {
@@ -87,23 +92,21 @@ export class EditWorkComponent implements OnInit {
         formData.append('addressAcademic', this.appUsers.AddressAcademic);
         formData.append('fromDate', this.appUsers.FromDate.toString());
         formData.append('toDate', this.appUsers.ToDate.toString());
-        this.EWService.updateAcademic(this.appUsers.Id,formData);
+        this.EWService.updateAcademic(this.appUsers.Id, formData);
         alert("Upload succesfully !")
         this.refresh();
       }
-      else
-      {
+      else {
         alert("Upload failure !")
       }
     }
-    catch(e)
-    {
+    catch (e) {
       alert("Upload failure !")
     }
   }
   refresh(): void {
     this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    this.m_router.navigateByUrl(this.m_returnUrl, { skipLocationChange: true });
     //window.location.reload();
   }
 }

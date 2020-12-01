@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
+    //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
 
     const user = await this.service.getUser();
     console.log(user)
     if (user) {
-      this.m_router.navigateByUrl('/', { skipLocationChange: true });
+      this.m_router.navigateByUrl("/", { skipLocationChange: true });
     }
   }
 
@@ -75,7 +75,8 @@ export class LoginComponent implements OnInit {
       if (result) {
         alert('Login Successfully');
         // this.m_authenService.startRefreshTokenTimer();
-        this.m_router.navigateByUrl('/', { skipLocationChange: true });
+        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
+        this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
       }
       else
         alert('Username or Password incorrect !');

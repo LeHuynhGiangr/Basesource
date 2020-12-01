@@ -14,7 +14,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { fakeBackendProvider } from './_helpers/fake-backend';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 @NgModule({
@@ -26,10 +26,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LoginModule,//
-    MainModule,//
+    LoginModule,
+    MainModule,
     AdminModule,
-    _404Module,//
+    _404Module,
     BrowserAnimationsModule,
     MatDialogModule,
     FormsModule,

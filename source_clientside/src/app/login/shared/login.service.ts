@@ -38,7 +38,7 @@ export class LoginService {
     sendOtp = async (email) => {
         try {
 
-            console.log("tét email: ", email)
+            console.log("test email: ", email)
 
             const formData = new FormData();
             formData.append('email', email);

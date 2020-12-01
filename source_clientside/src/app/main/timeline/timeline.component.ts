@@ -6,6 +6,7 @@ import { LoginService } from './../../login/shared/login.service';
 import { TimeLineService } from './shared/timeline.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from './dialog-uploadavatar/dialog-uploadavatar.component';
+import { DialogUploadBackgroundComponent } from './dialog-uploadbackground/dialog-uploadbackground.component';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -31,6 +32,7 @@ export class TimelineComponent implements OnInit {
     this.appUsers.FirstName=user["firstName"];
     this.appUsers.LastName=user["lastName"];
     this.appUsers.Avatar = user["avatar"];
+    this.appUsers.Background = user["background"];
   }
   getPath() {
     return this.router.url;
@@ -65,6 +67,26 @@ export class TimelineComponent implements OnInit {
           console.log(user["firstName"] + " " + user["lastName"]);
           this.appUsers.Id = user["id"].toString();
           this.appUsers.Avatar = user["avatar"]
+        }
+      });
+
+    });
+  }
+  openDialogBackground(): void {
+    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Background = user["background"]
         }
       });
 
