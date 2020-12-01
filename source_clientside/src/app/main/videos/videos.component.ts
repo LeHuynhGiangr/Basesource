@@ -6,6 +6,7 @@ import { LoginService } from './../../login/shared/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from 'src/app/_core/data-repository/profile';
 @Component({
     selector: 'app-videos',
     templateUrl: './videos.component.html',
@@ -25,12 +26,10 @@ export class VideosComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName=user["firstName"];
-    this.appUsers.LastName=user["lastName"];
-    this.appUsers.Avatar = user["avatar"]
-    this.appUsers.Background = user["background"];
+    this.appUsers.FirstName=UserProfile.FirstName;
+    this.appUsers.LastName=UserProfile.LastName;
+    this.appUsers.Avatar = UserProfile.Avatar;
+    this.appUsers.Background = UserProfile.Background;
   }
   getPath(){
     return this.router.url;

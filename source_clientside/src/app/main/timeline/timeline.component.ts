@@ -7,6 +7,7 @@ import { TimeLineService } from './shared/timeline.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from './dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -26,13 +27,13 @@ export class TimelineComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
-    const user = await this.service.getUser();
-    console.log(user)
-    this.appUsers.Id=user["id"].toString();
-    this.appUsers.FirstName=user["firstName"];
-    this.appUsers.LastName=user["lastName"];
-    this.appUsers.Avatar = user["avatar"];
-    this.appUsers.Background = user["background"];
+    //const user = await this.service.getUser();
+    //console.log(user)
+    this.appUsers.Id=UserProfile.Id
+    this.appUsers.FirstName=UserProfile.FirstName
+    this.appUsers.LastName=UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Background = UserProfile.Background
   }
   getPath() {
     return this.router.url;
@@ -69,7 +70,6 @@ export class TimelineComponent implements OnInit {
           this.appUsers.Avatar = user["avatar"]
         }
       });
-
     });
   }
   openDialogBackground(): void {

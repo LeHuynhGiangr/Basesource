@@ -6,6 +6,7 @@ import { LoginService } from './../../login/shared/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
     selector: 'app-about',
     templateUrl: './about.component.html',
@@ -26,26 +27,26 @@ export class AboutComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName=user["firstName"]
-    this.appUsers.LastName=user["lastName"]
-    this.appUsers.Avatar = user["avatar"]
-    this.appUsers.Descriptions = user["description"]
-    this.appUsers.Address = user["address"]
-    this.appUsers.PhoneNumber = user["phoneNumber"]
-    this.appUsers.Email = user["email"]
-    this.appUsers.BirthDay= user["birthDay"];
-    this.appUsers.AcademicLevel = user["academicLevel"]
-    this.appUsers.AddressAcademic = user["addressAcademic"]
-    this.appUsers.DescriptionAcademic = user["descriptionAcademic"]
-    this.appUsers.StudyingAt = user["studyingAt"]
-    this.appUsers.FromDate = user["fromDate"]
-    this.appUsers.ToDate = user["toDate"]
-    this.appUsers.Hobby = user["hobby"]
-    this.appUsers.Language = user["language"]
-    this.appUsers.Background = user["background"]
-    this.appUsers.Gender = user["gender"]
+    //var user = await this.service.getUser();
+    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.appUsers.FirstName=UserProfile.FirstName
+    this.appUsers.LastName=UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Descriptions = UserProfile.Description
+    this.appUsers.Address = UserProfile.Address
+    this.appUsers.PhoneNumber = UserProfile.PhoneNumber
+    this.appUsers.Email = UserProfile.Email
+    this.appUsers.BirthDay= UserProfile.BirthDay
+    this.appUsers.AcademicLevel = UserProfile.AcademicLevel
+    this.appUsers.AddressAcademic = UserProfile.AddressAcademic
+    this.appUsers.DescriptionAcademic = UserProfile.DescriptionAcademic
+    this.appUsers.StudyingAt = UserProfile.StudyingAt
+    this.appUsers.FromDate = UserProfile.FromDate
+    this.appUsers.ToDate = UserProfile.ToDate
+    this.appUsers.Hobby = UserProfile.Hobby
+    this.appUsers.Language = UserProfile.Language
+    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Gender = UserProfile.Gender
   }
   getPath(){
     return this.router.url;

@@ -5,6 +5,7 @@ import { LoginService } from '../../../login/shared/login.service';
 import { TimeLineService } from '../shared/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserProfile } from '../../../_core/data-repository/profile'
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
@@ -53,7 +54,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
     }
   }
 
-  onSave() {
+  async onSave() {
     try{
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);
@@ -62,6 +63,8 @@ export class DialogUploadBackgroundComponent implements OnInit {
         this.timeLineService.uploadBackground(this.appUsers.Id, formData);
         alert("Upload succesfully !")
         this.dialogRef.close();
+        var user = await this.service.getUser();
+        UserProfile.Background = user["background"]
         this.refresh()
       }
       else

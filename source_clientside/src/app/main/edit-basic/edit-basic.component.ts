@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
@@ -17,8 +18,7 @@ export class EditBasicComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog) {
-    
+    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog, public userprofile:UserProfile) {
   }
   
   async ngOnInit() {

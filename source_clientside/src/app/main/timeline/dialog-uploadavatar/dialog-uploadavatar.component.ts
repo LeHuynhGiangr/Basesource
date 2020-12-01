@@ -5,6 +5,7 @@ import { LoginService } from '../../../login/shared/login.service';
 import { TimeLineService } from '../shared/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserProfile } from '../../../_core/data-repository/profile'
 @Component({
   selector: 'app-dialog-uploadavatar',
   templateUrl: './dialog-uploadavatar.component.html',
@@ -27,8 +28,8 @@ export class DialogUploadAvatarComponent implements OnInit {
   async ngOnInit() {
     this.appUsers = new AppUsers();
     var user = await this.service.getUser();
-    this.appUsers.Avatar = user["avatar"]
-    this.appUsers.Id=user["id"]
+    this.appUsers.Avatar = user["avatar"];
+    this.appUsers.Id=UserProfile.Id
   }
 
   getImageMime(base64: string): string {
@@ -53,7 +54,7 @@ export class DialogUploadAvatarComponent implements OnInit {
     }
   }
 
-  onSave() {
+  async onSave() {
     try{
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);
@@ -62,6 +63,8 @@ export class DialogUploadAvatarComponent implements OnInit {
         this.timeLineService.uploadAvatar(this.appUsers.Id, formData);
         alert("Upload succesfully !")
         this.dialogRef.close();
+        var user = await this.service.getUser();
+        UserProfile.Avatar = user["avatar"]
         this.refresh()
       }
       else

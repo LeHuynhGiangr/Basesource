@@ -4,7 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
 import { PostService } from 'src/app/_core/services/post.service';
-
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -223,12 +223,40 @@ export class NewsfeedComponent implements OnInit {
     var user = await this.service.getUser();
     console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.Avatar = user["avatar"];
+    this.getProfile(user)
   }
 
   loadPostData(){
       this.m_postService.getPostById("07b17130-5c15-412f-882b-f3862de7a458").subscribe(jsonData=>this.m_posts=jsonData);
   }
-
+  getProfile(user)
+  {   
+    UserProfile.Id = user["id"].toString();
+    UserProfile.FirstName = user["firstName"]
+    UserProfile.LastName = user["lastName"]
+    UserProfile.Avatar = user["avatar"]
+    UserProfile.Background = user["background"]
+    UserProfile.Language = user["language"]
+    UserProfile.Location = user["location"]
+    UserProfile.Password = user["password"]
+    UserProfile.PhoneNumber = user["phoneNumber"]
+    UserProfile.RequestFriend = user["requestFriend"]
+    UserProfile.StudyingAt = user["studyingAt"]
+    UserProfile.ToDate = user["toDate"]
+    UserProfile.ViewListFriend = user["viewListFriend"]
+    UserProfile.ViewTimeLine = user["viewTimeLine"]
+    UserProfile.Works = user["works"]
+    UserProfile.AcademicLevel = user["academicLevel"]
+    UserProfile.AddressAcademic = user["addressAcademic"]
+    UserProfile.ConfirmPassword = user["confirmPassword"]
+    UserProfile.DescriptionAcademic = user["descriptionAcademic"]
+    UserProfile.FollowMe = user["followMe"]
+    UserProfile.Gender = user["gender"]
+    UserProfile.Hobby = user["hobby"]
+    UserProfile.Email = user["email"]
+    UserProfile.FromDate = user["fromDate"]
+    UserProfile.Description = user["description"]
+  }
   getPath(){
     return this.router.url;
   }
