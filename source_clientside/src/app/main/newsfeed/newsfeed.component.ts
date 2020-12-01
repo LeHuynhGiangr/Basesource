@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
+import { PostService } from 'src/app/_core/services/post.service';
 
 @Component({
     selector: 'app-newsfeed',
@@ -20,7 +21,7 @@ export class NewsfeedComponent implements OnInit {
     authorName:string,
     authorThumb?:string,
     authorId:string
-  }[]=[
+  }[]/*=[
     {
       "id": 7,
       "dateCreated": "2020-11-30T23:07:11.8852426",
@@ -205,11 +206,11 @@ export class NewsfeedComponent implements OnInit {
         "dud1RslRVLblPnlMVeYIQ7lKZAXO2hZDZUzoXI5x+V/9k=",
       "authorId": "07b17130-5c15-412f-882b-f3862de7a458"
   }
-  ]
+  ]*/;
 
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService) {
-    
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, private m_postService:PostService) { 
+    this.loadPostData();
   }
   
   async ngOnInit() {
@@ -221,8 +222,13 @@ export class NewsfeedComponent implements OnInit {
     this.appUsers = new AppUsers();
     var user = await this.service.getUser();
     console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.Avatar = user["avatar"]
+    this.appUsers.Avatar = user["avatar"];
   }
+
+  loadPostData(){
+      this.m_postService.getPostById("07b17130-5c15-412f-882b-f3862de7a458").subscribe(jsonData=>this.m_posts=jsonData);
+  }
+
   getPath(){
     return this.router.url;
   }
