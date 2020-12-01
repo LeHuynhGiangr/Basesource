@@ -362,10 +362,10 @@ namespace Domain.Services
                 user.Works = model.Works;
                 user.Gender = model.Gender;
                 user.BirthDay = model.BirthDay;
-                user.FollowMe = true;
-                user.RequestFriend = true;
-                user.ViewListFriend = true;
-                user.ViewTimeLine = true;
+                user.FollowMe = model.FollowMe;
+                user.RequestFriend = model.RequestFriend;
+                user.ViewListFriend = model.ViewListFriend;
+                user.ViewTimeLine = model.ViewTimeLine;
                 ///*
                 // * temp code, make easy to register, but registering need a verification token
                 // */
