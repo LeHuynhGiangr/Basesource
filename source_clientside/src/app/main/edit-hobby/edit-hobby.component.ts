@@ -6,6 +6,7 @@ import { LoginService } from './../../login/shared/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { EditInterestService } from './shared/edit-hobby.service';
+import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
@@ -35,6 +36,7 @@ export class EditHobbyComponent implements OnInit {
     this.appUsers.Avatar = user["avatar"]
     this.appUsers.Language =user["language"]
     this.appUsers.Hobby = user["hobby"]
+    this.appUsers.Background = user["background"];
   }
   getPath(){
     return this.router.url;
@@ -96,5 +98,25 @@ export class EditHobbyComponent implements OnInit {
     this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
     this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     //window.location.reload();
+  }
+  openDialogBackground(): void {
+    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Background = user["background"]
+        }
+      });
+
+    });
   }
 }

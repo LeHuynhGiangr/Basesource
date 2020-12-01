@@ -1,8 +1,11 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 @Component({
     selector: 'app-about',
     templateUrl: './about.component.html',
@@ -11,7 +14,8 @@ import { LoginService } from './../../login/shared/login.service';
 export class AboutComponent implements OnInit {
 
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService) {
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
+  private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog) {
     
   }
   
@@ -40,6 +44,8 @@ export class AboutComponent implements OnInit {
     this.appUsers.ToDate = user["toDate"]
     this.appUsers.Hobby = user["hobby"]
     this.appUsers.Language = user["language"]
+    this.appUsers.Background = user["background"]
+    this.appUsers.Gender = user["gender"]
   }
   getPath(){
     return this.router.url;
@@ -51,5 +57,44 @@ export class AboutComponent implements OnInit {
   getImageSource(base64: string): string
   {
     return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Avatar = user["avatar"]
+        }
+      });
+    });
+  }
+  openDialogBackground(): void {
+    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Background = user["background"]
+        }
+      });
+
+    });
   }
 }

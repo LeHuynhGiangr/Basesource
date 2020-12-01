@@ -31,4 +31,8 @@ export class AppUsers {
     Hobby:string;
     Language:string;
     Background:string;
+    FollowMe:boolean;
+    ViewTimeLine:boolean;
+    ViewListFriend:boolean;
+    RequestFriend:boolean;
 }

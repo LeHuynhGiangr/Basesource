@@ -6,6 +6,8 @@ import { EditPasswordService } from './shared/edit-password.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+
 @Component({
     selector: 'app-edit-password',
     templateUrl: './edit-password.component.html',
@@ -33,6 +35,7 @@ export class EditPasswordComponent implements OnInit {
     this.appUsers.FirstName = user["firstName"]
     this.appUsers.LastName = user["lastName"]
     this.appUsers.Avatar = user["avatar"]
+    this.appUsers.Background = user["background"];
   }
   getPath(){
     return this.router.url;
@@ -100,5 +103,25 @@ export class EditPasswordComponent implements OnInit {
     this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
     this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     //window.location.reload();
+  }
+  openDialogBackground(): void {
+    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Background = user["background"]
+        }
+      });
+
+    });
   }
 }

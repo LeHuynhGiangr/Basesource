@@ -6,6 +6,7 @@ import { EditBasicService } from './shared/edit-basic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
@@ -41,6 +42,11 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.Address = user["address"];
     this.appUsers.Descriptions = user["description"];
     this.appUsers.BirthDay= user["birthDay"];
+    this.appUsers.Background = user["background"];
+    this.appUsers.FollowMe = user["followMe"]
+    this.appUsers.RequestFriend = user["requestFriend"]
+    this.appUsers.ViewListFriend = user["viewListFriend"]
+    this.appUsers.ViewTimeLine = user ["viewTimeLine"]
     //this.datePipe.transform(this.appUsers.BirthDay,"yyyy-MM-dd")
   }
   getPath(){
@@ -74,6 +80,13 @@ export class EditBasicComponent implements OnInit {
         formData.append('phoneNumber', this.appUsers.PhoneNumber);
         formData.append('works', this.appUsers.Works);
         formData.append('birthDay', this.appUsers.BirthDay.toString());
+        formData.append('followMe', this.appUsers.FollowMe.toString());
+        formData.append('requestFriend', this.appUsers.RequestFriend.toString());
+        formData.append('viewTimeLine', this.appUsers.ViewTimeLine.toString());
+        formData.append('viewListFriend', this.appUsers.ViewListFriend.toString());
+        formData.append('gender', this.appUsers.Gender);
+        formData.append('phoneNumber', this.appUsers.PhoneNumber);
+        formData.append('works', this.appUsers.Works);
         this.EBService.uploadProfile(this.appUsers.Id,formData);
         alert("Upload succesfully !")
         this.refresh();
@@ -114,6 +127,26 @@ export class EditBasicComponent implements OnInit {
           this.appUsers.Avatar = user["avatar"]
         }
       });
+    });
+  }
+  openDialogBackground(): void {
+    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
+      width: '500px',
+      height: '400px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+          this.appUsers.Background = user["background"]
+        }
+      });
+
     });
   }
 }
