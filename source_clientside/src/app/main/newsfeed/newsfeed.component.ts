@@ -256,6 +256,8 @@ export class NewsfeedComponent implements OnInit {
     UserProfile.Email = user["email"]
     UserProfile.FromDate = user["fromDate"]
     UserProfile.Description = user["description"]
+    UserProfile.BirthDay = user["birthDay"]
+    UserProfile.Address = user["address"]
   }
   getPath(){
     return this.router.url;

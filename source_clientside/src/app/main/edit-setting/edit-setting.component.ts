@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditSettingService } from './shared/edit-setting.service';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
     selector: 'app-edit-setting',
     templateUrl: './edit-setting.component.html',
@@ -28,27 +29,27 @@ export class EditSettingComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Id = user["id"].toString();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName=user["firstName"];
-    this.appUsers.LastName=user["lastName"];
-    this.appUsers.Avatar = user["avatar"];
-    this.appUsers.Email = user["email"];
-    this.appUsers.Gender = user["gender"];
-    this.appUsers.Works = user["works"]
-    this.appUsers.Location = user["location"];
-    this.appUsers.PhoneNumber = user["phoneNumber"];
-    this.appUsers.Address = user["address"];
-    this.appUsers.Descriptions = user["description"];
-    this.appUsers.BirthDay= user["birthDay"];
-    this.appUsers.Background = user["background"];
-    this.appUsers.FollowMe = user["followMe"]
-    this.appUsers.RequestFriend = user["requestFriend"]
-    this.appUsers.ViewListFriend = user["viewListFriend"]
-    this.appUsers.ViewTimeLine = user ["viewTimeLine"]
+    //var user = await this.service.getUser();
+    this.appUsers.Id = UserProfile.Id
+    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Email = UserProfile.Email
+    this.appUsers.Gender = UserProfile.Gender
+    this.appUsers.Works = UserProfile.Works
+    this.appUsers.Location = UserProfile.Location
+    this.appUsers.PhoneNumber = UserProfile.PhoneNumber
+    this.appUsers.Address = UserProfile.Address
+    this.appUsers.Descriptions = UserProfile.Description
+    this.appUsers.BirthDay = UserProfile.BirthDay
+    this.appUsers.Background = UserProfile.Background
+    this.appUsers.FollowMe = UserProfile.FollowMe
+    this.appUsers.RequestFriend = UserProfile.RequestFriend
+    this.appUsers.ViewListFriend = UserProfile.ViewListFriend
+    this.appUsers.ViewTimeLine = UserProfile.ViewTimeLine
   }
-  onSave() {
+  async onSave() {
     try{
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);
@@ -71,6 +72,13 @@ export class EditSettingComponent implements OnInit {
         formData.append('works', this.appUsers.Works);
         this.ESService.uploadProfile(this.appUsers.Id,formData);
         alert("Upload succesfully !")
+
+        //Refresh user after edit interest
+        var user = await this.service.getUser();
+        UserProfile.ViewListFriend = user["viewListFriend"]
+        UserProfile.ViewTimeLine = user["viewTimeLine"]
+        UserProfile.FollowMe = user["followMe"]
+        UserProfile.RequestFriend = user["requestFriend"]
         this.refresh();
       }
       else

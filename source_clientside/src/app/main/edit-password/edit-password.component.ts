@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
-
+import { UserProfile } from '../../_core/data-repository/profile'
 @Component({
     selector: 'app-edit-password',
     templateUrl: './edit-password.component.html',
@@ -29,13 +29,13 @@ export class EditPasswordComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Id = user["id"].toString();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName = user["firstName"]
-    this.appUsers.LastName = user["lastName"]
-    this.appUsers.Avatar = user["avatar"]
-    this.appUsers.Background = user["background"];
+    //var user = await this.service.getUser();
+    this.appUsers.Id = UserProfile.Id
+    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Background = UserProfile.Background
   }
   getPath(){
     return this.router.url;
@@ -71,7 +71,7 @@ export class EditPasswordComponent implements OnInit {
       });
     });
   }
-  onSave() {
+  async onSave() {
     try{
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);

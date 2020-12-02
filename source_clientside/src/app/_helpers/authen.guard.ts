@@ -23,17 +23,21 @@ export class AuthenGuard implements CanActivate {
         //     this.m_router.navigateByUrl("/login", {skipLocationChange:true});
         //     return false;
         // }
-
         const user = this.service.getCurrrentUser();
 
         if (user) {
-            //logged in so return true
-            return true;
-        } else {
-            //this.m_router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
-            this.m_router.navigateByUrl("/login", { skipLocationChange: true });
-            return false;
+            if (user["role"] == 1) {
+                return true;
+            }
+            else if (user["role"] === 0) {
+                //this.m_router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+                this.m_router.navigateByUrl("/admin", { skipLocationChange: true });
+                return false;
+            }
         }
+
+        this.m_router.navigateByUrl("/login", { skipLocationChange: true });
+        return false;
 
     }
 

@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
 
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
 
-    const user = await this.service.getUser();
+    const user = await this.service.getUser() as any;
     console.log(user)
-    if (user) {
-      this.m_router.navigateByUrl("/", { skipLocationChange: true });
-    }
+      if (user) {
+        return this.m_router.navigateByUrl("/", { skipLocationChange: true });
+      }
   }
 
   private get m_formValue() {
@@ -75,7 +75,8 @@ export class LoginComponent implements OnInit {
       if (result) {
         alert('Login Successfully');
         // this.m_authenService.startRefreshTokenTimer();
-        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
+        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
+
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
       }
       else

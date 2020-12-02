@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
   $("body *").not('.top-area > .setting-area > li').on("click", function() {
 	$(".top-area > .setting-area > li > div").removeClass('active');		
  });
-	
+ 
 
 //--- user setting dropdown on topbar	
 $('.user-img').on('click', function() {
@@ -399,9 +399,8 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 	});	
 	
 
-
 });//document ready end
-
+	
 })(jQuery);
 
 

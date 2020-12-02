@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
+
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
@@ -18,7 +19,7 @@ export class EditBasicComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog, public userprofile:UserProfile) {
+    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog) {
   }
   
   async ngOnInit() {
@@ -28,25 +29,25 @@ export class EditBasicComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Id = user["id"].toString();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName=user["firstName"];
-    this.appUsers.LastName=user["lastName"];
-    this.appUsers.Avatar = user["avatar"];
-    this.appUsers.Email = user["email"];
-    this.appUsers.Gender = user["gender"];
-    this.appUsers.Works = user["works"]
-    this.appUsers.Location = user["location"];
-    this.appUsers.PhoneNumber = user["phoneNumber"];
-    this.appUsers.Address = user["address"];
-    this.appUsers.Descriptions = user["description"];
-    this.appUsers.BirthDay= user["birthDay"];
-    this.appUsers.Background = user["background"];
-    this.appUsers.FollowMe = user["followMe"]
-    this.appUsers.RequestFriend = user["requestFriend"]
-    this.appUsers.ViewListFriend = user["viewListFriend"]
-    this.appUsers.ViewTimeLine = user ["viewTimeLine"]
+    //var user = await this.service.getUser();
+    this.appUsers.Id = UserProfile.Id
+    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Email = UserProfile.Email
+    this.appUsers.Gender = UserProfile.Gender
+    this.appUsers.Works = UserProfile.Works
+    this.appUsers.Location = UserProfile.Location
+    this.appUsers.PhoneNumber = UserProfile.PhoneNumber
+    this.appUsers.Address = UserProfile.Address
+    this.appUsers.Descriptions = UserProfile.Description
+    this.appUsers.BirthDay= UserProfile.BirthDay
+    this.appUsers.Background = UserProfile.Background
+    this.appUsers.FollowMe = UserProfile.FollowMe
+    this.appUsers.RequestFriend = UserProfile.RequestFriend
+    this.appUsers.ViewListFriend = UserProfile.ViewListFriend
+    this.appUsers.ViewTimeLine = UserProfile.ViewTimeLine
     //this.datePipe.transform(this.appUsers.BirthDay,"yyyy-MM-dd")
   }
   getPath(){
@@ -66,7 +67,7 @@ export class EditBasicComponent implements OnInit {
   onChangeGender = (event: any) => {
     this.appUsers.Gender = event.target.value;
   }
-  onSave() {
+  async onSave() {
     try{
       const formData = new FormData();
       formData.append('id', this.appUsers.Id);
@@ -89,6 +90,16 @@ export class EditBasicComponent implements OnInit {
         formData.append('works', this.appUsers.Works);
         this.EBService.uploadProfile(this.appUsers.Id,formData);
         alert("Upload succesfully !")
+
+        //Refresh user after edit profile
+        var user = await this.service.getUser();
+        UserProfile.FirstName = user["firstName"]
+        UserProfile.LastName = user["lastName"]
+        UserProfile.Email = user["email"]
+        UserProfile.Address = user["address"]
+        UserProfile.BirthDay = user["birthDay"]
+        UserProfile.Gender = user["gender"]
+        UserProfile.PhoneNumber = user["phoneNumber"]
         this.refresh();
       }
       else
