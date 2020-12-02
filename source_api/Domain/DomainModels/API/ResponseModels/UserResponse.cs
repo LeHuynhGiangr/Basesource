@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,11 +34,12 @@ namespace Domain.DomainModels.API.ResponseModels
         public DateTime? ToDate { get; set; }
         public string AddressAcademic { get; set; }
         public string DescriptionAcademic { get; set; }
-        public string Role { get; set; }
+        public ERole Role { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
         public bool IsVerified { get; set; }
         //json object
         public object FriendsJson { get; set; }
+        
     }
 }

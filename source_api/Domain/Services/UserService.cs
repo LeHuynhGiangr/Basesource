@@ -221,7 +221,7 @@ namespace Domain.Services
                     Gender = user.Gender,
                     IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
                     PhoneNumber = user.PhoneNumber,
-                    Role = user.Role.ToString(),
+                    Role = user.Role,
                     Updated = user.DateModified,
                     FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
                 });
@@ -262,7 +262,8 @@ namespace Domain.Services
                     FromDate=l_user.FromDate,
                     ToDate=l_user.ToDate,
                     Hobby=l_user.Hobby,
-                    Language=l_user.Language
+                    Language=l_user.Language,
+                    Role = l_user.Role // sao k chiu bool v ta
                 };
             }
             catch(Exception e)
