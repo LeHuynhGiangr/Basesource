@@ -182,7 +182,7 @@ namespace Domain.Services
 
             //send varification token to email
             //SendVerificationEmail(l_user, origin);
-            EmailService.SendAsync(l_user.Email, "Token for confirm of register", l_sixDigitToken);
+            EmailService.SendAsync(l_user.UserName, "Token for confirm of register", l_sixDigitToken);
         }
 
         public void VerifyEmail(string token)
