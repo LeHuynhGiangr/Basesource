@@ -131,7 +131,6 @@ export class LoginComponent implements OnInit {
     }
     catch (e) {
       alert('Register failed');
-      this.refresh();
     }
   };
   refresh(): void {
