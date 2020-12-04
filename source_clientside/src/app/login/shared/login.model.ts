@@ -35,4 +35,5 @@ export class AppUsers {
     ViewTimeLine:boolean;
     ViewListFriend:boolean;
     RequestFriend:boolean;
+    Active:boolean;
 }
