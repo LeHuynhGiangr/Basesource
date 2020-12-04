@@ -63,8 +63,11 @@ namespace API
             services.AddCors();//***
 
             //configure Dependency Injection for services
-            services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
+            services.AddScoped<EFRepository<Post, int>, EFRepository<Post, int>>();
+            
+            services.AddScoped<IUserService<Guid>, UserService>();
+            services.AddScoped<IPostService<int>, PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,6 +9,7 @@ namespace Data.Entities
 
         public string Content { get; set; }
         //public int Likes { get; set; }
+        public string ImageUri { get; set; }
         public string LikeObjectsJson { get; set; }
         public string CommentObjectsJson { get; set; }
         //public bool Active { get; set; }

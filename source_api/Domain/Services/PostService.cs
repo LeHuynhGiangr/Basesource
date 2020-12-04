@@ -22,9 +22,24 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PostResponse> GetAll(int id)
+        public IEnumerable<PostResponse> GetAll()
         {
-            throw new NotImplementedException();
+            var l_posts = m_postRepository.GetAll(_=>_.User);
+            List<PostResponse> l_postResponses = new List<PostResponse>();
+            foreach (Post post in l_posts)
+            {
+                l_postResponses.Add(
+                    new PostResponse(
+                        post.Id,
+                        post.DateCreated,
+                        post.Content,
+                        post.ImageUri,
+                        JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
+                        JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
+                        post.User.FirstName + " " + post.User.LastName,
+                        post.User.Id.ToString()));
+            }
+            return l_postResponses;
         }
 
         public PostResponse GetById(int id)
@@ -43,6 +58,7 @@ namespace Domain.Services
                         post.Id,
                         post.DateCreated,
                         post.Content,
+                        post.ImageUri,
                         JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
                         JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,

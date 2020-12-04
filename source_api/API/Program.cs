@@ -3,6 +3,7 @@
  * and instance of IHostBuilder
  */
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace API
@@ -11,7 +12,21 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var l_hostBuilder = CreateHostBuilder(args).Build();
+            using (var scope = l_hostBuilder.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var projectDbContext = services.GetRequiredService(typeof(Data.EF.ProjectDbContext));
+                    Data.EF.DbInitializer.SeedData(projectDbContext as Data.EF.ProjectDbContext);
+                }
+                catch(System.Exception)
+                {
+
+                }
+            }
+            l_hostBuilder.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -23,3 +38,6 @@ namespace API
                 });
     }
 }
+/*
+ * ref: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
+ */

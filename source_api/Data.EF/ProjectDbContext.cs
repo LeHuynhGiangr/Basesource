@@ -58,7 +58,7 @@ namespace Data.EF
             //end configure
 
             //seeding data by extension method
-            builder.SeedData();
+            //builder.SeedData();
 
             //base.OnModelCreating(builder);
         }
@@ -78,7 +78,14 @@ namespace Data.EF
                     l_dateTrackedEntity.DateModified = DateTime.Now;
                 }
             }
-            return base.SaveChanges();
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

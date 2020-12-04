@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Data.Interfaces;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data.Entities
 {
-    public class Email
+    public class Email: IEntity<int>, IDateTracking
     {
         [Key]
         public int Id { get; set; }
@@ -10,5 +12,7 @@ namespace Data.Entities
         public string Cc { get; set; }
         public string Subject { get; set; }
         public string Text { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime? DateModified { get; set; }
     }
 }

@@ -25,11 +25,26 @@ namespace API.Controllers
 
         //get posts of user
         [HttpGet("{id:guid}")]
-        public IActionResult LoadPostsBy(Guid id)
+        public IActionResult LoadPostsById(Guid id)
         {
             try
             {
                 var l_postResponses = m_postService.GetPostsByUserId(id);
+                return Ok(l_postResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+
+        //get posts of all user
+        [HttpGet]
+        public IActionResult LoadAllPost()
+        {
+            try
+            {
+                var l_postResponses = m_postService.GetAll();
                 return Ok(l_postResponses);
             }
             catch (Exception e)

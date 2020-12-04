@@ -7,7 +7,7 @@ namespace Domain.IServices
 {
     public interface IPostService<T>
     {
-        IEnumerable<PostResponse> GetAll(T id);
+        IEnumerable<PostResponse> GetAll();
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id);
         PostResponse GetById(T id);
         //UserResponse Create(CreateRequest model);

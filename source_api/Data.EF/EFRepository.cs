@@ -25,7 +25,13 @@ namespace Data.EF
 
         public IQueryable<T> GetAll(params Expression<Func<T,object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> entity = _context.Set<T>();
+            foreach (var navigationProperty in navigationProperties)
+            {
+                entity = entity.Include(navigationProperty);
+            }
+            var l_records = from record in entity select record;
+            return l_records;
         }
 
         public T FindById(K id)
