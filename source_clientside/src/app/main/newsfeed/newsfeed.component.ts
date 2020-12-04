@@ -5,6 +5,8 @@ import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
 import { PostService } from 'src/app/_core/services/post.service';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { MatDialog } from '@angular/material/dialog';
+import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -24,7 +26,8 @@ export class NewsfeedComponent implements OnInit {
   }[];
 
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, private m_postService:PostService) { 
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
+  private m_postService:PostService,public dialog: MatDialog) { 
     this.loadPostData();
   }
   
@@ -88,5 +91,23 @@ export class NewsfeedComponent implements OnInit {
   onLogout() {
     this.service.logout();
     this.router.navigateByUrl('/login');
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogPostComponent, {
+      width: '800px',
+      height: '300px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.service.getUser().then(user => {
+        if (user) {
+          console.log(user["firstName"] + " " + user["lastName"]);
+          this.appUsers.Id = user["id"].toString();
+        }
+      });
+    });
   }
 }

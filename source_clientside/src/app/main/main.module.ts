@@ -43,6 +43,9 @@ import { ItemFriendComponent } from './right-sidebar-list-friend/item-friend/ite
 import { PostComponent } from './post/post.component';
 import { PostMetaComponent } from './post/post-meta/post-meta.component';
 import { CommentAreaComponent } from './post/comment-area/comment-area.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { DialogPostComponent } from './post/dialog-post/dialog-post.component';
 export const mainRoutes: Routes = [
 
   {path:'home', component:NewsfeedComponent},//main entry point
@@ -98,7 +101,7 @@ export const mainRoutes: Routes = [
     KnowledgeComponent,
     LikersComponent,
     MessagesComponent,
-
+    DialogPostComponent,
     /**start group home */
     NewsfeedComponent,
 
@@ -123,9 +126,16 @@ export const mainRoutes: Routes = [
     VideosComponent,
     WidgetsComponent,
   ],
-  imports: [ReactiveFormsModule,FormsModule,CommonModule, RouterModule.forChild(mainRoutes),NgxEchartsModule.forRoot({
-    echarts: () => import('echarts')
-  }),],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    RouterModule.forChild(mainRoutes),],
 })
 export class MainModule {}
  
