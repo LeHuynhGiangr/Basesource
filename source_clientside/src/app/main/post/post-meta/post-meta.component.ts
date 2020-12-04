@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PostMetaComponent implements OnInit {
   @Input() content:string;
-  @Input() imageSource:string;
+  @Input() imageUri:string;
 
   constructor() { }
 

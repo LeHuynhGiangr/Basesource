@@ -11,10 +11,14 @@ import { ApiUrlConstants } from '../common/api-url.constants';
 }
 )
 export class PostService {
-  private friendUrl:string=ApiUrlConstants.API_URL+'/post';
+  private postUrl:string=ApiUrlConstants.API_URL+'/post';
   constructor(private m_http: HttpClient) { }
 
   getPostById(id:string){
-    return this.m_http.get<any[]>(this.friendUrl+"/"+id, {observe:'body', responseType:'json'});
+    return this.m_http.get<any[]>(this.postUrl+"/"+id, {observe:'body', responseType:'json'});
+  }
+
+  getPost(){
+    return this.m_http.get<any[]>(this.postUrl, {observe:'body', responseType:'json'});
   }
 }

@@ -12,7 +12,7 @@ export class PostComponent implements OnInit {
     id:number,
     dateCreated:string,
     content:string,
-    imageSource?:string,
+    imageUri?:string,
     likeJson:{count:number, subjects:{Id:string, Name:string}[]},
     commentJson:{Id:string, Name:string, Comment:string}[],
     authorName:string,
