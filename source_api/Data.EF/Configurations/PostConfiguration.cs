@@ -11,7 +11,6 @@ namespace Data.EF.Configurations
             builder.ToTable("posts");
 
             builder.Property<System.Guid>("userid");
-            builder.Property(_ => _.ImageUri).IsUnicode(false);
             builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey("userid").HasConstraintName("fk_post_user_userid");
         }
     }
