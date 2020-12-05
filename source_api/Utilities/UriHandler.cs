@@ -24,10 +24,9 @@ namespace Utilities
                 FileStream l_fileStream = new FileStream(l_absoluteFilePath, FileMode.Open, FileAccess.Read);
                 BinaryReader l_binaryReader = new BinaryReader(l_fileStream, System.Text.Encoding.UTF8);
                 byte[] l_imageBytes = l_binaryReader.ReadBytes((int)l_fileStream.Length);
-                byte[] l_base64Data = System.Text.Encoding.UTF8.GetBytes(System.Convert.ToBase64String(l_imageBytes));
                 l_fileStream.Close();
                 l_binaryReader.Close();
-                return l_base64Data;
+                return l_imageBytes;
             }
             catch(FileNotFoundException fileNotFoundException)
             {
