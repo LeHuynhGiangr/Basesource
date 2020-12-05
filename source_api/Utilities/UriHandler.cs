@@ -16,7 +16,30 @@ namespace Utilities
             jpg,
             png
         }
-        public static string GetImageUri(string fileName="")
+        public static byte[] GetImageBase64Byte(string fileName="")
+        {
+            try
+            {
+                string l_absoluteFilePath = System.IO.Path.GetFullPath(".\\..\\Utilities\\Images\\" + fileName);
+                FileStream l_fileStream = new FileStream(l_absoluteFilePath, FileMode.Open, FileAccess.Read);
+                BinaryReader l_binaryReader = new BinaryReader(l_fileStream, System.Text.Encoding.UTF8);
+                byte[] l_imageBytes = l_binaryReader.ReadBytes((int)l_fileStream.Length);
+                byte[] l_base64Data = System.Text.Encoding.UTF8.GetBytes(System.Convert.ToBase64String(l_imageBytes));
+                l_fileStream.Close();
+                l_binaryReader.Close();
+                return l_base64Data;
+            }
+            catch(FileNotFoundException fileNotFoundException)
+            {
+                throw new System.Exception(message: fileNotFoundException.Message + "|" + "get uri failure");
+            }
+            catch(System.Exception e)
+            {
+                throw new System.Exception(message: e.Message);
+            }
+        }
+
+        public static string GetImageUri(string fileName = "")
         {
             try
             {
@@ -31,11 +54,11 @@ namespace Utilities
                 l_binaryReader.Close();
                 return "data:image/" + l_mediaFormat + l_data;
             }
-            catch(FileNotFoundException fileNotFoundException)
+            catch (FileNotFoundException fileNotFoundException)
             {
                 throw new System.Exception(message: fileNotFoundException.Message + "|" + "get uri failure");
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
                 throw new System.Exception(message: e.Message);
             }
