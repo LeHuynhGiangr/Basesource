@@ -42,7 +42,10 @@ export class EditPasswordComponent implements OnInit {
   }
   getImageMime(base64: string): string
   {
-    return 'jpg';
+    if (base64.charAt(0)=='/') return 'jpg';
+    else if (base64.charAt(0)=='R') return "gif";
+    else if(base64.charAt(0)=='i') return 'png';
+    else return 'jpeg';
   }
   getImageSource(base64: string): string
   {

@@ -191,28 +191,15 @@
         <a title="" [routerLink]="['/newsfeed']"><img src="assets/images/logo.png" style="width: 150px; height: 60px;"alt=""></a>
     </div>
     
-    <div class="top-area">
+    <div class="top-area" >
         <ul class="main-menu">
             <li>
-                <a href="#" title="">Home</a>
-                <ul>
-                    <li><a [routerLink]="['/main/home']" title="">Home Social</a></li>
-                    <li><a [routerLink]="['/main/home']" title="">Home Social Special</a></li>
-                    <li><a [routerLink]="['/main/home']" title="">Home Company</a></li>
-                    <li><a [routerLink]="['/login']" title="">Login page</a></li>
-                    <li><a [routerLink]="['/logout']" title="">Logout Page</a></li>
-                    <li><a [routerLink]="['/main/home']" title="">news feed</a></li>
-                </ul>
+                <a [routerLink]="['/main/home']">Home</a>
             </li>
             <li>
                 <a href="#" title="">timeline</a>
                 <ul>
                     <li><a [routerLink]="['/main/timeline']" title="">timeline</a></li>
-                    <li><a [routerLink]="['/main/friends']" title="">timeline friends</a></li>
-                    <li><a [routerLink]="['/main/groups']" title="">timeline groups</a></li>
-                    <li><a [routerLink]="['/main/fanpage']" title="">timeline pages</a></li>
-                    <li><a [routerLink]="['/main/images']" title="">timeline photos</a></li>
-                    <li><a [routerLink]="['/main/videos']" title="">timeline videos</a></li>
                     <li><a [routerLink]="['/main']" title="">favourit page</a></li>
                     <li><a [routerLink]="['/main/groups-search']" title="">groups search</a></li>
                     <li><a [routerLink]="['/main/likers']" title="">Likes page</a></li>
