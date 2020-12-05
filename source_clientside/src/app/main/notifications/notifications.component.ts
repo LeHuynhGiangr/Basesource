@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
     selector: 'app-notifications',
     templateUrl: './notifications.component.html',
@@ -16,7 +17,7 @@ export class NotificationsComponent implements OnInit {
 
   public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-  public dialog: MatDialog) {
+  public dialog: MatDialog,public uriHandler:UriHandler) {
     
   }
   

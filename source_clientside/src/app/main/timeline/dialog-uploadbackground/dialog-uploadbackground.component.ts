@@ -6,6 +6,7 @@ import { TimeLineService } from '../shared/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
@@ -18,7 +19,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router) {
+    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler) {
 
   }
   onNoClick(): void {
@@ -32,15 +33,6 @@ export class DialogUploadBackgroundComponent implements OnInit {
     this.appUsers.Id=user["id"]
   }
 
-  getImageMime(base64: string): string {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`;
-  }
   //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {

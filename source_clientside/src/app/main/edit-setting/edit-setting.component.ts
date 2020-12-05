@@ -8,6 +8,7 @@ import { EditSettingService } from './shared/edit-setting.service';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
     selector: 'app-edit-setting',
     templateUrl: './edit-setting.component.html',
@@ -18,7 +19,7 @@ export class EditSettingComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-   private m_route: ActivatedRoute, private m_router: Router, private ESService: EditSettingService) {
+   private m_route: ActivatedRoute, private m_router: Router, private ESService: EditSettingService,public uriHandler:UriHandler) {
     
   }
   
@@ -98,17 +99,6 @@ export class EditSettingComponent implements OnInit {
   }
   getPath(){
     return this.router.url;
-  }
-  getImageMime(base64: string): string
-  {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]

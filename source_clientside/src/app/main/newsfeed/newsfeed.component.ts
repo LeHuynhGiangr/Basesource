@@ -7,6 +7,7 @@ import { PostService } from 'src/app/_core/services/post.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -27,7 +28,7 @@ export class NewsfeedComponent implements OnInit {
 
   public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-  private m_postService:PostService,public dialog: MatDialog) { 
+  private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler) { 
     this.loadPostData();
   }
   
@@ -79,17 +80,6 @@ export class NewsfeedComponent implements OnInit {
   }
   getPath(){
     return this.router.url;
-  }
-  getImageMime(base64: string): string
-  {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onLogout() {
     this.service.logout();

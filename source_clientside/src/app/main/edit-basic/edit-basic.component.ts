@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
-
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
@@ -19,7 +19,8 @@ export class EditBasicComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog) {
+    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog
+    ,public uriHandler:UriHandler) {
   }
   
   async ngOnInit() {
@@ -52,17 +53,6 @@ export class EditBasicComponent implements OnInit {
   }
   getPath(){
     return this.router.url;
-  }
-  getImageMime(base64: string): string
-  {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onSubmit() {
     console.log('title is:');

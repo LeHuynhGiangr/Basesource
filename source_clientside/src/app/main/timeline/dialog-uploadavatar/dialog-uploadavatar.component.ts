@@ -6,6 +6,7 @@ import { TimeLineService } from '../shared/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
   selector: 'app-dialog-uploadavatar',
   templateUrl: './dialog-uploadavatar.component.html',
@@ -18,7 +19,7 @@ export class DialogUploadAvatarComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router) {
+    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler) {
 
   }
   onNoClick(): void {
@@ -32,12 +33,7 @@ export class DialogUploadAvatarComponent implements OnInit {
     this.appUsers.Id=UserProfile.Id
   }
 
-  getImageMime(base64: string): string {
-    return 'jpg';
-  }
-  getImageSource(base64: string): string {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`;
-  }
+
   //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {

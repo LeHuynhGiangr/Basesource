@@ -8,6 +8,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { EditInterestService } from './shared/edit-hobby.service';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
@@ -18,7 +19,7 @@ export class EditHobbyComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService) {
+  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService,public uriHandler:UriHandler) {
     
   }
   
@@ -41,14 +42,6 @@ export class EditHobbyComponent implements OnInit {
   }
   getPath(){
     return this.router.url;
-  }
-  getImageMime(base64: string): string
-  {
-    return 'jpg';
-  }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
   }
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]

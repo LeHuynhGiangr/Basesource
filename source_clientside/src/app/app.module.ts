@@ -17,7 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -35,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     FormsModule,
   ],
+  
   providers: [
     {provide:APP_INITIALIZER, useFactory: InitApp, multi:true, deps: [AuthenService]},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},

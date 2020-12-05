@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginService } from '../../../login/shared/login.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
   selector: 'app-dialog-post',
   templateUrl: './dialog-post.component.html',
@@ -16,7 +16,7 @@ export class DialogPostComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogPostComponent>, @Inject(MAT_DIALOG_DATA) private service: LoginService,
-    private m_route: ActivatedRoute,private m_router: Router) {
+    private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler) {
 
   }
   onNoClick(): void {
@@ -26,15 +26,6 @@ export class DialogPostComponent implements OnInit {
   async ngOnInit() {
   }
 
-  getImageMime(base64: string): string {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`;
-  }
   //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
