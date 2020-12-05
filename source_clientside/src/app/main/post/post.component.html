@@ -2,7 +2,7 @@
     <div class="friend-info">
         <figure>
             <!-- <img src="assets/images/resources/friend-avatar10.jpg" alt=""> -->
-            <img src="{{m_utility.convertBase64StringToJPG(postData.authorThumb)}}" alt="">
+            <img src="uriHandler.getImageSource(postData.authorThumb)" alt="">
         </figure>
         <div class="friend-name">
             <ins><a href="time-line.html" title="">{{postData.authorName}}</a></ins>
@@ -91,9 +91,9 @@
                 </p>
             </div>
         </div> --> <!--post-meta-->
-        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
+        <app-post-meta [content]="postData.content" [imageUri]="uriHandler.getImageSource(postData.imageUri)"></app-post-meta>
     </div>
-    <div class="coment-area">
+    <div class="coment-area"> 
         <!-- <ul class="we-comet">
             <li>
                 <div class="comet-avatar">

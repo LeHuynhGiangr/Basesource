@@ -1,6 +1,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { UtilityService } from 'src/app/_core/services/utility.service';
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 
 @Component({
   selector: 'app-post',
@@ -19,7 +20,7 @@ export class PostComponent implements OnInit {
     authorThumb?:string,
     authorId:string
   }
-  constructor(public m_utility:UtilityService) { }
+  constructor(public m_utility:UtilityService, public uriHandler:UriHandler) { }
 
   ngOnInit(): void {
   }

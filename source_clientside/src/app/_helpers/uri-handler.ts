@@ -1,3 +1,4 @@
+import { jitOnlyGuardedExpression } from '@angular/compiler/src/render3/util';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,9 +7,10 @@ import { Injectable } from '@angular/core';
 export class UriHandler{
   private getImageMime(base64: string): string
   {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
+    var tempString=String(base64);
+    if (tempString.charAt(0)=='/') return 'jpg';
+    else if (tempString.charAt(0)=='R') return "gif";
+    else if(tempString.charAt(0)=='i') return 'png';
     else return 'jpeg';
   }
   public getImageSource(base64: string): string

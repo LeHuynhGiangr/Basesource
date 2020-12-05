@@ -18,7 +18,7 @@ export class PostService {
     return this.m_http.get<any[]>(this.postUrl+"/"+id, {observe:'body', responseType:'json'});
   }
 
-  getPost(){
+  getPost(){ 
     return this.m_http.get<any[]>(this.postUrl, {observe:'body', responseType:'json'});
   }
 }
