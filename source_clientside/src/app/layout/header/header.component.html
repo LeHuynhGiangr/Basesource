@@ -188,7 +188,7 @@
 </div><!-- responsive header -->
 <div class="topbar ">
     <div class="logo">
-        <a title="" [routerLink]="['/newsfeed']"><img src="assets/images/logo.png" style="width: 150px; height: 60px;"alt=""></a>
+        <a title="" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 150px; height: 60px;"alt=""></a>
     </div>
     
     <div class="top-area" >
@@ -215,8 +215,8 @@
                 <a  title="Home" data-ripple=""><i class="ti-search"></i></a>
                 <div class="searched">
                     <form method="post" class="form-search">
-                        <input type="text" placeholder="Search Friend">
-                        <button data-ripple><i class="ti-search"></i></button>
+                        <input type="text" placeholder="Search Something">
+                        <button data-ripple [routerLink]="['/main/friends-search']"><i class="ti-search"></i></button>
                     </form>
                 </div>
             </li>

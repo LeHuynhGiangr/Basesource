@@ -10,6 +10,7 @@ import { EditWorkComponent } from './edit-work/edit-work.component';
 import { EditHobbyComponent } from './edit-hobby/edit-hobby.component';
 import { EditSettingComponent } from './edit-setting/edit-setting.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { FriendsSearchComponent } from './friends-search/friends-search.component';
 import { FriendsComponent } from './friends/friends.component';
 import { FanpageComponent } from './fanpage/fanpage.component';
 import { FaqComponent } from './faq/faq.component';
@@ -46,6 +47,7 @@ import { CommentAreaComponent } from './post/comment-area/comment-area.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogPostComponent } from './post/dialog-post/dialog-post.component';
+import {MatButtonModule} from '@angular/material/button';
 export const mainRoutes: Routes = [
 
   {path:'home', component:NewsfeedComponent},//main entry point
@@ -60,6 +62,7 @@ export const mainRoutes: Routes = [
   {path:'edit-setting', component:EditSettingComponent},
   {path:'edit-work', component:EditWorkComponent},
   {path:'friends', component:FriendsComponent},
+  {path:'friends-search', component:FriendsSearchComponent},
   {path:'fanpage', component:FanpageComponent},
   {path:'faq', component:FaqComponent},
   {path:'groups', component:GroupsComponent},
@@ -91,6 +94,7 @@ export const mainRoutes: Routes = [
     EditSettingComponent,
     EditWorkComponent,
     FriendsComponent,
+    FriendsSearchComponent,
     FanpageComponent,
     FaqComponent,
     GroupsComponent,
@@ -132,6 +136,7 @@ export const mainRoutes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    MatButtonModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
