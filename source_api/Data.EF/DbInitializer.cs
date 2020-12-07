@@ -70,7 +70,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Le",
@@ -106,7 +114,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1998, 1, 12),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Huynh",
@@ -167,7 +183,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Dang",
@@ -229,7 +253,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Thu",
@@ -304,7 +336,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Bich",
@@ -373,7 +413,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Van",
@@ -428,7 +476,15 @@ namespace Data.EF
                     AccessFailedCount = 0,
                     BirthDay = new DateTime(1999, 12, 1),
                     DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                    Avatar = l_string_post_pic1,
+                    Background = l_string_post_pic1,
+                    StudyingAt = "HCMUTE",
+                    FromDate = new DateTime(2017, 12, 1),
+                    ToDate = new DateTime(2021, 12, 1),
+                    AddressAcademic = "TP. Ho Chi Minh",
+                    DescriptionAcademic = "Hoc Lai 5 lan",
+                    Hobby = "Girls",
+                    AcademicLevel = "University",
                     Email = "gianghyn123456789@gmail.com",
                     PhoneNumber = "0123456789",
                     FirstName = "Dong",
@@ -1282,12 +1338,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                        Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend =true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Le",
                         LastName = "Giang",
-                        Gender = "Nam",
+                        Gender = "Male",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -1330,12 +1396,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1998, 1, 12),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend=true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Huynh",
                         LastName = "Le",
-                        Gender = "Nu",
+                        Gender = "Female",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -1498,12 +1574,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend=true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Dang",
                         LastName = "Bao",
-                        Gender = "Nam",
+                        Gender = "Male",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -1716,12 +1802,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend=true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Thu",
                         LastName = "Hang",
-                        Gender = "Nu",
+                        Gender = "Male",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -1852,12 +1948,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend=true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Bich",
                         LastName = "Hoang",
-                        Gender = "Nu",
+                        Gender = "Female",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -2120,12 +2226,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        AcademicLevel = "University",
+                        RequestFriend=true,
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Van",
                         LastName = "Tien",
-                        Gender = "Nam",
+                        Gender = "Male",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -2201,11 +2317,11 @@ namespace Data.EF
                                             Id = l_guid_user6.ToString(),
                                             Name=l_string_user_fullname6
                                         }
-                            
-                            
+
+
                                     }
                                 }),
-                            
+
                                 CommentObjectsJson = JsonSerializer.Serialize(new List<object>
                                 {
                                     new
@@ -2223,10 +2339,10 @@ namespace Data.EF
                                         Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
                                     }
                                 }),
-                            
+
                                 DateCreated = DateTime.Now,
                             },
-                            
+
                             new Post
                             {
                                 //Id = 12,
@@ -2247,11 +2363,11 @@ namespace Data.EF
                                             Id = l_guid_user6.ToString(),
                                             Name=l_string_user_fullname6
                                         }
-                            
-                            
+
+
                                     }
                                 }),
-                            
+
                                 CommentObjectsJson = JsonSerializer.Serialize(new List<object>
                                 {
                                     new
@@ -2269,10 +2385,10 @@ namespace Data.EF
                                         Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
                                     }
                                 }),
-                            
+
                                 DateCreated = DateTime.Now,
                             },
-                            
+
                             new Post
                             {
                                 //Id = 13,
@@ -2293,11 +2409,11 @@ namespace Data.EF
                                             Id = l_guid_user6.ToString(),
                                             Name=l_string_user_fullname6
                                         }
-                            
-                            
+
+
                                     }
                                 }),
-                            
+
                                 CommentObjectsJson = JsonSerializer.Serialize(new List<object>
                                 {
                                     new
@@ -2315,7 +2431,7 @@ namespace Data.EF
                                         Comment="You can climb onto a hill nearby for a sweeping view of Xep Beach from above"
                                     }
                                 }),
-                            
+
                                 DateCreated = DateTime.Now,
                             },
                         }
@@ -2329,12 +2445,22 @@ namespace Data.EF
                         AccessFailedCount = 0,
                         BirthDay = new DateTime(1999, 12, 1),
                         DateResetTokenExpired = DateTime.UtcNow.AddDays(7),
-
+                         Avatar = l_string_post_pic1,
+                        Background = l_string_post_pic1,
+                        StudyingAt = "HCMUTE",
+                        FromDate = new DateTime(2017, 12, 1),
+                        ToDate = new DateTime(2021, 12, 1),
+                        AddressAcademic = "TP. Ho Chi Minh",
+                        DescriptionAcademic = "Hoc Lai 5 lan",
+                        Hobby = "Girls",
+                        RequestFriend=true,
+                        AcademicLevel = "University",
+                        Language = "English",
                         Email = "gianghyn123456789@gmail.com",
                         PhoneNumber = "0123456789",
                         FirstName = "Dong",
                         LastName = "Khoi",
-                        Gender = "Nam",
+                        Gender = "Male",
                         EmailConfirmed = false,
                         PhoneNumberConfirmed = false,
                         LockoutEnabled = false,
@@ -2488,7 +2614,7 @@ namespace Data.EF
                             }
                         }
                     }
-                });
+                }); ;
 
             }
             projectDbContext.SaveChanges();
