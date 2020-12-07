@@ -22,9 +22,11 @@ namespace Domain.Services
         {
             try
             {
-                Post l_newPost = new Post(model.Status, System.Text.Encoding.UTF8.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
+                Guid l_newPostGuidId = Guid.NewGuid();
+                Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.UTF8.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 m_postRepository.Add(l_newPost);
-                return null;
+                m_postRepository.SaveChanges();
+                return GetById(l_newPostGuidId);
             }
             catch
             {
@@ -39,7 +41,7 @@ namespace Domain.Services
 
         public IEnumerable<PostResponse> GetAll()
         {
-            var l_posts = m_postRepository.GetAll(_=>_.User);
+            var l_posts = m_postRepository.GetAll(_ => _.User);
             List<PostResponse> l_postResponses = new List<PostResponse>();
             foreach (Post post in l_posts)
             {
@@ -59,7 +61,18 @@ namespace Domain.Services
 
         public PostResponse GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var l_post = m_postRepository.FindSingle(_ => _.Id.Equals(id), _ => _.User);
+            PostResponse l_postResponse = new PostResponse(
+                l_post.Id.ToString(),
+                l_post.DateCreated,
+                l_post.Content,
+                l_post.ImageUri,
+                JsonSerializer.Deserialize<object>(l_post.LikeObjectsJson ?? "[]"),
+                JsonSerializer.Deserialize<object>(l_post.CommentObjectsJson ?? "[]"),
+                l_post.User.FirstName + " " + l_post.User.LastName,
+                l_post.User.Id.ToString()
+                );
+            return l_postResponse;
         }
 
         public IEnumerable<PostResponse> GetPostsByUserId<Guid>(Guid id)

@@ -67,7 +67,7 @@ namespace API
             services.AddScoped<EFRepository<Post, Guid>, EFRepository<Post, Guid>>();
             
             services.AddScoped<IUserService<Guid>, UserService>();
-            services.AddScoped<IPostService<int>, PostService>();
+            services.AddScoped<IPostService<Guid>, PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

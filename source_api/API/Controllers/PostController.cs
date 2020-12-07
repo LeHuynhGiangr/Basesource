@@ -17,9 +17,9 @@ namespace API.Controllers
     [Route("post")]//routing/
     public class PostController:ControllerBase
     {
-        private readonly IPostService<int> m_postService;
+        private readonly IPostService<Guid> m_postService;
 
-        public PostController(IPostService<int> postService)
+        public PostController(IPostService<Guid> postService)
         {
             m_postService = postService;
         }
@@ -59,13 +59,13 @@ namespace API.Controllers
         {
             try
             {
-
+                var l_postResponse = m_postService.Create(createPostRequest);
+                return Ok(l_postResponse);
             }
-            catch
+            catch(Exception e)
             {
-
+                return StatusCode(500, new { message = e.Message });
             }
-            return null;
         }
     }
 }

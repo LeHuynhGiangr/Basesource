@@ -4,6 +4,7 @@ namespace Domain.DomainModels.API.ResponseModels
 {
     public class PostResponse
     {
+        public PostResponse() { }
         public PostResponse(string id, System.DateTime dateCreated, string content, byte[] imageUri, object likeJson, object commentJson, string authorName, string authorId)
         {
             Id = id;

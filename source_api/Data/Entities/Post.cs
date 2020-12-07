@@ -7,8 +7,9 @@ namespace Data.Entities
     {
         public Post() { }
         //constructor for create new post
-        public Post(string content, byte[] imageData, Guid userId)
+        public Post(Guid id, string content, byte[] imageData, Guid userId)
         {
+            Id = id;
             Content = content;
             ImageUri = imageData;
             UserId = userId;
