@@ -228,7 +228,32 @@ namespace Domain.Services
             }
             return l_userResponses;
         }
-
+        public IEnumerable<UserResponse> GetAllByName(string Name)
+        {
+            var l_users = m_userRepository.GetAll();
+            var userList = l_users.Where(_ => _.FirstName.Contains(Name));
+            List<UserResponse> l_userResponses = new List<UserResponse>();
+            foreach (User user in l_users)
+            {
+                l_userResponses.Add(new UserResponse
+                {
+                    Id = user.Id,
+                    Created = user.DateCreated,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Gender = user.Gender,
+                    IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
+                    PhoneNumber = user.PhoneNumber,
+                    Role = user.Role,
+                    Updated = user.DateModified,
+                    Avatar = user.Avatar,
+                    Description = user.Description,
+                    FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
+                });
+            }
+            return l_userResponses;
+        }
         public UserResponse GetById(Guid id)
         {
             try

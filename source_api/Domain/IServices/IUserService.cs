@@ -30,6 +30,7 @@ namespace Domain.IServices
         void ValidateResetToken(ValidateResetTokenRequest model);
         void ResetPassword(ResetPasswordRequest model);
         IEnumerable<UserResponse> GetAll();
+        IEnumerable<UserResponse> GetAllByName(string Name);
         UserResponse GetById(T id);
         UserResponse Create(CreateRequest model);
         UserResponse Update(T id, UpdateUserRequest model);

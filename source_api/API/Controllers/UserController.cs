@@ -1,11 +1,13 @@
 ﻿using API.Helpers;
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
+using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API
@@ -302,6 +304,19 @@ namespace API
             catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
+            }
+        }
+        [HttpGet("search")]
+        public ActionResult<IEnumerable<UserResponse>> GetAllByName(string Name)
+        {
+            try
+            {
+                var l_userResponses = m_userService.GetAllByName(Name);
+                return Ok(l_userResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(503);//service unavailable
             }
         }
         [Route("{id:guid}")]
