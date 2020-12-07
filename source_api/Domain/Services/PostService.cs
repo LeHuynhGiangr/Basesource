@@ -1,5 +1,6 @@
 ﻿using Data.EF;
 using Data.Entities;
+using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using System;
@@ -8,16 +9,30 @@ using System.Text.Json;
 
 namespace Domain.Services
 {
-    public class PostService : IPostService<int>
+    public class PostService : IPostService<Guid>
     {
-        private readonly EFRepository<Post, int> m_postRepository;
+        private readonly EFRepository<Post, Guid> m_postRepository;
 
-        public PostService(EFRepository<Post, int> postRepository)
+        public PostService(EFRepository<Post, Guid> postRepository)
         {
             m_postRepository = postRepository;
         }
 
-        public bool Delete(int id)
+        public PostResponse Create(CreatePostRequest model)
+        {
+            try
+            {
+                Post l_newPost = new Post(model.Status, System.Text.Encoding.UTF8.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
+                m_postRepository.Add(l_newPost);
+                return null;
+            }
+            catch
+            {
+                throw new Exception("create post failed");
+            }
+        }
+
+        public bool Delete(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +45,7 @@ namespace Domain.Services
             {
                 l_postResponses.Add(
                     new PostResponse(
-                        post.Id,
+                        post.Id.ToString(),
                         post.DateCreated,
                         post.Content,
                         post.ImageUri,
@@ -42,7 +57,7 @@ namespace Domain.Services
             return l_postResponses;
         }
 
-        public PostResponse GetById(int id)
+        public PostResponse GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -55,7 +70,7 @@ namespace Domain.Services
             {
                 l_postResponses.Add(
                     new PostResponse(
-                        post.Id,
+                        post.Id.ToString(),
                         post.DateCreated,
                         post.Content,
                         post.ImageUri,

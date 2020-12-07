@@ -10,8 +10,8 @@ namespace Data.EF.Configurations
         {
             builder.ToTable("posts");
 
-            builder.Property<System.Guid>("userid");
-            builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey("userid").HasConstraintName("fk_post_user_userid");
+            //builder.Property<System.Guid>("userid");
+            builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey(_=>_.UserId).HasConstraintName("fk_post_user_userid");
         }
     }
     /*

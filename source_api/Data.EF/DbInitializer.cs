@@ -44,6 +44,22 @@ namespace Data.EF
         private static string l_string_user_fullname6 = "Dong Khoi";
         private static byte[] l_string_user_pic6 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb6.jpg");
 
+        private static Guid l_guid_post1 = Guid.NewGuid();
+        private static Guid l_guid_post2 = Guid.NewGuid();
+        private static Guid l_guid_post3 = Guid.NewGuid();
+        private static Guid l_guid_post4 = Guid.NewGuid(); 
+        private static Guid l_guid_post5 = Guid.NewGuid();
+        private static Guid l_guid_post6 = Guid.NewGuid();
+        private static Guid l_guid_post7 = Guid.NewGuid();
+        private static Guid l_guid_post8 = Guid.NewGuid();
+        private static Guid l_guid_post9 = Guid.NewGuid();
+        private static Guid l_guid_post10 = Guid.NewGuid();
+        private static Guid l_guid_post11 = Guid.NewGuid();
+        private static Guid l_guid_post12 = Guid.NewGuid();
+        private static Guid l_guid_post13 = Guid.NewGuid();
+        private static Guid l_guid_post14 = Guid.NewGuid();
+        private static Guid l_guid_post15 = Guid.NewGuid();
+
         private static byte[] l_string_post_pic1 = Utilities.UriHandler.GetImageBase64Byte("post_pic4.png");
         private static byte[] l_string_post_pic2 = Utilities.UriHandler.GetImageBase64Byte("post_pic3.png");
         private static byte[] l_string_post_pic3 = Utilities.UriHandler.GetImageBase64Byte("post_pic9.jpg");
@@ -1474,7 +1490,7 @@ namespace Data.EF
                         {
                             new Post
                             {
-                                //Id = 1,
+                                Id = l_guid_post1,
                                 Content = "Hello everyone!",
                                 ImageUri = l_string_post_pic1,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -1518,7 +1534,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 2,
+                                Id = l_guid_post2,
                                 Content = "Today is wonderful day",
                                 ImageUri = l_string_post_pic2,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -1653,7 +1669,7 @@ namespace Data.EF
                         {
                             new Post
                             {
-                                //Id = 3,
+                                Id = l_guid_post3,
                                 Content = "Halong Bay is a beautiful natural wonder in northern Vietnam near the Chinese border. The Bay is dotted with 1,600 limestone islands and islets and covers an area of over 1,500 sqkm. This extraordinary area was declared a UNESCO World Heritage Site in 1994. For many tourists, this place is like something right out of a movie. The fact is that Halong Bay features a wide range of biodiversity, while the surrealistic scenery has indeed featured in endless movies.",
                                 ImageUri = l_string_post_pic3,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -1699,7 +1715,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 4,
+                                Id = l_guid_post4,
                                 Content = "Bà Nà là khu du lich toạ lạc 1 khu vực thuộc về dãy núi Trường Sơn nằm ở xã Hòa Ninh, huyện Hòa Vang, cách Đà Nẵng 25 km về phía Tây Nam. Trung tâm du lịch của Bà Nà nằm trên đỉnh Núi Chúa có độ cao 1489 m so với mực nước biển.",
                                 ImageUri = l_string_post_pic4,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -1745,7 +1761,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 5,
+                                Id = l_guid_post5,
                                 Content = "Ghềnh Đá Dĩa là một tập hợp các trụ đá hình lăng trụ xếp liền nhau, hòn nọ nối hòn kia kề với sóng nước. Bãi đá trải rộng san sát nhau chung màu đen huyền bí. Có trụ thẳng đứng, có trụ nghiêng vẹo nhưng vẫn chồng chất tầng tầng trông như chồng bát dĩa nên có tên gọi là Ghềnh Đá Dĩa. Nhìn từ xa, Ghềnh Đá trông giống một tổ ong thiên tạo khổng lồ vô cùng kỳ vĩ. " +
                                 "Các cột đá badan của Ghềnh Đá Dĩa được các nhà nghiên cứu cho là hình thành cách đây hàng triệu năm," +
                                 "khi các dòng nham thạch nóng chảy phun ra từ các núi lửa ở cao nguyên Vân Hoà(cách 30km) gặp nước biển lạnh nên đông cứng và nứt vỡ mà thành." +
@@ -1894,7 +1910,7 @@ namespace Data.EF
                         {
                             new Post
                             {
-                                //Id = 6,
+                                Id = l_guid_post6,
                                 Content = "Dalat travel guide: full experiences with useful travel tips,Dalat travel guide: full experiences and useful travel tips in Da Lat city such as transportation, accommodation, local food, famous tourist places…",
                                 ImageUri = l_string_post_pic6,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2033,7 +2049,7 @@ namespace Data.EF
                         Posts = new List<Post>{
                             new Post
                             {
-                                //Id = 7,
+                                Id = l_guid_post7,
                                 Content = "Travel to Phu Yen – Everything you need to know Phu Yen Overview: Phu Yen is another off beat track destination in Central of Vietnam with pristine beaches, busy fisherman villages, glistening mini desserts, mouth-watering seafood and astounding natural landscapes. If you’re planning to travel to Phu Yen for a peaceful holiday, you certainly won’t be disappointed.",
                                 ImageUri = l_string_post_pic7,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2079,7 +2095,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 8,
+                                Id = l_guid_post8,
                                 Content = "Getting Around in Phu Yen: Once you travel to Phu Yen, you’ll need transportation to get to all the beautiful sights. Since they are quite spread out, some as far as 50 kilometers from Tuy Hoa, walking or biking is not an option for most travelers.",
                                 ImageUri = l_string_post_pic8,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2125,7 +2141,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 9,
+                                Id = l_guid_post9,
                                 Content = "Where to Stay in Phu Yen: As more people are discovering Phu Yen, more hotels, hostels, and homestays are popping up. This gives you several places to choose from in categories ranging from luxury to budget." +
                                 "Want to surprise your partner with a nice room ? Then you can splurge on the Vietstar Resort & Spa, a five - star property close to the city with a beautiful pool and sweeping views of the ocean. If you’re looking for a more budget - friendly place to stay which is also closer to the beach, have a look at the Sala Tuy Hoa Beach Hotel.This newly opened hotel is only a four - minute walk from the sea and offers great amenities and even an airport shuttle.",
                                 ImageUri = l_string_post_pic9,
@@ -2172,7 +2188,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 10,
+                                Id = l_guid_post10,
                                 Content = "Explore Tuy Hoa: The capital of Phu Yen province, Tuy Hoa is the center of cultural and economic life in the area. It is also home to some great historical spots such as the Ngoc Lang temple and the Nhan tower built by the Champa people. Take a few hours to check out the city before heading out into the countryside, it’s well worth it.",
                                 ImageUri = l_string_post_pic10,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2298,7 +2314,7 @@ namespace Data.EF
                         {
                             new Post
                             {
-                                //Id = 11,
+                                Id = l_guid_post11,
                                 Content = "Xep Beach: A small beach with the length of only 500 meters, Xep Beach is a quiet place suitable for those seeking peace and tranquility during their trip. There are black stones lining along the beach, adding some sharpness to the softness of the ocean." +
                                 "You can climb onto a hill nearby for a sweeping view of Xep Beach from above. This hill became popular to tourists as the place where the children from “I see yellow flowers on the green grass” flew kites. In real life, this place is a small meadow where the locals’ cows are herded. I did not see any yellow flower there though, unfortunately.",
                                 ImageUri = l_string_post_pic11,
@@ -2345,7 +2361,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 12,
+                                Id = l_guid_post12,
                                 Content = "O Loan Lagoon: Since O Loan Lagoon is quite large, it’s not easy to identify the most picture-perfect corner to stop at. We rode along O Loan Lagoon under the heat of midday and stopped at a local seafood restaurant with a view of part of the lagoon. That view was not so impressive to be honest. Yet we had the chance to taste Blood Oyster: a must-try local cuisine.",
                                 ImageUri = l_string_post_pic12,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2391,7 +2407,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 13,
+                                Id = l_guid_post13,
                                 Content = "Mui Dien Cape – the easternmost point of Vietnam’s territory: Theoretically speaking, Mui Dien Cape is the first location in Vietnam to receive sunlight for a new day. After climbing steps for around 30 minutes (slow pace), you will reach the foot of the Mui Dien Lighthouse. Climbing up to the lighthouse gives a stunning view of the sea below.",
                                 ImageUri = l_string_post_pic13,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2523,7 +2539,7 @@ namespace Data.EF
                         {
                             new Post
                             {
-                                //Id = 14,
+                                Id = l_guid_post14,
                                 Content = "Bai Mon Beach: Bai Mon Beach can be accessed from the entrance to Mui Dien area as well. You need to pay an entrance fee and also a parking fee (very cheap!). There are shower rooms near the entrance for you to change before walking 200 meters to the beach.",
                                 ImageUri = l_string_post_pic14,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2569,7 +2585,7 @@ namespace Data.EF
 
                             new Post
                             {
-                                //Id = 15,
+                                Id = l_guid_post15,
                                 Content = "What to eat in Phu Yen Candidate #1 – Chicken Rice (Com Ga)",
                                 ImageUri = l_string_post_pic15,
                                 LikeObjectsJson = JsonSerializer.Serialize(new
@@ -2614,7 +2630,7 @@ namespace Data.EF
                             }
                         }
                     }
-                }); ;
+                });
 
             }
             projectDbContext.SaveChanges();

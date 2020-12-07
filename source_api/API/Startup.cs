@@ -64,7 +64,7 @@ namespace API
 
             //configure Dependency Injection for services
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
-            services.AddScoped<EFRepository<Post, int>, EFRepository<Post, int>>();
+            services.AddScoped<EFRepository<Post, Guid>, EFRepository<Post, Guid>>();
             
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<IPostService<int>, PostService>();

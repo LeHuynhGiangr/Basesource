@@ -3,9 +3,17 @@ using System;
 
 namespace Data.Entities
 {
-    public class Post : IEntity<int>, IDateTracking
+    public class Post : IEntity<Guid>, IDateTracking
     {
-        public int Id { get; set; }
+        public Post() { }
+        //constructor for create new post
+        public Post(string content, byte[] imageData, Guid userId)
+        {
+            Content = content;
+            ImageUri = imageData;
+            UserId = userId;
+        }
+        public Guid Id { get; set; }
 
         public string Content { get; set; }
         //public int Likes { get; set; }
@@ -19,6 +27,7 @@ namespace Data.Entities
         public DateTime? DateModified { get; set; }
 
         //reference navigation
+        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API.Helpers;
+using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,8 @@ namespace API.Controllers
 {
     //[Authorize]//any action medthods added to the controller will be secure by default unless explicitly made public/
     [ApiController]
-    //[RoleBaseAuthorize(Data.Enums.ERole.User, Data.Enums.ERole.Admin)]
-    [AllowAnonymous]
+    [RoleBaseAuthorize(Data.Enums.ERole.User, Data.Enums.ERole.Admin)]
+    //[AllowAnonymous]
     [Route("post")]//routing/
     public class PostController:ControllerBase
     {
@@ -51,6 +52,20 @@ namespace API.Controllers
             {
                 return StatusCode(500, new { message = e.Message });
             }
+        }
+
+        [HttpPost]
+        public IActionResult CreatePost([FromBody] CreatePostRequest createPostRequest)
+        {
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+            return null;
         }
     }
 }
