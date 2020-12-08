@@ -243,6 +243,7 @@ namespace Domain.Services
                     LastName = user.LastName,
                     Avatar = user.Avatar,
                     Description = user.Description,
+                    UserName = user.UserName
                 });
             }
             return l_userResponses;
@@ -257,6 +258,7 @@ namespace Domain.Services
                 }
                 return new UserResponse
                 {
+                    UserName = l_user.UserName,
                     FirstName = l_user.FirstName,
                     LastName = l_user.LastName,
                     PhoneNumber = l_user.PhoneNumber,
@@ -281,7 +283,7 @@ namespace Domain.Services
                     ToDate=l_user.ToDate,
                     Hobby=l_user.Hobby,
                     Language=l_user.Language,
-                    Role = l_user.Role // sao k chiu bool v ta
+                    Role = l_user.Role
                 };
             }
             catch(Exception e)
