@@ -223,6 +223,7 @@ namespace Domain.Services
                     PhoneNumber = user.PhoneNumber,
                     Role = user.Role,
                     Updated = user.DateModified,
+                    Active = user.Active,
                     FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
                 });
             }
@@ -231,25 +232,17 @@ namespace Domain.Services
         public IEnumerable<UserResponse> GetAllByName(string Name)
         {
             var l_users = m_userRepository.GetAll();
-            var userList = l_users.Where(_ => _.FirstName.Contains(Name));
+            var userList = l_users.Where(_ => _.FirstName.ToLower().Contains(Name.ToLower()));
             List<UserResponse> l_userResponses = new List<UserResponse>();
-            foreach (User user in l_users)
+            foreach (User user in userList)
             {
                 l_userResponses.Add(new UserResponse
                 {
                     Id = user.Id,
-                    Created = user.DateCreated,
-                    Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Gender = user.Gender,
-                    IsVerified = user.DateVerified != null || user.VerificationShortToken == null,
-                    PhoneNumber = user.PhoneNumber,
-                    Role = user.Role,
-                    Updated = user.DateModified,
                     Avatar = user.Avatar,
                     Description = user.Description,
-                    FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
                 });
             }
             return l_userResponses;
@@ -453,7 +446,18 @@ namespace Domain.Services
             m_userRepository.SaveChanges();
         }
 
+        public bool BlockUser(Guid id)
+        {
+            User user = m_userRepository.FindById(id);
 
+            user.Active =!user.Active;
+            m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
+            m_userRepository.SaveChanges();
+            if (user.Active == true)
+                return true;
+            else
+                return false;
+        }
         //--------------------------------------------------------------------------
         //helper methods
         private string GenerateJwtToken(User user)

@@ -307,30 +307,17 @@ namespace API
             }
         }
         [HttpGet("search")]
-        public ActionResult<IEnumerable<UserResponse>> GetAllByName(string Name)
+        public ActionResult<IEnumerable<UserResponse>> GetAllByName()
         {
             try
             {
-                var l_userResponses = m_userService.GetAllByName(Name);
-                return Ok(l_userResponses);
+                string name = HttpContext.Request.Query["name"];
+                var l_userResponse= m_userService.GetAllByName(name);
+                return Ok(l_userResponse);
             }
             catch (Exception e)
             {
                 return StatusCode(503);//service unavailable
-            }
-        }
-        [Route("{id:guid}")]
-        [HttpDelete]
-        public async Task<ActionResult<User>> DeleteUser(Guid id)
-        {
-            try
-            {
-                m_userService.DeleteUser(id);
-                return Ok("Delete user successfully");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new { message = "Not found !" });
             }
         }
         //[Authorize]

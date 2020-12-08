@@ -1,10 +1,12 @@
 ﻿using API.Helpers;
+using Data.Entities;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -32,6 +34,37 @@ namespace API.Controllers
             catch (Exception e)
             {
                 return StatusCode(503);//service unavailable
+            }
+        }
+        [Route("{id:guid}")]
+        [HttpDelete]
+        public ActionResult<User> DeleteUser(Guid id)
+        {
+            try
+            {
+                m_userService.DeleteUser(id);
+                return Ok("Delete user successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Not found !" });
+            }
+        }
+
+        [Route("block/{id:guid}")]
+        [HttpPut]
+        public ActionResult<User> BlockUser(Guid id)
+        {
+            try
+            {
+                if (m_userService.BlockUser(id) == true)
+                    return Ok("UnBlock user successfully");
+                else
+                    return Ok("Block user successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Not found !" });
             }
         }
     }

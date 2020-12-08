@@ -38,6 +38,7 @@ namespace Domain.IServices
         void UploadAvatar(Guid id, MemoryStream avatar);
         //void UploadAvatar(Guid id, IFormFile avatar);
         void DeleteUser(Guid id);
+        bool BlockUser(Guid id);
         void UploadUserProfile(Guid id, UpdateUserRequest model);
         void ChangePassword(Guid id, ResetPasswordRequest model);
         void UpdateAcademic(Guid id, UpdateAcademicRequest model);
