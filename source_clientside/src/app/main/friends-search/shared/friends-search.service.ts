@@ -10,7 +10,7 @@ export class SearchService {
     constructor(private http: HttpClient,private service : LoginService) {
 
     }
-    getAllUsers = async () => {
+    getAllUsers = async (Name) => {
         try {
        
             const config = {
@@ -18,7 +18,8 @@ export class SearchService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            const result = await this.http.get(this.urlAPI + 'user/search', config).toPromise();
+            const result = await this.http.get(this.urlAPI + 'user/search?name='+Name, config).toPromise();
+            console.log(result)
             return result;
         }
         catch (e) {

@@ -26,4 +26,36 @@ export class AdminService {
             // this.removeToken();
         }
     }
+    deleteUser = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.delete(this.urlAPI + 'admin/'+id, config).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+            // this.removeToken();
+        }
+    }
+    blockUser = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.put(this.urlAPI + 'admin/block/'+id, config).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+            // this.removeToken();
+        }
+    }
 }

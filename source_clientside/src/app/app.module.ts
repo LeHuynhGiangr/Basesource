@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { config } from 'process';
 
 @NgModule({
   declarations: [

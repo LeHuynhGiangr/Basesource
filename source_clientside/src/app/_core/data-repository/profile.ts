@@ -26,4 +26,6 @@ export class UserProfile {
     public static ViewTimeLine:boolean;
     public static ViewListFriend:boolean;
     public static RequestFriend:boolean;
+    public static Name;
+    public static UserName:string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './../login/shared/login.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppUsers } from './../login/shared/login.model';
 import { AdminService } from './../admin/admin.service';
 @Component({
@@ -11,8 +11,10 @@ import { AdminService } from './../admin/admin.service';
 export class AdminComponent implements OnInit {
   public appUsers: AppUsers;
   public users:any
+  public m_returnUrl: string;
   public userList = new Array<AppUsers>();
-  constructor(private router: Router,private service: LoginService, private Aservice: AdminService) { }
+  constructor(private router: Router,private service: LoginService, private Aservice: AdminService,
+    private m_route: ActivatedRoute, private m_router: Router) { }
 
   async ngOnInit() {
 
@@ -20,7 +22,9 @@ export class AdminComponent implements OnInit {
     var user = await this.service.getUser();
     this.appUsers.FirstName = user["firstName"]
     this.appUsers.LastName = user["lastName"]
-
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
     const users = await this.Aservice.getAllUsers()
     console.log(users)
     this.getUserList()
@@ -40,5 +44,20 @@ export class AdminComponent implements OnInit {
       console.log(user)
       this.userList.push(user);
     }
+  }
+  deleteUser(id){
+    alert("Delete successfully !")
+    this.Aservice.deleteUser(id)
+    this.refresh()
+  }
+  blockUser(id){
+    alert("Successfully !")
+    this.Aservice.blockUser(id)
+    this.refresh()
+  }
+  refresh(): void {
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
+    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    //window.location.reload();
   }
 }
