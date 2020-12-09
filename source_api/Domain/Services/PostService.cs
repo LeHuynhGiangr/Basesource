@@ -55,6 +55,7 @@ namespace Domain.Services
                         JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
                         JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,
+                        Convert.ToBase64String(post.User.Avatar),
                         post.User.Id.ToString()));
             }
             return l_postResponses;
@@ -71,6 +72,7 @@ namespace Domain.Services
                 JsonSerializer.Deserialize<object>(l_post.LikeObjectsJson ?? "[]"),
                 JsonSerializer.Deserialize<object>(l_post.CommentObjectsJson ?? "[]"),
                 l_post.User.FirstName + " " + l_post.User.LastName,
+                Convert.ToBase64String(l_post.User.Avatar),
                 l_post.User.Id.ToString()
                 );
             return l_postResponse;
@@ -91,6 +93,7 @@ namespace Domain.Services
                         JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
                         JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,
+                        Convert.ToBase64String(post.User.Avatar),
                         post.User.Id.ToString()));
             }
             return l_postResponses;
