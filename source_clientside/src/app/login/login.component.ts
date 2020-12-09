@@ -42,10 +42,9 @@ export class LoginComponent implements OnInit {
     });
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
     const user = await this.service.getUser() as any;
-    if(user){
-        UserProfile.Avatar = user["avatar"];
-    }
     if (user) {
+      UserProfile.Avatar = user["avatar"];
+      console.log(UserProfile.Id)
       return this.m_router.navigateByUrl("/", { skipLocationChange: true });
     }
   }
@@ -70,7 +69,10 @@ export class LoginComponent implements OnInit {
     //       this.m_loading=false;
     //     }
     //   });
-    
+    this.loginSubmit()
+  
+  }
+  loginSubmit(){
     this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then(async (result) => {
       if (result) {
         const user = await this.service.getUser() as any;
@@ -83,14 +85,11 @@ export class LoginComponent implements OnInit {
       }
       else
         alert('Username or Password incorrect !');
-      UserProfile.Id = result["id"].toString()
     }).catch((error) => {
       this.m_error = error;
       this.m_loading = false;
     });
-
   }
-
   getPath() {
     return this.m_router.url;
   }

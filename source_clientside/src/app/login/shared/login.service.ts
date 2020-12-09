@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { SystemConstants } from 'src/app/_core/common/system.constants';
+import { UserProfile } from 'src/app/_core/data-repository/profile';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class LoginService {
 
     getUser = async () => {
         try {
-       
+
             // const config = {
             //     headers: {
             //         Authorization: this.getConfigToken()
@@ -31,6 +32,7 @@ export class LoginService {
             //const result = await this.http.get(this.urlAPI + '/user/load', config).toPromise();
             const result = await this.http.get(this.urlAPI + '/user/load').toPromise();
             this.currentUser.next(result);
+            UserProfile.Id= this.getUserIdStorage(); // no no, casi user/load ẩn id rồi, been get user nay auto tra ve 0000, get ben login thu
             return result;
         }
         catch (e) {
@@ -77,6 +79,7 @@ export class LoginService {
 
             if (res) {
                 this.setToken(res.jwtToken);
+                this.saveUserIdStorage(res["id"]);
                 await this.getUser();
             }
             return res;
@@ -89,6 +92,15 @@ export class LoginService {
     logout = () => {
         this.removeToken();
         this.currentUser.next(null);
+    }
+
+    saveUserIdStorage = (userId: string) => {
+        localStorage.setItem('userId', userId)
+        console.log(userId);
+    }
+
+    getUserIdStorage = () => {
+        return localStorage.getItem('userId').toString();
     }
 
     setToken = (token) => {
