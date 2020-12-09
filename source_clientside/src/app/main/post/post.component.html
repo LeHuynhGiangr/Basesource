@@ -2,7 +2,7 @@
     <div class="friend-info">
         <figure>
             <!-- <img src="assets/images/resources/friend-avatar10.jpg" alt=""> -->
-            <img src="uriHandler.getImageSource(postData.authorThumb)" alt="">
+            <img [src]="uriHandler.getImageSource(postData.authorThumb)" alt="">
         </figure>
         <div class="friend-name">
             <ins><a href="time-line.html" title="">{{postData.authorName}}</a></ins>
