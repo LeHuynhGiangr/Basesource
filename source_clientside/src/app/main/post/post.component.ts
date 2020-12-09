@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/_core/models/Post';
 import { UtilityService } from 'src/app/_core/services/utility.service';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 
@@ -9,17 +10,7 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  @Input() public  postData:{
-    id:number,
-    dateCreated:string,
-    content:string,
-    imageUri?:string,
-    likeJson:{count:number, subjects:{Id:string, Name:string}[]},
-    commentJson:{Id:string, Name:string, Comment:string}[],
-    authorName:string,
-    authorThumb?:string,
-    authorId:string
-  }
+  @Input() public  postData:Post
   constructor(public m_utility:UtilityService, public uriHandler:UriHandler) { }
 
   ngOnInit(): void {

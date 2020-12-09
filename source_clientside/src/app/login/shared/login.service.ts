@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
+import { SystemConstants } from 'src/app/_core/common/system.constants';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
-    private urlAPI = 'https://localhost:44350/';
+    //private urlAPI = 'https://localhost:44350/';
+    private urlAPI = ApiUrlConstants.API_URL;
     private currentUser: BehaviorSubject<any>
 
     constructor(private http: HttpClient) {
@@ -20,12 +23,13 @@ export class LoginService {
     getUser = async () => {
         try {
        
-            const config = {
-                headers: {
-                    Authorization: this.getConfigToken()
-                }
-            }
-            const result = await this.http.get(this.urlAPI + 'user/load', config).toPromise();
+            // const config = {
+            //     headers: {
+            //         Authorization: this.getConfigToken()
+            //     }
+            // }
+            //const result = await this.http.get(this.urlAPI + '/user/load', config).toPromise();
+            const result = await this.http.get(this.urlAPI + '/user/load').toPromise();
             this.currentUser.next(result);
             return result;
         }
@@ -43,7 +47,7 @@ export class LoginService {
             const formData = new FormData();
             formData.append('email', email);
 
-            return await this.http.post(this.urlAPI + "otp/send-email-otp", formData).toPromise();
+            return await this.http.post(this.urlAPI + "/otp/send-email-otp", formData).toPromise();
 
         }
         catch (e) {
@@ -54,7 +58,7 @@ export class LoginService {
     postUser = async (users) => {
         try {
             console.log(users);
-            return await this.http.post(this.urlAPI + "identity/register", users).toPromise();
+            return await this.http.post(this.urlAPI + "/identity/register", users).toPromise();
 
         }
         catch (e) {
@@ -69,7 +73,7 @@ export class LoginService {
                 password
             };
             console.log("Login Successfully !");
-            const res = await this.http.post(`${this.urlAPI}identity/authenticate`, data, { withCredentials: true }).toPromise() as any;
+            const res = await this.http.post(`${this.urlAPI}/identity/authenticate`, data, { withCredentials: true }).toPromise() as any;
 
             if (res) {
                 this.setToken(res.jwtToken);
@@ -88,15 +92,15 @@ export class LoginService {
     }
 
     setToken = (token) => {
-        localStorage.setItem('token', token);
+        localStorage.setItem(SystemConstants.LOCAL_STORED_JWT_Key, token);
     };
 
     removeToken = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem(SystemConstants.LOCAL_STORED_JWT_Key);
     }
 
     getToken = () => {
-        return localStorage.getItem('token');
+        return localStorage.getItem(SystemConstants.LOCAL_STORED_JWT_Key);
     };
 
     getConfigToken = () => {

@@ -8,23 +8,15 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { MatDialog } from '@angular/material/dialog';
 import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
+import { Post } from 'src/app/_core/models/Post';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
     styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit {
-  public m_posts:{
-    id:number,
-    dateCreated:string,
-    content:string,
-    imageUri?:string,
-    likeJson:{count:number, subjects:{Id:string, Name:string}[]},
-    commentJson:{Id:string, Name:string, Comment:string}[],
-    authorName:string,
-    authorThumb?:string,
-    authorId:string
-  }[];
+  public m_posts:Post[];
 
   public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
@@ -43,11 +35,18 @@ export class NewsfeedComponent implements OnInit {
     console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.Avatar = user["avatar"];
     this.getProfile(user);
+    
   }
 
   loadPostData(){
-      this.m_postService.getPost().subscribe(jsonData=>this.m_posts=jsonData);
+      this.m_postService.getPost().subscribe((jsonData:Post[])=>this.m_posts=jsonData);
   }
+
+  createPost(newPost:CreatePostRequest){
+    if(!newPost)return;
+    //const createPostRequest:CreatePostRequest
+  }
+
   getProfile(user)
   {   
     UserProfile.Id = user["id"].toString();

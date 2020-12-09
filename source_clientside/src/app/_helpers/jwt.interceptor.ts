@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiUrlConstants } from '../_core/common/api-url.constants';
+import { SystemConstants } from '../_core/common/system.constants';
 import { AuthenService } from '../_core/services/authen.service';
 
 @Injectable()
@@ -10,12 +11,12 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //throw new Error('Method not implemented.');
-        const l_user = this.m_authenService.currentUser;
-        const l_isLoggedIn = l_user && l_user.jwtToken;
+        //const l_user = this.m_authenService.currentUser;
+        const l_authorBearer = localStorage.getItem(SystemConstants.LOCAL_STORED_JWT_Key)
         const l_isApiUrl = req.url.startsWith(ApiUrlConstants.API_URL);
-        if (l_isLoggedIn && l_isApiUrl) {
+        if (l_authorBearer && l_isApiUrl) {
             req = req.clone({
-                setHeaders: { Authorization: `Bearer ${l_user.jwtToken}` }
+                headers: req.headers.set('Authorization', `Bearer ${l_authorBearer}`)
             });
         }
 
