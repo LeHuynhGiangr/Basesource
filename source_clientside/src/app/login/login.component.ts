@@ -77,7 +77,6 @@ export class LoginComponent implements OnInit {
       if (result) {
         const user = await this.service.getUser() as any;
         UserProfile.Avatar = user["avatar"];
-        alert('Login Successfully');
         // this.m_authenService.startRefreshTokenTimer();
         this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
         

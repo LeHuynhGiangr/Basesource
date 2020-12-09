@@ -74,13 +74,18 @@ export class LoginService {
                 username,
                 password
             };
-            console.log("Login Successfully !");
+            
             const res = await this.http.post(`${this.urlAPI}/identity/authenticate`, data, { withCredentials: true }).toPromise() as any;
-
-            if (res) {
+            if(res["active"]==true)
+            {
+                alert("Login successfully")
                 this.setToken(res.jwtToken);
                 this.saveUserIdStorage(res["id"]);
                 await this.getUser();
+            }
+            else
+            {
+                alert("Account is blocked")
             }
             return res;
         }
