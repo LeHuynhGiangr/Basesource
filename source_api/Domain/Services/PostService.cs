@@ -23,7 +23,8 @@ namespace Domain.Services
             try
             {
                 Guid l_newPostGuidId = Guid.NewGuid();
-                Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.UTF8.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
+                //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
+                Post l_newPost = new Post(l_newPostGuidId, model.Status, Convert.FromBase64String(model.Base64Str), System.Guid.Parse(model.UserId));
                 m_postRepository.Add(l_newPost);
                 m_postRepository.SaveChanges();
                 return GetById(l_newPostGuidId);
