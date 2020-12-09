@@ -21,18 +21,19 @@ namespace API
             m_next = next;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext, EFRepository<Data.Entities.User, Guid> userRepository)
+        public async Task InvokeAsync(HttpContext httpContext)
         {
             var l_jwtToken = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (l_jwtToken != null)
             {
-                await AttachRoleToContext(httpContext, userRepository, l_jwtToken);
+                //await AttachRoleToContext(httpContext, l_jwtToken);
+                AttachRoleToContext(httpContext, l_jwtToken);
             }
             await m_next(httpContext);
         }
 
-        private async Task AttachRoleToContext(HttpContext httpContext, EFRepository<Data.Entities.User, Guid> userRepository, string token)
+        private void AttachRoleToContext(HttpContext httpContext, string token)
         {
             try
             {
@@ -51,10 +52,11 @@ namespace API
 
                 var l_jwtToken = (JwtSecurityToken)securityToken;
                 var l_accountId = l_jwtToken.Claims.First(_ => _.Type == "unique_name").Value;
+                var l_roleId = l_jwtToken.Claims.First(_ => _.Type == "role").Value;
 
-                var l_user = await userRepository.FindByIdAsyn(System.Guid.Parse(l_accountId.ToString()));
+                //var l_user = await userRepository.FindByIdAsyn(System.Guid.Parse(l_accountId.ToString()));
 
-                httpContext.Items["Role"] = (int)l_user.Role;//set "Role" item in httpcontex
+                httpContext.Items["Role"] = Int32.Parse(l_roleId);//set "Role" item in httpcontex
                 httpContext.Items["Id"] = l_accountId;
             }
             catch
