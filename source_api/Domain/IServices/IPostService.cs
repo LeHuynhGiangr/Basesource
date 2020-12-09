@@ -14,5 +14,6 @@ namespace Domain.IServices
         PostResponse Create(CreatePostRequest model);
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
+        void DeletePostByUserId(Guid id);
     }
 }

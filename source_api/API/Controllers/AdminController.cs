@@ -16,7 +16,7 @@ namespace API.Controllers
     public class AdminController:ControllerBase
     {
         private IUserService<Guid> m_userService;//dependency injection/
-
+        private IPostService<Guid> m_postService;
         //Parameter DI/
         public AdminController(IUserService<Guid> userService)
         {
@@ -42,6 +42,7 @@ namespace API.Controllers
         {
             try
             {
+                m_postService.DeletePostByUserId(id);
                 m_userService.DeleteUser(id);
                 return Ok("Delete user successfully");
             }

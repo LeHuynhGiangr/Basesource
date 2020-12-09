@@ -94,5 +94,15 @@ namespace Domain.Services
             }
             return l_postResponses;
         }
+        public void DeletePostByUserId(Guid id)
+        {
+            var l_posts = m_postRepository.FindMultiple(_ => _.User.Id.Equals(id), _ => _.User);
+            List<PostResponse> l_postResponses = new List<PostResponse>();
+            foreach (Post post in l_posts)
+            {
+                m_postRepository.Remove(post);
+            }
+            m_postRepository.SaveChanges();
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace Domain.Services
             m_userRepository.Update(l_user);
             m_userRepository.SaveChanges();
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_jwtToken, l_refreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active ,l_jwtToken, l_refreshToken.Token);
         }
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
@@ -96,7 +96,7 @@ namespace Domain.Services
             // generate new jwt
             var l_jwtToken = GenerateJwtToken(l_user);
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_jwtToken, l_newRefreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active, l_jwtToken, l_newRefreshToken.Token);
         }
 
         //get new JWT and new refresh token
@@ -253,7 +253,8 @@ namespace Domain.Services
             try
             {
                 User l_user = m_userRepository.FindById(id);
-                if(l_user == null) {
+                if (l_user == null)
+                {
                     throw new Exception("can not find user");
                 }
                 return new UserResponse
@@ -271,22 +272,22 @@ namespace Domain.Services
                     FollowMe = l_user.FollowMe,
                     Location = l_user.Location,
                     BirthDay = l_user.BirthDay,
-                    RequestFriend =l_user.RequestFriend,
-                    ViewListFriend=l_user.ViewListFriend,
-                    ViewTimeLine=l_user.ViewTimeLine,
-                    Works=l_user.Works,
-                    AcademicLevel=l_user.AcademicLevel,
-                    AddressAcademic=l_user.AddressAcademic,
-                    DescriptionAcademic=l_user.DescriptionAcademic,
-                    StudyingAt=l_user.StudyingAt,
-                    FromDate=l_user.FromDate,
-                    ToDate=l_user.ToDate,
-                    Hobby=l_user.Hobby,
-                    Language=l_user.Language,
+                    RequestFriend = l_user.RequestFriend,
+                    ViewListFriend = l_user.ViewListFriend,
+                    ViewTimeLine = l_user.ViewTimeLine,
+                    Works = l_user.Works,
+                    AcademicLevel = l_user.AcademicLevel,
+                    AddressAcademic = l_user.AddressAcademic,
+                    DescriptionAcademic = l_user.DescriptionAcademic,
+                    StudyingAt = l_user.StudyingAt,
+                    FromDate = l_user.FromDate,
+                    ToDate = l_user.ToDate,
+                    Hobby = l_user.Hobby,
+                    Language = l_user.Language,
                     Role = l_user.Role
                 };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -308,38 +309,6 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        //public async void SendEmail(string mailAddress, string content)
-        //{
-
-        //    var client = new System.Net.Mail.SmtpClient("smtp.example.com", 111);
-        //    client.UseDefaultCredentials = false;
-        //    client.EnableSsl = true;
-        //    client.Port = 587;
-        //    client.Host = "smtp.gmail.com";
-
-        //    client.Credentials = new System.Net.NetworkCredential("cauviewchome3@gmail.com", "cqxouerrcxzbnxdv");
-
-        //    var mailMessage = new System.Net.Mail.MailMessage();
-        //    mailMessage.From = new System.Net.Mail.MailAddress("cauviewchome3@gmail.com");
-
-        //    mailMessage.To.Add(mailAddress);
-
-        //    if (!string.IsNullOrEmpty(mailAddress))
-        //    {
-        //        mailMessage.CC.Add(mailAddress);
-        //    }
-
-        //    mailMessage.Body = content;
-
-        //    mailMessage.Subject = "Confirm Email Social Network";
-
-        //    mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
-        //    mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
-
-        //    await client.SendMailAsync(mailMessage);
-        //}
-
-        //public void UploadAvatar(Guid id, IFormFile avatar)
         public void UploadAvatar(Guid id, MemoryStream avatar)
         {
             User user = m_userRepository.FindById(id);
@@ -358,17 +327,13 @@ namespace Domain.Services
         {
             User user = m_userRepository.FindById(id);
 
-            //var ms = new MemoryStream();
-            //avatar.CopyTo(ms);
-
             var fileBytes = background.ToArray();
-            //string dataBytes = Convert.ToBase64String(fileBytes);
 
             user.Background = fileBytes;
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
-        public void UploadUserProfile(Guid id,UpdateUserRequest model)
+        public void UploadUserProfile(Guid id, UpdateUserRequest model)
         {
             User user = m_userRepository.FindById(id);
             var l_user = user;
@@ -452,7 +417,7 @@ namespace Domain.Services
         {
             User user = m_userRepository.FindById(id);
 
-            user.Active =!user.Active;
+            user.Active = !user.Active;
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
             if (user.Active == true)
