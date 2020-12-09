@@ -101,6 +101,34 @@ namespace API
             app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
 
+            //try using websocket
+            app.UseWebSockets(new WebSocketOptions { 
+                KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
+                ReceiveBufferSize= 1024*4 // 1024 byte * 4 = 4kb
+            });
+
+            app.Use(async (context, next) => {
+                if (context.Request.Path == "/ws")// websocket only accepts request for /ws
+                {
+                    if (context.WebSockets.IsWebSocketRequest)
+                    {
+                        using (System.Net.WebSockets.WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())//using webSocket:WebSocket to send and receive messages
+                        {
+
+                            await new WebSocketHelpers.SendReceiveHandler().Echo(context, webSocket);//main handling
+                        }
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 400;
+                    }
+                }
+                else
+                {
+                    await next();
+                }
+            });
+
             app.UseEndpoints(_ => _.MapControllers());
         }
     }
@@ -110,4 +138,6 @@ namespace API
  * https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-3.1
  * https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
  * problems: WWW-Authenticate, cofiguring authentication schema in asp.net core
+ * 
+ * websocket -> ref:https://docs.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-3.1
  */
