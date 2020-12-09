@@ -49,7 +49,6 @@ export class NewsfeedComponent implements OnInit {
 
   getProfile(user)
   {   
-    UserProfile.Id = user["id"].toString();
     UserProfile.FirstName = user["firstName"]
     UserProfile.LastName = user["lastName"]
     UserProfile.Avatar = user["avatar"]
@@ -83,6 +82,7 @@ export class NewsfeedComponent implements OnInit {
   }
   onLogout() {
     this.service.logout();
+
     this.router.navigateByUrl('/login');
   }
   openDialog(): void {

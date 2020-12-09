@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenService } from '../_core/services/authen.service';
 import { UrlConstants } from '../_core/common/url.constants';
 import { first } from 'rxjs/operators';
-
+import { UserProfile } from './../_core/data-repository/profile'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -40,14 +40,14 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
-
     const user = await this.service.getUser() as any;
-    console.log(user)
-      if (user) {
-        return this.m_router.navigateByUrl("/", { skipLocationChange: true });
-      }
+    if(user){
+        UserProfile.Avatar = user["avatar"];
+    }
+    if (user) {
+      return this.m_router.navigateByUrl("/", { skipLocationChange: true });
+    }
   }
 
   private get m_formValue() {
@@ -70,18 +70,20 @@ export class LoginComponent implements OnInit {
     //       this.m_loading=false;
     //     }
     //   });
-
-    this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then((result) => {
+    
+    this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then(async (result) => {
       if (result) {
+        const user = await this.service.getUser() as any;
+        UserProfile.Avatar = user["avatar"];
         alert('Login Successfully');
         // this.m_authenService.startRefreshTokenTimer();
         this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
-
+        
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
       }
       else
         alert('Username or Password incorrect !');
-      console.log(result);
+      UserProfile.Id = result["id"].toString()
     }).catch((error) => {
       this.m_error = error;
       this.m_loading = false;

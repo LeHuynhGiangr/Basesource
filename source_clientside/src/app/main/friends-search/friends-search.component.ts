@@ -33,7 +33,7 @@ export class FriendsSearchComponent implements OnInit {
         this.router.navigateByUrl('/login');
     }
     public getUserList = async () => {
-        console.log(UserProfile.UserName)
+        console.log(UserProfile.Id)
         this.users = await this.Sservice.getAllUsers(UserProfile.Name);
         for (let i = 0; i < this.users.length; i++) {
             let user = new AppUsers();
@@ -42,10 +42,9 @@ export class FriendsSearchComponent implements OnInit {
             user.LastName = this.users[i].lastName;
             user.Descriptions = this.users[i].description
             user.Avatar = this.users[i].avatar
-            user.UserName = this.users[i].userName
-            if(this.users[i].userName==UserProfile.UserName)
+            if(this.users[i].id==UserProfile.Id)
             {
-                i=i+1;
+                console.log("trung roi")
             }
             else
             {
