@@ -7,6 +7,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { EditWorkService } from './shared/edit-work.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 @Component({
   selector: 'app-edit-work',
@@ -30,19 +31,19 @@ export class EditWorkComponent implements OnInit {
 
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Id = user["id"].toString();
-    console.log(user["firstName"] + " " + user["lastName"]);
-    this.appUsers.FirstName = user["firstName"]
-    this.appUsers.LastName = user["lastName"]
-    this.appUsers.Avatar = user["avatar"]
-    this.appUsers.AcademicLevel = user["academicLevel"]
-    this.appUsers.AddressAcademic = user["addressAcademic"]
-    this.appUsers.DescriptionAcademic = user["descriptionAcademic"]
-    this.appUsers.StudyingAt = user["studyingAt"]
-    this.appUsers.FromDate = user["fromDate"]
-    this.appUsers.ToDate = user["toDate"]
-    this.appUsers.Background = user["background"];
+    //var user = await this.service.getUser();
+    this.appUsers.Id = UserProfile.Id.toString();
+    //console.log(user["firstName"] + " " + user["lastName"]);
+    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.AcademicLevel = UserProfile.AcademicLevel
+    this.appUsers.AddressAcademic = UserProfile.AddressAcademic
+    this.appUsers.DescriptionAcademic = UserProfile.DescriptionAcademic
+    this.appUsers.StudyingAt = UserProfile.StudyingAt
+    this.appUsers.FromDate = UserProfile.FromDate
+    this.appUsers.ToDate = UserProfile.ToDate
+    this.appUsers.Background = UserProfile.Background
   }
     getPath() {
       return this.router.url;
@@ -63,9 +64,9 @@ export class EditWorkComponent implements OnInit {
         console.log(result);
         this.service.getUser().then(user => {
           if (user) {
-            console.log(user["firstName"] + " " + user["lastName"]);
-            this.appUsers.Id = user["id"].toString();
-            this.appUsers.Avatar = user["avatar"]
+            //console.log(user["firstName"] + " " + user["lastName"]);
+            this.appUsers.Id = UserProfile.Id.toString()
+            this.appUsers.Avatar = UserProfile.Avatar
           }
         });
       });
@@ -75,12 +76,12 @@ export class EditWorkComponent implements OnInit {
       console.log('!!', value);
       this.appUsers.AcademicLevel = value;
     }
-    onSave() {
+    async onSave() {
       try {
         const lelveElement = document.querySelector("#level");
         this.appUsers.AcademicLevel = (<HTMLInputElement>lelveElement).value;
         const formData = new FormData();
-        formData.append('id', this.appUsers.Id);
+        formData.append('id', UserProfile.Id);
         if (1) {
           formData.append('academicLevel', this.appUsers.AcademicLevel);
           formData.append('studyingAt', this.appUsers.StudyingAt);
@@ -88,8 +89,17 @@ export class EditWorkComponent implements OnInit {
           formData.append('addressAcademic', this.appUsers.AddressAcademic);
           formData.append('fromDate', this.appUsers.FromDate.toString());
           formData.append('toDate', this.appUsers.ToDate.toString());
-          this.EWService.updateAcademic(this.appUsers.Id, formData);
+          this.EWService.updateAcademic(UserProfile.Id.toString(), formData);
           alert("Upload succesfully !")
+
+          //Refresh user after edit interest
+          var user = await this.service.getUser();
+          UserProfile.AcademicLevel = user["academicLevel"]
+          UserProfile.StudyingAt = user["studyingAt"]
+          UserProfile.DescriptionAcademic = user["descriptionAcademic"]
+          UserProfile.AddressAcademic = user["addressAcademic"]
+          UserProfile.FromDate = user["fromDate"]
+          UserProfile.ToDate = user["toDate"]
           this.refresh();
         }
         else {
@@ -118,8 +128,8 @@ export class EditWorkComponent implements OnInit {
         this.service.getUser().then(user => {
           if (user) {
             console.log(user["firstName"] + " " + user["lastName"]);
-            this.appUsers.Id = user["id"].toString();
-            this.appUsers.Background = user["background"]
+            this.appUsers.Id = UserProfile.Id.toString()
+            this.appUsers.Background = UserProfile.Background
           }
         });
   

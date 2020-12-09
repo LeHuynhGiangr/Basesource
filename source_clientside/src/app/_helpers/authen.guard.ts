@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { LoginService } from '../login/shared/login.service';
 import { UrlConstants } from '../_core/common/url.constants';
+import { UserProfile } from '../_core/data-repository/profile';
 import { AuthenService } from '../_core/services/authen.service';
 
 @Injectable({ providedIn: 'root' })
@@ -23,8 +24,8 @@ export class AuthenGuard implements CanActivate {
         //     this.m_router.navigateByUrl("/login", {skipLocationChange:true});
         //     return false;
         // }
+        
         const user = this.service.getCurrrentUser();
-
         if (user) {
             if (user["role"] == 1) {
                 return true;

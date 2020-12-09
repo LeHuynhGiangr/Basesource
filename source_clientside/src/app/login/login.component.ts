@@ -41,11 +41,10 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
-    const user = await this.service.getUser() as any;
-    if (user) {
+    if (UserProfile.Id!=null) {
+      const user = await this.service.getUser() as any;
       UserProfile.Avatar = user["avatar"];
-      console.log(UserProfile.Id)
-      return this.m_router.navigateByUrl("/", { skipLocationChange: true });
+      return this.m_router.navigateByUrl("/main", { skipLocationChange: true });
     }
   }
 
@@ -78,7 +77,7 @@ export class LoginComponent implements OnInit {
         const user = await this.service.getUser() as any;
         UserProfile.Avatar = user["avatar"];
         // this.m_authenService.startRefreshTokenTimer();
-        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/';
+        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main';
         
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
       }
