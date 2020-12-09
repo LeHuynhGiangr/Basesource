@@ -48,6 +48,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogPostComponent } from './post/dialog-post/dialog-post.component';
 import {MatButtonModule} from '@angular/material/button';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
 export const mainRoutes: Routes = [
 
   {path:'home', component:NewsfeedComponent},//main entry point
@@ -129,6 +130,7 @@ export const mainRoutes: Routes = [
     TimelineComponent,
     VideosComponent,
     WidgetsComponent,
+    ChatBoxComponent,
   ],
   imports: [
     CommonModule, 

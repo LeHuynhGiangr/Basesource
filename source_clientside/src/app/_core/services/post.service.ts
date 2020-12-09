@@ -22,9 +22,7 @@ export class PostService {
   }
 
   createPost(createPostRequest:CreatePostRequest):Observable<Post>{
-    return this.m_http.post<Post>(this.postUrl, createPostRequest, {
-
-    }).pipe(catchError(this.handleError));
+    return this.m_http.post<Post>(this.postUrl, createPostRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
   }
 
   private handleError(error:HttpErrorResponse){

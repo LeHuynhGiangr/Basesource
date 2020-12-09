@@ -44,6 +44,7 @@ export class NewsfeedComponent implements OnInit {
 
   createPost(newPost:CreatePostRequest){
     if(!newPost)return;
+    this.m_postService.createPost(newPost).subscribe((jsonData:Post)=>this.m_posts.unshift(jsonData));
     //const createPostRequest:CreatePostRequest
   }
 
@@ -95,12 +96,16 @@ export class NewsfeedComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-        }
-      });
+      if(dialogRef.componentInstance.isCloseByCancelBtn==0){
+        const base64String=dialogRef.componentInstance.m_image;
+        const createPostRequest: CreatePostRequest={
+          userId:localStorage.getItem('userId').toString(),
+          status: dialogRef.componentInstance.m_status,
+          base64Str:base64String || "",
+        };
+
+        this.createPost(createPostRequest);
+      }
     });
   }
 }

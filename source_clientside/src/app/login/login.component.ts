@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
       else
         alert('Username or Password incorrect !');
     }).catch((error) => {
-      this.m_error = error;
+      this.m_error = error; 
       this.m_loading = false;
     });
   }
