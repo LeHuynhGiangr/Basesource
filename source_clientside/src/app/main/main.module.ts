@@ -33,6 +33,7 @@ import { NewpageComponent } from './newpage/newpage.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PeopleNearbyComponent } from './people-nearby/people-nearby.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { TripComponent } from './trip/trip.component';
 import { VideosComponent } from './videos/videos.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { HeaderComponent } from '../layout/header/header.component';
@@ -48,7 +49,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogPostComponent } from './post/dialog-post/dialog-post.component';
 import {MatButtonModule} from '@angular/material/button';
-import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { TripDialogComponent } from './trip/trip-dialog/trip-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+import { AddFriendDialogComponent } from './trip/addfriend-dialog/addfriend-dialog.component';
+import {MatListModule} from '@angular/material/list';
 export const mainRoutes: Routes = [
 
   {path:'home', component:NewsfeedComponent},//main entry point
@@ -77,6 +81,7 @@ export const mainRoutes: Routes = [
   {path:'newpage', component:NewpageComponent},
   {path:'notifications', component:NotificationsComponent},
   {path:'people-nearby', component:PeopleNearbyComponent},
+  {path:'trip', component:TripComponent},
   {path:'timeline', component:TimelineComponent},
   {path:'videos', component:VideosComponent},
   {path:'widgets', component:WidgetsComponent},
@@ -128,9 +133,11 @@ export const mainRoutes: Routes = [
     NotificationsComponent,
     PeopleNearbyComponent,
     TimelineComponent,
+    TripComponent,
+    TripDialogComponent,
     VideosComponent,
     WidgetsComponent,
-    ChatBoxComponent,
+    AddFriendDialogComponent
   ],
   imports: [
     CommonModule, 
@@ -139,6 +146,8 @@ export const mainRoutes: Routes = [
     MatFormFieldModule,
     FormsModule,
     MatButtonModule,
+    MatSelectModule,
+    MatListModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

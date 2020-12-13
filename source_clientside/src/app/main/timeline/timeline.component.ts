@@ -28,13 +28,16 @@ export class TimelineComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
-    //const user = await this.service.getUser();
+    //this.service.getUser();
     //console.log(user)
     this.appUsers.Id=UserProfile.Id
     this.appUsers.FirstName=UserProfile.FirstName
     this.appUsers.LastName=UserProfile.LastName
     this.appUsers.Avatar = UserProfile.Avatar
     this.appUsers.Background = UserProfile.Background
+    // this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+    //   return false;
+    // }
   }
   getPath() {
     return this.router.url;
@@ -77,7 +80,6 @@ export class TimelineComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);

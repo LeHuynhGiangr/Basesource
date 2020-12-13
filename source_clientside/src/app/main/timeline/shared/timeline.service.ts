@@ -12,21 +12,15 @@ export class TimeLineService {
     }
     uploadAvatar = async (iduser, formData) => {
         try {
-            console.log(iduser);
-             const config = {
-                headers: {
-                    Authorization: this.service.getConfigToken()
-                }
-            }
-            return await this.http.put(this.urlAPI + "user/avatar/" + iduser ,formData, config).toPromise();            
+
+            return await this.http.put(this.urlAPI + "user/avatar/" + iduser ,formData).toPromise();            
         }
         catch (e) {
-            console.log(e);
+            console.log("ok");
         }
     }
     uploadBackground = async (iduser, formData) => {
         try {
-            console.log(iduser);
              const config = {
                 headers: {
                     Authorization: this.service.getConfigToken()
@@ -35,7 +29,7 @@ export class TimeLineService {
             return await this.http.put(this.urlAPI + "user/background/" + iduser ,formData, config).toPromise();            
         }
         catch (e) {
-            console.log(e);
+            console.log("ok");
         }
     }
 }

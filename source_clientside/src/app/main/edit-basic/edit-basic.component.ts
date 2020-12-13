@@ -93,6 +93,7 @@ export class EditBasicComponent implements OnInit {
         UserProfile.BirthDay = user["birthDay"]
         UserProfile.Gender = user["gender"]
         UserProfile.PhoneNumber = user["phoneNumber"]
+        UserProfile.Description = user["description"]
         this.refresh();
       }
       else

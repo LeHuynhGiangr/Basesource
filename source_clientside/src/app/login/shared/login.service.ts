@@ -32,7 +32,7 @@ export class LoginService {
             //const result = await this.http.get(this.urlAPI + '/user/load', config).toPromise();
             const result = await this.http.get(this.urlAPI + '/user/load').toPromise();
             this.currentUser.next(result);
-            UserProfile.Id= this.getUserIdStorage(); // no no, casi user/load ẩn id rồi, been get user nay auto tra ve 0000, get ben login thu
+            UserProfile.Id= this.getUserIdStorage(); 
             return result;
         }
         catch (e) {
