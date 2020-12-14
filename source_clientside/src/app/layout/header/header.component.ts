@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = UserProfile.Avatar
+      this.appUsers.Id = UserProfile.Id
     }
     getPath(){
       return this.router.url;
@@ -51,12 +52,17 @@ export class HeaderComponent implements OnInit {
                 this.userList.push(user);
             }
         }
-      this.refresh()
+      //this.refresh()
     }
-    refresh(): void {
-      this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/friends-search';
+    getNavigation( id) {
+      this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
+      UserProfile.IdTemp = UserProfile.Id
       this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-      //window.location.reload();
+    }
+
+    returnId()
+    {
+      UserProfile.IdTemp = UserProfile.Id
     }
 }
 

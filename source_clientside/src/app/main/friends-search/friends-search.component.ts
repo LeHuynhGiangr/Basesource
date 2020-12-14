@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
@@ -15,22 +15,23 @@ export class FriendsSearchComponent implements OnInit {
 
     public appUsers: AppUsers;
     public users:any
+    public m_returnUrl: string;
     public userList = new Array<AppUsers>();
-    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService
-    ,public uriHandler:UriHandler, public Sservice:SearchService) {}
+    constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService
+    ,public uriHandler:UriHandler, public Sservice:SearchService,private m_route: ActivatedRoute, private m_router: Router) {}
     async ngOnInit() {
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.src = "../assets/js/script.js";
         this.elementRef.nativeElement.appendChild(script);
         this.getUserList()
-        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+        this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
             return false;
         }
     }
     onLogout() {
         this.service.logout();
-        this.router.navigateByUrl('/login');
+        this.m_router.navigateByUrl('/login');
     }
     public getUserList = async () => {
         console.log(UserProfile.Id)
@@ -52,4 +53,10 @@ export class FriendsSearchComponent implements OnInit {
             }
         }
       }
+
+    getNavigation( id) {
+        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
+        UserProfile.IdTemp = id.toString()
+        this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    }
 }

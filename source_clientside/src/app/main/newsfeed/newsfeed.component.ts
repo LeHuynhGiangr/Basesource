@@ -32,8 +32,7 @@ export class NewsfeedComponent implements OnInit {
 
     this.appUsers = new AppUsers();
     var user = await this.service.getUser();
-    console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.Avatar = user["avatar"];
+    this.appUsers.Avatar = UserProfile.Avatar;
     this.getProfile(user);
     
   }

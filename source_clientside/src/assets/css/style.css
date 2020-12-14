@@ -4481,7 +4481,9 @@ canvas {
     float: none;
     margin-bottom: 15px;
 }
-
+.linked-location {
+    width: 200px;
+}
 .align-left {
     float: left;
     margin-right: 20px;
@@ -4509,6 +4511,7 @@ canvas {
 .align-right {
     float: right;
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 

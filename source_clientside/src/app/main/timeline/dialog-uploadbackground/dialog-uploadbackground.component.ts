@@ -74,7 +74,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
   }
   
   refresh(): void {
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline';
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/images';
     this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     //window.location.reload();
   }

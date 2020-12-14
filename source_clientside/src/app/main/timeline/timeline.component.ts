@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
@@ -16,25 +16,40 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
 })
 export class TimelineComponent implements OnInit {
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-    private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog,public uriHandler:UriHandler) {
+  constructor(private router: Router, private route: ActivatedRoute, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
+    private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog, public uriHandler: UriHandler) {
 
   }
 
   async ngOnInit() {
-    this.appUsers = new AppUsers();
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.appUsers = new AppUsers();
+    console.log(UserProfile.IdTemp)
+    console.log(UserProfile.Id)
+    if(UserProfile.Id==UserProfile.IdTemp)
+    {
+      this.appUsers.Id = UserProfile.Id
+      this.appUsers.FirstName = UserProfile.FirstName
+      this.appUsers.LastName = UserProfile.LastName
+      this.appUsers.Avatar = UserProfile.Avatar
+      this.appUsers.Background = UserProfile.Background
+    }
+    if(UserProfile.Id!=UserProfile.IdTemp)
+    {
+      const user =await this.service.getUserById(UserProfile.IdTemp)
+      console.log(user)
+      this.appUsers.FirstName = user["firstName"]
+      this.appUsers.LastName = user["lastName"]
+      this.appUsers.Avatar = user["avatar"]
+      this.appUsers.Background = user["background"]
+    }
     //this.service.getUser();
     //console.log(user)
-    this.appUsers.Id=UserProfile.Id
-    this.appUsers.FirstName=UserProfile.FirstName
-    this.appUsers.LastName=UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
-    this.appUsers.Background = UserProfile.Background
+
     // this.router.routeReuseStrategy.shouldReuseRoute = () =>{
     //   return false;
     // }

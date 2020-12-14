@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from './../../login/shared/login.service';
@@ -16,7 +16,8 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
 export class VideosComponent implements OnInit {
 
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, public dialog: MatDialog,
+  public m_returnUrl: string;
+  constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, public dialog: MatDialog,
   public uriHandler:UriHandler) {
     
   }
@@ -28,18 +29,30 @@ export class VideosComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    this.appUsers.FirstName=UserProfile.FirstName;
-    this.appUsers.LastName=UserProfile.LastName;
-    this.appUsers.Avatar = UserProfile.Avatar;
-    this.appUsers.Background = UserProfile.Background;
-  }
-  getPath(){
-    return this.router.url;
+    console.log(UserProfile.IdTemp)
+    console.log(UserProfile.Id)
+    if(UserProfile.Id==UserProfile.IdTemp)
+    {
+      this.appUsers.FirstName=UserProfile.FirstName;
+      this.appUsers.LastName=UserProfile.LastName;
+      this.appUsers.Avatar = UserProfile.Avatar;
+      this.appUsers.Background = UserProfile.Background;
+    }
+
+    if(UserProfile.Id!=UserProfile.IdTemp)
+    {
+      const user =await this.service.getUserById(UserProfile.IdTemp)
+      console.log(user)
+      this.appUsers.FirstName = user["firstName"]
+      this.appUsers.LastName = user["lastName"]
+      this.appUsers.Avatar = user["avatar"]
+      this.appUsers.Background = user["background"]
+    }
   }
 
   onLogout() {
     this.service.logout();
-    this.router.navigateByUrl('/login');
+    this.m_router.navigateByUrl('/login');
   }
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]
@@ -82,5 +95,9 @@ export class VideosComponent implements OnInit {
       });
 
     });
+  }
+  public getNavigation( id) {
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
+    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
   }
 }

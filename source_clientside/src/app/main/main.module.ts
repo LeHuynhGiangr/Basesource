@@ -19,8 +19,8 @@ import { GroupsSearchComponent } from './groups-search/groups-search.component';
 
 /*start group home */
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
-import {ListNavigationComponent} from './list-navigation/list-navigation.component';
-import {RightSidebarListFriendComponent} from './right-sidebar-list-friend/right-sidebar-list-friend.component';
+import { ListNavigationComponent } from './list-navigation/list-navigation.component';
+import { RightSidebarListFriendComponent } from './right-sidebar-list-friend/right-sidebar-list-friend.component';
 /**end group home */
 
 import { InboxComponent } from './inbox/inbox.component';
@@ -48,48 +48,50 @@ import { CommentAreaComponent } from './post/comment-area/comment-area.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogPostComponent } from './post/dialog-post/dialog-post.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { TripDialogComponent } from './trip/trip-dialog/trip-dialog.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { AddFriendDialogComponent } from './trip/addfriend-dialog/addfriend-dialog.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
 export const mainRoutes: Routes = [
 
-  {path:'home', component:NewsfeedComponent},//main entry point
+  { path: 'home', component: NewsfeedComponent },//main entry point
 
   /* ------------------------------------------- */
-  {path: '', redirectTo:'home',pathMatch:'full'},
-  {path:'about', component:AboutComponent},
-  {path:'contact', component:ContactComponent},
-  {path:'edit-basic', component:EditBasicComponent},
-  {path:'edit-hobby', component:EditHobbyComponent},
-  {path:'edit-password', component:EditPasswordComponent},
-  {path:'edit-setting', component:EditSettingComponent},
-  {path:'edit-work', component:EditWorkComponent},
-  {path:'friends', component:FriendsComponent},
-  {path:'friends-search', component:FriendsSearchComponent},
-  {path:'fanpage', component:FanpageComponent},
-  {path:'faq', component:FaqComponent},
-  {path:'groups', component:GroupsComponent},
-  {path:'groups-search', component:GroupsSearchComponent},
-  {path:'inbox', component:InboxComponent},
-  {path:'images', component:ImagesComponent},
-  {path:'insights', component:InsightsComponent},
-  {path:'knowledge', component:KnowledgeComponent},
-  {path:'likers', component:LikersComponent},
-  {path:'messages', component:MessagesComponent},
-  {path:'newpage', component:NewpageComponent},
-  {path:'notifications', component:NotificationsComponent},
-  {path:'people-nearby', component:PeopleNearbyComponent},
-  {path:'trip', component:TripComponent},
-  {path:'timeline', component:TimelineComponent},
-  {path:'videos', component:VideosComponent},
-  {path:'widgets', component:WidgetsComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'edit-basic', component: EditBasicComponent },
+  { path: 'edit-hobby', component: EditHobbyComponent },
+  { path: 'edit-password', component: EditPasswordComponent },
+  { path: 'edit-setting', component: EditSettingComponent },
+  { path: 'edit-work', component: EditWorkComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'friends-search', component: FriendsSearchComponent },
+  { path: 'fanpage', component: FanpageComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'groups', component: GroupsComponent },
+  { path: 'groups-search', component: GroupsSearchComponent },
+  { path: 'inbox', component: InboxComponent },
+  { path: 'images', component: ImagesComponent },
+  { path: 'insights', component: InsightsComponent },
+  { path: 'knowledge', component: KnowledgeComponent },
+  { path: 'likers', component: LikersComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'newpage', component: NewpageComponent },
+  { path: 'notifications', component: NotificationsComponent },
+  { path: 'people-nearby', component: PeopleNearbyComponent },
+  { path: 'trip', component: TripComponent },
+  { path: 'timeline/:id', component: TimelineComponent },
+  //{ path: 'timeline', component: TimelineComponent },
+  { path: 'videos', component: VideosComponent },
+  { path: 'widgets', component: WidgetsComponent },
 ];
 
 @NgModule({
   declarations: [
-    MainComponent, 
+    MainComponent,
     HeaderComponent,
     FooterComponent,
     AboutComponent,
@@ -137,10 +139,11 @@ export const mainRoutes: Routes = [
     TripDialogComponent,
     VideosComponent,
     WidgetsComponent,
-    AddFriendDialogComponent
+    AddFriendDialogComponent,
+    ChatBoxComponent,
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
@@ -153,5 +156,4 @@ export const mainRoutes: Routes = [
     }),
     RouterModule.forChild(mainRoutes),],
 })
-export class MainModule {}
- 
+export class MainModule { }

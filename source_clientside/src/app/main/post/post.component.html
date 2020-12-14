@@ -5,7 +5,7 @@
             <img [src]="uriHandler.getImageSource(postData.authorThumb)" alt="">
         </figure>
         <div class="friend-name">
-            <ins><a href="time-line.html" title="">{{postData.authorName}}</a></ins>
+            <ins><a (click)="getNavigation(postData.authorId)" [routerLink]="['/timeline/:', postData.authorId]" title="">{{postData.authorName}}</a></ins>
             <span>published: {{postData.dateCreated}}</span>
         </div>
         <!-- <div class="post-meta">

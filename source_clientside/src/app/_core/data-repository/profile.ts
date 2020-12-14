@@ -1,5 +1,6 @@
 export class UserProfile {
     public static Id:string=''
+    public static IdTemp:string=''
     public static FirstName:string=''
     public static LastName:string=''
     public static Avatar:string=''

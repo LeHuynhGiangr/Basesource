@@ -21,6 +21,16 @@ export class LoginService {
         return this.currentUser.value;
     }
 
+    getUserById = async (id) => {
+        try {
+            const result = await this.http.get(this.urlAPI + '/user/timeline-user/' + id).toPromise();
+            return result
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     getUser = async () => {
         try {
 
@@ -32,7 +42,7 @@ export class LoginService {
             //const result = await this.http.get(this.urlAPI + '/user/load', config).toPromise();
             const result = await this.http.get(this.urlAPI + '/user/load').toPromise();
             this.currentUser.next(result);
-            UserProfile.Id= this.getUserIdStorage(); 
+            UserProfile.Id = this.getUserIdStorage();
             return result;
         }
         catch (e) {
@@ -74,17 +84,15 @@ export class LoginService {
                 username,
                 password
             };
-            
+
             const res = await this.http.post(`${this.urlAPI}/identity/authenticate`, data, { withCredentials: true }).toPromise() as any;
-            if(res["active"]==true)
-            {
+            if (res["active"] == true) {
                 alert("Login successfully")
                 this.setToken(res.jwtToken);
                 this.saveUserIdStorage(res["id"]);
                 await this.getUser();
             }
-            else
-            {
+            else {
                 alert("Account is blocked")
             }
             return res;

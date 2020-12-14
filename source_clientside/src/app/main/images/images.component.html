@@ -35,13 +35,13 @@
 								  <span>My Photos</span>
 								</li>
 								<li>
-									<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
+									<a class="" (click)="getNavigation(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
 									<a class="active" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
 									<a class="" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
 									<a class="" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>
 									<a class="" [routerLink]="['/main/groups']" title="" data-ripple="">Groups</a>
 									<a class="" [routerLink]="['/main/about']" title="" data-ripple="">about</a>
-									<a class="" href="#" title="" data-ripple="">more</a>
+									<a class="" [routerLink]="['/main/about']" title="" data-ripple="">more</a>
 								</li>
 							</ul>
 						</div>
