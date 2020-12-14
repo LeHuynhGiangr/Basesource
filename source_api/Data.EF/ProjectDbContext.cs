@@ -55,6 +55,22 @@ namespace Data.EF
             builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_=> new { _.UserId, _.RoleId});
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
+
+            builder.Entity<UserJoinTrip>().HasKey(sc => new { sc.TripId, sc.UserId });
+
+            builder.Entity<UserJoinTrip>()
+                .HasOne(sc => sc.User)
+                .WithMany(s => s.UserJoinTrips)
+                .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<UserJoinTrip>()
+                .HasOne(sc => sc.Trip)
+                .WithMany(s => s.UserJoinTrips)
+                .HasForeignKey(sc => sc.TripId).OnDelete(DeleteBehavior.Restrict);
+
+            // builder.Entity<UserJoinTrip>().HasMany(i => i.User).WithRequired().WillCascadeOnDelete(false);
+
             //end configure
 
             //seeding data by extension method

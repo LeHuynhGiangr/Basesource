@@ -65,9 +65,11 @@ namespace API
             //configure Dependency Injection for services
             services.AddScoped<EFRepository<User, Guid>, EFRepository<User, Guid>>();
             services.AddScoped<EFRepository<Post, Guid>, EFRepository<Post, Guid>>();
-            
+            services.AddScoped<EFRepository<Trip, Guid>, EFRepository<Trip, Guid>>();
+
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<IPostService<Guid>, PostService>();
+            services.AddScoped<ITripService<Guid>, TripService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

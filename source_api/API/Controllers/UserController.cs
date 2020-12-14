@@ -320,6 +320,20 @@ namespace API
                 return StatusCode(503);//service unavailable
             }
         }
+
+        [HttpGet("timeline-user/{id:guid}")]
+        public ActionResult<IEnumerable<UserResponse>> GetUserByQuery(Guid id)
+        {
+            try
+            {
+                var l_userResponse = m_userService.GetById(id);
+                return Ok(l_userResponse);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });//service unavailable
+            }
+        }
         //[Authorize]
         //[HttpGet("{id:int}")]
         //public ActionResult<AccountResponse> GetById(int id)

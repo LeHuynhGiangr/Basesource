@@ -58,7 +58,7 @@ namespace Data.Entities
 
         //collection navigation
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
-
+        public IList<UserJoinTrip> UserJoinTrips { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
 
         //public virtual ICollection<Friend> Friends { get; set; }
