@@ -12,8 +12,12 @@ export class TimeLineService {
     }
     uploadAvatar = async (iduser, formData) => {
         try {
-
-            return await this.http.put(this.urlAPI + "user/avatar/" + iduser ,formData).toPromise();            
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            return await this.http.put(this.urlAPI + "user/avatar/" + iduser ,formData,config ).toPromise();            
         }
         catch (e) {
             console.log("ok");

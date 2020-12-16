@@ -2,12 +2,17 @@
 <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Trip Name</mat-label>
-      <input matInput placeholder="Ex. Vung Tau Trip" value="">
+      <input matInput placeholder="Ex. Vung Tau Trip" name="Name" type="text" id="input" required="required" [(ngModel)]="this.Name" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
-        <textarea style="height: 100px;" matInput placeholder="Ex. It makes me feel..."></textarea>
+        <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
     </mat-form-field>
+    <div class="form-group">
+        <h2>Image</h2>
+        <img [src]="url" height="200"> <br/>
+        <input type='file' accept="image/*" (change)="onSelectFile($event)">
+     </div>
     <mat-label><strong>Location</strong></mat-label>
     <iframe allowfullscreen frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEBGNYcsskKEZ3wzdxCicHWrz_XAOnC3o&amp;q=University+of+Technology+and+Education+Ho+Chi+Minh+city%2C+V%C3%B5+V%C4%83n+Ng%C3%A2n%2C+Linh+Chi%E1%BB%83u%2C+Th%E1%BB%A7+%C4%90%E1%BB%A9c%2C+Ho+Chi+Minh+City&amp;zoom=15"width="500px" height="460px"></iframe>
 </form>

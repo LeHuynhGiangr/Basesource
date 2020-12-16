@@ -23,6 +23,11 @@ export class LoginService {
 
     getUserById = async (id) => {
         try {
+            const config = {
+                headers: {
+                    Authorization: this.getConfigToken()
+                }
+            }
             const result = await this.http.get(this.urlAPI + '/user/timeline-user/' + id).toPromise();
             return result
         }
