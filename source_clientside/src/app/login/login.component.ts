@@ -88,13 +88,7 @@ export class LoginComponent implements OnInit {
       this.m_loading = false;
     });
   }
-  getPath() {
-    return this.m_router.url;
-  }
 
-  clear() {
-    //clear input after register
-  }
 
   onChangeGender = (event: any) => {
     this.appUsers.Gender = event.target.value;

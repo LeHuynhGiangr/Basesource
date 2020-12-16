@@ -9,6 +9,7 @@ import { EditInterestService } from './shared/edit-hobby.service';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
@@ -19,7 +20,7 @@ export class EditHobbyComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService,public uriHandler:UriHandler) {
+  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService,public uriHandler:UriHandler, public timelineurl:TimelineUrl) {
     
   }
   
@@ -40,9 +41,7 @@ export class EditHobbyComponent implements OnInit {
     this.appUsers.Hobby = UserProfile.Hobby
     this.appUsers.Background = UserProfile.Background
   }
-  getPath(){
-    return this.router.url;
-  }
+
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]
   }

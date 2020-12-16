@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
   selector: 'app-edit-work',
   templateUrl: './edit-work.component.html',
@@ -19,7 +20,7 @@ export class EditWorkComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc, private service: LoginService, public dialog: MatDialog,
-    private EWService: EditWorkService, private m_router: Router, private m_route: ActivatedRoute,public uriHandler:UriHandler) {
+    private EWService: EditWorkService, private m_router: Router, private m_route: ActivatedRoute,public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
 
   }
 

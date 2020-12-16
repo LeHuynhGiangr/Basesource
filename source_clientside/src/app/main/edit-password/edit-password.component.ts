@@ -9,6 +9,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-edit-password',
     templateUrl: './edit-password.component.html',
@@ -19,7 +20,7 @@ export class EditPasswordComponent implements OnInit {
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  private EPservice:EditPasswordService,private m_route: ActivatedRoute, private m_router: Router,public uriHandler:UriHandler) {
+  private EPservice:EditPasswordService,private m_route: ActivatedRoute, private m_router: Router,public uriHandler:UriHandler, public timelineurl:TimelineUrl) {
     
   }
   
@@ -37,9 +38,6 @@ export class EditPasswordComponent implements OnInit {
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = UserProfile.Avatar
     this.appUsers.Background = UserProfile.Background
-  }
-  getPath(){
-    return this.router.url;
   }
 
   onFileChanged(event) {

@@ -77,9 +77,6 @@ export class NewsfeedComponent implements OnInit {
     UserProfile.Address = user["address"]
     UserProfile.UserName = user["userName"]
   }
-  getPath(){
-    return this.router.url;
-  }
   onLogout() {
     this.service.logout();
 

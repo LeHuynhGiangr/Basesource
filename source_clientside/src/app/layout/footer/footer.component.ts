@@ -13,7 +13,4 @@ export class FooterComponent implements OnInit {
     ngOnInit() {
 
     }
-    getPath(){
-      return this.router.url;
-    }
 }

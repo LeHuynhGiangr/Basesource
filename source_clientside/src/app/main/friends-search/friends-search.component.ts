@@ -35,7 +35,7 @@ export class FriendsSearchComponent implements OnInit {
     }
     public getUserList = async () => {
         console.log(UserProfile.Id)
-        this.users = await this.Sservice.getAllUsers(UserProfile.Name);
+        this.users = await this.Sservice.getAllUsersByName(UserProfile.Name);
         for (let i = 0; i < this.users.length; i++) {
             let user = new AppUsers();
             user.Id = this.users[i].id.toString();

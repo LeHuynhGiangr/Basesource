@@ -17,7 +17,4 @@ export class ContactComponent implements OnInit {
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
     }
-    getPath(){
-      return this.router.url;
-    }
 }

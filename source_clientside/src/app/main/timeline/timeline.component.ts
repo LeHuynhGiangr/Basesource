@@ -9,6 +9,7 @@ import { DialogUploadAvatarComponent } from './dialog-uploadavatar/dialog-upload
 import { DialogUploadBackgroundComponent } from './dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -16,8 +17,10 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
 })
 export class TimelineComponent implements OnInit {
   public appUsers: AppUsers;
+  compareId: boolean;
   constructor(private router: Router, private route: ActivatedRoute, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-    private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog, public uriHandler: UriHandler) {
+    private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog, public uriHandler: UriHandler,
+    public timelineurl:TimelineUrl) {
 
   }
 
@@ -32,6 +35,7 @@ export class TimelineComponent implements OnInit {
     console.log(UserProfile.Id)
     if(UserProfile.Id==UserProfile.IdTemp)
     {
+      this.compareId =true
       this.appUsers.Id = UserProfile.Id
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
@@ -40,6 +44,7 @@ export class TimelineComponent implements OnInit {
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
+      this.compareId =false
       const user =await this.service.getUserById(UserProfile.IdTemp)
       console.log(user)
       this.appUsers.FirstName = user["firstName"]

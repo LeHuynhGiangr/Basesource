@@ -8,6 +8,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-groups',
     templateUrl: './groups.component.html',
@@ -17,8 +18,9 @@ export class GroupsComponent implements OnInit {
 
   public appUsers: AppUsers;
   public m_returnUrl: string;
+  compareId: boolean;
   constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  public uriHandler:UriHandler) {
+  public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
     
   }
   
@@ -31,6 +33,7 @@ export class GroupsComponent implements OnInit {
     this.appUsers = new AppUsers();
     if(UserProfile.Id==UserProfile.IdTemp)
     {
+      this.compareId =true
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
       this.appUsers.Avatar = UserProfile.Avatar
@@ -38,6 +41,7 @@ export class GroupsComponent implements OnInit {
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
+      this.compareId =false
       const user =await this.service.getUserById(UserProfile.IdTemp)
       console.log(user)
       this.appUsers.Id = UserProfile.IdTemp
@@ -94,9 +98,5 @@ export class GroupsComponent implements OnInit {
         });
   
       });
-    }
-    public getNavigation( id) {
-      this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
-      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
 }

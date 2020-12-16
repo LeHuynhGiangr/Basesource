@@ -5,6 +5,7 @@ import { LoginService } from './../../login/shared/login.service';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { SearchService } from '../../main/friends-search/shared/friends-search.service';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -17,7 +18,7 @@ export class HeaderComponent implements OnInit {
     public users:any
     public userList = new Array<AppUsers>();
     constructor(private router: Router ,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
-      public Sservice:SearchService) {}
+      public Sservice:SearchService,public timelineurl:TimelineUrl) {}
 
     async ngOnInit() {
       //var user = await this.service.getUser();
@@ -25,16 +26,13 @@ export class HeaderComponent implements OnInit {
       this.appUsers.Avatar = UserProfile.Avatar
       this.appUsers.Id = UserProfile.Id
     }
-    getPath(){
-      return this.router.url;
-    }
     onLogout() {
       this.service.logout();
       this.router.navigateByUrl('/login');
     }
     async search(){
       UserProfile.Name = this.NameSearch
-      this.users = await this.Sservice.getAllUsers(UserProfile.Name);
+      this.users = await this.Sservice.getAllUsersByName(UserProfile.Name);
         for (let i = 0; i < this.users.length; i++) {
             let user = new AppUsers();
             user.Id = this.users[i].id.toString();
@@ -53,11 +51,6 @@ export class HeaderComponent implements OnInit {
             }
         }
       //this.refresh()
-    }
-    getNavigation( id) {
-      this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
-      UserProfile.IdTemp = UserProfile.Id
-      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
 
     returnId()

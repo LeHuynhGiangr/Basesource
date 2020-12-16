@@ -8,6 +8,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-videos',
     templateUrl: './videos.component.html',
@@ -17,8 +18,9 @@ export class VideosComponent implements OnInit {
 
   public appUsers: AppUsers;
   public m_returnUrl: string;
+  compareId: boolean;
   constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, public dialog: MatDialog,
-  public uriHandler:UriHandler) {
+  public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
     
   }
   
@@ -33,6 +35,7 @@ export class VideosComponent implements OnInit {
     console.log(UserProfile.Id)
     if(UserProfile.Id==UserProfile.IdTemp)
     {
+      this.compareId =true
       this.appUsers.FirstName=UserProfile.FirstName;
       this.appUsers.LastName=UserProfile.LastName;
       this.appUsers.Avatar = UserProfile.Avatar;
@@ -41,8 +44,8 @@ export class VideosComponent implements OnInit {
 
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
+      this.compareId = false
       const user =await this.service.getUserById(UserProfile.IdTemp)
-      console.log(user)
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
       this.appUsers.Avatar = user["avatar"]

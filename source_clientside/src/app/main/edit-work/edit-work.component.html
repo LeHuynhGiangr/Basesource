@@ -35,7 +35,7 @@
 										<span>My Academic</span>
 									</li>
 									<li>
-										<a class="" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
+										<a class="" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
 										<a class="" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
 										<a class="" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
 										<a class="" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>

@@ -2,11 +2,11 @@
 	<section>
 			<div class="feature-photo">
 				<figure><img [src]="uriHandler.getImageSource(this.appUsers.Background)" style="width: 1600px; height: 450px;" alt=""></figure>
-				<div class="add-btn">
+				<div class="add-btn" *ngIf="this.compareId === false">
 					<span>1205 followers</span>
 					<a href="#" title="" data-ripple="">Add Friend</a>
 				</div>
-				<form class="edit-phto" (click)="openDialogBackground()">
+				<form class="edit-phto" (click)="openDialogBackground()" *ngIf="this.compareId === true">
 					<i class="fa fa-camera-retro"></i>
 					<label class="fileContainer">
 						Edit Cover Photo
@@ -18,7 +18,7 @@
 							<div class="user-avatar">
 								<figure>
 									<img [src]="uriHandler.getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="">
-									<form class="edit-phto" (click)=openDialog()>
+									<form class="edit-phto" (click)=openDialog() *ngIf="this.compareId === true">
 										<i class="fa fa-camera-retro"></i>
 										<label class="fileContainer">
 											Edit Display Photo
@@ -35,7 +35,7 @@
 										<span>My Groups</span>
 									</li>
 									<li>
-										<a class="" (click)="getNavigation(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
+										<a class="" (click)="timelineurl.getNavigation(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
 										<a class="" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
 										<a class="" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
 										<a class="" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>
@@ -143,7 +143,7 @@
 													<h4><a href="time-line.html" title="">funparty</a></h4>
 													<span>public group</span>
 													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -156,7 +156,7 @@
 													<h4><a href="time-line.html" title="">ABC News</a></h4>
 													<span>Private group</span>
 													<em>5M Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -169,7 +169,7 @@
 													<h4><a href="time-line.html" title="">SEO Zone</a></h4>
 													<span>Public group</span>
 													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -182,7 +182,7 @@
 													<h4><a href="time-line.html" title="">Max Us</a></h4>
 													<span>Public group</span>
 													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -195,7 +195,7 @@
 													<h4><a href="time-line.html" title="">Banana Group</a></h4>
 													<span>Friends Group</span>
 													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -208,7 +208,7 @@
 													<h4><a href="time-line.html" title="">Bad boys n Girls</a></h4>
 													<span>Public group</span>
 													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -221,7 +221,7 @@
 													<h4><a href="time-line.html" title="">Bachelor's fun</a></h4>
 													<span>Public Group</span>
 													<em>500 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>
@@ -234,7 +234,7 @@
 													<h4><a href="time-line.html" title="">Max Us</a></h4>
 													<span>Public group</span>
 													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">leave group</a>
+													<a href="#" title="" class="add-butn" data-ripple="" *ngIf="this.compareId === true">leave group</a>
 												</div>
 											</div>
 										</li>

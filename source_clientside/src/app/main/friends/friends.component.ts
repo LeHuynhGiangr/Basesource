@@ -8,6 +8,8 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { FriendService } from './shared/friends.service';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
@@ -17,8 +19,11 @@ export class FriendsComponent implements OnInit {
 
   public appUsers: AppUsers;
   public m_returnUrl: string;
+  public users:any
+  public userList = new Array<AppUsers>();
+  compareId: boolean;
   constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog
-  ,public uriHandler:UriHandler) {
+  ,public uriHandler:UriHandler,private FService:FriendService, public timelineurl:TimelineUrl) {
     
   }
   
@@ -33,13 +38,16 @@ export class FriendsComponent implements OnInit {
     console.log(UserProfile.Id)
     if(UserProfile.Id==UserProfile.IdTemp)
     {
+      this.compareId =true
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
       this.appUsers.Avatar = UserProfile.Avatar
       this.appUsers.Background = UserProfile.Background
+      this.getUserList()
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
+      this.compareId =false
       const user =await this.service.getUserById(UserProfile.IdTemp)
       console.log(user)
       this.appUsers.Id = UserProfile.IdTemp
@@ -47,6 +55,9 @@ export class FriendsComponent implements OnInit {
       this.appUsers.LastName = user["lastName"]
       this.appUsers.Avatar = user["avatar"]
       this.appUsers.Background = user["background"]
+      this.appUsers.ViewListFriend = user["viewListFriend"]
+      if(this.appUsers.ViewListFriend==true)
+        this.getUserList()
     }
     }
 
@@ -97,8 +108,24 @@ export class FriendsComponent implements OnInit {
   
       });
     }
-    public getNavigation( id) {
-      this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
-      this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    public getUserList = async () => {
+      console.log(UserProfile.Id)
+      this.users = await this.FService.getAllFriends();
+      for (let i = 0; i < this.users.length; i++) {
+          let user = new AppUsers();
+          user.Id = this.users[i].id.toString();
+          user.FirstName = this.users[i].firstName;
+          user.LastName = this.users[i].lastName;
+          user.Descriptions = this.users[i].description
+          user.Avatar = this.users[i].avatar
+          if(this.users[i].id==UserProfile.Id)
+          {
+              console.log("trung roi")
+          }
+          else
+          {
+              this.userList.push(user);
+          }
+      }
     }
 }

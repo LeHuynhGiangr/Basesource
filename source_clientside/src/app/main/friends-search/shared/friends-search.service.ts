@@ -10,7 +10,7 @@ export class SearchService {
     constructor(private http: HttpClient,private service : LoginService) {
 
     }
-    getAllUsers = async (Name) => {
+    getAllUsersByName = async (Name) => {
         try {
        
             const config = {

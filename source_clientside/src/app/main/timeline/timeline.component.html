@@ -2,11 +2,11 @@
 	<section>
 		<div class="feature-photo">
 			<figure><img [src]="uriHandler.getImageSource(this.appUsers.Background)" style="width: 1600px; height: 450px;" alt=""></figure>
-			<div class="add-btn">
+			<div class="add-btn" *ngIf="this.compareId === false">
 				<span>1205 followers</span>
-				<!--<a href="#" title="" data-ripple="">Add Friend</a>-->
+				<a href="#" title="" data-ripple="">Add Friend</a>
 			</div>
-			<form class="edit-phto" (click)="openDialogBackground()">
+			<form class="edit-phto" (click)="openDialogBackground()" *ngIf="this.compareId === true">
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
 					Edit Cover Photo
@@ -19,7 +19,7 @@
 						<div class="user-avatar">
 							<figure>
 								<img [src]="uriHandler.getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="" >
-								<form class="edit-phto" (click)=openDialog()>
+								<form class="edit-phto" (click)=openDialog() *ngIf="this.compareId === true">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
 										Edit Display Photo
@@ -36,7 +36,7 @@
 								  <span>My Timeline</span>
 								</li>
 								<li>
-									<a class="active" [routerLink]="['/main/timeline']" title="" data-ripple="">time line</a>
+									<a class="active" (click)="timelineurl.getNavigation(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
 									<a class="" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
 									<a class="" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
 									<a class="" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>

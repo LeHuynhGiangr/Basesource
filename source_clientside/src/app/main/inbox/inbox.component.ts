@@ -8,6 +8,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-inbox',
     templateUrl: './inbox.component.html',
@@ -17,7 +18,7 @@ export class InboxComponent implements OnInit {
 
     public appUsers: AppUsers;
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService,public dialog: MatDialog ,
-    public uriHandler:UriHandler) {}
+    public uriHandler:UriHandler,public timelineurl:TimelineUrl) {}
 
     async ngOnInit() {
       var script = document.createElement("script");
@@ -26,8 +27,6 @@ export class InboxComponent implements OnInit {
       this.elementRef.nativeElement.appendChild(script);
 
       this.appUsers = new AppUsers();
-      //var user = await this.service.getUser();
-      //console.log(user["firstName"]+" "+user["lastName"]);
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
       this.appUsers.Avatar = UserProfile.Avatar
@@ -78,5 +77,9 @@ export class InboxComponent implements OnInit {
         });
   
       });
+    }
+    returnId()
+    {
+      UserProfile.IdTemp = UserProfile.Id
     }
 }

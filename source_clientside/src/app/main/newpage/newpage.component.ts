@@ -8,6 +8,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-newpage',
     templateUrl: './newpage.component.html',
@@ -17,7 +18,7 @@ export class NewpageComponent implements OnInit {
 
   public appUsers: AppUsers;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  public uriHandler:UriHandler) {
+  public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
     
   }
   

@@ -9,6 +9,7 @@ import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dia
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
@@ -20,7 +21,7 @@ export class EditBasicComponent implements OnInit {
   public m_returnUrl: string;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
     private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog
-    ,public uriHandler:UriHandler) {
+    ,public uriHandler:UriHandler, public timelineurl:TimelineUrl) {
   }
   
   async ngOnInit() {
@@ -50,9 +51,6 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend
     this.appUsers.ViewTimeLine = UserProfile.ViewTimeLine
     //this.datePipe.transform(this.appUsers.BirthDay,"yyyy-MM-dd")
-  }
-  getPath(){
-    return this.router.url;
   }
   onSubmit() {
     console.log('title is:');
@@ -153,5 +151,10 @@ export class EditBasicComponent implements OnInit {
       });
 
     });
+  }
+  getNavigation( id) {
+    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
+    UserProfile.IdTemp = UserProfile.Id
+    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
   }
 }
