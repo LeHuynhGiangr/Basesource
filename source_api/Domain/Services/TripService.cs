@@ -5,6 +5,7 @@ using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace Domain.Services
@@ -43,28 +44,34 @@ namespace Domain.Services
                         trip.Id,
                         trip.DateCreated,
                         trip.Description,
-                        trip.User.Id.ToString());
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name);
             return tripResponse;
         }
 
-        public void Create(CreateTripRequest model)
+        public TripResponse Create(CreateTripRequest model, MemoryStream image)
         {
             try
             {
                 Guid l_newTripGuidId = Guid.NewGuid();
+                var fileBytes = image.ToArray();
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Trip l_newTrip = new Trip
                 {
-                    Id = l_newTripGuidId, //chắc ko, giảng bận sợ hỏi này quạu, thôi làm time line trc nha, cái này tối t mò thử
+                    Id = l_newTripGuidId, 
                     Name = model.Name,
-                    UserId = System.Guid.Parse("26865c8c-2918-4804-9888-95e853236d2d"),
+                    UserId = model.UserId,
                     DateCreated = DateTime.Now,
                     Location = 0,
+                    Image = fileBytes,
                     Description = model.Description
                 };
 
                 m_tripRepository.Add(l_newTrip);
                 m_tripRepository.SaveChanges();
+
+                return GetById(l_newTripGuidId);
             }
             catch
             {
@@ -85,7 +92,9 @@ namespace Domain.Services
                         trip.Id,
                         trip.DateCreated,
                         trip.Description,
-                        trip.User.Id.ToString()));
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name));
             }
             return l_tripResponses;
         }
@@ -104,8 +113,9 @@ namespace Domain.Services
                         trip.Id,
                         trip.DateCreated,
                         trip.Description,
-                        trip.User.Id.ToString()
-                        ));
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name));
             }
             return l_tripResponses;
         }

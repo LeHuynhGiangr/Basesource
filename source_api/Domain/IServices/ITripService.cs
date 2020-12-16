@@ -2,6 +2,7 @@
 using Domain.DomainModels.API.ResponseModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Domain.IServices
@@ -11,7 +12,7 @@ namespace Domain.IServices
         IEnumerable<TripResponse> GetAll();
         IEnumerable<TripResponse> GetTripsByUserId<IdType>(IdType id);
         TripResponse GetById(T id);
-        void Create(CreateTripRequest model);
+        TripResponse Create(CreateTripRequest model, MemoryStream image);
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         void DeleteByUserId(Guid id);

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helpers;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
+    [RoleBaseAuthorize(Data.Enums.ERole.User, Data.Enums.ERole.Admin)]
     [Route("trip")]
     public class TripController : ControllerBase
     {
@@ -35,11 +38,12 @@ namespace API.Controllers
         }
 
         //get posts of user
-        [HttpGet("{id:guid}")]
-        public IActionResult LoadTripsById(Guid id)
+        [HttpGet("load")]
+        public IActionResult LoadTripsById()
         {
             try
             {
+                System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 var tripResponses  = _service.GetTripsByUserId(id);
                 return Ok(tripResponses);
             }
@@ -50,11 +54,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePost([FromBody] CreateTripRequest createTripRequest)
+        public IActionResult CreateTrip([FromForm] CreateTripRequest createTripRequest, IFormFile image)
         {
             try
             {
-                 _service.Create(createTripRequest);
+                System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_memStream = new System.IO.MemoryStream();
+                image.CopyTo(l_memStream);
+                createTripRequest.UserId = id;
+                _service.Create(createTripRequest,l_memStream);
                 return Ok("Create successfully");
             }
             catch (Exception e)
