@@ -11,7 +11,7 @@ import { AppUsers } from '../../../login/shared/login.model';
   styleUrls: ['./comment-area.component.css']
 })
 export class CommentAreaComponent implements OnInit {
-  @Input() commentJson:{Id:string, Name:string, Comment:string}[]
+  @Input() commentJson:{Id:string, Name:string, avarThumb:string, Comment:string}[]
   public m_returnUrl: string;
   public appUsers: AppUsers;
   constructor(public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute, private m_router: Router) { }
