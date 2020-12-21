@@ -21,7 +21,7 @@ namespace Data.EF
         //start declare entities 
         public override DbSet<User> Users { get; set; }
         public override DbSet<Role> Roles { get; set; }
-        public DbSet<PostMedia> PostMedias { get; set; }
+        public DbSet<UserMedia> UserMedias { get; set; }
         public DbSet<PostComment> PostComments { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Notification> Notifications { get; set; }
