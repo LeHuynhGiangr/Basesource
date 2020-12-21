@@ -7,6 +7,7 @@ import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { ImageService } from '../../images/shared/images.service';
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
@@ -19,7 +20,8 @@ export class DialogUploadBackgroundComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler) {
+    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
+    public Iservice:ImageService) {
 
   }
   onNoClick(): void {
@@ -31,6 +33,9 @@ export class DialogUploadBackgroundComponent implements OnInit {
     var user = await this.service.getUser();
     this.appUsers.Background = user["background"]
     this.appUsers.Id=user["id"]
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
   }
 
   //display image before upload
@@ -48,7 +53,20 @@ export class DialogUploadBackgroundComponent implements OnInit {
       this.background = event.target.files[0];
     }
   }
+  async saveImage()
+  {
+      const formData = new FormData();
+      if (Image) {
+        formData.append('media', this.background);
+        this.Iservice.postImage(formData);
+        this.dialogRef.close();
+      }
+      else
+      {
+        alert("Upload failure !")
+      }
 
+  }
   async onSave() {
     try{
       const formData = new FormData();
@@ -56,11 +74,12 @@ export class DialogUploadBackgroundComponent implements OnInit {
       if (Image) {
         formData.append('background', this.background);
         this.timeLineService.uploadBackground(this.appUsers.Id, formData);
+        this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
         var user = await this.service.getUser();
         UserProfile.Background = user["background"]
-        this.refresh()
+        //this.refresh()
       }
       else
       {

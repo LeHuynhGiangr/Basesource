@@ -34,6 +34,8 @@ import { TripService } from './shared/trip.service';
         var user = await this.service.getUser();
         console.log(user["firstName"]+" "+user["lastName"]);
         this.appUsers.Avatar = UserProfile.Avatar
+        this.appUsers.Id = UserProfile.Id
+        console.log(this.appUsers.Id)
         this.getTripList()
         this.router.routeReuseStrategy.shouldReuseRoute = () =>{
            return false;

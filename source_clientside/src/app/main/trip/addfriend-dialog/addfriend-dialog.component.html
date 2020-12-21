@@ -1,12 +1,15 @@
 <h2><strong>Add Friends</strong></h2>
-<mat-selection-list #shoes>
-    <mat-list-option *ngFor="let shoe of typesOfShoes">
-      {{shoe}}
+<mat-selection-list #users>
+    <mat-list-option *ngFor="let user of userList">
+      {{user.FirstName+ " "+user.LastName}}
+      <figure>
+        <a  title=""><img [src]="uriHandler.getImageSource(user.Avatar)" style="width:20px; height:20px;" alt=""></a>
+    </figure>
     </mat-list-option>
 </mat-selection-list>
   
 <p>
-    Friends selected: {{shoes.selectedOptions.selected.length}}
+    Friends selected: {{users.selectedOptions.selected.length}}
 </p>
 <div mat-dialog-actions class="myDiv">
     <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>

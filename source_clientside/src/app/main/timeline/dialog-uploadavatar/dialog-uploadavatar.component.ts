@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../shared/DialogData';
 import { LoginService } from '../../../login/shared/login.service';
+import { ImageService } from '../../images/shared/images.service';
 import { TimeLineService } from '../shared/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class DialogUploadAvatarComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler) {
+    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
+    public Iservice:ImageService) {
 
   }
   onNoClick(): void {
@@ -31,6 +33,9 @@ export class DialogUploadAvatarComponent implements OnInit {
     var user = await this.service.getUser();
     this.appUsers.Avatar = user["avatar"];
     this.appUsers.Id=UserProfile.Id
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
   }
 
 
@@ -50,6 +55,20 @@ export class DialogUploadAvatarComponent implements OnInit {
     }
   }
 
+  async saveImage()
+  {
+      const formData = new FormData();
+      if (Image) {
+        formData.append('media', this.avatar);
+        this.Iservice.postImage(formData);
+        this.dialogRef.close();
+      }
+      else
+      {
+        alert("Upload failure !")
+      }
+
+  }
   async onSave() {
     try{
       const formData = new FormData();
@@ -57,11 +76,12 @@ export class DialogUploadAvatarComponent implements OnInit {
       if (Image) {
         formData.append('avatar', this.avatar);
         this.timeLineService.uploadAvatar(this.appUsers.Id, formData);
+        this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
         var user = await this.service.getUser();
         UserProfile.Avatar = user["avatar"]
-        this.refresh()
+        //this.refresh()
       }
       else
       {

@@ -108,7 +108,7 @@ export class FriendsComponent implements OnInit {
   
       });
     }
-    public getUserList = async () => {
+    getUserList = async () => {
       console.log(UserProfile.Id)
       this.users = await this.FService.getAllFriends();
       for (let i = 0; i < this.users.length; i++) {

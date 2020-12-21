@@ -10,6 +10,7 @@ export class UriHandler{
     if (tempString.charAt(0)=='/') return 'jpg';
     else if (tempString.charAt(0)=='R') return "gif";
     else if(tempString.charAt(0)=='i') return 'png';
+    else if(tempString.charAt(0)=="A") return "mp4";
     else return 'jpeg';
   }
   public getImageSource(base64: string): string

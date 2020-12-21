@@ -109,6 +109,7 @@ export class LoginService {
 
     logout = () => {
         this.removeToken();
+        localStorage.clear();
         this.currentUser.next(null);
     }
 

@@ -53,6 +53,8 @@ import { TripDialogComponent } from './trip/trip-dialog/trip-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AddFriendDialogComponent } from './trip/addfriend-dialog/addfriend-dialog.component';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 export const mainRoutes: Routes = [
 
@@ -151,6 +153,8 @@ export const mainRoutes: Routes = [
     MatButtonModule,
     MatSelectModule,
     MatListModule,
+    MatMenuModule,
+    MatIconModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

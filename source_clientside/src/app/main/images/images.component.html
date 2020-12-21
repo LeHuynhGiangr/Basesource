@@ -131,71 +131,12 @@
 							<div class="col-lg-6">
 								<div class="central-meta">
 									<ul class="photos">
-
-										<li>
-											<a class="strip" href="assets/images/resources/photo2.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo2.jpg"  alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo3.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo3.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-44.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo4.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-55.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo5.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-
-										<li>
-											<a class="strip" href="assets/images/resources/photo-66.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo6.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-77.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo7.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-88.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo8.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-
-										<li>
-											<a class="strip" href="assets/images/resources/photo-99.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo12.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-101.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo10.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-101.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo11.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo1.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo1.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-33.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo9.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo-99.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo12.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo6.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo6.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
-										<li>
-											<a class="strip" href="assets/images/resources/photo13.jpg" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
-												<img src="assets/images/resources/photo13.jpg" alt="" style="width:220px;height:210px;"></a>
-										</li>
+										<li *ngFor="let image of imageList">
+											<a class="strip" (click)="showImage(image.Id,image.Image)" *ngIf="this.compareId === true">
+												<img [src]="uriHandler.getImageSource(image.Image)"  alt="" style="width:220px;height:210px;"></a>
+										</li>										
 									</ul>
-									<div class="lodmore"><button class="btn-view btn-load-more"></button></div>
+									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
