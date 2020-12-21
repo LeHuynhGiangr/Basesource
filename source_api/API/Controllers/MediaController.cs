@@ -35,12 +35,12 @@ namespace API.Controllers
             }
         }
         //get posts of user
-        [HttpGet("load")]
-        public IActionResult LoadMediaById()
+        [HttpGet("load/{id:guid}")]
+        public IActionResult LoadMediaById(Guid id)
         {
             try
             {
-                System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                //System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 var mediaResponses = _service.GetMediaByUserId(id);
                 return Ok(mediaResponses);
             }
