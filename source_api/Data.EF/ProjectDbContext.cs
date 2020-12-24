@@ -56,7 +56,7 @@ namespace Data.EF
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
 
-            builder.Entity<UserJoinTrip>().HasKey(sc => new { sc.TripId, sc.UserId });
+            builder.Entity<UserJoinTrip>().HasKey(sc => new { sc.Id });
 
             builder.Entity<UserJoinTrip>()
                 .HasOne(sc => sc.User)
