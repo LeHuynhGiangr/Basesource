@@ -24,7 +24,7 @@
                         <div class="col-lg-6">
                             <button class="btn btn-primary" mat-button style="width: 730px;" (click)="CreateTripDialog()">Create Trip</button>
                             <div class="loadMore">
-                                <div class="central-meta item" *ngFor="let trip of tripList">
+                                <div class="central-meta item" *ngFor="let trip of tripList" >
                                     <div class="user-post">
                                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="left2">
                                             <mat-icon>more_vert</mat-icon>
@@ -67,14 +67,12 @@
                                                     <iframe allowfullscreen frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEBGNYcsskKEZ3wzdxCicHWrz_XAOnC3o&amp;q=University+of+Technology+and+Education+Ho+Chi+Minh+city%2C+V%C3%B5+V%C4%83n+Ng%C3%A2n%2C+Linh+Chi%E1%BB%83u%2C+Th%E1%BB%A7+%C4%90%E1%BB%A9c%2C+Ho+Chi+Minh+City&amp;zoom=15"
                         width="1000px" height="300px"></iframe>
                                                 </div>	
-                                                <div class="we-video-info">
-                                                    <ul>
-                                                        
-                                                        <li class="detail">
-                                                            <h4>People Invite</h4>
-                                                            <a title="">Friend 1</a>
-                                                        </li>
-                                                        
+                                                <div>
+                                                    <ul class="we-video-info">
+                                                        <h4>People Invite</h4>
+                                                        <li class="detail" *ngFor="let user of userList">                 
+                                                            <a title="">{{user.FirstName+ " "+user.LastName}}</a>
+                                                        </li>                                                       
                                                         <button class="btn btn-primary left" mat-button (click)="AddFriendDialog()" *ngIf="this.appUsers.Id === trip.authorId">Add Friend</button>
                                                     </ul>
                                                 </div>

@@ -37,7 +37,21 @@ export class TripService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
+        }
+    }
+    getFriendInTrip = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.get(this.urlAPI + 'invitefriend/load?tripid='+id, config).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
         }
     }
 }

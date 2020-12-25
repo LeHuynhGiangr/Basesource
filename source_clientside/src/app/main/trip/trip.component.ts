@@ -17,8 +17,11 @@ import { TripService } from './shared/trip.service';
   })
   export class TripComponent implements OnInit {
     public appUsers: AppUsers;
+    public users:any
+    public userList = new Array<AppUsers>();
     public trips:any
     public tripList = new Array<Trips>();
+    check:boolean=true
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService) {
   
@@ -41,13 +44,27 @@ import { TripService } from './shared/trip.service';
            return false;
          }
     }
-    public getTripList = async () => {
-      console.log(UserProfile.Id)
-      this.trips = await this.TService.getAllTrips();
+    getTripList = async () => {
+      this.trips = await this.TService.getAllTrips()
       for (let i = 0; i < this.trips.length; i++) {
           let trip = new Trips();
-          trip.Id = this.trips[i].id.toString();
-          trip.Name = this.trips[i].name;
+          trip.Id = this.trips[i].id.toString()
+          //get friends in trip
+          this.users = await this.TService.getFriendInTrip(trip.Id)
+          
+          if(this.users.length>0)
+          {
+            for (let i = 0; i < this.users.length; i++) {
+              let user = new AppUsers()         
+              user.Id = this.users[i].userId
+              const name = await this.service.getUserById(user.Id)
+              user.FirstName = name["firstName"]
+              user.LastName = name["lastName"]
+              this.userList.push(user)
+            }
+          }
+          //get fields of trip
+          trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
           trip.Image = this.trips[i].image
           trip.authorId = this.trips[i].authorId
@@ -56,7 +73,13 @@ import { TripService } from './shared/trip.service';
           const user = await this.service.getUserById(trip.authorId)
           trip.authorAvatar = user["avatar"]
           trip.authorName = user["firstName"]+" "+user["lastName"]
-          this.tripList.push(trip);
+          this.tripList.push(trip)
+      }
+    }
+    clearArray()
+    {
+      for(let i=0;i<this.userList.length;i++){
+        this.userList.pop()
       }
     }
     CreateTripDialog(): void {
