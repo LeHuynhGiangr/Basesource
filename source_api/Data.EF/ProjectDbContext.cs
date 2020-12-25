@@ -56,12 +56,12 @@ namespace Data.EF
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
 
-            builder.Entity<UserJoinTrip>().HasKey(sc => new { sc.Id });
+            builder.Entity<UserJoinTrip>().HasKey(sc => new { sc.TripId, sc.Id });
 
             builder.Entity<UserJoinTrip>()
                 .HasOne(sc => sc.User)
                 .WithMany(s => s.UserJoinTrips)
-                .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(sc => sc.Id).OnDelete(DeleteBehavior.Restrict);
 
 
             builder.Entity<UserJoinTrip>()

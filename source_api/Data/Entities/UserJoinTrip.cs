@@ -7,15 +7,12 @@ namespace Data.Entities
 {
     public class UserJoinTrip : IEntity<Guid>,IDateTracking
     {
-        [Key]
+        [ForeignKey("UserId"), Column(Order = 0)]
         public Guid Id { get; set; }
         public User User { get; set; }
-
-        public Guid UserId { get; set; }
-
-        public Trip Trip { get; set; }
-
+        [ForeignKey("TripId"), Column(Order = 1)]
         public Guid TripId { get; set; }
+        public Trip Trip { get; set; }
 
         public bool Confirmed { get; set; }
         public DateTime DateCreated { get; set; }

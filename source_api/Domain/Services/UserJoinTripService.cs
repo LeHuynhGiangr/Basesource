@@ -24,12 +24,10 @@ namespace Domain.Services
         {
             try
             {
-                Guid l_newGuidId = Guid.NewGuid();
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 UserJoinTrip l_newUjt = new UserJoinTrip
                 {
-                    Id = l_newGuidId,
-                    UserId = model.UserId,
+                    Id = model.UserId,
                     TripId = model.TripId,
                     Confirmed = model.Confirm,
                     DateCreated = DateTime.Now
@@ -50,8 +48,7 @@ namespace Domain.Services
             {
                 l_userResponses.Add(new UserJoinTripResponse
                 {
-                    Id = user.Id,
-                    UserId = user.UserId,
+                    UserId = user.Id,
                     DateCreated = user.DateCreated,
                     Confirm = user.Confirmed,
                     TripId = user.TripId
@@ -71,7 +68,6 @@ namespace Domain.Services
                 l_utripResponses.Add(
                     new UserJoinTripResponse(
                         utrip.Id,
-                        utrip.UserId,
                         utrip.DateCreated,
                         utrip.Confirmed,
                         utrip.TripId));
