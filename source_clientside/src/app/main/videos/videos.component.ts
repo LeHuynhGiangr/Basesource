@@ -46,6 +46,7 @@ export class VideosComponent implements OnInit {
     {
       this.compareId = false
       const user =await this.service.getUserById(UserProfile.IdTemp)
+      this.appUsers.Id = UserProfile.IdTemp
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
       this.appUsers.Avatar = user["avatar"]
