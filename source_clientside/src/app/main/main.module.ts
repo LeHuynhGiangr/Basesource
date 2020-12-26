@@ -56,6 +56,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { UsersListTripComponent } from './trip/users-list-trip/users-list-trip.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -143,6 +144,7 @@ export const mainRoutes: Routes = [
     WidgetsComponent,
     AddFriendDialogComponent,
     ChatBoxComponent,
+    UsersListTripComponent,
   ],
   imports: [
     CommonModule,

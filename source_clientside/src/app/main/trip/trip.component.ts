@@ -49,20 +49,20 @@ import { TripService } from './shared/trip.service';
       for (let i = 0; i < this.trips.length; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
-          //get friends in trip
-          this.users = await this.TService.getFriendInTrip(trip.Id)
+          // //get friends in trip
+          // this.users = await this.TService.getFriendInTrip(trip.Id)
           
-          if(this.users.length>0)
-          {
-            for (let i = 0; i < this.users.length; i++) {
-              let user = new AppUsers()         
-              user.Id = this.users[i].userId
-              const name = await this.service.getUserById(user.Id)
-              user.FirstName = name["firstName"]
-              user.LastName = name["lastName"]
-              this.userList.push(user)
-            }
-          }
+          // if(this.users.length>0)
+          // {
+          //   for (let i = 0; i < this.users.length; i++) {
+          //     let user = new AppUsers()         
+          //     user.Id = this.users[i].userId
+          //     const name = await this.service.getUserById(user.Id)
+          //     user.FirstName = name["firstName"]
+          //     user.LastName = name["lastName"]
+          //     this.userList.push(user)
+          //   }
+          // }
           //get fields of trip
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description

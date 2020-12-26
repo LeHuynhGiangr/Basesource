@@ -4,8 +4,8 @@
         <div class="header-inner">
             <h2>My List Trips</h2>
             <nav class="breadcrumb">
-              <a [routerLink]="['/newsfeed']" class="breadcrumb-item"><i class="fa fa-home"></i></a>
-              <span class="breadcrumb-item active">Trips</span>
+                <a [routerLink]="['/newsfeed']" class="breadcrumb-item"><i class="fa fa-home"></i></a>
+                <span class="breadcrumb-item active">Trips</span>
             </nav>
         </div>
     </div>
@@ -22,17 +22,19 @@
                             </aside>
                         </div><!-- sidebar -->
                         <div class="col-lg-6">
-                            <button class="btn btn-primary" mat-button style="width: 730px;" (click)="CreateTripDialog()">Create Trip</button>
+                            <button class="btn btn-primary" mat-button style="width: 730px;"
+                                (click)="CreateTripDialog()">Create Trip</button>
                             <div class="loadMore">
-                                <div class="central-meta item" *ngFor="let trip of tripList" >
+                                <div class="central-meta item" *ngFor="let trip of tripList">
                                     <div class="user-post">
-                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="left2">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu"
+                                            aria-label="Example icon-button with a menu" class="left2">
                                             <mat-icon>more_vert</mat-icon>
-                                          </button>
-                                          <mat-menu #menu="matMenu">
+                                        </button>
+                                        <mat-menu #menu="matMenu">
                                             <button mat-menu-item *ngIf="this.appUsers.Id === trip.authorId">
-                                              <mat-icon>edit</mat-icon>
-                                              <span>edit</span>
+                                                <mat-icon>edit</mat-icon>
+                                                <span>edit</span>
                                             </button>
                                             <button mat-menu-item>
                                                 <mat-icon>report_problem</mat-icon>
@@ -42,51 +44,51 @@
                                                 <mat-icon>delete</mat-icon>
                                                 <span>delete</span>
                                             </button>
-                                          </mat-menu>
+                                        </mat-menu>
                                         <div class="friend-info">
                                             <figure>
-                                                <img [src]="uriHandler.getImageSource(trip.authorAvatar)" style="width: 50px; height: 50px;">
+                                                <img [src]="uriHandler.getImageSource(trip.authorAvatar)"
+                                                    style="width: 50px; height: 50px;">
                                             </figure>
                                             <div class="friend-name">
                                                 <ins><a href="time-line.html" title="">{{trip.Name}}</a></ins>
-                                                <span>published: {{trip.CreatedDate| date: 'dd/MM/yyyy'}} Created by {{trip.authorName}}</span>
+                                                <span>published: {{trip.CreatedDate| date: 'dd/MM/yyyy'}} Created by
+                                                    {{trip.authorName}}</span>
                                             </div>
                                             <div class="description">
-                                                    
-                                                    <p>
-                                                        {{trip.Description}}
-                                                    </p>
-                                                </div>
+
+                                                <p>
+                                                    {{trip.Description}}
+                                                </p>
+                                            </div>
                                             <div class="post-meta">
                                                 <div class="linked-image align-left">
-                                                    <a title=""><img [src]="uriHandler.getImageSource(trip.Image)" style="width: 750px;height: 400;" alt=""></a>
+                                                    <a title=""><img [src]="uriHandler.getImageSource(trip.Image)"
+                                                            style="width: 750px;height: 400;" alt=""></a>
                                                 </div>
                                                 <br>
                                                 <div class="detail">
                                                     <span>Location</span>
-                                                    <iframe allowfullscreen frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEBGNYcsskKEZ3wzdxCicHWrz_XAOnC3o&amp;q=University+of+Technology+and+Education+Ho+Chi+Minh+city%2C+V%C3%B5+V%C4%83n+Ng%C3%A2n%2C+Linh+Chi%E1%BB%83u%2C+Th%E1%BB%A7+%C4%90%E1%BB%A9c%2C+Ho+Chi+Minh+City&amp;zoom=15"
-                        width="1000px" height="300px"></iframe>
-                                                </div>	
+                                                    <iframe allowfullscreen frameborder="0"
+                                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEBGNYcsskKEZ3wzdxCicHWrz_XAOnC3o&amp;q=University+of+Technology+and+Education+Ho+Chi+Minh+city%2C+V%C3%B5+V%C4%83n+Ng%C3%A2n%2C+Linh+Chi%E1%BB%83u%2C+Th%E1%BB%A7+%C4%90%E1%BB%A9c%2C+Ho+Chi+Minh+City&amp;zoom=15"
+                                                        width="1000px" height="300px"></iframe>
+                                                </div>
                                                 <div>
-                                                    <ul class="we-video-info">
-                                                        <h4>People Invite</h4>
-                                                        <li class="detail" *ngFor="let user of userList">                 
-                                                            <a title="">{{user.FirstName+ " "+user.LastName}}</a>
-                                                        </li>                                                       
-                                                        <button class="btn btn-primary left" mat-button (click)="AddFriendDialog()" *ngIf="this.appUsers.Id === trip.authorId">Add Friend</button>
-                                                    </ul>
+                                                    <app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
+                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog()" *ngIf="this.appUsers.Id === trip.authorId">Add Friend</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                  
-                                </div>                              
+                                    </div>
+                                </div>
                             </div>
                         </div><!-- centerl meta -->
                         <div class="col-lg-3">
                             <aside class="sidebar static">
                                 <div class="widget">
                                     <div class="banner medium-opacity bluesh">
-                                        <div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)" class="bg-image"></div>
+                                        <div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)"
+                                            class="bg-image"></div>
                                         <div class="baner-top">
                                             <span><img src="assets/images/book-icon.png" alt=""></span>
                                             <i class="fa fa-ellipsis-h"></i>
@@ -98,7 +100,7 @@
                                             <span>like them all</span>
                                             <a [routerLink]="['/main/newpage']" title="" data-ripple="">start now!</a>
                                         </div>
-                                    </div>											
+                                    </div>
                                 </div>
                                 <div class="widget friend-list stick-widget">
                                     <h4 class="widget-title">Friends</h4>
@@ -111,7 +113,9 @@
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">bucky barnes</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
@@ -121,7 +125,9 @@
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">Sarah Loren</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
@@ -131,7 +137,9 @@
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">jason borne</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
@@ -141,66 +149,78 @@
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">Cameron diaz</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <img src="assets/images/resources/friend-avatar5.jpg" alt="">
                                                 <span class="status f-online"></span>
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">daniel warber</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <img src="assets/images/resources/friend-avatar6.jpg" alt="">
                                                 <span class="status f-away"></span>
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">andrew</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <img src="assets/images/resources/friend-avatar7.jpg" alt="">
                                                 <span class="status f-off"></span>
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">amy watson</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <img src="assets/images/resources/friend-avatar5.jpg" alt="">
                                                 <span class="status f-online"></span>
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">daniel warber</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                         <li>
-                                            
+
                                             <figure>
                                                 <img src="assets/images/resources/friend-avatar2.jpg" alt="">
                                                 <span class="status f-away"></span>
                                             </figure>
                                             <div class="friendz-meta">
                                                 <a href="time-line.html">Sarah Loren</a>
-                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
+                                                <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection"
+                                                        class="__cf_email__"
+                                                        data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
                                             </div>
                                         </li>
                                     </ul>
-                                    
+
                                 </div><!-- friends list sidebar -->
                             </aside>
                         </div><!-- sidebar -->
