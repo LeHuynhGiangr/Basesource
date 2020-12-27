@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {LoginService} from './../login/shared/login.service'
+import {LoginService} from '../_core/services/login.service'
+import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 @Injectable({
     providedIn: 'root'
 })
 export class AdminService {
-    private urlAPI = 'https://localhost:44350/';
+    private urlAPI :string=ApiUrlConstants.API_URL;
 
     constructor(private http: HttpClient,private service : LoginService) {
 
@@ -18,7 +19,7 @@ export class AdminService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            const result = await this.http.get(this.urlAPI + 'admin', config).toPromise();
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_ADMIN_URL, config).toPromise();
             return result;
         }
         catch (e) {
@@ -34,7 +35,7 @@ export class AdminService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            const result = await this.http.delete(this.urlAPI + 'admin/'+id, config).toPromise();
+            const result = await this.http.delete(this.urlAPI + ApiUrlConstants.API_ADMIN_URL + id, config).toPromise();
             return result;
         }
         catch (e) {
@@ -50,7 +51,7 @@ export class AdminService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            const result = await this.http.put(this.urlAPI + 'admin/block/'+id, config).toPromise();
+            const result = await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_URL +'block/' + id, config).toPromise();
             return result;
         }
         catch (e) {

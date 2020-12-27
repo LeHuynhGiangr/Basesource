@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../login/shared/login.service';
+import { LoginService } from '../_core/services/login.service';
 import { UrlConstants } from '../_core/common/url.constants';
 import { UserProfile } from '../_core/data-repository/profile';
 import { AuthenService } from '../_core/services/authen.service';

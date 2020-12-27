@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from '../../../login/shared/login.model';
-import { TripService } from './../shared/trip.service';
+import { TripService } from '../../../_core/services/trip.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
     selector: 'app-trip-dialog',

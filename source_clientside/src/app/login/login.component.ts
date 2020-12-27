@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { LoginService } from './shared/login.service';
+import { LoginService } from '../_core/services/login.service';
 import { AppUsers } from './shared/login.model';
 import { EditPasswordComponent } from '../main/edit-password/edit-password.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

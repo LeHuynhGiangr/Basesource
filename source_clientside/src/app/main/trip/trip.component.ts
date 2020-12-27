@@ -2,14 +2,14 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { MatDialog } from '@angular/material/dialog';
 import { TripDialogComponent } from './trip-dialog/trip-dialog.component';
 import { AddFriendDialogComponent } from './addfriend-dialog/addfriend-dialog.component';
-import { Trips } from './../trip/shared/trip.model';
-import { TripService } from './shared/trip.service';
+import { Trips } from '../../_core/models/trip.model';
+import { TripService } from '../../_core/services/trip.service';
 @Component({
     selector: 'app-trip',
     templateUrl: './trip.component.html',
@@ -49,21 +49,6 @@ import { TripService } from './shared/trip.service';
       for (let i = 0; i < this.trips.length; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
-          // //get friends in trip
-          // this.users = await this.TService.getFriendInTrip(trip.Id)
-          
-          // if(this.users.length>0)
-          // {
-          //   for (let i = 0; i < this.users.length; i++) {
-          //     let user = new AppUsers()         
-          //     user.Id = this.users[i].userId
-          //     const name = await this.service.getUserById(user.Id)
-          //     user.FirstName = name["firstName"]
-          //     user.LastName = name["lastName"]
-          //     this.userList.push(user)
-          //   }
-          // }
-          //get fields of trip
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
           trip.Image = this.trips[i].image
@@ -74,12 +59,6 @@ import { TripService } from './shared/trip.service';
           trip.authorAvatar = user["avatar"]
           trip.authorName = user["firstName"]+" "+user["lastName"]
           this.tripList.push(trip)
-      }
-    }
-    clearArray()
-    {
-      for(let i=0;i<this.userList.length;i++){
-        this.userList.pop()
       }
     }
     CreateTripDialog(): void {
@@ -94,7 +73,7 @@ import { TripService } from './shared/trip.service';
           console.log(result);
         });
       }
-      AddFriendDialog(): void {
+    AddFriendDialog(): void {
         const dialogRef = this.dialog.open(AddFriendDialogComponent, {
           width: '500px',
           height: '400px',

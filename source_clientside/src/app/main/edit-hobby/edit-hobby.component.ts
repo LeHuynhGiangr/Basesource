@@ -2,10 +2,10 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
-import { EditInterestService } from './shared/edit-hobby.service';
+import { EditInterestService } from '../../_core/services/edit-hobby.service';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
@@ -29,7 +29,9 @@ export class EditHobbyComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
     this.appUsers = new AppUsers();
     //var user = await this.service.getUser();
     this.appUsers.Id = UserProfile.Id
@@ -77,9 +79,9 @@ export class EditHobbyComponent implements OnInit {
         alert("Upload succesfully !")
         
         //Refresh user after edit interest
-        var user = await this.service.getUser();
-        UserProfile.Hobby = user["hobby"]
-        UserProfile.Language = user["language"]
+        //var user = await this.service.getUser();
+        UserProfile.Hobby = this.appUsers.Hobby
+        UserProfile.Language = this.appUsers.Language
         this.refresh();
       }
       else

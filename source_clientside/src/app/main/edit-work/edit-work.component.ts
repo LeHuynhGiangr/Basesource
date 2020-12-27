@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
-import { EditWorkService } from './shared/edit-work.service';
+import { EditWorkService } from '../../_core/services/edit-work.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
@@ -94,13 +94,13 @@ export class EditWorkComponent implements OnInit {
           alert("Upload succesfully !")
 
           //Refresh user after edit interest
-          var user = await this.service.getUser();
-          UserProfile.AcademicLevel = user["academicLevel"]
-          UserProfile.StudyingAt = user["studyingAt"]
-          UserProfile.DescriptionAcademic = user["descriptionAcademic"]
-          UserProfile.AddressAcademic = user["addressAcademic"]
-          UserProfile.FromDate = user["fromDate"]
-          UserProfile.ToDate = user["toDate"]
+          //var user = await this.service.getUser();
+          UserProfile.AcademicLevel = this.appUsers.AcademicLevel
+          UserProfile.StudyingAt = this.appUsers.StudyingAt
+          UserProfile.DescriptionAcademic = this.appUsers.DescriptionAcademic
+          UserProfile.AddressAcademic = this.appUsers.AddressAcademic
+          UserProfile.FromDate = this.appUsers.FromDate
+          UserProfile.ToDate = this.appUsers.ToDate
           this.refresh();
         }
         else {

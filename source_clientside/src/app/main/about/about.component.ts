@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
@@ -29,7 +29,9 @@ export class AboutComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+       return false;
+     }
     this.appUsers = new AppUsers();
     if(UserProfile.Id==UserProfile.IdTemp)
     {

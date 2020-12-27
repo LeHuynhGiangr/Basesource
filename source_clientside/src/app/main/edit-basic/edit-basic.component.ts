@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
-import { EditBasicService } from './shared/edit-basic.service';
+import { LoginService } from '../../_core/services/login.service';
+import { EditBasicService } from '../../_core/services/edit-basic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
@@ -29,11 +29,12 @@ export class EditBasicComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
 
     this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
     this.appUsers.Id = UserProfile.Id
-    //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = UserProfile.Avatar
@@ -50,7 +51,6 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.RequestFriend = UserProfile.RequestFriend
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend
     this.appUsers.ViewTimeLine = UserProfile.ViewTimeLine
-    //this.datePipe.transform(this.appUsers.BirthDay,"yyyy-MM-dd")
   }
   onSubmit() {
     console.log('title is:');
@@ -83,15 +83,15 @@ export class EditBasicComponent implements OnInit {
         alert("Upload succesfully !")
 
         //Refresh user after edit profile
-        var user = await this.service.getUser();
-        UserProfile.FirstName = user["firstName"]
-        UserProfile.LastName = user["lastName"]
-        UserProfile.Email = user["email"]
-        UserProfile.Address = user["address"]
-        UserProfile.BirthDay = user["birthDay"]
-        UserProfile.Gender = user["gender"]
-        UserProfile.PhoneNumber = user["phoneNumber"]
-        UserProfile.Description = user["description"]
+        //var user = await this.service.getUser();
+        UserProfile.FirstName = this.appUsers.FirstName
+        UserProfile.LastName = this.appUsers.LastName
+        UserProfile.Email = this.appUsers.Email
+        UserProfile.Address = this.appUsers.Address
+        UserProfile.BirthDay = this.appUsers.BirthDay
+        UserProfile.Gender = this.appUsers.Gender
+        UserProfile.PhoneNumber = this.appUsers.PhoneNumber
+        UserProfile.Description = this.appUsers.Descriptions
         this.refresh();
       }
       else

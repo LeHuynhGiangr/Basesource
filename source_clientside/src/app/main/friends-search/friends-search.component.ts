@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
-import { SearchService } from './shared/friends-search.service';
+import { LoginService } from '../../_core/services/login.service';
+import { SearchService } from '../../_core/services/friends-search.service';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { UserProfile } from 'src/app/_core/data-repository/profile';
 @Component({

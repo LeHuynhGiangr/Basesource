@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../shared/DialogData';
-import { LoginService } from '../../../login/shared/login.service';
-import { ImageService } from '../../images/shared/images.service';
-import { TimeLineService } from '../shared/timeline.service';
+import { DialogData } from '../../../_core/models/DialogData';
+import { LoginService } from '../../../_core/services/login.service';
+import { ImageService } from '../../../_core/services/images.service';
+import { TimeLineService } from '../../../_core/services/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'

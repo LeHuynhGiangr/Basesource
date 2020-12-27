@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { UserProfile } from '../../_core/data-repository/profile'
-import { SearchService } from '../../main/friends-search/shared/friends-search.service';
+import { SearchService } from '../../_core/services/friends-search.service';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-header',

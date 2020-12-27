@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LoginService } from '../../../login/shared/login.service';
-import { ImageService } from '../../images/shared/images.service';
-import {Images} from '../shared/images.model'
+import { LoginService } from '../../../_core/services/login.service';
+import { ImageService } from '../../../_core/services/images.service';
+import {Images} from '../../../_core/models/images.model'
 import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'

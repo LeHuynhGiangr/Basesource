@@ -2,9 +2,9 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
-import { EditSettingService } from './shared/edit-setting.service';
+import { EditSettingService } from '../../_core/services/edit-setting.service';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
@@ -76,11 +76,11 @@ export class EditSettingComponent implements OnInit {
         alert("Upload succesfully !")
 
         //Refresh user after edit interest
-        var user = await this.service.getUser();
-        UserProfile.ViewListFriend = user["viewListFriend"]
-        UserProfile.ViewTimeLine = user["viewTimeLine"]
-        UserProfile.FollowMe = user["followMe"]
-        UserProfile.RequestFriend = user["requestFriend"]
+        //var user = await this.service.getUser();
+        UserProfile.ViewListFriend = this.appUsers.ViewListFriend
+        UserProfile.ViewTimeLine = this.appUsers.ViewTimeLine
+        UserProfile.FollowMe = this.appUsers.FollowMe
+        UserProfile.RequestFriend = this.appUsers.RequestFriend
         this.refresh();
       }
       else

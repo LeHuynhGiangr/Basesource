@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, NgModule } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LoginService } from '../../../login/shared/login.service';
+import { LoginService } from '../../../_core/services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-dialog-post',

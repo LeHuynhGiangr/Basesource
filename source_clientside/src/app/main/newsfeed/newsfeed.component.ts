@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 import { PostService } from 'src/app/_core/services/post.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { MatDialog } from '@angular/material/dialog';

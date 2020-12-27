@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
-import { LoginService } from './../../login/shared/login.service';
-import { EditPasswordService } from './shared/edit-password.service';
+import { LoginService } from '../../_core/services/login.service';
+import { EditPasswordService } from '../../_core/services/edit-password.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
@@ -56,9 +56,8 @@ export class EditPasswordComponent implements OnInit {
       console.log(result);
       this.service.getUser().then(user => {
         if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Avatar = user["avatar"]
+          this.appUsers.Id = UserProfile.Id
+          this.appUsers.Avatar = UserProfile.Avatar
         }
       });
     });
@@ -109,8 +108,8 @@ export class EditPasswordComponent implements OnInit {
       this.service.getUser().then(user => {
         if (user) {
           console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Background = user["background"]
+          this.appUsers.Id = UserProfile.Id
+          this.appUsers.Background = UserProfile.Background
         }
       });
 

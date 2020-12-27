@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppUsers } from 'src/app/login/shared/login.model';
-import { LoginService } from 'src/app/login/shared/login.service';
-import { TripService } from '../shared/trip.service';
+import { LoginService } from 'src/app/_core/services/login.service';
+import { TripService } from '../../../_core/services/trip.service';
 
 @Component({
   selector: 'app-users-list-trip',

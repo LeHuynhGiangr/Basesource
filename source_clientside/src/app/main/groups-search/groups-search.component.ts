@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { LoginService } from './../../login/shared/login.service';
+import { LoginService } from '../../_core/services/login.service';
 @Component({
     selector: 'app-groups-search',
     templateUrl: './groups-search.component.html',
