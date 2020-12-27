@@ -19,7 +19,7 @@ export class ApiUrlConstants{
     //admin API
     public static API_ADMIN_URL = '/admin/'
     //trip API
-    public static API_TRIP_URL = '/trip/'
+    public static API_TRIP_URL = '/trip'
     public static API_FRIENDSINTRIP_URL = '/invitefriend/load?tripid='
     //media API
     public static API_MEDIA_URL = '/media'

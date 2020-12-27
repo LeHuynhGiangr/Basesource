@@ -18,7 +18,7 @@ export class TripService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            return await this.http.post(this.urlAPI + "trip/" ,formData, config).toPromise();            
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_TRIP_URL ,formData, config).toPromise();            
         }
         catch (e) {
             console.log("ok");
