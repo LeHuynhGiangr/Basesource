@@ -77,14 +77,15 @@ export class DialogUploadBackgroundComponent implements OnInit {
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
-        var user = await this.service.getUser();
-        UserProfile.Background = user["background"]
         //this.refresh()
       }
       else
       {
         alert("Upload failure !")
       }
+      var user = await this.service.getUser();
+      UserProfile.Background = user["background"]
+      this.appUsers.Background = UserProfile.Background
     }
     catch(e)
     {

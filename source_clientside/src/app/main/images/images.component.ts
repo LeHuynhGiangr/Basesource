@@ -80,9 +80,8 @@ export class ImagesComponent implements OnInit {
         console.log(result);
         this.service.getUser().then(user => {
           if (user) {
-            console.log(user["firstName"] + " " + user["lastName"]);
-            this.appUsers.Id = user["id"].toString();
             this.appUsers.Avatar = user["avatar"]
+            UserProfile.Avatar = user["avatar"]
           }
         });
       });
@@ -99,9 +98,8 @@ export class ImagesComponent implements OnInit {
         console.log(result);
         this.service.getUser().then(user => {
           if (user) {
-            console.log(user["firstName"] + " " + user["lastName"]);
-            this.appUsers.Id = user["id"].toString();
             this.appUsers.Background = user["background"]
+            UserProfile.Background = user["background"]
           }
         });
   

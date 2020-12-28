@@ -33,8 +33,7 @@ export class TimelineComponent implements OnInit {
       return false;
     }
     this.appUsers = new AppUsers();
-    console.log(UserProfile.IdTemp)
-    console.log(UserProfile.Id)
+    console.log(UserProfile.Avatar)
     if(UserProfile.Id==UserProfile.IdTemp)
     {
       this.compareId =true
@@ -54,15 +53,6 @@ export class TimelineComponent implements OnInit {
       this.appUsers.Avatar = user["avatar"]
       this.appUsers.Background = user["background"]
     }
-    //this.service.getUser();
-    //console.log(user)
-
-    // this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-    //   return false;
-    // }
-  }
-  getPath() {
-    return this.router.url;
   }
 
 
@@ -83,12 +73,10 @@ export class TimelineComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
       this.service.getUser().then(user => {
         if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
           this.appUsers.Avatar = user["avatar"]
+          UserProfile.Avatar = user["avatar"]
         }
       });
     });
@@ -104,9 +92,8 @@ export class TimelineComponent implements OnInit {
       console.log('The dialog was closed');
       this.service.getUser().then(user => {
         if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
           this.appUsers.Background = user["background"]
+          UserProfile.Background = user["background"]
         }
       });
 

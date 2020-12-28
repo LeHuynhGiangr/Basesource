@@ -60,7 +60,7 @@ export class DialogUploadAvatarComponent implements OnInit {
       if (Image) {
         formData.append('media', this.avatar);
         this.Iservice.postImage(formData);
-        this.dialogRef.close();
+        //this.dialogRef.close();
       }
       else
       {
@@ -78,14 +78,15 @@ export class DialogUploadAvatarComponent implements OnInit {
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
-        var user = await this.service.getUser();
-        UserProfile.Avatar = user["avatar"]
         //this.refresh()
       }
       else
       {
         alert("Upload failure !")
       }
+      var user = await this.service.getUser();
+      UserProfile.Avatar = user["avatar"]
+      this.appUsers.Avatar = UserProfile.Avatar
     }
     catch(e)
     {
@@ -93,10 +94,4 @@ export class DialogUploadAvatarComponent implements OnInit {
     }
   }
   
-  refresh(): void {
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/images';
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-    
-    //window.location.reload();
-  }
 }
