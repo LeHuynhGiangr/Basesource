@@ -13,7 +13,8 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-edit-password',
     templateUrl: './edit-password.component.html',
-    styleUrls: ['./edit-password.component.css']
+    styleUrls: ['./edit-password.component.css'],
+    
 })
 export class EditPasswordComponent implements OnInit {
 

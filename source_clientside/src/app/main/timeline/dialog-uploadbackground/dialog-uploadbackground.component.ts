@@ -33,9 +33,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
     //var user = await this.service.getUser();
     this.appUsers.Background = UserProfile.Background
     this.appUsers.Id=UserProfile.Id
-    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
-      return false;
-    }
+
   }
 
   //display image before upload
@@ -73,7 +71,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
       formData.append('id', this.appUsers.Id);
       if (Image) {
         formData.append('background', this.background);
-        this.timeLineService.uploadBackground(this.appUsers.Id, formData);
+        await this.timeLineService.uploadBackground(this.appUsers.Id, formData);
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
@@ -83,9 +81,6 @@ export class DialogUploadBackgroundComponent implements OnInit {
       {
         alert("Upload failure !")
       }
-      var user = await this.service.getUser();
-      UserProfile.Background = user["background"]
-      this.appUsers.Background = UserProfile.Background
     }
     catch(e)
     {

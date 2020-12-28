@@ -74,7 +74,7 @@ export class DialogUploadAvatarComponent implements OnInit {
       formData.append('id', this.appUsers.Id);
       if (Image) {
         formData.append('avatar', this.avatar);
-        this.timeLineService.uploadAvatar(this.appUsers.Id, formData);
+        await this.timeLineService.uploadAvatar(this.appUsers.Id, formData);
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();
@@ -84,9 +84,6 @@ export class DialogUploadAvatarComponent implements OnInit {
       {
         alert("Upload failure !")
       }
-      var user = await this.service.getUser();
-      UserProfile.Avatar = user["avatar"]
-      this.appUsers.Avatar = UserProfile.Avatar
     }
     catch(e)
     {

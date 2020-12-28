@@ -13,7 +13,7 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  styleUrls: ['./timeline.component.css'],
 })
 export class TimelineComponent implements OnInit {
   public appUsers: AppUsers;
@@ -68,8 +68,10 @@ export class TimelineComponent implements OnInit {
       height: '400px',
       data: { Id: this.appUsers.Id }
     });
-
     dialogRef.afterClosed().subscribe(result => {
+      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+        return false;
+      }
       console.log('The dialog was closed');
       this.service.getUser().then(user => {
         if (user) {
@@ -97,4 +99,5 @@ export class TimelineComponent implements OnInit {
 
     });
   }
+
 }

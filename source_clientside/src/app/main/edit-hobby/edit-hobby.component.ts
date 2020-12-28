@@ -13,7 +13,8 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
-    styleUrls: ['./edit-hobby.component.css']
+    styleUrls: ['./edit-hobby.component.css'],
+    
 })
 export class EditHobbyComponent implements OnInit {
 
