@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Data.EF
 {
@@ -43,6 +41,10 @@ namespace Data.EF
         private static Guid l_guid_user_token6 = Guid.NewGuid();
         private static string l_string_user_fullname6 = "Dong Khoi";
         private static byte[] l_string_user_pic6 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb6.jpg");
+
+        private static Guid l_guid_chat12 = Guid.NewGuid();
+        private static Guid l_guid_chat13 = Guid.NewGuid();
+        private static Guid l_guid_chat14 = Guid.NewGuid();
 
         private static Guid l_guid_post1 = Guid.NewGuid();
         private static Guid l_guid_post2 = Guid.NewGuid();
@@ -1344,6 +1346,36 @@ namespace Data.EF
 
         public static void SeedData(ProjectDbContext projectDbContext)
         {
+            //if (!projectDbContext.Chattings.Any())
+            //{
+            //    projectDbContext.Chattings.AddRange(new List<Chatting>() { 
+            //        new Chatting()
+            //        {
+            //            Id=l_guid_chat12,
+            //            ChatMessagesJson=JsonSerializer.Serialize(new List<object>
+            //            {
+            //                new
+            //                {
+            //                    Id=l_guid_user1,
+            //                    Message="hi, are you ok?"
+            //                },
+            //                new
+            //                {
+            //                    Id=l_guid_user2
+            //                },
+            //                new
+            //                {
+            //                    Id=l_guid_user2
+            //                },
+            //                new
+            //                {
+            //                    Id=l_guid_user1
+            //                }
+            //            }),
+            //            DateCreated=DateTime.Now
+            //        }
+            //    });
+            //}
             if (!projectDbContext.Users.Any())
             {
                 projectDbContext.Users.AddRange(new List<User>() {

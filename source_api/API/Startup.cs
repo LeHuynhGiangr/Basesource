@@ -54,7 +54,11 @@ namespace API
             });
 
             //register group of services with extension methods
-            services.AddDbContext<ProjectDbContext>(_ => _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), _ => _.MigrationsAssembly("source_api.Data.EF")));
+            services.AddDbContext<ProjectDbContext>(
+                _ => _.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"), 
+                    _ => _.MigrationsAssembly("source_api.Data.EF")
+                    ));
 
             //services.AddControllers();
 

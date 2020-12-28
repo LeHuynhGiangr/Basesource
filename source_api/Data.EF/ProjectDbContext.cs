@@ -36,6 +36,7 @@ namespace Data.EF
         public DbSet<UserJoinTrip> UserJoinTrips { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<OTP> OTPs { get; set; }
+        public DbSet<Chatting> Chattings { get; set; }
 
 
         //end declare entites
@@ -49,6 +50,7 @@ namespace Data.EF
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new PostConfiguration());
+            builder.ApplyConfiguration(new ChattingConfiguration());
 
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);

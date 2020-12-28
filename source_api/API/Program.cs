@@ -33,7 +33,7 @@ namespace API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder = webBuilder.UseUrls("http://localhost:4000");
+                    webBuilder = webBuilder.UseUrls("http://0.0.0.0:44350");
                     webBuilder.UseStartup<Startup>();
                 });
     }
