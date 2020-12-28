@@ -33,7 +33,6 @@ export class TimelineComponent implements OnInit {
       return false;
     }
     this.appUsers = new AppUsers();
-    console.log(UserProfile.Avatar)
     if(UserProfile.Id==UserProfile.IdTemp)
     {
       this.compareId =true
@@ -47,7 +46,6 @@ export class TimelineComponent implements OnInit {
     {
       this.compareId =false
       const user =await this.service.getUserById(UserProfile.IdTemp)
-      console.log(user)
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
       this.appUsers.Avatar = user["avatar"]

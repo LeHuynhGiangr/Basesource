@@ -2,10 +2,10 @@
 <div class="responsive-header">
     <div class="mh-head first Sticky">
         <span class="mh-btns-left">
-            <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+            <a (click)="openNav()" class="" href="#menu"><i class="fa fa-align-justify"></i></a>
         </span>
         <span class="mh-text">
-            <a [routerLink]="['/newsfeed']" title=""><img src="assets/images/logo2.png" style="width: 100px; height: 50px;" alt=""></a>
+            <a [routerLink]="['/main/home']" title=""><img src="assets/images/logo.png" style="width: 100px; height: 50px;" alt=""></a>
         </span>
         <span class="mh-btns-right">
             <a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -13,113 +13,22 @@
     </div>
     <div class="mh-head second">
         <form class="mh-form">
-            <input placeholder="search" />
-            <a href="#/" class="fa fa-search"></a>
+            <input placeholder="search"  [(ngModel)]="this.NameSearch"/>
+            <a [routerLink]="['/main/friends-search']" (click)="search()" class="fa fa-search"></a>
         </form>
     </div>
-    <nav id="menu" class="res-menu">
+    <nav id="menu" class="res-menu" >
         <ul>
-            <li><span>Home</span>
-                <ul>
-                    <li><a [routerLink]="['/newsfeed']" title="">Home Social</a></li>
-                    <li><a href="index2.html" title="">Home Social 2</a></li>
-                    <li><a href="index-company.html" title="">Home Company</a></li>
-                    <li><a [routerLink]="['/login']" title="">Login page</a></li>
-                    <li><a href="logout.html" title="">Logout Page</a></li>
-                    <li><a [routerLink]="['/newsfeed']" title="">news feed</a></li>
-                </ul>
-            </li>
-            <li><span>Time Line</span>
-                <ul>
-                    <li><a [routerLink]="['/timeline']" title="">timeline</a></li>
-                    <li><a [routerLink]="['/friends']" title="">timeline friends</a></li>
-                    <li><a [routerLink]="['/groups']" title="">timeline groups</a></li>
-                    <li><a href="timeline-pages.html" title="">timeline pages</a></li>
-                    <li><a [routerLink]="['/images']" title="">timeline photos</a></li>
-                    <li><a [routerLink]="['/videos']" title="">timeline videos</a></li>
-                    <li><a [routerLink]="['/fanpage']" title="">favourit page</a></li>
-                    <li><a href="groups.html" title="">groups page</a></li>
-                    <li><a href="page-likers.html" title="">Likes page</a></li>
-                    <li><a [routerLink]="['/people-nearby']" title="">people nearby</a></li>
-                    
-                    
-                </ul>
-            </li>
-            <li><span>Account Setting</span>
-                <ul>
-                    <li><a [routerLink]="['/newpage']" title="">create fav page</a></li>
-                    <li><a [routerLink]="['/edit-setting']" title="">edit account setting</a></li>
-                    <li><a [routerLink]="['/edit-hobby']" title="">edit-interest</a></li>
-                    <li><a [routerLink]="['/edit-password']" title="">edit-password</a></li>
-                    <li><a [routerLink]="['/edit-basic']" title="">edit profile basics</a></li>
-                    <li><a [routerLink]="['/edit-work']" title="">edit work educations</a></li>
-                    <li><a [routerLink]="['/messages']" title="">message box</a></li>
-                    <li><a [routerLink]="['/inbox']" title="">Inbox</a></li>
-                    <li><a [routerLink]="['/notifications']" title="">notifications page</a></li>
-                </ul>
-            </li>
-            <li><span>forum</span>
-                <ul>
-                    <li><a href="forum.html" title="">Forum Page</a></li>
-                    <li><a href="forums-category.html" title="">Fourm Category</a></li>
-                    <li><a href="forum-open-topic.html" title="">Forum Open Topic</a></li>
-                    <li><a href="forum-create-topic.html" title="">Forum Create Topic</a></li>
-                </ul>
-            </li>
-            <li><span>Our Shop</span>
-                <ul>
-                    <li><a href="shop.html" title="">Shop Products</a></li>
-                    <li><a href="shop-masonry.html" title="">Shop Masonry Products</a></li>
-                    <li><a href="shop-single.html" title="">Shop Detail Page</a></li>
-                    <li><a href="shop-cart.html" title="">Shop Product Cart</a></li>
-                    <li><a href="shop-checkout.html" title="">Product Checkout</a></li>
-                </ul>
-            </li>
-            <li><span>Our Blog</span>
-                <ul>
-                    <li><a href="blog-grid-wo-sidebar.html" title="">Our Blog</a></li>
-                    <li><a href="blog-grid-right-sidebar.html" title="">Blog with R-Sidebar</a></li>
-                    <li><a href="blog-grid-left-sidebar.html" title="">Blog with L-Sidebar</a></li>
-                    <li><a href="blog-masonry.html" title="">Blog Masonry Style</a></li>
-                    <li><a href="blog-list-wo-sidebar.html" title="">Blog List Style</a></li>
-                    <li><a href="blog-list-right-sidebar.html" title="">Blog List with R-Sidebar</a></li>
-                    <li><a href="blog-list-left-sidebar.html" title="">Blog List with L-Sidebar</a></li>
-                    <li><a href="blog-detail.html" title="">Blog Post Detail</a></li>
-                </ul>
-            </li>
-            <li><span>Portfolio</span>
-                <ul>
-                    <li><a href="portfolio-2colm.html" title="">Portfolio 2col</a></li>
-                    <li><a href="portfolio-3colm.html" title="">Portfolio 3col</a></li>
-                    <li><a href="portfolio-4colm.html" title="">Portfolio 4col</a></li>
-                </ul>
-            </li>
-            <li><span>Support & Help</span>
-                <ul>
-                    <li><a href="support-and-help.html" title="">Support & Help</a></li>
-                    <li><a href="support-and-help-detail.html" title="">Support & Help Detail</a></li>
-                    <li><a href="support-and-help-search-result.html" title="">Support & Help Search Result</a></li>
-                </ul>
-            </li>
-            <li><span>More pages</span>
-                <ul>
-                    <li><a href="careers.html" title="">Careers</a></li>
-                    <li><a href="career-detail.html" title="">Career Detail</a></li>
-                    <li><a [routerLink]="['/404']" title="">404 error page</a></li>
-                    <li><a href="404-2.html" title="">404 Style2</a></li>
-                    <li><a [routerLink]="['/faq']" title="">faq's page</a></li>
-                    <li><a [routerLink]="['/insights']" title="">insights</a></li>
-                    <li><a href="knowledge-base.html" title="">knowledge base</a></li>
-                </ul>
-            </li>
-            <li><a [routerLink]="['/about']" title="">about</a></li>
-            <li><a href="about-company.html" title="">About Us2</a></li>
-            <li><a [routerLink]="['/contact']" title="">contact</a></li>
-            <li><a href="contact-branches.html" title="">Contact Us2</a></li>
-            <li><a href="widgets.html" title="">Widgts</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/home']" title="">Home Social</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" title="">timeline</a></li>                             
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/trip']" title="">View List Trips</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/contact']" title="">contact</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/faq']" title="">faq's page</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/knowledge']" title="">Knowledge base</a></li>
+            <li *ngIf="this.res==true"><a [routerLink]="['/main/widgets']" title="">Widgets</a></li>
         </ul>
     </nav>
-    <nav id="shoppingbag">
+    <nav id="shoppingbag" *ngIf="this.res==true">
         <div>
             <div class="">
                 <form method="post">

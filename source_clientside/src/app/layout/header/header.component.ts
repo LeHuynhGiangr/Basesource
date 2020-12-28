@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from '../../_core/services/login.service';
@@ -15,12 +16,18 @@ export class HeaderComponent implements OnInit {
     public appUsers: AppUsers;
     public NameSearch :string
     public m_returnUrl: string;
+    public res:boolean=false
     public users:any
     public userList = new Array<AppUsers>();
-    constructor(private router: Router ,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
+    constructor(private router: Router ,private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
       public Sservice:SearchService,public timelineurl:TimelineUrl) {}
 
     async ngOnInit() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "../assets/js/nav.js";
+      this.elementRef.nativeElement.appendChild(script);
+      
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = UserProfile.Avatar
@@ -29,6 +36,9 @@ export class HeaderComponent implements OnInit {
     onLogout() {
       this.service.logout();
       this.router.navigateByUrl('/login');
+    }
+    openNav(){
+      this.res=true
     }
     async search(){
       UserProfile.Name = this.NameSearch
