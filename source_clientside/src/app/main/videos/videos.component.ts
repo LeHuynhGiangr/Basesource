@@ -29,7 +29,9 @@ export class VideosComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
     this.appUsers = new AppUsers();
     console.log(UserProfile.IdTemp)
     console.log(UserProfile.Id)

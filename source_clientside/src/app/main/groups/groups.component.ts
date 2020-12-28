@@ -29,7 +29,9 @@ export class GroupsComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
     this.appUsers = new AppUsers();
     if(UserProfile.Id==UserProfile.IdTemp)
     {

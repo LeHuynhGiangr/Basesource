@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     if (UserProfile.Id!=null) {
       const user = await this.service.getUser() as any;
       UserProfile.Avatar = user["avatar"];
+      UserProfile.Background = user["background"];
       return this.m_router.navigateByUrl("/main", { skipLocationChange: true });
     }
   }

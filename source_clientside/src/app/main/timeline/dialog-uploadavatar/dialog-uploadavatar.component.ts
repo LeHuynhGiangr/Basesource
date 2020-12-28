@@ -30,8 +30,7 @@ export class DialogUploadAvatarComponent implements OnInit {
 
   async ngOnInit() {
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Avatar = user["avatar"];
+    this.appUsers.Avatar = UserProfile.Avatar
     this.appUsers.Id=UserProfile.Id
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;

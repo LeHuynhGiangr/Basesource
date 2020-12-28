@@ -30,9 +30,9 @@ export class DialogUploadBackgroundComponent implements OnInit {
 
   async ngOnInit() {
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Background = user["background"]
-    this.appUsers.Id=user["id"]
+    //var user = await this.service.getUser();
+    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Id=UserProfile.Id
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }

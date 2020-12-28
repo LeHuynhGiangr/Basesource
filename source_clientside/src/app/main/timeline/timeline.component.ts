@@ -29,7 +29,9 @@ export class TimelineComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
     this.appUsers = new AppUsers();
     console.log(UserProfile.IdTemp)
     console.log(UserProfile.Id)
