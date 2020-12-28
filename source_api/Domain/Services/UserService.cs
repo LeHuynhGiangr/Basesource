@@ -207,7 +207,7 @@ namespace Domain.Services
 
         public IEnumerable<UserResponse> GetAll()
         {
-            var l_users = m_userRepository.GetAll();
+            var l_users = m_userRepository.GetAll(_=>_.Friend);
             List<UserResponse> l_userResponses = new List<UserResponse>();
             foreach (User user in l_users)
             {
@@ -224,7 +224,7 @@ namespace Domain.Services
                     Role = user.Role,
                     Updated = user.DateModified,
                     Active = user.Active,
-                    FriendsJson = JsonSerializer.Deserialize<object>(user.FriendsJsonString ?? "[]")
+                    FriendsJson = JsonSerializer.Deserialize<object>(user.Friend.FriendsJsonString ?? "[]"),
                 });
             }
             return l_userResponses;

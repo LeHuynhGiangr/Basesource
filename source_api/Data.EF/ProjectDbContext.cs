@@ -51,6 +51,7 @@ namespace Data.EF
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new PostConfiguration());
             builder.ApplyConfiguration(new ChattingConfiguration());
+            builder.ApplyConfiguration(new FriendConfiguration());
 
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);

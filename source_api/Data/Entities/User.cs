@@ -48,7 +48,7 @@ namespace Data.Entities
         public DateTime? DateResetTokenExpired { get; set; }
 
         //json string, storing list of friends
-        public string FriendsJsonString { get; set; }
+        //public string FriendsJsonString { get; set; }
         public string Hobby { get; set; }
         public string Language { get; set; }
 
@@ -60,6 +60,7 @@ namespace Data.Entities
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
         public IList<UserJoinTrip> UserJoinTrips { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public Friend Friend { get; set; }
 
         //public virtual ICollection<Friend> Friends { get; set; }
 

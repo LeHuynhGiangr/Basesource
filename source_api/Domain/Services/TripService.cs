@@ -13,12 +13,10 @@ namespace Domain.Services
     public class TripService : ITripService<Guid>
     {
         private readonly EFRepository<Trip, Guid> m_tripRepository;
-        private readonly ProjectDbContext _context;
 
         public TripService(EFRepository<Trip, Guid> tripRepository, ProjectDbContext context)
         {
             m_tripRepository = tripRepository;
-            _context = context;
         }
 
         public bool Delete(Guid id)

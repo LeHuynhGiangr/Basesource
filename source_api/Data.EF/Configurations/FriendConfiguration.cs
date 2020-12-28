@@ -11,14 +11,12 @@ namespace Data.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Friend> builder)
         {
-            //builder.ToTable("friends");
-
-            //builder.Property(_ => _.FriendId).IsRequired(required: true);
+            builder.ToTable("friends");
 
             ////add the shadow property to the model
             //builder.Property<Guid>("userid");
 
-            //builder.HasOne(e => e.User).WithMany(e => e.Friends).HasForeignKey("userid").HasConstraintName("fk_friend_user_userid").OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.User).WithOne(e => e.Friend).HasForeignKey<Friend>(_=>_.Id).HasConstraintName("fk_friend_user_userid").OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
