@@ -7,62 +7,6 @@
                     <div class="row" id="page-contents">
                         <div class="col-lg-3">
                             <aside class="sidebar static">
-                                <!-- Shortcuts -->
-                                <app-list-navigation></app-list-navigation>
-
-                            </aside>
-                        </div><!-- sidebar -->
-                        <div class="col-lg-6">
-                            <div class="central-meta">
-                                <div class="new-postbox">
-                                    <figure>
-                                        <img [src]="uriHandler.getImageSource(this.appUsers.Avatar)"
-                                            style="width: 70px; height: 70px;" alt="">
-                                    </figure>
-                                    <div class="newpst-input">
-                                        <form method="post">
-                                            <textarea rows="2" placeholder="write something" (click)=openDialog()></textarea>
-                                            <div class="attachments">
-                                                <ul>
-                                                    <li>
-                                                        <i class="fa fa-music"></i>
-                                                        <label class="fileContainer">
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-image"></i>
-                                                        <label class="fileContainer">
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-video-camera"></i>
-                                                        <label class="fileContainer">
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-camera"></i>
-                                                        <label class="fileContainer">
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div><!-- add post new box -->
-                            
-                            <div class="loadMore">
-
-                                <ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
-                                    <div class="central-meta item">
-                                        <app-post [postData]=post></app-post>
-                                    </div>
-                                </ng-template>
-                            </div>
-
-                        </div><!-- centerl meta -->
-                        <div class="col-lg-3">
-                            <aside class="sidebar static">
                                 <div class="widget">
                                     <h4 class="widget-title">Your page</h4>
                                     <div class="your-page">
@@ -145,9 +89,64 @@
                                     </div>
                                 </div><!-- page like widget -->
 
+                                <!-- Shortcuts -->
+                                <app-list-navigation></app-list-navigation>
+                            </aside>
+                        </div><!-- sidebar -->
+                        <div class="col-lg-6">
+                            <div class="central-meta">
+                                <div class="new-postbox">
+                                    <figure>
+                                        <img [src]="uriHandler.getImageSource(this.appUsers.Avatar)"
+                                            style="width: 70px; height: 70px;" alt="">
+                                    </figure>
+                                    <div class="newpst-input">
+                                        <form method="post">
+                                            <textarea rows="2" placeholder="write something" (click)=openDialog()></textarea>
+                                            <div class="attachments">
+                                                <ul>
+                                                    <li>
+                                                        <i class="fa fa-music"></i>
+                                                        <label class="fileContainer">
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-image"></i>
+                                                        <label class="fileContainer">
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-video-camera"></i>
+                                                        <label class="fileContainer">
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-camera"></i>
+                                                        <label class="fileContainer">
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><!-- add post new box -->
+                            
+                            <div class="loadMore">
+
+                                <ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
+                                    <div class="central-meta item">
+                                        <app-post [postData]=post></app-post>
+                                    </div>
+                                </ng-template>
+                            </div>
+
+                        </div><!-- centerl meta -->
+                        <div class="col-lg-3">
+                            <aside class="sidebar static">
+
                                 <!-- friends list sidebar here -->
                                 <app-right-sidebar-list-friend></app-right-sidebar-list-friend>
-                            
                             </aside>
                         </div><!-- sidebar -->
                     </div>
@@ -156,5 +155,4 @@
         </div>
     </div>
 </section>
-<app-chat-box></app-chat-box>
 <app-footer></app-footer>

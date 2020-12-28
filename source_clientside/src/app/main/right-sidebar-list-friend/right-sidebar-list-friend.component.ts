@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./right-sidebar-list-friend.component.css']
 })
 export class RightSidebarListFriendComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
