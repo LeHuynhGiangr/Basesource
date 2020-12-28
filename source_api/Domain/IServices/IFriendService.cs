@@ -7,8 +7,7 @@ namespace Domain.IServices
 {
     public interface IFriendService<T>
     {
-        IEnumerable<FriendResponse> GetAll(T id);
-        IEnumerable<FriendResponse> GetFriendsByUserId<IdType>(IdType id);
+        IEnumerable<FriendResponse> GetAll();
         FriendResponse GetById(T id);
         //UserResponse Create(CreateRequest model);
         //UserResponse Update(T id, UpdateUserRequest model);
