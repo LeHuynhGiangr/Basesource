@@ -4476,7 +4476,6 @@ canvas {
 
 .linked-image {
     display: inline-block;
-    width: 30%;
     vertical-align: top;
     float: none;
     margin-bottom: 15px;
@@ -4491,7 +4490,7 @@ canvas {
 
 .post-meta .detail {
     display: inline-block;
-    width: 64%;
+    width: 100%;
 }
 
 .post-meta .detail > span {

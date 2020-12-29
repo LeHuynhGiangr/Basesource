@@ -50,16 +50,15 @@
                                     </div>
                                 </div>
                             </div><!-- add post new box -->
-                            
+                            <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
                             <div class="loadMore">
-
                                 <ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
                                     <div class="central-meta item">
                                         <app-post [postData]=post></app-post>
                                     </div>
                                 </ng-template>
                             </div>
-
+                            <button class="btn-view btn-load-more"></button>
                         </div><!-- centerl meta -->
                         <div class="col-lg-3">
                             <aside class="sidebar static">

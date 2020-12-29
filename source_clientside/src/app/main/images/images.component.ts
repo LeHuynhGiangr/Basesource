@@ -16,7 +16,8 @@ import {DialogShowImageComponent} from '../images/dialog-image/dialog-image.comp
 @Component({
     selector: 'app-images',
     templateUrl: './images.component.html',
-    styleUrls: ['./images.component.css']
+    styleUrls: ['./images.component.css'],
+    
 })
 export class ImagesComponent implements OnInit {
 
@@ -25,6 +26,9 @@ export class ImagesComponent implements OnInit {
   public imageList = new Array<Images>();
   public m_returnUrl: string;
   compareId: boolean;
+  play:boolean
+  interval;
+  time: number = 0;
   constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
   public uriHandler:UriHandler,public timelineurl:TimelineUrl, public Iservice: ImageService) {
     
@@ -58,16 +62,25 @@ export class ImagesComponent implements OnInit {
         this.appUsers.Avatar = user["avatar"]
         this.appUsers.Background = user["background"]
       }
+      UserProfile.count=3
       this.getImageList()
+      this.startTimer()
+    }
+    startTimer() {
+      this.play = true;
+      this.interval = setInterval(() => {
+        this.time++;
+        if(this.time>=200)
+        {
+          this.play = false
+          clearInterval(this.interval);
+        }
+      },50)
     }
     onLogout() {
       this.service.logout();
       this.m_router.navigateByUrl('/login');
     }
-    onFileChanged(event) {
-      this.appUsers.Avatar = event.target.files[0]
-    }
-
     openDialog(): void {
       const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
         width: '500px',
@@ -129,6 +142,8 @@ export class ImagesComponent implements OnInit {
     }
     async loadmore()
     {
+      this.time=0
+      this.startTimer()
       this.images = await this.Iservice.getImageUser(UserProfile.IdTemp);
       for (let i = UserProfile.count; i < UserProfile.count+3; i++) {
           let image = new Images();

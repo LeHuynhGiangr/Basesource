@@ -10,6 +10,10 @@ import { DialogUploadBackgroundComponent } from './dialog-uploadbackground/dialo
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { PostService } from 'src/app/_core/services/post.service';
+import { Post } from 'src/app/_core/models/Post';
+import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
+import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -18,9 +22,13 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 export class TimelineComponent implements OnInit {
   public appUsers: AppUsers;
   compareId: boolean;
+  play:boolean
+  interval;
+  time: number = 0;
+  public m_posts:Post[];
   constructor(private router: Router, private route: ActivatedRoute, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
     private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog, public uriHandler: UriHandler,
-    public timelineurl:TimelineUrl) {
+    public timelineurl:TimelineUrl, private Pservice:PostService) {
 
   }
 
@@ -51,9 +59,21 @@ export class TimelineComponent implements OnInit {
       this.appUsers.Avatar = user["avatar"]
       this.appUsers.Background = user["background"]
     }
+    this.loadPostData();
+    this.startTimer()
   }
 
-
+  startTimer() {
+    this.play = true;
+    this.interval = setInterval(() => {
+      this.time++;
+      if(this.time>=100)
+      {
+        this.play = false
+        clearInterval(this.interval);
+      }
+    },50)
+  }
   onLogout() {
     this.service.logout();
     this.router.navigateByUrl('/login');
@@ -62,6 +82,35 @@ export class TimelineComponent implements OnInit {
     this.appUsers.Avatar = event.target.files[0]
   }
 
+  createPost(newPost:CreatePostRequest){
+    if(!newPost)return;
+      this.Pservice.createPost(newPost).subscribe((jsonData:Post)=>this.m_posts.unshift(jsonData));
+    this.loadPostData();
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
+  }
+  createpostDialog(): void {
+    const dialogRef = this.dialog.open(DialogPostComponent, {
+      width: '800px',
+      height: '300px',
+      data: { Id: this.appUsers.Id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(dialogRef.componentInstance.isCloseByCancelBtn==0){
+        const base64String=dialogRef.componentInstance.m_image;
+        const createPostRequest: CreatePostRequest={
+          userId:localStorage.getItem('userId').toString(),
+          status: dialogRef.componentInstance.m_status,
+          base64Str:base64String || "",
+        };
+        this.createPost(createPostRequest);
+      }
+    });
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',
@@ -99,5 +148,7 @@ export class TimelineComponent implements OnInit {
 
     });
   }
-
+  loadPostData(){
+    this.Pservice.getPostById(UserProfile.IdTemp).subscribe((jsonData:Post[])=>this.m_posts=jsonData);
+  }
 }

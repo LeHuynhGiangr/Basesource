@@ -24,6 +24,7 @@
                         <div class="col-lg-6">
                             <button class="btn btn-primary" mat-button style="width: 730px;"
                                 (click)="CreateTripDialog()">Create Trip</button>
+                            
                             <div class="loadMore">
                                 <div class="central-meta item" *ngFor="let trip of tripList">
                                     <div class="user-post">
@@ -81,6 +82,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
+                                <button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
                             </div>
                         </div><!-- centerl meta -->
                         <div class="col-lg-3">

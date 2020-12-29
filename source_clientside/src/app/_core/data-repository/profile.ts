@@ -29,5 +29,5 @@ export class UserProfile {
     public static RequestFriend:boolean;
     public static Name;
     public static UserName:string;
-    public static count=9;
+    public static count=6;
 }

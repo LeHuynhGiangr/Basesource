@@ -49,7 +49,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
         formData.append('description',this.Description)
         formData.append('name',this.Name)
         formData.append('location',"1")
-        this.service.createTrip(formData);
+        await this.service.createTrip(formData);
         alert("Create succesfully !")
         this.dialogRef.close();
         this.refresh()

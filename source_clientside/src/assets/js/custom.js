@@ -52,7 +52,43 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $FOOTER = $('footer');
 
 	
+$(function() {
+
+	//	create the menus
+	$('#menu').mmenu();
+	$('#shoppingbag').mmenu({
+		navbar: {
+			title: 'General Setting'
+		},
+		offCanvas: {
+			position: 'right'
+		}
+	});
+
+	//	fire the plugin
+	$('.mh-head.first').mhead({
+		scroll: {
+			hide: 200
+		}
+		
+	});
+	$('.mh-head.second').mhead({
+		scroll: false
+	});
+
 	
+});		
+	
+if ($.isFunction($.fn.loadMoreResults)) {	
+	$('.loadMore').loadMoreResults({
+		displayedItems: 3,
+		showItems: 1,
+		button: {
+		  'class': 'btn-load-more',
+		  'text': 'Load More'
+		}
+	});	
+}	
 // Sidebar
 function init_sidebar() {
 // TODO: This is some kind of easy fix, maybe we can improve this

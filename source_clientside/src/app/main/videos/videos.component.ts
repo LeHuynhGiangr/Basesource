@@ -12,7 +12,8 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-videos',
     templateUrl: './videos.component.html',
-    styleUrls: ['./videos.component.css']
+    styleUrls: ['./videos.component.css'],
+    
 })
 export class VideosComponent implements OnInit {
 

@@ -136,6 +136,7 @@
 												<img [src]="uriHandler.getImageSource(image.Image)"  alt="" style="width:220px;height:210px;"></a>
 										</li>										
 									</ul>
+									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
