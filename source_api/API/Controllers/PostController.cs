@@ -30,8 +30,41 @@ namespace API.Controllers
         {
             try
             {
-                var l_postResponses = m_postService.GetPostsByUserId(id);
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_postResponses = m_postService.GetPostsByUserId(l_userId);
                 return Ok(l_postResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult LazyLoadOwnPost()
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                //var l_postResponses = m_postService.GetPostsByUserId(l_userId);
+                //return Ok(l_postResponses);
+                throw new Exception();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult LazyLoadFriendPost()
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                //var l_postResponses = m_postService.GetPostsByUserId(l_userId);
+                //return Ok(l_postResponses);
+                throw new Exception();
             }
             catch (Exception e)
             {
