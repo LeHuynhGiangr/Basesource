@@ -3,6 +3,7 @@
  */
 using Data.EF;
 using Data.Entities;
+using Data.Interfaces;
 using Domain.IServices;
 using Domain.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -72,11 +73,14 @@ namespace API
             services.AddScoped<EFRepository<Trip, Guid>, EFRepository<Trip, Guid>>();
             services.AddScoped<EFRepository<UserMedia, Guid>, EFRepository<UserMedia, Guid>>();
             services.AddScoped<EFRepository<UserJoinTrip, Guid>, EFRepository<UserJoinTrip, Guid>>();
+            services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
+
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<IPostService<Guid>, PostService>();
             services.AddScoped<ITripService<Guid>, TripService>();
             services.AddScoped<IMediaService<Guid>, MediaService>();
             services.AddScoped<IUserJoinTripService<Guid>, UserJoinTripService>();
+            services.AddScoped<IFriendService<Guid>, FriendService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

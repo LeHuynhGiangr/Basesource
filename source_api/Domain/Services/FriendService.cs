@@ -4,6 +4,7 @@ using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Domain.Services
 {
@@ -43,7 +44,7 @@ namespace Domain.Services
             }
             FriendResponse l_friendResponse = new FriendResponse
             {
-                FriendJsonString = l_friend.FriendsJsonString
+                FriendJsonString = JsonSerializer.Deserialize<object>(l_friend.FriendsJsonString ?? "[]"),
             };
             return l_friendResponse;
         }
