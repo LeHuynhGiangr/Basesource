@@ -108,5 +108,15 @@ namespace Domain.Services
             }
             m_postRepository.SaveChanges();
         }
+
+        public IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PostResponse> GetOwnedPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

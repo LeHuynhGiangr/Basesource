@@ -17,6 +17,7 @@ namespace API.Controllers
     [Route("post")]//routing/
     public class PostController:ControllerBase
     {
+        private const int m_const_maximumNumberOfEntries = 5;
         private readonly IPostService<Guid> m_postService;
 
         public PostController(IPostService<Guid> postService)
@@ -41,34 +42,36 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult LazyLoadOwnPost()
+        [Route("lazy-ownedposts")]
+        public IActionResult LazyLoadOwnedPosts([FromBody] LazyLoadPostRequest lazyLoadPostRequest)
         {
             try
             {
                 System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                //var l_postResponses = m_postService.GetPostsByUserId(l_userId);
+                var l_postResponse = m_postService.GetOwnedPostsByUserId(l_userId, m_const_maximumNumberOfEntries);
                 //return Ok(l_postResponses);
-                throw new Exception();
+                throw new Exception(message:"service unavailable");
             }
             catch (Exception e)
             {
-                return StatusCode(500, new { message = e.Message });
+                return StatusCode(503, new { message = e.Message });
             }
         }
 
         [HttpGet]
-        public IActionResult LazyLoadFriendPost()
+        [Route("lazy-posts")]
+        public IActionResult LazyLoadPosts([FromBody] LazyLoadPostRequest lazyLoadPostRequest)
         {
             try
             {
                 System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                //var l_postResponses = m_postService.GetPostsByUserId(l_userId);
+                var l_postResponse = m_postService.GetPostsByUserId(l_userId, m_const_maximumNumberOfEntries);
                 //return Ok(l_postResponses);
-                throw new Exception();
+                throw new Exception(message: "service unavailable");
             }
             catch (Exception e)
             {
-                return StatusCode(500, new { message = e.Message });
+                return StatusCode(503, new { message = e.Message });
             }
         }
 
