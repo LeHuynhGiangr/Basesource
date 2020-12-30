@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Helpers;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +17,12 @@ namespace API.Controllers
     public class MediaController : ControllerBase
     {
         private readonly IMediaService<Guid> _service;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public MediaController(IMediaService<Guid> service)
+        public MediaController(IMediaService<Guid> service, IWebHostEnvironment webHostEnvironment)
         {
             _service = service;
+            _webHostEnvironment = webHostEnvironment;
         }
         [HttpGet]
         public IActionResult GetMedia()
@@ -50,15 +53,13 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateMedia([FromForm] CreateMediaRequest createMediaRequest, IFormFile media)
+        public IActionResult CreateMedia([FromForm] CreateMediaRequest createMediaRequest)
         {
             try
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                var l_memStream = new System.IO.MemoryStream();
-                media.CopyTo(l_memStream);
                 createMediaRequest.UserId = id;
-                _service.Create(createMediaRequest, l_memStream);
+                _service.Create(createMediaRequest, _webHostEnvironment.WebRootPath);
                 return Ok("Create successfully");
             }
             catch (Exception e)

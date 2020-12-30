@@ -2,6 +2,7 @@
 using Domain.DomainModels;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +36,7 @@ namespace Domain.IServices
         UserResponse Create(CreateRequest model);
         UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
-        void UploadAvatar(Guid id, MemoryStream avatar);
+        void UploadAvatar(Guid id, string webRootPath, IFormFile avatar);
         //void UploadAvatar(Guid id, IFormFile avatar);
         void DeleteUser(Guid id);
         bool BlockUser(Guid id);
@@ -43,6 +44,6 @@ namespace Domain.IServices
         void ChangePassword(Guid id, ResetPasswordRequest model);
         void UpdateAcademic(Guid id, UpdateAcademicRequest model);
         void UpdateInterest(Guid id, UpdateInterestRequest model);
-        void UploadBackground(Guid id, MemoryStream background);
+        void UploadBackground(Guid id, string webRootPath, IFormFile background);
     }
 }

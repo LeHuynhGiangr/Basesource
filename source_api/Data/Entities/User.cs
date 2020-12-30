@@ -25,8 +25,8 @@ namespace Data.Entities
         public float Location { get; set; }
         public string Works { get; set; }
         public bool Active { get; set; }
-        public byte[] Avatar { get; set; }
-        public byte[] Background { get; set; }
+        public string Avatar { get; set; }
+        public string Background { get; set; }
         public bool FollowMe { get; set; }
         public bool RequestFriend { get; set; }
         public bool ViewListFriend { get; set; }

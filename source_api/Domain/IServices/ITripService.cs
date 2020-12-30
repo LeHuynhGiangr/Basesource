@@ -12,7 +12,7 @@ namespace Domain.IServices
         IEnumerable<TripResponse> GetAll();
         IEnumerable<TripResponse> GetTripsByUserId<IdType>(IdType id);
         TripResponse GetById(T id);
-        TripResponse Create(CreateTripRequest model, MemoryStream image);
+        TripResponse Create(CreateTripRequest model, string webRootPath);
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         void DeleteByUserId(Guid id);

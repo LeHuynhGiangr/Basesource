@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace Domain.DomainModels.API.RequestModels
 {
     public class CreateMediaRequest
     {
-        public byte[] MediaFile { get; set; }
+        public IFormFile MediaFile { get; set; }
         public Guid UserId { get; set; }
     }
 }

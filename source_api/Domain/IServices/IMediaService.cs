@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Domain.IServices
 {
@@ -12,6 +13,6 @@ namespace Domain.IServices
         IEnumerable<MediaResponse> GetAll();
         IEnumerable<MediaResponse> GetMediaByUserId<IdType>(IdType id);
         MediaResponse GetById(Guid id);
-        MediaResponse Create(CreateMediaRequest model, MemoryStream media);
+        MediaResponse Create(CreateMediaRequest model, string webRootPath);
     }
 }

@@ -17,6 +17,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Domain.Services.InternalServices;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Domain.Services
 {
@@ -309,29 +310,46 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        public void UploadAvatar(Guid id, MemoryStream avatar)
+        public void UploadAvatar(Guid id, string webRootPath, IFormFile avatar)
         {
             User user = m_userRepository.FindById(id);
 
-            //var ms = new MemoryStream();
-            //avatar.CopyTo(ms);
+            string imageUrl = this.SaveFile(webRootPath, $"media-file/{id}/", avatar);
+            string url = imageUrl;
 
-            var fileBytes = avatar.ToArray();
-            //string dataBytes = Convert.ToBase64String(fileBytes);
-
-            user.Avatar = fileBytes;
+            user.Avatar = url;
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
         }
-        public void UploadBackground(Guid id, MemoryStream background)
+        public void UploadBackground(Guid id, string webRootPath, IFormFile background)
         {
             User user = m_userRepository.FindById(id);
-
-            var fileBytes = background.ToArray();
-
-            user.Background = fileBytes;
+            string imageUrl = this.SaveFile(webRootPath, $"media-file/{id}/", background);
+            string url = imageUrl;
+            user.Background = url;
             m_userRepository.SetModifierUserStatus(user, EntityState.Modified);
             m_userRepository.SaveChanges();
+        }
+        private string SaveFile(string webRootPath, string dirFile, IFormFile image)
+        {
+            //host static image
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string nameImage = unixTimestamp.ToString() + "." + image.FileName.Split('.')[1];
+
+            string filePath = $"{webRootPath}\\{dirFile}";
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
+            {
+                image.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
+            return dirFile + nameImage;
         }
         public void UploadUserProfile(Guid id, UpdateUserRequest model)
         {

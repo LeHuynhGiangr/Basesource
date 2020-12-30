@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using API.Helpers;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,10 +18,11 @@ namespace API.Controllers
     public class TripController : ControllerBase
     {
         private readonly ITripService<Guid> _service;
-
-        public TripController(ITripService<Guid> service)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public TripController(ITripService<Guid> service, IWebHostEnvironment webHostEnvironment)
         {
             _service = service;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -54,15 +56,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTrip([FromForm] CreateTripRequest createTripRequest, IFormFile image)
+        public IActionResult CreateTrip([FromForm] CreateTripRequest createTripRequest)
         {
             try
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                var l_memStream = new System.IO.MemoryStream();
-                image.CopyTo(l_memStream);
                 createTripRequest.UserId = id;
-                _service.Create(createTripRequest,l_memStream);
+                _service.Create(createTripRequest, _webHostEnvironment.WebRootPath);
                 return Ok("Create successfully");
             }
             catch (Exception e)

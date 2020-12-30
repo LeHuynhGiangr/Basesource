@@ -22,8 +22,8 @@ namespace Domain.DomainModels.API.ResponseModels
         public string Hobby { get; set; }
         public string Language { get; set; }
         public bool Active { get; set; }
-        public byte[] Avatar { get; set; }
-        public byte[] Background { get; set; }
+        public string Avatar { get; set; }
+        public string Background { get; set; }
         public bool FollowMe { get; set; }
         public bool RequestFriend { get; set; }
         public bool ViewListFriend { get; set; }

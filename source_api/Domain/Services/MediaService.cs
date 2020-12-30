@@ -3,14 +3,17 @@ using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public class MediaService: IMediaService<Guid>
+    public class MediaService : IMediaService<Guid>
     {
         private readonly EFRepository<UserMedia, Guid> m_mediaRepository;
         private readonly ProjectDbContext _context;
@@ -31,18 +34,19 @@ namespace Domain.Services
                         );
             return mediaResponse;
         }
-        public MediaResponse Create(CreateMediaRequest model, MemoryStream media)
+        public MediaResponse Create(CreateMediaRequest model, string webRootPath)
         {
             try
             {
                 Guid l_newId = Guid.NewGuid();
-                var fileBytes = media.ToArray();
+                string imageUrl = this.SaveFile(webRootPath, $"media-file/{l_newId}/", model.MediaFile);
+                string url = imageUrl;
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 UserMedia l_media = new UserMedia
                 {
                     Id = l_newId,
                     DateCreated = DateTime.Now,
-                    MediaFile = fileBytes,
+                    MediaFile = url,
                     UserId = model.UserId
                 };
 
@@ -54,6 +58,27 @@ namespace Domain.Services
             {
                 throw new Exception("create media failed");
             }
+        }
+        private string SaveFile(string webRootPath, string dirFile, IFormFile image)
+        {
+            //host static image
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string nameImage = unixTimestamp.ToString() + "." + image.FileName.Split('.')[1];
+
+            string filePath = $"{webRootPath}\\{dirFile}";
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
+            {
+                image.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
+            return dirFile + nameImage;
         }
         IEnumerable<MediaResponse> IMediaService<Guid>.GetAll()
         {

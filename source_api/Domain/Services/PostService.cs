@@ -3,8 +3,10 @@ using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace Domain.Services
@@ -18,13 +20,15 @@ namespace Domain.Services
             m_postRepository = postRepository;
         }
 
-        public PostResponse Create(CreatePostRequest model)
+        public PostResponse Create(CreatePostRequest model,string webRootPath)
         {
             try
             {
                 Guid l_newPostGuidId = Guid.NewGuid();
+                string imageUrl = this.SaveFile(webRootPath, $"media-file/{l_newPostGuidId}/", model.Image);
+                string url = imageUrl;
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
-                Post l_newPost = new Post(l_newPostGuidId, model.Status, Convert.FromBase64String(model.Base64Str), System.Guid.Parse(model.UserId));
+                Post l_newPost = new Post(l_newPostGuidId, model.Status, url, System.Guid.Parse(model.UserId));
                 m_postRepository.Add(l_newPost);
                 m_postRepository.SaveChanges();
                 return GetById(l_newPostGuidId);
@@ -34,7 +38,27 @@ namespace Domain.Services
                 throw new Exception("create post failed");
             }
         }
+        private string SaveFile(string webRootPath, string dirFile, IFormFile imageUri)
+        {
+            //host static image
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string nameImage = unixTimestamp.ToString() + "." + imageUri.FileName.Split('.')[1];
 
+            string filePath = $"{webRootPath}\\{dirFile}";
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
+            {
+                imageUri.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
+            return dirFile + nameImage;
+        }
         public bool Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -55,7 +79,7 @@ namespace Domain.Services
                         JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
                         JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,
-                        Convert.ToBase64String(post.User.Avatar),
+                        post.User.Avatar,
                         post.User.Id.ToString()));
             }
             return l_postResponses;
@@ -72,7 +96,7 @@ namespace Domain.Services
                 JsonSerializer.Deserialize<object>(l_post.LikeObjectsJson ?? "[]"),
                 JsonSerializer.Deserialize<object>(l_post.CommentObjectsJson ?? "[]"),
                 l_post.User.FirstName + " " + l_post.User.LastName,
-                Convert.ToBase64String(l_post.User.Avatar),
+                l_post.User.Avatar,
                 l_post.User.Id.ToString()
                 );
             return l_postResponse;
@@ -93,7 +117,7 @@ namespace Domain.Services
                         JsonSerializer.Deserialize<object>(post.LikeObjectsJson ?? "[]"),
                         JsonSerializer.Deserialize<object>(post.CommentObjectsJson ?? "[]"),
                         post.User.FirstName + " " + post.User.LastName,
-                        Convert.ToBase64String(post.User.Avatar),
+                        post.User.Avatar,
                         post.User.Id.ToString()));
             }
             return l_postResponses;

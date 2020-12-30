@@ -3,6 +3,7 @@ using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -19,115 +20,20 @@ namespace API
     public class UserController : ControllerBase
     {
         private string m_tokenKeyName = "refreshtoken";
-
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private IUserService<Guid> m_userService;//dependency injection/
 
+
         //Parameter DI/
-        public UserController(IUserService<Guid> userService)
+        public UserController(IUserService<Guid> userService, IWebHostEnvironment webHostEnvironment)
         {
             m_userService = userService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         ///*
         // * below is public action methods which can be access without authorization
         // */
-        //[AllowAnonymous]//this attribute is applied to does not require authorization/
-        //[HttpPost("authenticate")]//Http post method
-        //public IActionResult Authenticate([FromBody] AuthenticateRequest model)//get data from request body, auto binding/
-        //{
-        //    try
-        //    {
-        //        var l_response = m_userService.Authenticate(model, GetclientIpv4Address());
-
-        //        //if response is null -> status 400 - Bad request
-        //        if (l_response == null)
-        //        {
-        //            return BadRequest(new { message = "username or password is incorrect" });
-        //        }
-
-        //        SetTokenCookie(l_response.RefreshToken);
-
-        //        return Ok(l_response);//status 200 OK
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(new { message = e.Message });
-        //    }
-
-        //}
-
-        //[AllowAnonymous]
-        //[HttpPost("refresh-token")]
-        //public IActionResult RefreshToken()
-        //{
-        //    try
-        //    {
-        //        //get refreshToken in cookies
-        //        var l_refreshToken = Request.Cookies[m_tokenKeyName];
-
-        //        //if cannot get token return status 400 - bad request
-        //        if (string.IsNullOrEmpty(l_refreshToken))
-        //        {
-        //            return BadRequest(new { message = "token is required" });
-        //        }
-
-        //        var l_response = m_userService.RefreshToken(l_refreshToken, GetclientIpv4Address());
-
-        //        //if response is null return status 401 unauthorized
-        //        if (l_response == null)
-        //        {
-        //            return Unauthorized(new { message = "invalid token" });
-        //        }
-
-        //        SetTokenCookie(l_response.RefreshToken);
-
-        //        return Ok(l_response);//status 200 OK
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(new { message = e.Message });
-        //    }
-        //}
-
-        //[AllowAnonymous]
-        //[HttpPost("register")]
-        //public IActionResult Register([FromBody] RegisterRequest registerRequest)
-        //{
-        //    try
-        //    {
-        //        m_userService.Register(registerRequest, Request.Headers["origin"]);
-        //        return Ok(new { message = "registration successful" });//temporarily, verification token has not been sent to email yet
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(new { message = e.Message });
-        //    }
-        //}
-
-        //[HttpPost("verify-email")]
-        //public IActionResult VerifyEmail()
-        //{
-        //    return StatusCode(503);
-        //}
-
-        //[HttpPost("forgot-password")]
-        //public IActionResult ForgotPassword()
-        //{
-        //    return StatusCode(503);
-        //}
-
-        //[HttpPost("validate-reset-token")]
-        //public IActionResult ValidateResetToken()
-        //{
-        //    return StatusCode(503);
-        //}
-
-        //[HttpPost("reset-password")]
-        //public IActionResult ResetPassword()
-        //{
-        //    return StatusCode(503);
-        //}
-
         //[Authorize]
         [HttpPost("revoke-token")]
         public IActionResult RevokeToken([FromBody] RevokeTokenRequest revokeTokenRequestModel)
@@ -150,22 +56,6 @@ namespace API
             return Ok(new { message = "token is invoke" });
         }
 
-        //[Authorize(Role.Admin)]
-        //[AllowAnonymous]
-        //[HttpGet]
-        //public ActionResult<IEnumerable<UserResponse>> GetAll()
-
-        //{
-        //    try
-        //    {
-        //        var l_userResponses = m_userService.GetAll();
-        //        return Ok(l_userResponses);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return StatusCode(503);//service unavailable
-        //    }
-        //}
 
         //[AllowAnonymous]//this attribute is applied to does not require authorization/
         [HttpPost("sendingemail")]//Http post method
@@ -191,7 +81,7 @@ namespace API
                 System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 var l_memStream = new System.IO.MemoryStream();
                 avatar.CopyTo(l_memStream);
-                m_userService.UploadAvatar(l_userId, l_memStream);
+                m_userService.UploadAvatar(l_userId, _webHostEnvironment.WebRootPath,avatar);
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
@@ -210,7 +100,7 @@ namespace API
                 System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 var l_memStream = new System.IO.MemoryStream();
                 background.CopyTo(l_memStream);
-                m_userService.UploadBackground(l_userId, l_memStream);
+                m_userService.UploadBackground(l_userId, _webHostEnvironment.WebRootPath,background);
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,6 @@ namespace Domain.DomainModels.API.RequestModels
     {
         public string UserId { get; set; }
         public string Status { get; set; }
-        public string Base64Str { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

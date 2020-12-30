@@ -3,6 +3,7 @@ using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,12 +49,13 @@ namespace Domain.Services
             return tripResponse;
         }
 
-        public TripResponse Create(CreateTripRequest model, MemoryStream image)
+        public TripResponse Create(CreateTripRequest model, string webRootPath)
         {
             try
             {
                 Guid l_newTripGuidId = Guid.NewGuid();
-                var fileBytes = image.ToArray();
+                string imageUrl = this.SaveFile(webRootPath, $"media-file/{l_newTripGuidId}/", model.Image);
+                string url = imageUrl;
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Trip l_newTrip = new Trip
                 {
@@ -62,7 +64,7 @@ namespace Domain.Services
                     UserId = model.UserId,
                     DateCreated = DateTime.Now,
                     Location = 0,
-                    Image = fileBytes,
+                    Image = url,
                     Description = model.Description
                 };
 
@@ -76,7 +78,27 @@ namespace Domain.Services
                 throw new Exception("create trip failed");
             }
         }
+        private string SaveFile(string webRootPath, string dirFile, IFormFile image)
+        {
+            //host static image
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string nameImage = unixTimestamp.ToString() + "." + image.FileName.Split('.')[1];
 
+            string filePath = $"{webRootPath}\\{dirFile}";
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+            using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
+            {
+                image.CopyTo(fileStream);
+                fileStream.Flush();
+            }
+
+            return dirFile + nameImage;
+        }
         IEnumerable<TripResponse> ITripService<Guid>.GetAll()
         {
             var l_trips = m_tripRepository.GetAll(_ => _.User);
