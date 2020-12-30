@@ -1,7 +1,7 @@
 <app-header></app-header>
 	<section>
 		<div class="feature-photo">
-			<figure><img [src]="uriHandler.getImageSource(this.appUsers.Background)" style="width: 1600px; height: 450px;" alt=""></figure>
+			<figure><img src="{{this.appUsers.Background}}" style="width: 1600px; height: 450px;" alt=""></figure>
 			<div class="add-btn">
 				<span>1205 followers</span>
 				<a href="#" title="" data-ripple="">Add Friend</a>
@@ -17,7 +17,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img [src]="uriHandler.getImageSource(this.appUsers.Avatar)" style="width: 250px; height: 200px;" alt="">
+								<img src="{{this.appUsers.Avatar}}" style="width: 250px; height: 200px;" alt="">
 								<form class="edit-phto" (click)=openDialog()>
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">

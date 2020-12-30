@@ -10,6 +10,7 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-edit-password',
     templateUrl: './edit-password.component.html',
@@ -37,8 +38,8 @@ export class EditPasswordComponent implements OnInit {
     //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
-    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }
 
   onFileChanged(event) {

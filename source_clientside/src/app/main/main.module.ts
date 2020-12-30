@@ -58,6 +58,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { UsersListTripComponent } from './trip/users-list-trip/users-list-trip.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point

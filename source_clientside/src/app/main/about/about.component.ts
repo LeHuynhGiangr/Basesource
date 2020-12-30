@@ -9,10 +9,12 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-about',
     templateUrl: './about.component.html',
-    styleUrls: ['./about.component.css']
+    styleUrls: ['./about.component.css'],
+    
 })
 export class AboutComponent implements OnInit {
 
@@ -38,7 +40,7 @@ export class AboutComponent implements OnInit {
       this.compareId =true
       this.appUsers.FirstName=UserProfile.FirstName
       this.appUsers.LastName=UserProfile.LastName
-      this.appUsers.Avatar = UserProfile.Avatar
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Descriptions = UserProfile.Description
       this.appUsers.Address = UserProfile.Address
       this.appUsers.PhoneNumber = UserProfile.PhoneNumber
@@ -52,7 +54,7 @@ export class AboutComponent implements OnInit {
       this.appUsers.ToDate = UserProfile.ToDate
       this.appUsers.Hobby = UserProfile.Hobby
       this.appUsers.Language = UserProfile.Language
-      this.appUsers.Background = UserProfile.Background
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
       this.appUsers.Gender = UserProfile.Gender
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
@@ -63,8 +65,8 @@ export class AboutComponent implements OnInit {
       this.appUsers.Id = UserProfile.IdTemp
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
-      this.appUsers.Avatar = user["avatar"]
-      this.appUsers.Background = user["background"]
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
       this.appUsers.Descriptions = user["description"]
       this.appUsers.Address = user["address"]
       this.appUsers.PhoneNumber = user["phoneNumber"]
@@ -94,7 +96,7 @@ export class AboutComponent implements OnInit {
       console.log(result);
       this.service.getUser().then(user => {
         if (user) {
-          this.appUsers.Avatar = user["avatar"]
+          this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
             UserProfile.Avatar = user["avatar"]
         }
       });
@@ -112,7 +114,7 @@ export class AboutComponent implements OnInit {
       console.log(result);
       this.service.getUser().then(user => {
         if (user) {
-          this.appUsers.Background = user["background"]
+          this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
           UserProfile.Background = user["background"]
         }
       });

@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
+import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
@@ -31,8 +32,8 @@ export class DialogUploadBackgroundComponent implements OnInit {
   async ngOnInit() {
     this.appUsers = new AppUsers();
     //var user = await this.service.getUser();
-    this.appUsers.Background = UserProfile.Background
-    this.appUsers.Id=UserProfile.Id
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
+    this.appUsers.Id = UserProfile.Id
 
   }
 

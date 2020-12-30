@@ -10,10 +10,12 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-edit-setting',
     templateUrl: './edit-setting.component.html',
-    styleUrls: ['./edit-setting.component.css']
+    styleUrls: ['./edit-setting.component.css'],
+    
 })
 export class EditSettingComponent implements OnInit {
 
@@ -36,7 +38,7 @@ export class EditSettingComponent implements OnInit {
     //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Email = UserProfile.Email
     this.appUsers.Gender = UserProfile.Gender
     this.appUsers.Works = UserProfile.Works
@@ -45,7 +47,7 @@ export class EditSettingComponent implements OnInit {
     this.appUsers.Address = UserProfile.Address
     this.appUsers.Descriptions = UserProfile.Description
     this.appUsers.BirthDay = UserProfile.BirthDay
-    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     this.appUsers.FollowMe = UserProfile.FollowMe
     this.appUsers.RequestFriend = UserProfile.RequestFriend
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend

@@ -7,6 +7,7 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { SearchService } from '../../_core/services/friends-search.service';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit {
       
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
-      this.appUsers.Avatar = UserProfile.Avatar
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Id = UserProfile.Id
     }
     onLogout() {
@@ -49,7 +50,7 @@ export class HeaderComponent implements OnInit {
             user.FirstName = this.users[i].firstName;
             user.LastName = this.users[i].lastName;
             user.Descriptions = this.users[i].description
-            user.Avatar = this.users[i].avatar
+            user.Avatar = ApiUrlConstants.API_URL+"/"+this.users[i].avatar
             user.UserName = this.users[i].userName
             if(this.users[i].userName==UserProfile.UserName)
             {

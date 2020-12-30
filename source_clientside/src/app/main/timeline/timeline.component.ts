@@ -14,6 +14,7 @@ import { PostService } from 'src/app/_core/services/post.service';
 import { Post } from 'src/app/_core/models/Post';
 import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
 import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -29,7 +30,6 @@ export class TimelineComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
     private service: LoginService, private Tservice: TimeLineService, public dialog: MatDialog, public uriHandler: UriHandler,
     public timelineurl:TimelineUrl, private Pservice:PostService) {
-
   }
 
   async ngOnInit() {
@@ -47,8 +47,8 @@ export class TimelineComponent implements OnInit {
       this.appUsers.Id = UserProfile.Id
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
-      this.appUsers.Avatar = UserProfile.Avatar
-      this.appUsers.Background = UserProfile.Background
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
@@ -56,8 +56,8 @@ export class TimelineComponent implements OnInit {
       const user =await this.service.getUserById(UserProfile.IdTemp)
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
-      this.appUsers.Avatar = user["avatar"]
-      this.appUsers.Background = user["background"]
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
     }
     this.loadPostData();
     this.startTimer()
@@ -124,7 +124,7 @@ export class TimelineComponent implements OnInit {
       console.log('The dialog was closed');
       this.service.getUser().then(user => {
         if (user) {
-          this.appUsers.Avatar = user["avatar"]
+          this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
           UserProfile.Avatar = user["avatar"]
         }
       });
@@ -141,7 +141,7 @@ export class TimelineComponent implements OnInit {
       console.log('The dialog was closed');
       this.service.getUser().then(user => {
         if (user) {
-          this.appUsers.Background = user["background"]
+          this.appUsers.Background = ApiUrlConstants.API_URL+"/"+ user["background"]
           UserProfile.Background = user["background"]
         }
       });

@@ -9,10 +9,12 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-groups',
     templateUrl: './groups.component.html',
-    styleUrls: ['./groups.component.css']
+    styleUrls: ['./groups.component.css'],
+    
 })
 export class GroupsComponent implements OnInit {
 
@@ -38,8 +40,8 @@ export class GroupsComponent implements OnInit {
       this.compareId =true
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
-      this.appUsers.Avatar = UserProfile.Avatar
-      this.appUsers.Background = UserProfile.Background
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
     {
@@ -49,8 +51,8 @@ export class GroupsComponent implements OnInit {
       this.appUsers.Id = UserProfile.IdTemp
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
-      this.appUsers.Avatar = user["avatar"]
-      this.appUsers.Background = user["background"]
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
     }
     }
 

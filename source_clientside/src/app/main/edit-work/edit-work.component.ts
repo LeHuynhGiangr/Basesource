@@ -10,10 +10,12 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
   selector: 'app-edit-work',
   templateUrl: './edit-work.component.html',
-  styleUrls: ['./edit-work.component.css']
+  styleUrls: ['./edit-work.component.css'],
+  
 })
 export class EditWorkComponent implements OnInit {
 
@@ -37,14 +39,14 @@ export class EditWorkComponent implements OnInit {
     //console.log(user["firstName"] + " " + user["lastName"]);
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.AcademicLevel = UserProfile.AcademicLevel
     this.appUsers.AddressAcademic = UserProfile.AddressAcademic
     this.appUsers.DescriptionAcademic = UserProfile.DescriptionAcademic
     this.appUsers.StudyingAt = UserProfile.StudyingAt
     this.appUsers.FromDate = UserProfile.FromDate
     this.appUsers.ToDate = UserProfile.ToDate
-    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }
     getPath() {
       return this.router.url;

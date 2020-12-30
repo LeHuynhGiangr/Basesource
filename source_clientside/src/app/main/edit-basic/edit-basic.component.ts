@@ -10,10 +10,12 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
-    styleUrls: ['./edit-basic.component.css']
+    styleUrls: ['./edit-basic.component.css'],
+    
 })
 export class EditBasicComponent implements OnInit {
 
@@ -37,7 +39,7 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.Id = UserProfile.Id
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Email = UserProfile.Email
     this.appUsers.Gender = UserProfile.Gender
     this.appUsers.Works = UserProfile.Works
@@ -46,7 +48,7 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.Address = UserProfile.Address
     this.appUsers.Descriptions = UserProfile.Description
     this.appUsers.BirthDay= UserProfile.BirthDay
-    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     this.appUsers.FollowMe = UserProfile.FollowMe
     this.appUsers.RequestFriend = UserProfile.RequestFriend
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend

@@ -10,6 +10,7 @@ import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackgr
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
@@ -39,10 +40,10 @@ export class EditHobbyComponent implements OnInit {
     //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Language = UserProfile.Language
     this.appUsers.Hobby = UserProfile.Hobby
-    this.appUsers.Background = UserProfile.Background
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }
 
   onFileChanged(event) {
@@ -112,9 +113,6 @@ export class EditHobbyComponent implements OnInit {
       console.log(result);
       this.service.getUser().then(user => {
         if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Background = user["background"]
         }
       });
 

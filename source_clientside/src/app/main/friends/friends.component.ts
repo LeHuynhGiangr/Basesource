@@ -10,10 +10,12 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { FriendService } from '../../_core/services/friends.service';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
-    styleUrls: ['./friends.component.css']
+    styleUrls: ['./friends.component.css'],
+    
 })
 export class FriendsComponent implements OnInit {
 
@@ -43,8 +45,8 @@ export class FriendsComponent implements OnInit {
       this.compareId =true
       this.appUsers.FirstName = UserProfile.FirstName
       this.appUsers.LastName = UserProfile.LastName
-      this.appUsers.Avatar = UserProfile.Avatar
-      this.appUsers.Background = UserProfile.Background
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
       this.getUserList()
     }
     if(UserProfile.Id!=UserProfile.IdTemp)
@@ -55,8 +57,8 @@ export class FriendsComponent implements OnInit {
       this.appUsers.Id = UserProfile.IdTemp
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
-      this.appUsers.Avatar = user["avatar"]
-      this.appUsers.Background = user["background"]
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
+      this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
       this.appUsers.ViewListFriend = user["viewListFriend"]
       if(this.appUsers.ViewListFriend==true)
         this.getUserList()
@@ -83,7 +85,7 @@ export class FriendsComponent implements OnInit {
         console.log(result);
         this.service.getUser().then(user => {
           if (user) {
-            this.appUsers.Avatar = user["avatar"]
+            this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
             UserProfile.Avatar = user["avatar"]
           }
         });
@@ -101,7 +103,7 @@ export class FriendsComponent implements OnInit {
         console.log(result);
         this.service.getUser().then(user => {
           if (user) {
-            this.appUsers.Background = user["background"]
+            this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
             UserProfile.Background = user["background"]
           }
         });
@@ -117,7 +119,7 @@ export class FriendsComponent implements OnInit {
           user.FirstName = this.users[i].firstName;
           user.LastName = this.users[i].lastName;
           user.Descriptions = this.users[i].description
-          user.Avatar = this.users[i].avatar
+          user.Avatar = ApiUrlConstants.API_URL+"/"+this.users[i].avatar
           if(this.users[i].id==UserProfile.Id)
           {
               console.log("trung roi")

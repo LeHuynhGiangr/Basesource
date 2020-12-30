@@ -8,6 +8,7 @@ import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
+import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
 @Component({
   selector: 'app-dialog-uploadavatar',
   templateUrl: './dialog-uploadavatar.component.html',
@@ -30,14 +31,14 @@ export class DialogUploadAvatarComponent implements OnInit {
 
   async ngOnInit() {
     this.appUsers = new AppUsers();
-    this.appUsers.Avatar = UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+ UserProfile.Avatar
     this.appUsers.Id=UserProfile.Id
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
   }
 
-
+  // sửa sao thành lưu /assets/sdsad.jpg nữa chắc ok
   //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -58,7 +59,7 @@ export class DialogUploadAvatarComponent implements OnInit {
   {
       const formData = new FormData();
       if (Image) {
-        formData.append('media', this.avatar);
+        formData.append('MediaFile', this.avatar);
         this.Iservice.postImage(formData);
         //this.dialogRef.close();
       }

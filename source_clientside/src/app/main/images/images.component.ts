@@ -13,6 +13,7 @@ import { ImageInfo } from '../../_core/data-repository/image'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import {DialogShowImageComponent} from '../images/dialog-image/dialog-image.component'
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-images',
     templateUrl: './images.component.html',
@@ -29,9 +30,10 @@ export class ImagesComponent implements OnInit {
   play:boolean
   interval;
   time: number = 0;
+  lengthcount
+  count
   constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
   public uriHandler:UriHandler,public timelineurl:TimelineUrl, public Iservice: ImageService) {
-    
   }
   
   async ngOnInit() {
@@ -49,8 +51,8 @@ export class ImagesComponent implements OnInit {
         this.compareId =true
         this.appUsers.FirstName = UserProfile.FirstName
         this.appUsers.LastName = UserProfile.LastName
-        this.appUsers.Avatar = UserProfile.Avatar
-        this.appUsers.Background = UserProfile.Background
+        this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+        this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
       }
       if(UserProfile.Id!=UserProfile.IdTemp)
       {
@@ -59,10 +61,9 @@ export class ImagesComponent implements OnInit {
         this.appUsers.Id = UserProfile.IdTemp
         this.appUsers.FirstName = user["firstName"]
         this.appUsers.LastName = user["lastName"]
-        this.appUsers.Avatar = user["avatar"]
-        this.appUsers.Background = user["background"]
+        this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
+        this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
       }
-      UserProfile.count=3
       this.getImageList()
       this.startTimer()
     }
@@ -70,7 +71,7 @@ export class ImagesComponent implements OnInit {
       this.play = true;
       this.interval = setInterval(() => {
         this.time++;
-        if(this.time>=200)
+        if(this.time>=30)
         {
           this.play = false
           clearInterval(this.interval);
@@ -130,12 +131,15 @@ export class ImagesComponent implements OnInit {
       });
     }
     getImageList = async () => {
+      this.count=6
       this.images = await this.Iservice.getImageUser(UserProfile.IdTemp);
-      for (let i = 0; i < UserProfile.count; i++) {
+      this.lengthcount=this.images.length
+      console.log(this.images.length)
+      for (let i = 0; i < this.count; i++) {
           let image = new Images();
-          image.Id = this.images[i].id.toString();
+          image.Id = this.images[i].id.toString()
           image.CreatedDate = this.images[i].createdDate;
-          image.Image = this.images[i].mediaFile;
+          image.Image = ApiUrlConstants.API_URL+"/"+this.images[i].mediaFile;
           image.UserId = this.images[i].userId.toString()
           this.imageList.push(image);
       }
@@ -145,14 +149,14 @@ export class ImagesComponent implements OnInit {
       this.time=0
       this.startTimer()
       this.images = await this.Iservice.getImageUser(UserProfile.IdTemp);
-      for (let i = UserProfile.count; i < UserProfile.count+3; i++) {
+      this.count=this.count+3
+      for (let i = this.count-3; i < this.count; i++) {
           let image = new Images();
-          image.Id = this.images[i].id.toString();
+          image.Id = this.images[i].id.toString()
           image.CreatedDate = this.images[i].createdDate;
-          image.Image = this.images[i].mediaFile;
+          image.Image = ApiUrlConstants.API_URL+"/"+this.images[i].mediaFile;
           image.UserId = this.images[i].userId.toString()
           this.imageList.push(image);
-      }
-      UserProfile.count=UserProfile.count+3
+        }
     }
 }

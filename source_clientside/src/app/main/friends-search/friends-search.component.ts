@@ -6,6 +6,7 @@ import { LoginService } from '../../_core/services/login.service';
 import { SearchService } from '../../_core/services/friends-search.service';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { UserProfile } from 'src/app/_core/data-repository/profile';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-friends-search',
     templateUrl: './friends-search.component.html',
@@ -42,7 +43,7 @@ export class FriendsSearchComponent implements OnInit {
             user.FirstName = this.users[i].firstName;
             user.LastName = this.users[i].lastName;
             user.Descriptions = this.users[i].description
-            user.Avatar = this.users[i].avatar
+            user.Avatar = ApiUrlConstants.API_URL+"/"+this.users[i].avatar
             if(this.users[i].id==UserProfile.Id)
             {
                 console.log("trung roi")

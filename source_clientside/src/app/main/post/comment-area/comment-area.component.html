@@ -3,7 +3,7 @@
     <ng-template ngFor let-comment [ngForOf]="commentJson" let-i="index">
         <li>
             <div class="comet-avatar">
-                <img [src]="uriHandler.getImageSource(comment.avarThumb)" alt="assets/images/non-user.png" style="height: 30px;width: 30px;"alt="">
+                <img [src]=" getImageComment(comment.avarThumb)" alt="assets/images/non-user.png" style="height: 30px;width: 30px;"alt="">
             </div>
             <div class="we-comment">
                 <div class="coment-head">
@@ -22,7 +22,7 @@
     </li> -->
     <li class="post-comment">
         <div class="comet-avatar">
-            <img [src]="uriHandler.getImageSource(this.appUsers.Avatar)"
+            <img src="{{this.appUsers.Avatar}}"
             style="width: 40px; height: 40px;" alt="">
         </div>
         <div class="post-comt-box">

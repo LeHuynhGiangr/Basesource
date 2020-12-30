@@ -1,8 +1,8 @@
 export class ApiUrlConstants{
-    public static API_URL = "http://localhost:44350";
+    public static API_URL = "https://localhost:44350";
     //user API
     //public static API_ATHENTICATE_URL= '/user/authenticate'
-    public static API_REFRESHTOKEN_URL= '/user/refresh-token'
+    public static API_REFRESHTOKEN_URL= '/user/refresh-token/'
     //public static API_REGISTER_URL= '/user/register'
     public static API_UPDATE_PROFILE_URL = '/user/profile/'
     public static API_UPDATE_INTEREST_URL = '/user/interest/'

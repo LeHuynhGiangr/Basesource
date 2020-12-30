@@ -48,7 +48,7 @@
                                         </mat-menu>
                                         <div class="friend-info">
                                             <figure>
-                                                <img [src]="uriHandler.getImageSource(trip.authorAvatar)"
+                                                <img src="{{trip.authorAvatar}}"
                                                     style="width: 50px; height: 50px;">
                                             </figure>
                                             <div class="friend-name">
@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="post-meta">
                                                 <div class="linked-image align-left">
-                                                    <a title=""><img [src]="uriHandler.getImageSource(trip.Image)"
+                                                    <a title=""><img src="{{trip.Image}}"
                                                             style="width: 750px;height: 400;" alt=""></a>
                                                 </div>
                                                 <br>

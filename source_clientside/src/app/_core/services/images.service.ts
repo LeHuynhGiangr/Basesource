@@ -7,7 +7,6 @@ import { ApiUrlConstants } from '../common/api-url.constants';
 })
 export class ImageService {
     private urlAPI :string=ApiUrlConstants.API_URL;
-
     constructor(private http: HttpClient,private service : LoginService) {
 
     }
@@ -40,4 +39,5 @@ export class ImageService {
             console.log("ok");
         }
     }
+
 }

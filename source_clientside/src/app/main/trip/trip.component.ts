@@ -10,6 +10,7 @@ import { TripDialogComponent } from './trip-dialog/trip-dialog.component';
 import { AddFriendDialogComponent } from './addfriend-dialog/addfriend-dialog.component';
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-trip',
     templateUrl: './trip.component.html',
@@ -17,14 +18,14 @@ import { TripService } from '../../_core/services/trip.service';
   })
   export class TripComponent implements OnInit {
     public appUsers: AppUsers;
-    public users:any
-    public userList = new Array<AppUsers>();
     public trips:any
     public tripList = new Array<Trips>();
     play:boolean
     interval;
     time: number = 0;
     check:boolean=true
+    lengthcount
+    count
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService) {
   
@@ -49,7 +50,7 @@ import { TripService } from '../../_core/services/trip.service';
       this.play = true;
       this.interval = setInterval(() => {
         this.time++;
-        if(this.time>=100)
+        if(this.time>=50)
         {
           this.play = false
           clearInterval(this.interval);
@@ -57,18 +58,19 @@ import { TripService } from '../../_core/services/trip.service';
       },50)
     }
     getTripList = async () => {
+      this.count=2
       this.trips = await this.TService.getAllTrips()
-      for (let i = 0; i < UserProfile.count; i++) {
+      this.lengthcount=this.trips.length
+      for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
-          trip.Image = this.trips[i].image
+          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
-          trip.Image = this.trips[i].image
           const user = await this.service.getUserById(trip.authorId)
-          trip.authorAvatar = user["avatar"]
+          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
           trip.authorName = user["firstName"]+" "+user["lastName"]
           this.tripList.push(trip)
       }
@@ -77,7 +79,8 @@ import { TripService } from '../../_core/services/trip.service';
       this.time=0
       this.startTimer()
       this.trips = await this.TService.getAllTrips()
-      for (let i = UserProfile.count; i < UserProfile.count+1; i++) {
+      this.count=this.count+3
+      for (let i = this.count-3; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
@@ -85,13 +88,12 @@ import { TripService } from '../../_core/services/trip.service';
           trip.Image = this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
-          trip.Image = this.trips[i].image
+          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           const user = await this.service.getUserById(trip.authorId)
-          trip.authorAvatar = user["avatar"]
+          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
           trip.authorName = user["firstName"]+" "+user["lastName"]
           this.tripList.push(trip)
       }
-      UserProfile.count=UserProfile.count+1
     }
     CreateTripDialog(): void {
         const dialogRef = this.dialog.open(TripDialogComponent, {
