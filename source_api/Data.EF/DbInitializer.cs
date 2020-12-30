@@ -15,32 +15,32 @@ namespace Data.EF
         private static Guid l_guid_user1 = Guid.NewGuid();
         private static Guid l_guid_user_token1 = Guid.NewGuid();
         private static string l_string_user_fullname1 = "Huynh Le";
-        private static byte[] l_string_user_pic1 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb1.jpg");
+        private static byte[] l_string_user_pic1 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb1.jpg");
 
         private static Guid l_guid_user2 = Guid.NewGuid();
         private static Guid l_guid_user_token2 = Guid.NewGuid();
         private static string l_string_user_fullname2 = "Dang Bao";
-        private static byte[] l_string_user_pic2 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb2.jpg");
+        private static byte[] l_string_user_pic2 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb2.jpg");
 
         private static Guid l_guid_user3 = Guid.NewGuid();
         private static Guid l_guid_user_token3 = Guid.NewGuid();
         private static string l_string_user_fullname3 = "Thu Hang";
-        private static byte[] l_string_user_pic3 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb3.jpg");
+        private static byte[] l_string_user_pic3 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb3.jpg");
 
         private static Guid l_guid_user4 = Guid.NewGuid();
         private static Guid l_guid_user_token4 = Guid.NewGuid();
         private static string l_string_user_fullname4 = "Bich Hoang";
-        private static byte[] l_string_user_pic4 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb4.jpg");
+        private static byte[] l_string_user_pic4 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb4.jpg");
 
         private static Guid l_guid_user5 = Guid.NewGuid();
         private static Guid l_guid_user_token5 = Guid.NewGuid();
         private static string l_string_user_fullname5 = "Van Tien";
-        private static byte[] l_string_user_pic5 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb5.jpg");
+        private static byte[] l_string_user_pic5 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb5.jpg");
 
         private static Guid l_guid_user6 = Guid.NewGuid();
         private static Guid l_guid_user_token6 = Guid.NewGuid();
         private static string l_string_user_fullname6 = "Dong Khoi";
-        private static byte[] l_string_user_pic6 = Utilities.UriHandler.GetImageBase64Byte("avar_thumb6.jpg");
+        private static byte[] l_string_user_pic6 = Utilities.Base64Handler.GetImageBase64Byte("avar_thumb6.jpg");
 
         private static Guid l_guid_chat12 = Guid.NewGuid();
         private static Guid l_guid_chat13 = Guid.NewGuid();
@@ -62,21 +62,21 @@ namespace Data.EF
         private static Guid l_guid_post14 = Guid.NewGuid();
         private static Guid l_guid_post15 = Guid.NewGuid();
 
-        private static byte[] l_string_post_pic1 = Utilities.UriHandler.GetImageBase64Byte("post_pic4.png");
-        private static byte[] l_string_post_pic2 = Utilities.UriHandler.GetImageBase64Byte("post_pic3.png");
-        private static byte[] l_string_post_pic3 = Utilities.UriHandler.GetImageBase64Byte("post_pic9.jpg");
-        private static byte[] l_string_post_pic4 = Utilities.UriHandler.GetImageBase64Byte("post_pic17.jpg");
-        private static byte[] l_string_post_pic5 = Utilities.UriHandler.GetImageBase64Byte("post_pic5.png");
-        private static byte[] l_string_post_pic6 = Utilities.UriHandler.GetImageBase64Byte("post_pic6.jpg");
-        private static byte[] l_string_post_pic7 = Utilities.UriHandler.GetImageBase64Byte("post_pic7.jpg");
-        private static byte[] l_string_post_pic8 = Utilities.UriHandler.GetImageBase64Byte("post_pic8.png");
-        private static byte[] l_string_post_pic9 = Utilities.UriHandler.GetImageBase64Byte("post_pic12.png");
-        private static byte[] l_string_post_pic10 = Utilities.UriHandler.GetImageBase64Byte("post_pic15.jpg");
-        private static byte[] l_string_post_pic11 = Utilities.UriHandler.GetImageBase64Byte("post_pic16.png");
-        private static byte[] l_string_post_pic12 = Utilities.UriHandler.GetImageBase64Byte("post_pic11.png");
-        private static byte[] l_string_post_pic13 = Utilities.UriHandler.GetImageBase64Byte("post_pic10.png");
-        private static byte[] l_string_post_pic14 = Utilities.UriHandler.GetImageBase64Byte("post_pic1.png");
-        private static byte[] l_string_post_pic15 = Utilities.UriHandler.GetImageBase64Byte("post_pic14.png");
+        private static byte[] l_string_post_pic1 = Utilities.Base64Handler.GetImageBase64Byte("post_pic4.png");
+        private static byte[] l_string_post_pic2 = Utilities.Base64Handler.GetImageBase64Byte("post_pic3.png");
+        private static byte[] l_string_post_pic3 = Utilities.Base64Handler.GetImageBase64Byte("post_pic9.jpg");
+        private static byte[] l_string_post_pic4 = Utilities.Base64Handler.GetImageBase64Byte("post_pic17.jpg");
+        private static byte[] l_string_post_pic5 = Utilities.Base64Handler.GetImageBase64Byte("post_pic5.png");
+        private static byte[] l_string_post_pic6 = Utilities.Base64Handler.GetImageBase64Byte("post_pic6.jpg");
+        private static byte[] l_string_post_pic7 = Utilities.Base64Handler.GetImageBase64Byte("post_pic7.jpg");
+        private static byte[] l_string_post_pic8 = Utilities.Base64Handler.GetImageBase64Byte("post_pic8.png");
+        private static byte[] l_string_post_pic9 = Utilities.Base64Handler.GetImageBase64Byte("post_pic12.png");
+        private static byte[] l_string_post_pic10 = Utilities.Base64Handler.GetImageBase64Byte("post_pic15.jpg");
+        private static byte[] l_string_post_pic11 = Utilities.Base64Handler.GetImageBase64Byte("post_pic16.png");
+        private static byte[] l_string_post_pic12 = Utilities.Base64Handler.GetImageBase64Byte("post_pic11.png");
+        private static byte[] l_string_post_pic13 = Utilities.Base64Handler.GetImageBase64Byte("post_pic10.png");
+        private static byte[] l_string_post_pic14 = Utilities.Base64Handler.GetImageBase64Byte("post_pic1.png");
+        private static byte[] l_string_post_pic15 = Utilities.Base64Handler.GetImageBase64Byte("post_pic14.png");
 
         //public static void SeedData(this ModelBuilder modelBuilder)
         //{

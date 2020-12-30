@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Utilities
 {
-    public static class UriHandler
+    public static class Base64Handler
     {
         //syntax of uri: data:[<media type>][;base64],<data>
         private static readonly byte[] JPG_SIGNATURE = { 0xff, 0xd8, 0xff};
@@ -38,7 +38,7 @@ namespace Utilities
             }
         }
 
-        public static string GetImageUri(string fileName = "")
+        public static string GetImageBase64String(string fileName = "")
         {
             try
             {
