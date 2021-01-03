@@ -9,6 +9,6 @@ namespace Domain.DomainModels.API.RequestModels
     {
         public string UserId { get; set; }
         public string Status { get; set; }
-        public IFormFile Image { get; set; }
+        public string Base64Str { get; set; }
     }
 }

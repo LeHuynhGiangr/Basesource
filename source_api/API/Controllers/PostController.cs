@@ -97,7 +97,7 @@ namespace API.Controllers
         {
             try
             {
-                var l_postResponse = m_postService.Create(createPostRequest, _webHostEnvironment.WebRootPath);
+                var l_postResponse = m_postService.Create(createPostRequest);
                 return Ok(l_postResponse);
             }
             catch(Exception e)

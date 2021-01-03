@@ -63,7 +63,7 @@ namespace Utilities
             }
         }
 
-        private static string GetImageFormat(byte[] bytes)
+        public static string GetImageFormat(byte[] bytes)
         {
             if(bytes.CompareByteArray(JPG_SIGNATURE, 3))
             {

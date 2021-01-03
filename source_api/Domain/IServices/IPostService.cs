@@ -9,7 +9,7 @@ namespace Domain.IServices
     {
         IEnumerable<PostResponse> GetAll();
         PostResponse GetById(T id);
-        PostResponse Create(CreatePostRequest model, string webRootPath);
+        PostResponse Create(CreatePostRequest model);
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id);
