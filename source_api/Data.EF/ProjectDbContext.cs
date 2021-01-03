@@ -72,6 +72,15 @@ namespace Data.EF
                 .WithMany(s => s.UserJoinTrips)
                 .HasForeignKey(sc => sc.TripId).OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Trip>()
+               .HasOne(sc => sc.Page)
+               .WithMany(s => s.Trips)
+               .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Trip>()
+              .HasOne(sc => sc.User)
+              .WithMany(s => s.Trips)
+              .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+
             // builder.Entity<UserJoinTrip>().HasMany(i => i.User).WithRequired().WillCascadeOnDelete(false);
 
             //end configure
