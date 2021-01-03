@@ -10,6 +10,7 @@ import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
 import { Post } from 'src/app/_core/models/Post';
+import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -17,11 +18,14 @@ import { Post } from 'src/app/_core/models/Post';
 })
 export class NewsfeedComponent implements OnInit {
   public m_posts:Post[];
-
+  posts:any
+  listpost = new Array<Post[]>()
   public appUsers: AppUsers;
+  play:boolean
+  interval;
+  time: number = 0;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
   private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler) { 
-    this.loadPostData();
   }
   
   async ngOnInit() {
@@ -32,11 +36,22 @@ export class NewsfeedComponent implements OnInit {
 
     this.appUsers = new AppUsers();
     var user = await this.service.getUser();
-    this.appUsers.Avatar = UserProfile.Avatar;
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar;
+    this.loadPostData();
     this.getProfile(user);
-    
+    this.startTimer()
   }
-
+  startTimer() {
+    this.play = true;
+    this.interval = setInterval(() => {
+      this.time++;
+      if(this.time>=50)
+      {
+        this.play = false
+        clearInterval(this.interval);
+      }
+    },50)
+  }
   loadPostData(){
       this.m_postService.getPost().subscribe((jsonData:Post[])=>this.m_posts=jsonData);
   }
@@ -44,11 +59,15 @@ export class NewsfeedComponent implements OnInit {
   createPost(newPost:CreatePostRequest){
     if(!newPost)return;
     this.m_postService.createPost(newPost).subscribe((jsonData:Post)=>this.m_posts.unshift(jsonData));
-    //const createPostRequest:CreatePostRequest
+    this.loadPostData();
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
   }
 
   getProfile(user)
   {   
+    UserProfile.IdTemp = UserProfile.Id
     UserProfile.FirstName = user["firstName"]
     UserProfile.LastName = user["lastName"]
     UserProfile.Avatar = user["avatar"]

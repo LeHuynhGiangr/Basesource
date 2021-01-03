@@ -1,13 +1,13 @@
 <div class="user-post">
     <div class="friend-info">
         <figure>
-            <img [src]="uriHandler.getImageSource(postData.authorThumb)" alt="">
+            <img src="{{postData.authorThumb}}" style="width: 50px; height: 50px;" alt="">
         </figure>
         <div class="friend-name">
             <ins><a (click)="getNavigation(postData.authorId)" [routerLink]="['/timeline/:', postData.authorId]" title="">{{postData.authorName}}</a></ins>
             <span>published: {{postData.dateCreated}}</span>
         </div>
-        <app-post-meta [content]="postData.content" [imageUri]="uriHandler.getImageSource(postData.imageUri)"></app-post-meta>
+        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
     </div>
     <div class="coment-area"> 
         <app-comment-area [commentJson]="postData.commentJson"></app-comment-area>
