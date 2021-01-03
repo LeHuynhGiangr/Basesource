@@ -2,7 +2,6 @@
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,11 +19,10 @@ namespace API.Controllers
     {
         private const int m_const_maximumNumberOfEntries = 5;
         private readonly IPostService<Guid> m_postService;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public PostController(IPostService<Guid> postService, IWebHostEnvironment webHostEnvironment)
+
+        public PostController(IPostService<Guid> postService)
         {
             m_postService = postService;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         //get posts of user
@@ -97,7 +95,7 @@ namespace API.Controllers
         {
             try
             {
-                var l_postResponse = m_postService.Create(createPostRequest, _webHostEnvironment.WebRootPath);
+                var l_postResponse = m_postService.Create(createPostRequest);
                 return Ok(l_postResponse);
             }
             catch(Exception e)
