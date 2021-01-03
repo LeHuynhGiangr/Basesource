@@ -111,14 +111,12 @@ namespace API
             app.UseRouting();
 
             //try using static files without authorization
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-            //         System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "StaticFiles")),
-            //    RequestPath = "/53746174696346696c6573"
-            //});
-
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+                     System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "StaticFiles")),
+                RequestPath = "/53746174696346696c6573"
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
