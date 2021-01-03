@@ -29,12 +29,12 @@ namespace API.Controllers
 
         //get posts of user
         [HttpGet("{id:guid}")]
-        public IActionResult LoadPostsById(Guid id)
+        public IActionResult LoadPostsByUserId(Guid id)
         {
             try
             {
-                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                var l_postResponses = m_postService.GetPostsByUserId(l_userId);
+                //System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_postResponses = m_postService.GetPostsByUserId(id);
                 return Ok(l_postResponses);
             }
             catch (Exception e)
@@ -42,7 +42,21 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
-
+        //get posts of id post
+        [HttpGet("load/{id:guid}")]
+        public IActionResult LoadPostsById(Guid id)
+        {
+            try
+            {
+                //System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_postResponses = m_postService.GetById(id);
+                return Ok(l_postResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [HttpGet]
         [Route("lazy-ownedposts")]
         public IActionResult LazyLoadOwnedPosts([FromBody] LazyLoadPostRequest lazyLoadPostRequest)

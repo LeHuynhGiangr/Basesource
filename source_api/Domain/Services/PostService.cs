@@ -129,13 +129,17 @@ namespace Domain.Services
         }
         public void DeletePostByUserId(Guid id)
         {
+
             var l_posts = m_postRepository.FindMultiple(_ => _.User.Id.Equals(id), _ => _.User);
-            List<PostResponse> l_postResponses = new List<PostResponse>();
-            foreach (Post post in l_posts)
+            if(l_posts!=null)
             {
-                m_postRepository.Remove(post);
-            }
-            m_postRepository.SaveChanges();
+                List<PostResponse> l_postResponses = new List<PostResponse>();
+                foreach (Post post in l_posts)
+                {
+                    m_postRepository.Remove(post);
+                }
+                m_postRepository.SaveChanges();
+            }    
         }
 
         public IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null)
