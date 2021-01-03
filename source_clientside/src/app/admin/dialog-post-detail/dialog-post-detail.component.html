@@ -1,0 +1,13 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{this.m_post.authorName}}</mat-card-title>
+      <mat-card-subtitle>{{this.m_post.dateCreated| date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+    </mat-card-header>
+    <img [src]="getImageComment(this.m_post.imageUri)">
+    <mat-card-content>
+      <p>
+        {{this.m_post.content}}
+      </p>
+    </mat-card-content>
+</mat-card>
