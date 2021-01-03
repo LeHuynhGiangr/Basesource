@@ -16,7 +16,9 @@ export class PostService {
   getPostById(id:string){
     return this.m_http.get<Post[]>(this.postUrl+"/"+id, {observe:'body', responseType:'json'});
   }
-
+  getPostByPostId(id:string){
+    return this.m_http.get<Post[]>(this.postUrl+"/load/"+id, {observe:'body', responseType:'json'});
+  }
   getPost():Observable<Post[]>{ 
     return this.m_http.get<Post[]>(this.postUrl, {observe:'body', responseType:'json'});
   }

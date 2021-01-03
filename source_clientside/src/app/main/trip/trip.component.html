@@ -21,9 +21,40 @@
 
                             </aside>
                         </div><!-- sidebar -->
+                       
                         <div class="col-lg-6">
-                            <button class="btn btn-primary" mat-button style="width: 730px;"
-                                (click)="CreateTripDialog()">Create Trip</button>
+                            <mat-accordion class="example-headers-align">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        Where do you want to go ?
+                                      </mat-panel-title>
+                                      <mat-panel-description>
+                                        Let's go!
+                                      </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                
+                                    <mat-form-field>
+                                      <mat-label>Tourist place name</mat-label>
+                                      <input matInput>
+                                    </mat-form-field>
+                                
+                                    <mat-form-field>
+                                      <mat-label>From $</mat-label>
+                                      <input matInput type="number" min="10">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>To $</mat-label>
+                                        <input matInput type="number" min="10">
+                                      </mat-form-field>
+                                    <mat-action-row>
+                                      <button mat-button color="primary">Find</button>
+                                    </mat-action-row>
+                                  </mat-expansion-panel>
+                            </mat-accordion>
+                            
+                            <!--<button class="btn btn-primary" mat-button style="width: 730px;"
+                                (click)="CreateTripDialog()">Create Trip</button><-->
                             
                             <div class="loadMore">
                                 <div class="central-meta item" *ngFor="let trip of tripList">
@@ -76,6 +107,7 @@
                                                 </div>
                                                 <div>
                                                     <app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
+                                                    <span><mat-icon>attach_money</mat-icon>200</span>
                                                     <button class="btn btn-primary left" mat-button (click)="AddFriendDialog()" *ngIf="this.appUsers.Id === trip.authorId">Add Friend</button>
                                                 </div>
                                             </div>
