@@ -7,7 +7,7 @@ namespace Data.Entities
     {
         public Post() { }
         //constructor for create new post
-        public Post(Guid id, string content, byte[] imageData, Guid userId)
+        public Post(Guid id, string content, string imageData, Guid userId)
         {
             Id = id;
             Content = content;
@@ -18,7 +18,7 @@ namespace Data.Entities
 
         public string Content { get; set; }
         //public int Likes { get; set; }
-        public byte[] ImageUri { get; set; }
+        public string ImageUri { get; set; }
         public string LikeObjectsJson { get; set; }
         public string CommentObjectsJson { get; set; }
         //public bool Active { get; set; }
