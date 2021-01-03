@@ -42,7 +42,6 @@ namespace API.Controllers
         {
             try
             {
-                m_postService.DeletePostByUserId(id);
                 m_userService.DeleteUser(id);
                 return Ok("Delete user successfully");
             }

@@ -225,7 +225,7 @@ namespace Domain.Services
                     Role = user.Role,
                     Updated = user.DateModified,
                     Active = user.Active,
-                    FriendsJson = JsonSerializer.Deserialize<object>(user.Friend.FriendsJsonString ?? "[]"),
+                    FriendsJson = JsonSerializer.Deserialize<object>(user.Friend?.FriendsJsonString ?? "[]"),
                 });
             }
             return l_userResponses;

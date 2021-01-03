@@ -11,7 +11,7 @@ namespace Data.EF.Configurations
             builder.ToTable("posts");
 
             //builder.Property<System.Guid>("userid");
-            builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey(_=>_.UserId).HasConstraintName("fk_post_user_userid");
+            builder.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey(_=>_.UserId).HasConstraintName("fk_post_user_userid").OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         }
     }
     /*
