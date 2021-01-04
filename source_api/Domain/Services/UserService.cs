@@ -295,10 +295,6 @@ namespace Domain.Services
             //throw new NotImplementedException();
         }
 
-        public UserResponse Create(CreateRequest model)
-        {
-            throw new NotImplementedException();
-        }
 
         public UserResponse Update(Guid id, UpdateUserRequest model)
         {

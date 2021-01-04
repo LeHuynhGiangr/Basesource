@@ -33,7 +33,6 @@ namespace Domain.IServices
         IEnumerable<UserResponse> GetAll();
         IEnumerable<UserResponse> GetAllByName(string Name);
         UserResponse GetById(T id);
-        UserResponse Create(CreateRequest model);
         UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         void UploadAvatar(Guid id, string webRootPath, IFormFile avatar);
