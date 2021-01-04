@@ -35,7 +35,6 @@ export class FriendsSearchComponent implements OnInit {
         this.m_router.navigateByUrl('/login');
     }
     public getUserList = async () => {
-        console.log(UserProfile.Id)
         this.users = await this.Sservice.getAllUsersByName(UserProfile.Name);
         for (let i = 0; i < this.users.length; i++) {
             let user = new AppUsers();

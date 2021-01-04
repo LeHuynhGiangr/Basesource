@@ -5,20 +5,62 @@
       <input matInput placeholder="Ex. Vung Tau Trip" name="Name" type="text" id="input" required="required" [(ngModel)]="this.Name" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     <mat-form-field class="example-full-width">
+        <mat-label>Content</mat-label>
+        <textarea style="height: 100px;" name="Content" type="text" id="input" required="required" [(ngModel)]="this.Content" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
         <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Departure</mat-label>
+        <textarea style="height: 100px;" name="Departure" type="text" id="input" required="required" [(ngModel)]="this.Departure" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Destination</mat-label>
+        <textarea style="height: 100px;" name="Destination" type="text" id="input" required="required" [(ngModel)]="this.Destination" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Service</mat-label>
+        <textarea style="height: 100px;" name="Service" type="text" id="input" required="required" [(ngModel)]="this.Service" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Policy</mat-label>
+        <textarea style="height: 100px;" name="Policy" type="text" id="input" required="required" [(ngModel)]="this.Policy" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>InfoContact</mat-label>
+        <textarea style="height: 100px;" name="InfoContact" type="text" id="input" required="required" [(ngModel)]="this.InfoContact" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Cost</mat-label>
+        <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.Cost"[ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Days</mat-label>
+        <input matInput type="number" name="Days" id="input" required="required" [(ngModel)]="this.Days" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="fill">
+        <mat-label>Date Start Tourist</mat-label>
+        <input matInput [matDatepicker]="picker1" name="DateStart" [(ngModel)]="this.DateStart" [ngModelOptions]="{standalone: true}">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="fill">
+        <mat-label>Date End Tourist</mat-label>
+        <input matInput [matDatepicker]="picker2" name="DateEnd" [(ngModel)]="this.DateEnd" [ngModelOptions]="{standalone: true}">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
     <div class="form-group">
         <h2>Image</h2>
         <img [src]="url" height="200"> <br/>
         <input type='file' accept="image/*" (change)="onSelectFile($event)">
      </div>
-    <mat-label><strong>Location</strong></mat-label>
-    <iframe allowfullscreen frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEBGNYcsskKEZ3wzdxCicHWrz_XAOnC3o&amp;q=University+of+Technology+and+Education+Ho+Chi+Minh+city%2C+V%C3%B5+V%C4%83n+Ng%C3%A2n%2C+Linh+Chi%E1%BB%83u%2C+Th%E1%BB%A7+%C4%90%E1%BB%A9c%2C+Ho+Chi+Minh+City&amp;zoom=15"width="500px" height="460px"></iframe>
 </form>
 <br>
 <br>
 <div mat-dialog-actions class="myDiv">
-    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
+    <button class="btn btn-primary" mat-button (click)="onSave()">Create</button>
     <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
 </div>

@@ -10,6 +10,8 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { PagesService } from 'src/app/_core/services/page.service'
+import {Pages} from 'src/app/_core/models/pages.model'
 @Component({
     selector: 'app-newpage',
     templateUrl: './newpage.component.html',
@@ -18,8 +20,9 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 export class NewpageComponent implements OnInit {
 
   public appUsers: AppUsers;
+  public pages: Pages;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-  public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
+  public uriHandler:UriHandler,public timelineurl:TimelineUrl, private PService:PagesService) {
     
   }
   
@@ -30,20 +33,26 @@ export class NewpageComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
-    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.pages = new Pages();
     this.appUsers.FirstName = UserProfile.FirstName
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }
-  getPath(){
-    return this.router.url;
-  }
   onFileChanged(event) {
     this.appUsers.Avatar = event.target.files[0]
   }
-
+  createPage = async (page) => {
+    try {
+      const result = await this.PService.postPage(page);
+      alert('Add sucessfully');    
+      this.pages.Name=''
+      this.pages.Description=''
+    }
+    catch (e) {
+      alert('Add failed');
+    }
+  };
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
       width: '500px',

@@ -7,4 +7,6 @@ export class Trips {
     authorName:string;
     CreatedDate:Date;
     authorAvatar:string;
+    Cost:string
+    PageId:string
 }

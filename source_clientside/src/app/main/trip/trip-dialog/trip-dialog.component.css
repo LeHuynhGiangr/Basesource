@@ -15,3 +15,6 @@
 .left {
     margin-left :25px 
 }
+mat-form-field {
+  margin-right: 12px;
+}

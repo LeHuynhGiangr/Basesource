@@ -59,6 +59,8 @@ import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { UsersListTripComponent } from './trip/users-list-trip/users-list-trip.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -74,7 +76,7 @@ export const mainRoutes: Routes = [
   { path: 'edit-work', component: EditWorkComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'friends-search', component: FriendsSearchComponent },
-  { path: 'fanpage', component: FanpageComponent },
+  { path: 'fanpage/:id', component: FanpageComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'groups-search', component: GroupsSearchComponent },
@@ -161,6 +163,8 @@ export const mainRoutes: Routes = [
     MatIconModule,
     MatProgressBarModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

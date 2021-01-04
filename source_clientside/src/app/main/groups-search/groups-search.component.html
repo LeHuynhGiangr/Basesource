@@ -2,10 +2,10 @@
 	<section>
 		<div class="page-header">
 			<div class="header-inner">
-				<h2>your Searched Groups</h2>
+				<h2>your Pages</h2>
 				<nav class="breadcrumb">
 				  <a [routerLink]="['/newsfeed']" class="breadcrumb-item"><i class="fa fa-home"></i></a>
-				  <span class="breadcrumb-item active">Groups</span>
+				  <span class="breadcrumb-item active">Pages</span>
 				</nav>
 			</div>
 		</div>
@@ -91,123 +91,18 @@
 							<div class="col-lg-6">
 								<div class="central-meta">
 									<div class="groups">
-										<span><i class="fa fa-users"></i> Groups</span>
+										<span><i class="fa fa-users"></i> Pages</span>
 									</div>
-									<ul class="nearby-contct">
+									<ul class="nearby-contct" *ngFor="let page of pageList">
 										<li>
 											<div class="nearly-pepls">
 												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group1.jpg" alt=""></a>
+													<a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title=""><img src={{page.Avatar}} style="width:60px; height:60px;" alt=""></a>
 												</figure>
 												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">funparty</a></h4>
-													<span>public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group2.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">ABC News</a></h4>
-													<span>Private group</span>
-													<em>5M Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group3.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">SEO Zone</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group4.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">Max Us</a></h4>
-													<span>Public group</span>
-													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group5.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">Banana Group</a></h4>
-													<span>Friends Group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group6.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">Bad boys n Girls</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group7.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">bachelor's fun</a></h4>
-													<span>Public Group</span>
-													<em>500 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group4.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">Max Us</a></h4>
-													<span>Public group</span>
-													<em> 756 Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="nearly-pepls">
-												<figure>
-													<a [routerLink]="['/groups-search']" title=""><img src="assets/images/resources/group3.jpg" alt=""></a>
-												</figure>
-												<div class="pepl-info">
-													<h4><a [routerLink]="['/groups-search']" title="">SEO Zone</a></h4>
-													<span>Public group</span>
-													<em>32k Members</em>
-													<a href="#" title="" class="add-butn" data-ripple="">join now</a>
+													<h4><a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title="">{{page.Name}}</a></h4>
+													<span>{{page.Description}}</span>
+													<em>{{page.Follow}} Follows</em>
 												</div>
 											</div>
 										</li>

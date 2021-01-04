@@ -11,6 +11,7 @@ import { AddFriendDialogComponent } from './addfriend-dialog/addfriend-dialog.co
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { PagesService } from '../../_core/services/page.service';
 @Component({
     selector: 'app-trip',
     templateUrl: './trip.component.html',
@@ -27,7 +28,8 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
     lengthcount
     count
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-      private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService) {
+      private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
+      private PService:PagesService) {
   
     }
     async ngOnInit() {
@@ -69,9 +71,11 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
-          const user = await this.service.getUserById(trip.authorId)
-          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
-          trip.authorName = user["firstName"]+" "+user["lastName"]
+          trip.PageId = this.trips[i].pageId
+          const page = await this.PService.getPageById(trip.PageId)
+          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+          trip.authorName = page["name"]
+          trip.Cost = this.trips[i].cost
           this.tripList.push(trip)
       }
     }

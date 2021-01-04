@@ -56,9 +56,9 @@ export class DialogUploadBackgroundComponent implements OnInit {
   {
       const formData = new FormData();
       if (Image) {
-        formData.append('media', this.background);
+        formData.append('MediaFile', this.background);
         this.Iservice.postImage(formData);
-        this.dialogRef.close();
+        //this.dialogRef.close();
       }
       else
       {
