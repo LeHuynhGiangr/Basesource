@@ -13,7 +13,7 @@ namespace Domain.DomainModels.API.ResponseModels
             DateCreated = dateCreated;
             Name = name;
             Avatar = avatar;
-            Backgound = background;
+            Background = background;
             Description = description;
             Follow = follow;
             UserId = userId;
@@ -24,7 +24,7 @@ namespace Domain.DomainModels.API.ResponseModels
         public string Description { get; set; }
         public string Avatar { get; set; }
         public double Follow { get; set; }
-        public string Backgound { get; set; }
+        public string Background { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public string UserId { get; set; }

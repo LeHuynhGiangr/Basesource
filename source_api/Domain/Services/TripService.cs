@@ -45,7 +45,17 @@ namespace Domain.Services
                         trip.Description,
                         trip.User.Id.ToString(),
                         trip.Image,
-                        trip.Name);
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Days,
+                        trip.DateStart,
+                        trip.DateEnd);
             return tripResponse;
         }
 
@@ -65,7 +75,16 @@ namespace Domain.Services
                     DateCreated = DateTime.Now,
                     Location = 0,
                     Image = url,
-                    Description = model.Description
+                    Description = model.Description,
+                    Start = model.Start,
+                    Destination = model.Destination,
+                    Content = model.Content,
+                    Cost = model.Cost,
+                    Days = model.Days,
+                    Policy = model.Policy,
+                    InfoContact = model.InfoContact,
+                    DateStart = model.DateStart,
+                    DateEnd = model.DateEnd
                 };
 
                 m_tripRepository.Add(l_newTrip);
@@ -114,7 +133,17 @@ namespace Domain.Services
                         trip.Description,
                         trip.User.Id.ToString(),
                         trip.Image,
-                        trip.Name));
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Days,
+                        trip.DateStart,
+                        trip.DateEnd));
             }
             return l_tripResponses;
         }
@@ -135,7 +164,17 @@ namespace Domain.Services
                         trip.Description,
                         trip.User.Id.ToString(),
                         trip.Image,
-                        trip.Name));
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Days,
+                        trip.DateStart,
+                        trip.DateEnd));
             }
             return l_tripResponses;
         }

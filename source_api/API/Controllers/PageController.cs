@@ -23,6 +23,20 @@ namespace API.Controllers
             _service = service;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult LoadPagesId(Guid id)
+        {
+            try
+            {
+                var pageResponses = _service.GetById(id);
+                return Ok(pageResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         //get posts of user
         [HttpGet("load")]
         public IActionResult LoadPagesByUserId()
