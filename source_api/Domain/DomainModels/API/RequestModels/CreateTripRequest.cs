@@ -22,5 +22,6 @@ namespace Domain.DomainModels.API.RequestModels
         public IFormFile Image { get; set; }
         public float Location { get; set; }
         public Guid UserId { get; set; }
+        public Guid PageId { get; set; }
     }
 }
