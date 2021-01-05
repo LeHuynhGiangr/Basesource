@@ -23,4 +23,7 @@ export class ApiUrlConstants{
     public static API_FRIENDSINTRIP_URL = '/invitefriend/load?tripid='
     //media API
     public static API_MEDIA_URL = '/media'
+	//pages API
+    public static API_PAGE_URL = '/page/load'
+    public static API_PAGEID_URL = '/page/'
 }
