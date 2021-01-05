@@ -8,5 +8,14 @@ export class Trips {
     CreatedDate:Date;
     authorAvatar:string;
     Cost:string
+    Content:string
+    Departure : string
+    Destination: string
+    Policy: string
+    InfoContact:string
+    Service:string
+    Days:string
+    DateStart:Date
+    DateEnd:Date
     PageId:string
 }

@@ -213,7 +213,7 @@
 									</div>
 								</div><!-- add post new box -->
 								<div class="loadMore">
-								<div class="central-meta item">
+								<div class="central-meta item"  *ngFor="let trip of tripList">
 									<div class="user-post">
 										<button mat-icon-button [matMenuTriggerFor]="menu"
                                             aria-label="Example icon-button with a menu" class="left2">
@@ -233,85 +233,37 @@
 													<span>delete</span>
 												</button>
 											</mat-menu>
-										<div class="friend-info">
-											<figure>
-												<img src={{this.pages.Avatar}} style="width: 50px; height: 50px;" alt="">
-											</figure>
-											<div class="friend-name">
-												<ins><a href="time-line.html" title="">{{this.pages.Name}}</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="post-meta">
-												<img src="assets/images/resources/user-post6.jpg" alt="">
-												<div class="we-video-info">
-													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Comments">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li>
-														<li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
-
-															</div>
-														</li>
-													</ul>
+											<div class="friend-info">
+												<figure>
+													<img src="{{trip.authorAvatar}}"
+														style="width: 50px; height: 50px;">
+												</figure>
+												<div class="friend-name">
+													<ins><a (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" title="">{{trip.Name}}</a></ins>
+													<span>published: {{trip.CreatedDate| date: 'dd/MM/yyyy'}} Created by
+														{{trip.authorName}}</span>
 												</div>
 												<div class="description">
-													<span>beautiful lamp on discount 50%</span>
+	
 													<p>
-														Amazon <a href="#" title="">#amazonee</a> the most beatuiful lamp available in america and the saudia arabia, you can purchase for the home and shop for increase the room beauty
+														{{trip.Content}}
 													</p>
 												</div>
+												<div class="post-meta">
+													<div class="linked-image align-left">
+														<a title=""><img (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" src="{{trip.Image}}"
+																style="width: 750px;height: 400;" alt=""></a>
+													</div>
+													<br>
+													<div class="detail">
+													</div>
+													<div>
+														<app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
+														<span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
+														<button class="btn btn-primary left" mat-button >Add Friend</button>
+													</div>
+												</div>
 											</div>
-										</div>
 										<div class="coment-area">
 											<ul class="we-comet">
 												<li>
@@ -376,7 +328,7 @@
 												</li>
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="assets/images/resources/comet-4.jpg" alt="">
+														<img src={{this.pages.Avatar}} style="width: 40px; height: 40px;" alt="">
 													</div>
 													<div class="post-comt-box">
 														<form method="post">
@@ -406,6 +358,8 @@
 										</div>
 									</div>
 								</div>
+								<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
+                                <button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
 								</div>
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">

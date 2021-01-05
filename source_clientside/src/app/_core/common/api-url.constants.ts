@@ -1,5 +1,5 @@
 export class ApiUrlConstants{
-    public static API_URL = "http://localhost:44350";
+    public static API_URL = "https://localhost:44350";
     //user API
     //public static API_ATHENTICATE_URL= '/user/authenticate'
     public static API_REFRESHTOKEN_URL= '/user/refresh-token/'
@@ -19,11 +19,13 @@ export class ApiUrlConstants{
     //admin API
     public static API_ADMIN_URL = '/admin/'
     //trip API
-    public static API_TRIP_URL = '/trip'
+    public static API_TRIP_URL = '/trip/'
+    public static API_TRIPLOAD_URL = '/trip/load/'
     public static API_FRIENDSINTRIP_URL = '/invitefriend/load?tripid='
     //media API
     public static API_MEDIA_URL = '/media'
-	//pages API
+
+    //pages API
     public static API_PAGE_URL = '/page/load'
     public static API_PAGEID_URL = '/page/'
 }

@@ -34,6 +34,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PeopleNearbyComponent } from './people-nearby/people-nearby.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TripComponent } from './trip/trip.component';
+import { TripDetailComponent } from './trip-detail/trip-detail.component';
 import { VideosComponent } from './videos/videos.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { HeaderComponent } from '../layout/header/header.component';
@@ -61,6 +62,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -90,6 +93,7 @@ export const mainRoutes: Routes = [
   { path: 'notifications', component: NotificationsComponent },
   { path: 'people-nearby', component: PeopleNearbyComponent },
   { path: 'trip', component: TripComponent },
+  { path: 'trip-detail/:id', component: TripDetailComponent },
   { path: 'timeline/:id', component: TimelineComponent },
   //{ path: 'timeline', component: TimelineComponent },
   { path: 'videos', component: VideosComponent },
@@ -143,6 +147,7 @@ export const mainRoutes: Routes = [
     PeopleNearbyComponent,
     TimelineComponent,
     TripComponent,
+    TripDetailComponent,
     TripDialogComponent,
     VideosComponent,
     WidgetsComponent,
@@ -165,6 +170,8 @@ export const mainRoutes: Routes = [
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
+    MatCardModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

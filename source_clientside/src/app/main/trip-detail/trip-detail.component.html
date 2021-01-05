@@ -1,0 +1,110 @@
+<app-header></app-header>
+	<section>
+		<div class="page-header">
+			<div class="header-inner">
+				<h2>Trip Detail</h2>
+				<nav class="breadcrumb">
+				  <a [routerLink]="['/newsfeed']" class="breadcrumb-item"><i class="fa fa-home"></i></a>
+				  <span class="breadcrumb-item active">Trip Detail</span>
+				</nav>
+			</div>
+		</div>
+	</section>
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-6 left">
+                                <h1>Trip Name : {{this.trips.Name}} </h1>
+                                <span><mat-icon>local_atm</mat-icon><strong> {{this.trips.Cost}} $</strong></span>
+                                <mat-tab-group animationDuration="0ms">
+                                    <mat-tab label="Description">
+                                        <mat-card class="example-card">
+                                            <mat-card-header>
+                                              <mat-card-title>Tourist Description</mat-card-title>
+                                            </mat-card-header>
+                                            <mat-card-content>
+                                              <p class="angular-with-newlines">
+                                                {{this.trips.Description}}
+                                              </p>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </mat-tab>
+                                    <mat-tab label="Schedule">
+                                        <mat-card class="example-card">
+                                            <mat-card-header>
+                                              <mat-card-title>Tourist Schedule</mat-card-title>
+                                            </mat-card-header>
+                                            <mat-card-content>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Departure</mat-label>
+                                                    <input matInput disabled value="{{this.trips.Departure}}">
+                                                </mat-form-field>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Destination</mat-label>
+                                                    <input matInput disabled value="{{this.trips.Destination}}">
+                                                </mat-form-field>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Days</mat-label>
+                                                    <input matInput disabled value="{{this.trips.Days}}">
+                                                </mat-form-field>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Date Start</mat-label>
+                                                    <input matInput disabled value="{{this.trips.DateStart | date: 'dd/MM/yyyy'}}">
+                                                </mat-form-field>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Date End</mat-label>
+                                                    <input matInput disabled value="{{this.trips.DateEnd | date: 'dd/MM/yyyy'}}">
+                                                </mat-form-field>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </mat-tab>
+                                    <mat-tab label="Policy">
+                                        <mat-card class="example-card">
+                                            <mat-card-header>
+                                              <mat-card-title>Tourist Policy</mat-card-title>
+                                            </mat-card-header>
+                                            <mat-card-content>
+                                              <p class="angular-with-newlines">
+                                                {{this.trips.Policy}}
+                                              </p>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </mat-tab>
+                                    <mat-tab label="Contact">
+                                        <mat-card class="example-card">
+                                            <mat-card-header>
+                                              <mat-card-title>Contact Infomation</mat-card-title>
+                                            </mat-card-header>
+                                            <mat-card-content>
+                                              <p class="angular-with-newlines">
+                                                {{this.trips.InfoContact}}
+                                              </p>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </mat-tab>
+                                    <mat-tab label="Service">
+                                        <mat-card class="example-card">
+                                            <mat-card-header>
+                                              <mat-card-title>Service</mat-card-title>
+                                            </mat-card-header>
+                                            <mat-card-content>
+                                              <p class="angular-with-newlines">
+                                                {{this.trips.Service}}
+                                              </p>
+                                            </mat-card-content>
+                                        </mat-card>
+                                    </mat-tab>
+                                  </mat-tab-group>
+                                <button type="submit" mat-button mat-raised-button color="primary">Book Now !</button>
+							</div><!-- centerl meta -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<app-footer></app-footer>

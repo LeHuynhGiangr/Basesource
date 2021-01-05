@@ -24,6 +24,22 @@ export class TripService {
             console.log("ok");
         }
     }
+    getTripDetail = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIP_URL+id, config).toPromise();
+            console.log(result)
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
     getAllTrips = async () => {
         try {
        
@@ -33,6 +49,22 @@ export class TripService {
                 }
             }
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIP_URL, config).toPromise();
+            console.log(result)
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    getAllTripsByPageId = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIPLOAD_URL+id, config).toPromise();
             console.log(result)
             return result;
         }
