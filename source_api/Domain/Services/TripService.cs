@@ -55,7 +55,8 @@ namespace Domain.Services
                         trip.Cost,
                         trip.Days,
                         trip.DateStart,
-                        trip.DateEnd);
+                        trip.DateEnd,
+                        trip.PageId.ToString());
             return tripResponse;
         }
 
@@ -84,7 +85,9 @@ namespace Domain.Services
                     Policy = model.Policy,
                     InfoContact = model.InfoContact,
                     DateStart = model.DateStart,
-                    DateEnd = model.DateEnd
+                    DateEnd = model.DateEnd,
+                    Service = model.Service,
+                    PageId = model.PageId
                 };
 
                 m_tripRepository.Add(l_newTrip);
@@ -143,7 +146,8 @@ namespace Domain.Services
                         trip.Cost,
                         trip.Days,
                         trip.DateStart,
-                        trip.DateEnd));
+                        trip.DateEnd,
+                        trip.PageId.ToString()));
             }
             return l_tripResponses;
         }
@@ -174,10 +178,41 @@ namespace Domain.Services
                         trip.Cost,
                         trip.Days,
                         trip.DateStart,
-                        trip.DateEnd));
+                        trip.DateEnd,
+                        trip.PageId.ToString()));
             }
             return l_tripResponses;
         }
-       
+        IEnumerable<TripResponse> ITripService<Guid>.GetTripsByPageId<IdType>(IdType id)
+        {
+            var l_trips = m_tripRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.Page, _=>_.User);
+
+
+            List<TripResponse> l_tripResponses = new List<TripResponse>();
+
+            foreach (Trip trip in l_trips)
+            {
+                l_tripResponses.Add(
+                    new TripResponse(
+                        trip.Id,
+                        trip.DateCreated,
+                        trip.Description,
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Days,
+                        trip.DateStart,
+                        trip.DateEnd,
+                        trip.PageId.ToString()));
+            }
+            return l_tripResponses;
+        }
     }
 }

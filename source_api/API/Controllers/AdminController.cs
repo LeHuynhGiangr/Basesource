@@ -16,7 +16,6 @@ namespace API.Controllers
     public class AdminController:ControllerBase
     {
         private IUserService<Guid> m_userService;//dependency injection/
-        private IPostService<Guid> m_postService;
         //Parameter DI/
         public AdminController(IUserService<Guid> userService)
         {

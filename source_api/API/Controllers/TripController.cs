@@ -25,13 +25,13 @@ namespace API.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet]
-        public IActionResult GetTrip()
+        [HttpGet("{id:guid}")]
+        public IActionResult LoadTripById(Guid id)
         {
             try
             {
-                var trips = _service.GetAll();
-                return Ok(trips);
+                var tripResponses = _service.GetById(id);
+                return Ok(tripResponses);
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace API.Controllers
             }
         }
 
-        //get posts of user
+        //get trip by user id
         [HttpGet("load")]
         public IActionResult LoadTripsByUserId()
         {
@@ -54,7 +54,20 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
-
+        //get trip by page id
+        [HttpGet("load/{id:guid}")]
+        public IActionResult LoadTripsByPageId(Guid id)
+        {
+            try
+            {
+                var tripResponses = _service.GetTripsByPageId(id);
+                return Ok(tripResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [HttpPost]
         public IActionResult CreateTrip([FromForm] CreateTripRequest createTripRequest)
         {
