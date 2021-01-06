@@ -18,16 +18,17 @@ namespace Utilities
                 string absolutePath = rootDir;
                 string fileNameWithExtension = fileName + ".png";
                 if (subDir != String.Empty)
-                    absolutePath += ("\\" + subDir);
+                    absolutePath += (SystemConstants.DIRECTORY_SEPARATOR_CHAR + subDir);
 
                 if (!Directory.Exists(absolutePath))
                 {
+                    var separator = Path.DirectorySeparatorChar;
                     Directory.CreateDirectory(absolutePath);
                 }
 
                 //File.WriteAllBytes(destination + "\\" + fileName, bytes);
 
-                using (FileStream fileStream = System.IO.File.Create(absolutePath + "\\" + fileNameWithExtension))
+                using (FileStream fileStream = System.IO.File.Create(absolutePath + SystemConstants.DIRECTORY_SEPARATOR_CHAR + fileNameWithExtension))
                 {
                     //bytes.CopyTo(fileStream);
                     fileStream.Write(bytes, 0, bytes.Length);

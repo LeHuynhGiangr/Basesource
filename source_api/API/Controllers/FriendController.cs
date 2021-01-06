@@ -19,7 +19,7 @@ namespace API.Controllers
 
         //get friend of user
         [HttpGet]
-        public IActionResult LoadPostsById()
+        public IActionResult LoadFriendById()
         {
             try
             {
