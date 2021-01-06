@@ -75,7 +75,7 @@ namespace API.Controllers
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createTripRequest.UserId = id;
-                _service.Create(createTripRequest, _webHostEnvironment.WebRootPath);
+                _service.Create(createTripRequest);
                 return Ok("Create successfully");
             }
             catch (Exception e)

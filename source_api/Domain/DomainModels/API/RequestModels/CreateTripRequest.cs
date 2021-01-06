@@ -19,7 +19,7 @@ namespace Domain.DomainModels.API.RequestModels
         public string Days { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
         public float Location { get; set; }
         public Guid UserId { get; set; }
         public Guid PageId { get; set; }

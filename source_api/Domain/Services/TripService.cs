@@ -61,13 +61,17 @@ namespace Domain.Services
             return tripResponse;
         }
 
-        public TripResponse Create(CreateTripRequest model, string webRootPath)
+        public TripResponse Create(CreateTripRequest model)
         {
             try
             {
                 Guid l_newTripGuidId = Guid.NewGuid();
-                string imageUrl = this.SaveFile(webRootPath, $"media-file/{l_newTripGuidId}/", model.Image);
-                string url = imageUrl;
+                string url = Utilities.BytesToFileConverter.BytesToImageFile(
+                   bytes: System.Convert.FromBase64String(model.Image),
+                   fileName: Guid.NewGuid().ToString(),
+                   rootDir: SystemConstants.WWWROOT_DIRECTORY,
+                   subDir: SystemConstants.FAKE_POST_MEDIA_DIRECTORY + SystemConstants.DIRECTORY_SEPARATOR_CHAR + model.UserId
+               );
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Trip l_newTrip = new Trip
                 {
