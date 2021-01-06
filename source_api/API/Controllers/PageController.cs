@@ -67,5 +67,38 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("avatar")]
+        [HttpPut]
+        public IActionResult UploadAvatar([FromForm] Guid id,IFormFile avatar)
+        {
+            try
+            {
+                var l_memStream = new System.IO.MemoryStream();
+                avatar.CopyTo(l_memStream);
+                _service.UploadAvatar(id, _webHostEnvironment.WebRootPath, avatar);
+                return Ok("Upload avatar success fully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [Route("background")]
+        [HttpPut]
+        public IActionResult UploadBackground([FromForm] Guid id, IFormFile background)
+        {
+            try
+            {
+                var l_memStream = new System.IO.MemoryStream();
+                background.CopyTo(l_memStream);
+                _service.UploadBackground(id, _webHostEnvironment.WebRootPath, background);
+                return Ok("Upload background success fully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

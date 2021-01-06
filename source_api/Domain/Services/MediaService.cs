@@ -65,7 +65,7 @@ namespace Domain.Services
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             string nameImage = unixTimestamp.ToString() + "." + image.FileName.Split('.')[1];
 
-            string filePath = $"{webRootPath}\\{dirFile}";
+            string filePath = $"{webRootPath}{SystemConstants.DIRECTORY_SEPARATOR_CHAR}{dirFile}";
 
             if (!Directory.Exists(filePath))
             {

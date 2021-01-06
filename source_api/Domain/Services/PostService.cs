@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using Utilities;
 
 namespace Domain.Services
 {
@@ -30,8 +29,8 @@ namespace Domain.Services
                 string url = Utilities.BytesToFileConverter.BytesToImageFile(
                     bytes:System.Convert.FromBase64String(model.Base64Str), 
                     fileName: Guid.NewGuid().ToString(), 
-                    rootDir: SystemConstants.WWWROOT_DIRECTORY, 
-                    subDir:SystemConstants.FAKE_POST_MEDIA_DIRECTORY+SystemConstants.DIRECTORY_SEPARATOR_CHAR+ model.UserId
+                    rootDir: SystemConstants.WWWROOT_DIRECTORY,
+                    subDir: SystemConstants.FAKE_POST_MEDIA_DIRECTORY + SystemConstants.DIRECTORY_SEPARATOR_CHAR + model.UserId
                 );
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Post l_newPost = new Post(id:l_newPostGuidId, content:model.Status, imageData:url, userId:System.Guid.Parse(model.UserId));

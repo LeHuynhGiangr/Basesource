@@ -4,6 +4,7 @@ using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -80,13 +81,28 @@ namespace Domain.Services
                 throw new Exception("create trip failed");
             }
         }
+        public void UploadAvatar(Guid id, string webRootPath, IFormFile avatar)
+        {
+            Page page = m_pageRepository.FindById(id);
+
+            string imageUrl = this.SaveFile(webRootPath, $"media-file/{id}/", avatar);
+            page.Avatar = imageUrl;
+            m_pageRepository.SaveChanges();
+        }
+        public void UploadBackground(Guid id, string webRootPath, IFormFile background)
+        {
+            Page page = m_pageRepository.FindById(id);
+            string imageUrl = this.SaveFile(webRootPath, $"media-file/{id}/", background);
+            page.Background = imageUrl;
+            m_pageRepository.SaveChanges();
+        }
         private string SaveFile(string webRootPath, string dirFile, IFormFile image)
         {
             //host static image
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             string nameImage = unixTimestamp.ToString() + "." + image.FileName.Split('.')[1];
 
-            string filePath = $"{webRootPath}\\{dirFile}";
+            string filePath = $"{webRootPath}{SystemConstants.DIRECTORY_SEPARATOR_CHAR}{dirFile}";
 
             if (!Directory.Exists(filePath))
             {
