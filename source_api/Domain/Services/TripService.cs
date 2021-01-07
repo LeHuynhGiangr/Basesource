@@ -36,7 +36,34 @@ namespace Domain.Services
             }
             m_tripRepository.SaveChanges();
         }
-
+        public IEnumerable<TripResponse> GetAll()
+        {
+            var l_trip = m_tripRepository.GetAll(_ => _.User, _ => _.Page);
+            List<TripResponse> l_tripResponses = new List<TripResponse>();
+            foreach (Trip trip in l_trip)
+            {
+                l_tripResponses.Add(
+                    new TripResponse(
+                        trip.Id,
+                        trip.DateCreated,
+                        trip.Description,
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Days,
+                        trip.DateStart,
+                        trip.DateEnd,
+                        trip.PageId.ToString()));
+            }
+            return l_tripResponses;
+        }
         public TripResponse GetById(Guid id)
         {
             var trip = m_tripRepository.FindSingle(_ => _.Id.Equals(id), _ => _.User);
@@ -61,17 +88,13 @@ namespace Domain.Services
             return tripResponse;
         }
 
-        public TripResponse Create(CreateTripRequest model)
+        public TripResponse Create(CreateTripRequest model, string webRootPath)
         {
             try
             {
                 Guid l_newTripGuidId = Guid.NewGuid();
-                string url = Utilities.BytesToFileConverter.BytesToImageFile(
-                   bytes: System.Convert.FromBase64String(model.Image),
-                   fileName: Guid.NewGuid().ToString(),
-                   rootDir: SystemConstants.WWWROOT_DIRECTORY,
-                   subDir: SystemConstants.FAKE_POST_MEDIA_DIRECTORY + SystemConstants.DIRECTORY_SEPARATOR_CHAR + model.UserId
-               );
+                string imageUrl = this.SaveFile(webRootPath, $"media-file/{l_newTripGuidId}/", model.Image);
+                string url = imageUrl;
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Trip l_newTrip = new Trip
                 {

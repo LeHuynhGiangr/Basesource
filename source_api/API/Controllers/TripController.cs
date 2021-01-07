@@ -24,7 +24,19 @@ namespace API.Controllers
             _service = service;
             _webHostEnvironment = webHostEnvironment;
         }
-
+        [HttpGet]
+        public IActionResult LoadAllTrip()
+        {
+            try
+            {
+                var tripResponses = _service.GetAll();
+                return Ok(tripResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [HttpGet("{id:guid}")]
         public IActionResult LoadTripById(Guid id)
         {
@@ -75,7 +87,7 @@ namespace API.Controllers
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createTripRequest.UserId = id;
-                _service.Create(createTripRequest);
+                _service.Create(createTripRequest, _webHostEnvironment.WebRootPath);
                 return Ok("Create successfully");
             }
             catch (Exception e)
