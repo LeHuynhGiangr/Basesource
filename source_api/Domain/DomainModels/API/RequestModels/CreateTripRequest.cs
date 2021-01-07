@@ -17,8 +17,8 @@ namespace Domain.DomainModels.API.RequestModels
         public string Content { get; set; }
         public string Cost { get; set; }
         public string Days { get; set; }
-        public DateTime DateStart { get; set; }
-        public DateTime DateEnd { get; set; }
+        public string DateStart { get; set; }
+        public string DateEnd { get; set; }
         public IFormFile Image { get; set; }
         public float Location { get; set; }
         public Guid UserId { get; set; }

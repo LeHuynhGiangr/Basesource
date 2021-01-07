@@ -112,8 +112,8 @@ namespace Domain.Services
                     Days = model.Days,
                     Policy = model.Policy,
                     InfoContact = model.InfoContact,
-                    DateStart = model.DateStart,
-                    DateEnd = model.DateEnd,
+                    DateStart = DateTime.Parse(model.DateStart),
+                    DateEnd = DateTime.Parse(model.DateEnd),
                     Service = model.Service,
                     PageId = model.PageId
                 };
