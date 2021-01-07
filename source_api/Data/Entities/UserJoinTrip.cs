@@ -14,7 +14,13 @@ namespace Data.Entities
         public Guid TripId { get; set; }
         public Trip Trip { get; set; }
 
-        public bool Confirmed { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string Requirements { get; set; }
+        public int PeopleNumber { get; set; }
+        public string CostPayment { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         

@@ -29,7 +29,13 @@ namespace Domain.Services
                 {
                     Id = model.UserId,
                     TripId = model.TripId,
-                    Confirmed = model.Confirm,
+                    Email = model.Email,
+                    Address = model.Address,
+                    CostPayment = model.CostPayment,
+                    Name = model.Name,
+                    PeopleNumber = model.PeopleNumber,
+                    PhoneNumber = model.PhoneNumber,
+                    Requirements = model.Requirements,
                     DateCreated = DateTime.Now
                 };
                 m_userjointripRepository.Add(l_newUjt);
@@ -37,7 +43,7 @@ namespace Domain.Services
             }
             catch
             {
-                throw new Exception("create trip failed");
+                throw new Exception("invite user failed");
             }
         }
         public IEnumerable<UserJoinTripResponse> GetAll()
@@ -50,7 +56,13 @@ namespace Domain.Services
                 {
                     UserId = user.Id,
                     DateCreated = user.DateCreated,
-                    Confirm = user.Confirmed,
+                    Name = user.Name,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email,
+                    Address = user.Address,
+                    Requirements = user.Requirements,
+                    PeopleNumber = user.PeopleNumber,
+                    CostPayment = user.CostPayment,
                     TripId = user.TripId
                 });
             }
@@ -69,7 +81,13 @@ namespace Domain.Services
                     new UserJoinTripResponse(
                         utrip.Id,
                         utrip.DateCreated,
-                        utrip.Confirmed,
+                        utrip.Name,
+                        utrip.PhoneNumber,
+                        utrip.Email,
+                        utrip.Address,
+                        utrip.Requirements,
+                        utrip.PeopleNumber,
+                        utrip.CostPayment,
                         utrip.TripId));
             }
             return l_utripResponses;

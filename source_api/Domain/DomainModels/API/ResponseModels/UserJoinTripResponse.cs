@@ -7,16 +7,29 @@ namespace Domain.DomainModels.API.ResponseModels
     public class UserJoinTripResponse
     {
         public UserJoinTripResponse() { }
-        public UserJoinTripResponse(Guid uid, System.DateTime dateCreated, bool confirm, Guid tid)
+        public UserJoinTripResponse(Guid uid, System.DateTime dateCreated, string name,string phonenumber,string email,string address,
+            string requirements,int peoplenumber,string costpayment,Guid tid)
         {
             UserId = uid;
             DateCreated = dateCreated;
-            Confirm = confirm;
+            Name = name;
+            PhoneNumber = phonenumber;
+            Email = email;
+            Address = address;
+            Requirements = requirements;
+            PeopleNumber = peoplenumber;
+            CostPayment = costpayment;
             TripId = tid;
         }
         public Guid UserId { get; set; }
         public Guid TripId { get; set; }
-        public bool Confirm { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string Requirements { get; set; }
+        public int PeopleNumber { get; set; }
+        public string CostPayment { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
     }
