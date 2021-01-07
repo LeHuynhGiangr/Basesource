@@ -123,9 +123,9 @@ namespace Domain.Services
 
                 return GetById(l_newTripGuidId);
             }
-            catch
+            catch (Exception e)
             {
-                throw new Exception("create trip failed");
+                throw e;
             }
         }
         private string SaveFile(string webRootPath, string dirFile, IFormFile image)
