@@ -12,6 +12,8 @@ import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { PagesService } from '../../_core/services/page.service';
+import {PageUrl} from 'src/app/_helpers/get-page-url'
+import {TripUrl} from 'src/app/_helpers/get-trip-url'
 @Component({
     selector: 'app-trip',
     templateUrl: './trip.component.html',
@@ -29,7 +31,7 @@ import { PagesService } from '../../_core/services/page.service';
     count
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
-      private PService:PagesService) {
+      private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
   
     }
     async ngOnInit() {
@@ -76,6 +78,7 @@ import { PagesService } from '../../_core/services/page.service';
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
+          trip.Content = this.trips[i].content
           this.tripList.push(trip)
       }
     }

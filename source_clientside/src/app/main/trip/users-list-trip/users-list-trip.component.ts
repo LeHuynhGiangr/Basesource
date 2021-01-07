@@ -13,7 +13,7 @@ export class UsersListTripComponent implements OnInit {
 
   @Input() tripId: string
   public userList = new Array<AppUsers>();
-
+  name:string
   constructor(private TService: TripService,  private service: LoginService) {
 
   }
@@ -33,6 +33,7 @@ export class UsersListTripComponent implements OnInit {
         const name = await this.service.getUserById(user.Id);
         user.FirstName = name["firstName"]
         user.LastName = name["lastName"]
+        user.NamePayment = users[i].name +" (Account: "+user.FirstName+" "+user.LastName+")"
         this.userList.push(user)
       }
     }

@@ -27,4 +27,23 @@ export class TripUrl{
         TripStatic.DateEnd = result["dateEnd"]
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
+    public async getNavigationPayment( id) {
+        this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/trip-payment/'+id;
+        console.log(this.m_returnUrl)
+        TripStatic.Id = id
+        const result = await this.TService.getTripDetail(TripStatic.Id);
+        TripStatic.Name = result["name"]
+        TripStatic.Image = result["image"]
+        TripStatic.Description =result["description"]
+        TripStatic.Cost =result["cost"]
+        TripStatic.Departure = result["start"]
+        TripStatic.Destination = result["destination"]
+        TripStatic.Policy = result["policy"]
+        TripStatic.InfoContact = result["infoContact"]
+        TripStatic.Service = result["service"]
+        TripStatic.Days = result["days"]
+        TripStatic.DateStart = result["dateStart"]
+        TripStatic.DateEnd = result["dateEnd"]
+        this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
+    }
 }

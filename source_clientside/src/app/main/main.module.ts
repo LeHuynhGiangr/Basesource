@@ -35,6 +35,7 @@ import { PeopleNearbyComponent } from './people-nearby/people-nearby.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TripComponent } from './trip/trip.component';
 import { TripDetailComponent } from './trip-detail/trip-detail.component';
+import { TripPaymentComponent } from './trip-payment/trip-payment.component';
 import { VideosComponent } from './videos/videos.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { HeaderComponent } from '../layout/header/header.component';
@@ -64,6 +65,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDividerModule} from '@angular/material/divider';
+import { NgxPayPalModule } from 'ngx-paypal';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -94,6 +98,7 @@ export const mainRoutes: Routes = [
   { path: 'people-nearby', component: PeopleNearbyComponent },
   { path: 'trip', component: TripComponent },
   { path: 'trip-detail/:id', component: TripDetailComponent },
+  { path: 'trip-payment/:id', component: TripPaymentComponent },
   { path: 'timeline/:id', component: TimelineComponent },
   //{ path: 'timeline', component: TimelineComponent },
   { path: 'videos', component: VideosComponent },
@@ -149,6 +154,7 @@ export const mainRoutes: Routes = [
     TripComponent,
     TripDetailComponent,
     TripDialogComponent,
+    TripPaymentComponent,
     VideosComponent,
     WidgetsComponent,
     AddFriendDialogComponent,
@@ -172,6 +178,9 @@ export const mainRoutes: Routes = [
     MatNativeDateModule,
     MatTabsModule,
     MatCardModule,
+    MatStepperModule,
+    MatDividerModule,
+    NgxPayPalModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

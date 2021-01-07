@@ -11,6 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
+import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialog-uploadpageavatar.component';
+import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
+import {PageUrl} from 'src/app/_helpers/get-page-url'
 @Component({
     selector: 'app-fanpage',
     templateUrl: './fanpage.component.html',
@@ -27,19 +30,24 @@ export class FanpageComponent implements OnInit {
     lengthcount
     count
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-    private PService:PagesService,public dialog: MatDialog,private TService:TripService, public tripurl:TripUrl) {}
+    private PService:PagesService,public dialog: MatDialog,private TService:TripService, public tripurl:TripUrl, public pageurl:PageUrl) {}
 
     ngOnInit() {
       var script = document.createElement("script");
       script.type = "text/javascript";
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
+      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+        return false;
+      }
+
       this.getPage()
       this.startTimer()
       this.getTripList()
     }
     async getPage(){
       this.pages = new Pages()
+      this.pages.Id = PageStatic.Id
       this.pages.Name =  PageStatic.Name
       this.pages.Avatar = ApiUrlConstants.API_URL+"/"+PageStatic.Avatar
       this.pages.Background = ApiUrlConstants.API_URL+"/"+PageStatic.Background
@@ -110,5 +118,39 @@ export class FanpageComponent implements OnInit {
           trip.authorName = user["firstName"]+" "+user["lastName"]
           this.tripList.push(trip)
       }
+    }
+    openDialogAvatar(): void {
+      const dialogRef = this.dialog.open(DialogUploadPageAvatarComponent, {
+        width: '500px',
+        height: '400px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        this.PService.getPageById(PageStatic.Id).then(page => {
+          if (page) {
+            this.pages.Avatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+            PageStatic.Avatar = page["avatar"]
+          }
+        });
+      });
+    }
+    openDialogBackground(): void {
+      const dialogRef = this.dialog.open(DialogUploadPageBackgroundComponent, {
+        width: '500px',
+        height: '400px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        this.PService.getPageById(PageStatic.Id).then(page => {
+          if (page) {
+            this.pages.Background = ApiUrlConstants.API_URL+"/"+page["background"]
+            PageStatic.Background = page["background"]
+          }
+        });
+      });
     }
 }

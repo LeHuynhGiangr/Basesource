@@ -36,4 +36,5 @@ export class AppUsers {
     ViewListFriend:boolean;
     RequestFriend:boolean;
     Active:boolean;
+    NamePayment:string;
 }

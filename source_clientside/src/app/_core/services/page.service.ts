@@ -52,4 +52,30 @@ export class PagesService {
             // this.removeToken();
         }
     }
+    uploadAvatar = async (formData) => {
+        try {
+            // const config = {
+            //     headers: {
+            //         Authorization: this.service.getConfigToken()
+            //     }
+            // }
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_UPDATE_PAGEAVATAR_URL,formData ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    uploadBackground = async (formData) => {
+        try {
+             const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_UPDATE_PAGEBACKGROUND_URL ,formData, config).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }

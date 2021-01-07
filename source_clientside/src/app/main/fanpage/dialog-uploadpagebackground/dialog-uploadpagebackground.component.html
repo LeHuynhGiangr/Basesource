@@ -1,0 +1,14 @@
+<h1><strong>Edit Background</strong></h1>
+<div class="form-group">
+    <h2>New Background</h2>
+    <img [src]="url" height="200"> <br/>
+    <input type='file' accept="image/*" (change)="onSelectFile($event)">
+ </div>
+<br>
+<br>
+<div mat-dialog-actions class="myDiv">
+    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
+</div>
+
+

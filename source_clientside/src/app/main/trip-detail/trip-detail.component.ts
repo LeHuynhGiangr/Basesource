@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Trips } from '../../_core/models/trip.model';
 import { TripStatic } from '../../_core/data-repository/trip';
+import {TripUrl} from 'src/app/_helpers/get-trip-url'
 @Component({
     selector: 'app-trip-detail',
     templateUrl: './trip-detail.component.html',
@@ -10,7 +11,7 @@ import { TripStatic } from '../../_core/data-repository/trip';
 })
 export class TripDetailComponent implements OnInit {
     public trips :Trips;
-    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ) {}
+    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
@@ -19,6 +20,7 @@ export class TripDetailComponent implements OnInit {
       this.elementRef.nativeElement.appendChild(script);
 
       this.trips = new Trips()
+      this.trips.Id = TripStatic.Id
       this.trips.Name = TripStatic.Name
       this.trips.Description = TripStatic.Description
       this.trips.Cost = TripStatic.Cost

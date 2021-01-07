@@ -6,11 +6,10 @@
 				<span>1.3k followers</span>
 				<a href="#" title="" data-ripple="">Follow</a>
 			</div>
-			<form class="edit-phto">
+			<form class="edit-phto" (click)="openDialogBackground()">
 				<i class="fa fa-camera-retro"></i>
 				<label class="fileContainer">
 					Edit Cover Photo
-				<input type="file"/>
 			</label>
 			</form>
 			<div class="container-fluid">
@@ -19,11 +18,10 @@
 						<div class="user-avatar">
 							<figure>
 								<img src={{this.pages.Avatar}} style="width: 250px; height: 200px;" alt="">
-								<form class="edit-phto">
+								<form class="edit-phto" (click)="openDialogAvatar()" >
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
 										Edit Display Photo
-										<input type="file"/>
 									</label>
 								</form>
 							</figure>
@@ -37,7 +35,7 @@
 								  <span>@tourist_page</span>
 								</li>
 								<li>
-									<a class="active" [routerLink]="['/main/fangape']" title="" data-ripple="">Tours</a>
+									<a class="active" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
 									<a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Discount</a>
 									<a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
 									<a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
@@ -260,7 +258,7 @@
 													<div>
 														<app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
 														<span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
-														<button class="btn btn-primary left" mat-button >Add Friend</button>
+														<button class="btn btn-primary left" mat-button >Message</button>
 													</div>
 												</div>
 											</div>
