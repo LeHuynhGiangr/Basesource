@@ -14,9 +14,11 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 export class PostComponent implements OnInit {
   @Input() public  postData:Post
   public m_returnUrl: string;
+  id
   constructor(public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute, private m_router: Router) { }
 
   ngOnInit(): void {
+    this.id = UserProfile.Id
     this.postData.imageUri = ApiUrlConstants.API_URL + "/" + this.postData.imageUri
     this.postData.authorThumb = ApiUrlConstants.API_URL + "/" + this.postData.authorThumb
   }

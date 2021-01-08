@@ -6,6 +6,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { Trips } from '../../_core/models/trip.model';
 import { TripStatic } from '../../_core/data-repository/trip';
+import { UserProfile } from '../../_core/data-repository/profile'
+import { TripService } from '../../_core/services/trip.service';
+import {TripUrl} from 'src/app/_helpers/get-trip-url'
 @Component({
     selector: 'app-trip-payment',
     templateUrl: './trip-payment.component.html',
@@ -24,8 +27,13 @@ export class TripPaymentComponent implements OnInit {
     cost:number
     total:number
     people:number=1
-    
-    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private _formBuilder: FormBuilder ) {}
+    name:string
+    address:string
+    email:string
+    phone:string
+    requirements:string
+    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private _formBuilder: FormBuilder,
+    private TService:TripService, public tripurl:TripUrl ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
@@ -54,9 +62,6 @@ export class TripPaymentComponent implements OnInit {
       });
       this.secondFormGroup = this._formBuilder.group({
         secondCtrl: ['', Validators.required]
-      });
-      this.thirdFormGroup = this._formBuilder.group({
-        thirdCtrl: ['', Validators.required]
       });
     }
     successfully(){
@@ -88,7 +93,7 @@ export class TripPaymentComponent implements OnInit {
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'USD',
-                  value: this.trips.Cost.toString(),
+                  value: (this.cost + parseInt(this.trips.Cost)).toString(),
                 },
               }]
             }]
@@ -110,10 +115,30 @@ export class TripPaymentComponent implements OnInit {
             });
     
           },
-          onClientAuthorization: (data) => {
+          onClientAuthorization: async (data) => {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
             if(data["status"]=="COMPLETED")
-                alert("Payment successfully")
+              {
+                try{
+                  const formData = new FormData();
+                  formData.append('name', this.name);
+                  formData.append('address',this.address)
+                  formData.append('email',this.email)
+                  formData.append('phoneNumber',this.phone)
+                  formData.append('requirements',this.requirements)
+                  formData.append('peopleNumber',this.people.toString())
+                  formData.append('costPayment',this.total.toString())
+                  formData.append('userId',UserProfile.Id)
+                  formData.append('tripId',TripStatic.Id)
+                  await this.TService.addUserInTrip(formData);
+                  alert("Payment succesfully !")
+                  this.check=true
+                }
+                catch(e)
+                {
+                  alert("Payment failure !")
+                }
+              }
           },
           onCancel: (data, actions) => {
             console.log('OnCancel', data, actions);

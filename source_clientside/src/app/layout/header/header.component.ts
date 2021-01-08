@@ -8,6 +8,8 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { SearchService } from '../../_core/services/friends-search.service';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { MatDialog } from '@angular/material/dialog';
+import {PaymentHistoryDialogComponent} from '../../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -21,7 +23,7 @@ export class HeaderComponent implements OnInit {
     public users:any
     public userList = new Array<AppUsers>();
     constructor(private router: Router ,private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
-      public Sservice:SearchService,public timelineurl:TimelineUrl) {}
+      public Sservice:SearchService,public timelineurl:TimelineUrl, public dialog: MatDialog) {}
 
     async ngOnInit() {
       var script = document.createElement("script");
@@ -63,7 +65,18 @@ export class HeaderComponent implements OnInit {
         }
       //this.refresh()
     }
-
+    openDialog(): void {
+      const dialogRef = this.dialog.open(PaymentHistoryDialogComponent, {
+        width: '500px',
+        height: '400px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        console.log('The dialog was closed');
+      });
+    }
     returnId()
     {
       UserProfile.IdTemp = UserProfile.Id

@@ -279,12 +279,12 @@
             <img src="{{this.appUsers.Avatar}}" style="width: 35px; height: 35px;" alt="">
             <span class="status f-online"></span>
             <div class="user-setting">
-                <a href="#" title=""><span class="status f-online"></span>online</a>
-                <a href="#" title=""><span class="status f-away"></span>away</a>
-                <a href="#" title=""><span class="status f-off"></span>offline</a>
+                <a title=""><span class="status f-online"></span>online</a>
+                <a title=""><span class="status f-away"></span>away</a>
+                <a title=""><span class="status f-off"></span>offline</a>
                 <a (click)="returnId()" [routerLink]="['/main/about']" title=""><i class="ti-user"></i> view profile</a>
                 <a (click)="returnId()" [routerLink]="['/main/edit-basic']" title=""><i class="ti-pencil-alt"></i>edit profile</a>
-                <a href="#" title=""><i class="ti-target"></i>activity log</a>
+                <a (click)="openDialog()" title=""><i class="ti-wallet"></i>payment history</a>
                 <a (click)="returnId()" [routerLink]="['/main/edit-setting']" title=""><i class="ti-settings"></i>account setting</a>
                 <a [routerLink]="['/login']" (click)="onLogout()" title=""><i class="ti-power-off"></i>log out</a>
             </div>

@@ -1,17 +1,9 @@
-<h2><strong>Add Friends</strong></h2>
-<mat-selection-list #users>
-    <mat-list-option *ngFor="let user of userList">
-      {{user.FirstName+ " "+user.LastName}}
-      <figure>
-        <a  title=""><img [src]="uriHandler.getImageSource(user.Avatar)" style="width:20px; height:20px;" alt=""></a>
-    </figure>
-    </mat-list-option>
-</mat-selection-list>
-  
-<p>
-    Friends selected: {{users.selectedOptions.selected.length}}
-</p>
-<div mat-dialog-actions class="myDiv">
-    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
-    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
-</div>
+<h2><strong>List Passengers</strong></h2>
+<mat-list *ngFor="let user of userList">
+    <mat-list-item><mat-icon>info</mat-icon>{{this.user.NamePayment}}</mat-list-item>
+    <mat-list-item><mat-icon>phone</mat-icon>{{this.user.PhoneNumber}}</mat-list-item>
+    <mat-list-item><mat-icon>location_on</mat-icon>{{this.user.Address}}</mat-list-item>
+    <mat-list-item><mat-icon>email</mat-icon>{{this.user.Email}}</mat-list-item>
+    <mat-list-item><mat-icon>supervised_user_circle</mat-icon>{{this.user.Descriptions}}</mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>

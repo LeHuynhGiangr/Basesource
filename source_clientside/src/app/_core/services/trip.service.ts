@@ -80,7 +80,24 @@ export class TripService {
                     Authorization: this.service.getConfigToken()
                 }
             }
-            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_FRIENDSINTRIP_URL + id, config).toPromise();
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_FRIENDSINTRIPLOAD_URL + id, config).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    addUserInTrip = async (formData) => {
+        try {
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_FRIENDSINTRIP_URL ,formData).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    getPaymentTrip = async (id) => {
+        try {
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_PAYMENTHISTORY_URL + id).toPromise();
             return result;
         }
         catch (e) {

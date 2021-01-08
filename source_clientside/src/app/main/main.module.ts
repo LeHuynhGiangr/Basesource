@@ -68,6 +68,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDividerModule} from '@angular/material/divider';
 import { NgxPayPalModule } from 'ngx-paypal';
+import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -160,6 +161,7 @@ export const mainRoutes: Routes = [
     AddFriendDialogComponent,
     ChatBoxComponent,
     UsersListTripComponent,
+    PaymentHistoryDialogComponent
   ],
   imports: [
     CommonModule,

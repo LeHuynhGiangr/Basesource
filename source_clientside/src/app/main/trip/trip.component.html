@@ -104,7 +104,8 @@
                                                 <div>
                                                     <app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
                                                     <span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
-                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog()" *ngIf="this.appUsers.Id != trip.authorId">Message</button>
+                                                    <button class="btn btn-primary left" mat-button *ngIf="this.appUsers.Id != trip.authorId">Message</button>
+                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog(trip.Id)" *ngIf="this.appUsers.Id === trip.authorId">Info Passesngers</button>
                                                 </div>
                                             </div>
                                         </div>

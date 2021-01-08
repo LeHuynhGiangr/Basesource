@@ -107,18 +107,18 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
           width: '500px',
           height: '400px',
         });
-    
+        
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           console.log(result);
         });
       }
-    AddFriendDialog(): void {
+    AddFriendDialog(id): void {
         const dialogRef = this.dialog.open(AddFriendDialogComponent, {
           width: '500px',
           height: '400px',
         });
-    
+        dialogRef.componentInstance.idTrip = id;
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           console.log(result);

@@ -24,23 +24,23 @@
                                         <ng-template matStepLabel>Information</ng-template>
                                         <mat-form-field>
                                           <mat-label>Name</mat-label>
-                                          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                          <input matInput placeholder="Last name, First name" name="1" id="1" [(ngModel)]="this.name" formControlName="firstCtrl" required>
                                         </mat-form-field>
                                         <mat-form-field>
                                             <mat-label>Phone Number</mat-label>
-                                            <input matInput placeholder="Phone Number" formControlName="firstCtrl" required>
+                                            <input matInput placeholder="Phone Number" name="2" id="2" [(ngModel)]="this.phone" formControlName="firstCtrl" required>
                                         </mat-form-field>
                                         <mat-form-field>
                                             <mat-label>Email</mat-label>
-                                            <input matInput placeholder="Email" formControlName="firstCtrl" required>
+                                            <input matInput placeholder="Email" name="3" id="3" [(ngModel)]="this.email" formControlName="firstCtrl" required>
                                         </mat-form-field>
                                         <mat-form-field>
                                             <mat-label>Address</mat-label>
-                                            <input matInput placeholder="Address" formControlName="firstCtrl" required>
+                                            <input matInput placeholder="Address" name="4" id="4" [(ngModel)]="this.address" formControlName="firstCtrl" required>
                                         </mat-form-field>
                                         <mat-form-field>
                                             <mat-label>Requirements</mat-label>
-                                            <input matInput placeholder="Requirements" formControlName="firstCtrl" required>
+                                            <input matInput placeholder="Requirements" name="5" id="5" [(ngModel)]="this.requirements" formControlName="firstCtrl" required>
                                         </mat-form-field>
                                         <div>
                                           <p>Enter information for the team leader or person responsible for keeping in touch with the Tour service provider</p>
@@ -63,7 +63,7 @@
                                         </div>
                                       </form>
                                     </mat-step>
-                                    <mat-step [stepControl]="thirdFormGroup" errorMessage="Payment is required.">
+                                    <mat-step [stepControl]="thirdFormGroup">
                                         <form [formGroup]="thirdFormGroup">
                                           <ng-template matStepLabel>Payment</ng-template>
                                           <ngx-paypal [config]="payPalConfig"></ngx-paypal>
@@ -78,8 +78,7 @@
                                         <ng-template matStepLabel>Done</ng-template>
                                         <p>You are now done.</p>
                                         <div>
-                                          <button mat-button>OK</button>
-                                          <button mat-button (click)="stepper.reset()">Reset</button>
+                                          <button mat-button [routerLink]="['/main/home']">OK</button>
                                         </div>
                                     </mat-step>
                                   </mat-horizontal-stepper>                                  
