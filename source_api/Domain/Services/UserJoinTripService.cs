@@ -92,5 +92,29 @@ namespace Domain.Services
             }
             return l_utripResponses;
         }
+        IEnumerable<UserJoinTripResponse> IUserJoinTripService<Guid>.GetHistoryByUserId<IdType>(IdType userId)
+        {
+            var l_userjointrip = m_userjointripRepository.GetAll();
+            var l_utrips = l_userjointrip.Where(_ => _.Id.ToString().Contains(userId.ToString()));
+
+            List<UserJoinTripResponse> l_utripResponses = new List<UserJoinTripResponse>();
+
+            foreach (UserJoinTrip utrip in l_utrips)
+            {
+                l_utripResponses.Add(
+                    new UserJoinTripResponse(
+                        utrip.Id,
+                        utrip.DateCreated,
+                        utrip.Name,
+                        utrip.PhoneNumber,
+                        utrip.Email,
+                        utrip.Address,
+                        utrip.Requirements,
+                        utrip.PeopleNumber,
+                        utrip.CostPayment,
+                        utrip.TripId));
+            }
+            return l_utripResponses;
+        }
     }
 }

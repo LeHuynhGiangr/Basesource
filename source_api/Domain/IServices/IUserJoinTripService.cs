@@ -10,5 +10,6 @@ namespace Domain.IServices
     {
         IEnumerable<UserJoinTripResponse> GetFriendsByTripId<IdType>(IdType id);
         public void InviteUser(UserJoinTripRequest model);
+        IEnumerable<UserJoinTripResponse> GetHistoryByUserId<IdType>(IdType id);
     }
 }

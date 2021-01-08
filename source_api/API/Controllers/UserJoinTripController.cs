@@ -22,6 +22,20 @@ namespace API.Controllers
         {
             _service = service;
         }
+        [HttpGet("history")]
+        public ActionResult<IEnumerable<UserJoinTripResponse>> GetHistoryByUserId()
+        {
+            try
+            {
+                string userId = HttpContext.Request.Query["userId"];
+                var l_userResponse = _service.GetHistoryByUserId(userId);
+                return Ok(l_userResponse);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(503);//service unavailable
+            }
+        }
         //get posts of user
         [HttpGet("load")]
         public ActionResult<IEnumerable<UserJoinTripResponse>> GetFriendByTripId()
