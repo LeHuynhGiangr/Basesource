@@ -11,6 +11,12 @@ export class ItemFriendComponent implements OnInit {
   @Input() m_account:string;
   @Input() m_isOnline:boolean=false;
 
+  public short_friend_lst: {
+    Id:string,
+    Name:string,
+    avarThumb:string
+  }
+  
   constructor() { }
 
   ngOnInit(): void {
