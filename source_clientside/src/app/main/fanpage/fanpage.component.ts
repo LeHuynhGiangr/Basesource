@@ -14,6 +14,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialog-uploadpageavatar.component';
 import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
+import { UserProfile } from 'src/app/_core/data-repository/profile';
 @Component({
     selector: 'app-fanpage',
     templateUrl: './fanpage.component.html',
@@ -23,6 +24,7 @@ export class FanpageComponent implements OnInit {
     public pages: Pages;
     public trips:any
     public tripList = new Array<Trips>();
+    userid:string
     play:boolean
     interval;
     time: number = 0;
@@ -40,7 +42,7 @@ export class FanpageComponent implements OnInit {
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{
         return false;
       }
-
+      this.userid=UserProfile.Id
       this.getPage()
       this.startTimer()
       this.getTripList()
