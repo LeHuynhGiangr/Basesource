@@ -13,6 +13,7 @@ import { Post } from 'src/app/_core/models/Post';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
+import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -69,7 +70,13 @@ export class NewsfeedComponent implements OnInit {
 
   commentPost(postCmtRequest:PostCommentRequest){
     if(!postCmtRequest)return;
-    this.m_postService.commentPost(postCmtRequest).subscribe((jsonData:PostComment) => this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(jsonData));
+    this.m_postService.commentPost(postCmtRequest).subscribe((jsonData:PostCommentResponse) => { 
+      const l_postComment: PostComment={
+        Id:jsonData.userId,
+        Name:jsonData.name,
+        Comment:jsonData.comment,
+      };
+      ;this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(l_postComment)});
     this.loadPostData();
     this.router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;

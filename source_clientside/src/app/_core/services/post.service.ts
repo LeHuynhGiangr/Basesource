@@ -8,6 +8,7 @@ import { Post } from '../models/Post';
 import { PostComponent } from 'src/app/main/post/post.component';
 import { PostCommentRequest } from '../models/models.request/post-comment-request.model';
 import { PostComment } from '../models/post-comment.model';
+import { PostCommentResponse } from '../models/models.response/post-comment-response';
 
 @Injectable({
   providedIn:'root'
@@ -30,8 +31,8 @@ export class PostService {
     return this.m_http.post<Post>(this.postUrl, createPostRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
   }
 
-  commentPost(postCmtRequest:PostCommentRequest):Observable<PostComment>{
-    return this.m_http.post<PostComment>(this.postUrl+"/act-cmt", postCmtRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
+  commentPost(postCmtRequest:PostCommentRequest):Observable<PostCommentResponse>{
+    return this.m_http.post<PostCommentResponse>(this.postUrl+"/act-cmt", postCmtRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
   }
 
   private handleError(error:HttpErrorResponse){
