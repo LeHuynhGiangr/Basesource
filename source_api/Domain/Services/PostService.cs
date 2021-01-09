@@ -159,7 +159,7 @@ namespace Domain.Services
             //get list of ids of friend
             Friend l_friend = m_friendRepository.FindById(System.Guid.Parse(id.ToString()));//????????????????????????????????????????????????????????????????????l_friendObjs
             var l_serializer = new DataContractJsonSerializer(typeof(FriendObjDataContract[]));
-            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_friend.FriendsJsonString));
+            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_friend.FriendsJsonString ?? "[]"));
             var l_friendObjDC = l_serializer.ReadObject(l_memoryStream) as FriendObjDataContract[];
 
             List<PostResponse> postResponses = new List<PostResponse>();
@@ -192,7 +192,7 @@ namespace Domain.Services
             var l_commentUser = m_userRepository.FindById(userCmtId);
 
             var l_serializer = new DataContractJsonSerializer(typeof(CommentObjDataContract[]));
-            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_post.CommentObjectsJson));
+            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_post.CommentObjectsJson ?? "[]"));
             List<CommentObjDataContract> l_commentObjDCs = (l_serializer.ReadObject(l_memoryStream) as CommentObjDataContract[]).ToList();
 
             var l_commentObjDC = new CommentObjDataContract
