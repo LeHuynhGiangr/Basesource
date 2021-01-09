@@ -28,6 +28,6 @@
        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
     </div>
     <div class="coment-area">
-       <app-comment-area [commentJson]="postData.commentJson"></app-comment-area>
+       <app-comment-area (submitCommentEvent)="submitComment($event)" [commentJson]="postData.commentJson"></app-comment-area>
     </div>
  </div>

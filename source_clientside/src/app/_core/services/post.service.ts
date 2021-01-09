@@ -5,12 +5,15 @@ import { catchError, retry } from 'rxjs/operators';
 import { ApiUrlConstants } from '../common/api-url.constants';
 import { CreatePostRequest } from '../models/models.request/CreatePostRequest';
 import { Post } from '../models/Post';
+import { PostComponent } from 'src/app/main/post/post.component';
+import { PostCommentRequest } from '../models/models.request/post-comment-request.model';
+import { PostComment } from '../models/post-comment.model';
 
 @Injectable({
   providedIn:'root'
 })
 export class PostService {
-  private postUrl:string=ApiUrlConstants.API_URL+'/post/can-view';
+  private postUrl:string=ApiUrlConstants.API_URL+'/post';
   constructor(private m_http: HttpClient) { }
 
   getPostById(id:string){
@@ -20,11 +23,15 @@ export class PostService {
     return this.m_http.get<Post[]>(this.postUrl+"/load/"+id, {observe:'body', responseType:'json'});
   }
   getPost():Observable<Post[]>{ 
-    return this.m_http.get<Post[]>(this.postUrl, {observe:'body', responseType:'json'});
+    return this.m_http.get<Post[]>(this.postUrl+"/can-view", {observe:'body', responseType:'json'});
   }
 
   createPost(createPostRequest:CreatePostRequest):Observable<Post>{
     return this.m_http.post<Post>(this.postUrl, createPostRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
+  }
+
+  commentPost(postCmtRequest:PostCommentRequest):Observable<PostComment>{
+    return this.m_http.post<PostComment>(this.postUrl+"/act-cmt", postCmtRequest, {observe:'body', responseType:'json'}).pipe(catchError(this.handleError));
   }
 
   private handleError(error:HttpErrorResponse){

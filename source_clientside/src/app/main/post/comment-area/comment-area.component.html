@@ -26,8 +26,8 @@
             style="width: 40px; height: 40px;" alt="">
         </div>
         <div class="post-comt-box">
-            <form method="post">
-                <textarea placeholder="Post your comment"></textarea>
+            <form method="post" on>
+                <textarea placeholder="Post your comment" (keyup.enter)="OnKeyUpTxtAreaEvent($event)"></textarea>
                 <div class="add-smiles">
                     <span class="em em-expressionless" title="add icon"></span>
                 </div>
@@ -45,7 +45,6 @@
                     <i class="em em-rage"></i>
                     <i class="em em-stuck_out_tongue"></i>
                 </div>
-                <button type="submit"></button>
             </form>
         </div>
     </li>

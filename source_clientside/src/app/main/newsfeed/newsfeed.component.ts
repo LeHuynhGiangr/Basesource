@@ -11,6 +11,8 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
 import { Post } from 'src/app/_core/models/Post';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
+import { PostComment } from 'src/app/_core/models/post-comment.model';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -59,6 +61,16 @@ export class NewsfeedComponent implements OnInit {
   createPost(newPost:CreatePostRequest){
     if(!newPost)return;
     this.m_postService.createPost(newPost).subscribe((jsonData:Post)=>this.m_posts.unshift(jsonData));
+    this.loadPostData();
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
+  }
+
+  commentPost(postCmtRequest:PostCommentRequest){
+    alert("inside newfeed");
+    if(!postCmtRequest)return;
+    this.m_postService.commentPost(postCmtRequest).subscribe((jsonData:PostComment) => this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(jsonData));
     this.loadPostData();
     this.router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
