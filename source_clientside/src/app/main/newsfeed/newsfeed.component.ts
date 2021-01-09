@@ -68,7 +68,6 @@ export class NewsfeedComponent implements OnInit {
   }
 
   commentPost(postCmtRequest:PostCommentRequest){
-    alert("inside newfeed");
     if(!postCmtRequest)return;
     this.m_postService.commentPost(postCmtRequest).subscribe((jsonData:PostComment) => this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(jsonData));
     this.loadPostData();
