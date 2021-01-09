@@ -15,6 +15,9 @@ import { Post } from 'src/app/_core/models/Post';
 import { CreatePostRequest } from 'src/app/_core/models/models.request/CreatePostRequest';
 import { DialogPostComponent } from '../post/dialog-post/dialog-post.component';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
+import { PostComment } from 'src/app/_core/models/post-comment.model';
+import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -62,7 +65,21 @@ export class TimelineComponent implements OnInit {
     this.loadPostData();
     this.startTimer()
   }
-
+  commentPost(postCmtRequest:PostCommentRequest){
+    alert("inside newfeed");
+    if(!postCmtRequest)return;
+    this.Pservice.commentPost(postCmtRequest).subscribe((jsonData:PostCommentResponse) => { 
+      const l_postComment: PostComment={
+        Id:jsonData.userId,
+        Name:jsonData.name,
+        Comment:jsonData.comment,
+      };
+      ;this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(l_postComment)});
+    this.loadPostData();
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
+  }
   startTimer() {
     this.play = true;
     this.interval = setInterval(() => {

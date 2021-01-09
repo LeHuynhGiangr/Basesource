@@ -15,6 +15,7 @@ import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialo
 import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { UserProfile } from 'src/app/_core/data-repository/profile';
+import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
 @Component({
     selector: 'app-fanpage',
     templateUrl: './fanpage.component.html',
@@ -153,6 +154,17 @@ export class FanpageComponent implements OnInit {
             PageStatic.Background = page["background"]
           }
         });
+      });
+    }
+    AddFriendDialog(id): void {
+      const dialogRef = this.dialog.open(AddFriendDialogComponent, {
+        width: '500px',
+        height: '400px',
+      });
+      dialogRef.componentInstance.idTrip = id;
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
       });
     }
 }

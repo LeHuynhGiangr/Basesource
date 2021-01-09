@@ -233,7 +233,7 @@
 									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
 										<div class="central-meta item">
-											<app-post [postData]=post></app-post>
+											<app-post (OnReceivePostCommentData)="commentPost($event)" [postData]=post></app-post>
 										</div>
 									</ng-template>
 									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
