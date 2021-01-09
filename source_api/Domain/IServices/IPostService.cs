@@ -13,6 +13,7 @@ namespace Domain.IServices
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id);
+        IEnumerable<PostResponse> GetRestrictedPostsByUserId<IdType>(IdType id);
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries=4, object ignoredObjLst=null);
         IEnumerable<PostResponse> GetOwnedPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null);
         void DeletePostByUserId(Guid id);

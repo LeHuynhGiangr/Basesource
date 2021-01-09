@@ -1,12 +1,17 @@
 ﻿using Data.EF;
 using Data.Entities;
+using Data.Interfaces;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text.Json;
 using Utilities;
 
@@ -15,10 +20,12 @@ namespace Domain.Services
     public class PostService : IPostService<Guid>
     {
         private readonly EFRepository<Post, Guid> m_postRepository;
+        private readonly IRepository<Friend, Guid> m_friendRepository;
 
-        public PostService(EFRepository<Post, Guid> postRepository)
+        public PostService(EFRepository<Post, Guid> postRepository, IRepository<Friend, Guid> friendRepository)
         {
             m_postRepository = postRepository;
+            m_friendRepository = friendRepository;
         }
 
         public PostResponse Create(CreatePostRequest model)
@@ -44,27 +51,7 @@ namespace Domain.Services
                 throw new Exception("create post failed");
             }
         }
-        private string SaveFile(string webRootPath, string dirFile, IFormFile imageUri)
-        {
-            //host static image
-            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            string nameImage = unixTimestamp.ToString() + "." + imageUri.FileName.Split('.')[1];
 
-            string filePath = $"{webRootPath}\\{dirFile}";
-
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-
-            using (FileStream fileStream = System.IO.File.Create(filePath + nameImage))
-            {
-                imageUri.CopyTo(fileStream);
-                fileStream.Flush();
-            }
-
-            return dirFile + nameImage;
-        }
         public bool Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -143,6 +130,8 @@ namespace Domain.Services
             }    
         }
 
+
+
         public IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null)
         {
             throw new NotImplementedException();
@@ -151,6 +140,34 @@ namespace Domain.Services
         public IEnumerable<PostResponse> GetOwnedPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null)
         {
             throw new NotImplementedException();
+        }
+
+        [DataContract]
+        public class FriendObjDataContract
+        {
+            [DataMember]
+            public string Id { get; set; }
+            [DataMember]
+            public string Name { get; set; }
+            [DataMember]
+            public string avarThumb { get; set; }
+        };
+        public IEnumerable<PostResponse> GetRestrictedPostsByUserId<Guid>(Guid id)
+        {
+            //get list of ids of friend
+            Friend l_friend = m_friendRepository.FindById(System.Guid.Parse(id.ToString()));//????????????????????????????????????????????????????????????????????l_friendObjs
+            var l_serializer = new DataContractJsonSerializer(typeof(FriendObjDataContract[]));
+            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_friend.FriendsJsonString));
+            var l_friendObjDC = l_serializer.ReadObject(l_memoryStream) as FriendObjDataContract[];
+
+            List<PostResponse> postResponses = new List<PostResponse>();
+            foreach (FriendObjDataContract o in l_friendObjDC)
+            {
+                postResponses.AddRange(this.GetPostsByUserId(System.Guid.Parse(o.Id)));
+            }
+            postResponses.AddRange(this.GetPostsByUserId(id));
+
+            return postResponses;
         }
     }
 }

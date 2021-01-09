@@ -42,6 +42,23 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+
+        //get post be viewed by user
+        [HttpGet("can-view")]
+        public IActionResult LoadPostsByUserId()
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                var l_postResponses = m_postService.GetRestrictedPostsByUserId(l_userId);
+                return Ok(l_postResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+
         //get posts of id post
         [HttpGet("load/{id:guid}")]
         public IActionResult LoadPostsById(Guid id)
@@ -92,6 +109,7 @@ namespace API.Controllers
         }
 
         //get posts of all user
+        [RoleBaseAuthorize(Data.Enums.ERole.Admin)]
         [HttpGet]
         public IActionResult LoadAllPost()
         {
