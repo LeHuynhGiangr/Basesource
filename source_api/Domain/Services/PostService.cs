@@ -21,11 +21,13 @@ namespace Domain.Services
     {
         private readonly EFRepository<Post, Guid> m_postRepository;
         private readonly IRepository<Friend, Guid> m_friendRepository;
+        private readonly EFRepository<User, Guid> m_userRepository;
 
-        public PostService(EFRepository<Post, Guid> postRepository, IRepository<Friend, Guid> friendRepository)
+        public PostService(EFRepository<Post, Guid> postRepository, IRepository<Friend, Guid> friendRepository, EFRepository<User, Guid> userRepository)
         {
             m_postRepository = postRepository;
             m_friendRepository = friendRepository;
+            m_userRepository = userRepository;
         }
 
         public PostResponse Create(CreatePostRequest model)
@@ -168,6 +170,51 @@ namespace Domain.Services
             postResponses.AddRange(this.GetPostsByUserId(id));
 
             return postResponses;
+        }
+
+        [DataContract]
+        public class CommentObjDataContract
+        {
+            [DataMember]
+            public string Id { get; set; }
+            [DataMember]
+            public string Name { get; set; }
+            [DataMember]
+            public string avarThumb { get; set; }
+            [DataMember]
+            public string Comment { get; set; }
+
+        };
+        public CommentPostResponse CommentPost(Guid userCmtId, CommentPostRequest commentPostRequest)
+        {
+            //edit comment-post
+            var l_post = m_postRepository.FindById(System.Guid.Parse(commentPostRequest.PostId));
+            var l_commentUser = m_userRepository.FindById(userCmtId);
+
+            var l_serializer = new DataContractJsonSerializer(typeof(CommentObjDataContract[]));
+            var l_memoryStream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(l_post.CommentObjectsJson));
+            List<CommentObjDataContract> l_commentObjDCs = (l_serializer.ReadObject(l_memoryStream) as CommentObjDataContract[]).ToList();
+
+            var l_commentObjDC = new CommentObjDataContract
+            {
+                Id = l_commentUser.Id.ToString(),
+                Name = l_commentUser.FirstName + " " + l_commentUser.LastName,
+                avarThumb = l_commentUser.Avatar,
+                Comment = commentPostRequest.Comment
+            };
+
+            l_commentObjDCs.Add(l_commentObjDC);
+
+            l_post.CommentObjectsJson = JsonSerializer.Serialize(l_commentObjDCs);
+            m_postRepository.SaveChanges();
+
+            return new CommentPostResponse { 
+                PostId=commentPostRequest.PostId,
+                UserId= l_commentObjDC.Id,
+                Name= l_commentObjDC.Name,
+                AvarUrl= l_commentObjDC.avarThumb,
+                Comment= l_commentObjDC.Comment
+            };
         }
     }
 }

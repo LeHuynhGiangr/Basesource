@@ -1,5 +1,6 @@
 ﻿using API.Helpers;
 using Domain.DomainModels.API.RequestModels;
+using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -133,6 +134,20 @@ namespace API.Controllers
                 return Ok(l_postResponse);
             }
             catch(Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+
+        [HttpPost("act-cmt")]
+        public IActionResult CommentPost([FromBody] CommentPostRequest commentPostRequest)
+        {
+            try
+            {
+                System.Guid l_userId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                CommentPostResponse l_commentPostResponse = m_postService.CommentPost(l_userId, commentPostRequest);
+                return Ok(l_commentPostResponse);
+            }catch(Exception e)
             {
                 return StatusCode(500, new { message = e.Message });
             }

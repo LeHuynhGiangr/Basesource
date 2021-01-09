@@ -16,6 +16,9 @@ namespace Domain.IServices
         IEnumerable<PostResponse> GetRestrictedPostsByUserId<IdType>(IdType id);
         IEnumerable<PostResponse> GetPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries=4, object ignoredObjLst=null);
         IEnumerable<PostResponse> GetOwnedPostsByUserId<IdType>(IdType id, int maximumNumberOfEntries = 4, object ignoredObjLst = null);
+
+        CommentPostResponse CommentPost(System.Guid userCmtId, CommentPostRequest commentPostRequest);
+
         void DeletePostByUserId(Guid id);
     }
 }
