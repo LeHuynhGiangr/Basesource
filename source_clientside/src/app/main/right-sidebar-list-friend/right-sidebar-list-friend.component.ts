@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChattingService } from 'src/app/_core/services/chatting.service';
+import { UriHandler } from 'src/app/_helpers/uri-handler';
 
 @Component({
   selector: 'app-right-sidebar-list-friend',
@@ -7,8 +8,12 @@ import { ChattingService } from 'src/app/_core/services/chatting.service';
   styleUrls: ['./right-sidebar-list-friend.component.css']
 })
 export class RightSidebarListFriendComponent implements OnInit {
-  public m_short_friend_lst:any
-  constructor(public m_chattingService:ChattingService) {
+  public m_friends:{
+    Id:string,
+    Name:string,
+    avarThumb:string
+  }[]
+  constructor(public m_chattingService:ChattingService, public m_uriHandler:UriHandler) {
     this.loadFriendData();
   }
 
@@ -17,6 +22,6 @@ export class RightSidebarListFriendComponent implements OnInit {
   }
   loadFriendData(){
     this.m_chattingService.getFriendDataById().subscribe(jsonData => {
-      this.m_short_friend_lst=jsonData; alert(this.m_short_friend_lst.friendJsonString[0].Id)});
+      this.m_friends=jsonData.friendJsonString});
   }
 }

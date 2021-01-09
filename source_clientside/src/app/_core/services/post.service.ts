@@ -10,7 +10,7 @@ import { Post } from '../models/Post';
   providedIn:'root'
 })
 export class PostService {
-  private postUrl:string=ApiUrlConstants.API_URL+'/post';
+  private postUrl:string=ApiUrlConstants.API_URL+'/post/can-view';
   constructor(private m_http: HttpClient) { }
 
   getPostById(id:string){

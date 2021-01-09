@@ -19,17 +19,7 @@ jQuery(document).ready(function($) {
 $('.user-img').on('click', function() {
 	$('.user-setting').toggleClass("active");
 	return false;
-});	
-	
-//--- side message box	
-$('.friendz-list > li, .chat-users > li').on('click', function() {
-	$('.chat-box').addClass("show");
-	return false;
-});	
-	$('.close-mesage').on('click', function() {
-		$('.chat-box').removeClass("show");
-		return false;
-	});	
+});
 	
 //------ scrollbar plugin
 	if ($.isFunction($.fn.perfectScrollbar)) {

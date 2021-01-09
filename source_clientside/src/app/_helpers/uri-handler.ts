@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ApiUrlConstants } from '../_core/common/api-url.constants';
+import { SystemConstants } from '../_core/common/system.constants';
 
 @Injectable({
-    providedIn:'root'
+    providedIn:'any'
 })
 export class UriHandler{
   private getImageMime(base64: string): string
@@ -16,5 +18,8 @@ export class UriHandler{
   public getImageSource(base64: string): string
   {
     return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
+  }
+  public getImageUrl(subPath:string): string{
+    return ApiUrlConstants.API_URL + "/" + subPath;
   }
 }
