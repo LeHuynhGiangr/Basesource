@@ -77,12 +77,11 @@ export class NewsfeedComponent implements OnInit {
         Comment:jsonData.comment,
       };
       ;this.m_posts.find(_=>_.id == postCmtRequest.PostId).commentJson.push(l_postComment)});
-    this.loadPostData();
+      this.loadPostData();
     this.router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
   }
-
   getProfile(user)
   {   
     UserProfile.IdTemp = UserProfile.Id

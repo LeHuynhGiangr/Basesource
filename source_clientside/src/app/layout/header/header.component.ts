@@ -26,15 +26,14 @@ export class HeaderComponent implements OnInit {
       public Sservice:SearchService,public timelineurl:TimelineUrl, public dialog: MatDialog) {}
 
     async ngOnInit() {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "../assets/js/nav.js";
-      this.elementRef.nativeElement.appendChild(script);
+
       
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Id = UserProfile.Id
+      this.appUsers.FirstName = UserProfile.FirstName
+      this.appUsers.LastName = UserProfile.LastName
     }
     onLogout() {
       this.service.logout();

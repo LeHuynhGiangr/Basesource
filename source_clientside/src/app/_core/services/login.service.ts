@@ -41,6 +41,7 @@ export class LoginService {
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_LOAD_MAINUSER_URL).toPromise();
             this.currentUser.next(result);
             UserProfile.Id = this.getUserIdStorage();
+            UserProfile.FirstName = this.getFirstNameStorage()
             return result;
         }
         catch (e) {
@@ -87,7 +88,7 @@ export class LoginService {
             if (res["active"] == true) {
                 alert("Login successfully")
                 this.setToken(res.jwtToken);
-                this.saveUserIdStorage(res["id"]);
+                this.saveUserIdStorage(res["id"],res["firstName"]);
                 await this.getUser();
             }
             else {
@@ -106,13 +107,17 @@ export class LoginService {
         this.currentUser.next(null);
     }
 
-    saveUserIdStorage = (userId: string) => {
+    saveUserIdStorage = (userId: string,firstName:string) => {
         localStorage.setItem('userId', userId)
+        localStorage.setItem('firstName',firstName)
         console.log(userId);
     }
 
     getUserIdStorage = () => {
         return localStorage.getItem('userId').toString();
+    }
+    getFirstNameStorage = () => {
+        return localStorage.getItem('firstName').toString();
     }
 
     setToken = (token) => {
